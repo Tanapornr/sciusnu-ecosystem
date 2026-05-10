@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCiUS Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #003355; --secondary: #11caa0; --bg-light: #f8fafc; --text-dark: #1e293b; --text-muted: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sarabun', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); display: flex; height: 100vh; overflow: hidden; }
+        h1, h2, h3, h4 { font-family: 'Kanit', sans-serif; }
+
+        /* Login Screen */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary), #001a33); display: flex; justify-content: center; align-items: center; z-index: 100; }
+        .login-box { background: white; padding: 40px; border-radius: 20px; width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 15px; font-family: 'Sarabun'; outline: none;}
+        .login-box button { width: 100%; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-size: 16px; font-family: 'Kanit'; cursor: pointer; transition: 0.2s;}
+        .login-box button:hover { background: #0fa482; }
+        #errorMsg { color: #ef4444; font-size: 13px; margin-bottom: 10px; display: none; }
+
+        /* Sidebar & Layout */
+        #app-screen { display: none; width: 100%; height: 100%; }
+        .sidebar { width: 260px; background: white; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+        .nav-item { padding: 15px 24px; display: flex; align-items: center; gap: 15px; color: var(--text-muted); text-decoration: none; border-left: 4px solid transparent; transition: 0.2s;}
+        .nav-item:hover, .nav-item.active { background: #f0fdfa; color: var(--secondary); border-left-color: var(--secondary); }
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .header { background: white; padding: 15px 40px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .page-container { padding: 30px 40px; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);}
+        
+        .badge-list { display: flex; gap: 10px; flex-wrap: wrap; }
+        .skill-badge { background: #fefce8; border: 1px solid #fef08a; color: #a16207; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; display: flex; align-items: center; gap: 5px;}
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <div style="font-size: 40px; color: var(--secondary); margin-bottom: 10px;"><i class="fa-solid fa-flask-vial"></i></div>
+            <h2 style="color: var(--primary); margin-bottom: 5px;">SCiUS OER Connect</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 14px;">ระบบนิเวศการเรียนรู้บุคลากร วมว.</p>
+            
+            <div id="errorMsg"></div>
+            <input type="text" id="loginId" placeholder="รหัสพนักงาน (เช่น EMP001)" value="EMP001">
+            <input type="password" id="loginPass" placeholder="รหัสผ่าน (เช่น 1234)" value="1234">
+            <button onclick="login()" id="loginBtn">เข้าสู่ระบบ</button>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 15px;">ระบบจำลอง (Mockup) ล็อกอินได้ทันที</p>
+        </div>
+    </div>
+
+    <div id="app-screen">
+        <nav class="sidebar">
+            <div style="padding: 20px; border-bottom: 1px solid #e2e8f0;">
+                <h3 style="color: var(--primary);"><i class="fa-solid fa-flask-vial"></i> SCiUS OER</h3>
+            </div>
+            <div style="padding: 15px 0; display: flex; flex-direction: column; height: 100%;">
+                <a href="index.html" class="nav-item active"><i class="fa-solid fa-house"></i> หน้าหลัก (Dashboard)</a>
+                <a href="oer.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> คลังทรัพยากร (OER)</a>
+                <a href="course.html" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> คอร์สเรียนสั้น</a>
+                <a href="cop.html" class="nav-item"><i class="fa-solid fa-comments"></i> ชุมชน (CoP)</a>
+                <a href="#" onclick="logout()" class="nav-item" style="color: #ef4444; margin-top: auto;"><i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="header">
+                <div><h3 style="color: var(--primary);">หน้าหลัก (Dashboard)</h3></div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="text-align: right;">
+                        <div id="uName" style="font-weight: 600; color: var(--primary);"></div>
+                        <div id="uRole" style="font-size: 12px; color: var(--text-muted);"></div>
+                    </div>
+                    <div style="width: 40px; height: 40px; background: var(--secondary); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 18px;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-container">
+                <div class="card" style="background: linear-gradient(135deg, var(--primary), #0a192f); color: white;">
+                    <h2 id="welcomeText">สวัสดี 👋</h2>
+                    <p style="opacity: 0.8; margin-top: 5px;">ยินดีต้อนรับสู่ระบบนิเวศการเรียนรู้สายสนับสนุน โครงการ วมว.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                    <div class="card">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-medal"></i> สมรรถนะและเหรียญตราของคุณ</h3>
+                        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 15px;">ประเมินและรับรองจากการปฏิบัติงานจริง (Authentic Assessment)</p>
+                        <div id="badgesContainer" class="badge-list"></div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-robot"></i> AI ผู้ช่วยอัจฉริยะ</h3>
+                        <div id="chatHistory" style="background: var(--bg-light); padding: 15px; border-radius: 8px; height: 250px; margin-bottom: 10px; overflow-y: auto;">
+                            <p style="font-size: 14px; background: white; padding: 10px; border-radius: 8px; display: inline-block; border: 1px solid #e2e8f0; margin-bottom: 10px;">สวัสดีครับ! ผมคือ AI Mentor มีปัญหาเรื่องเอกสารหรือระเบียบพัสดุ ถามผมได้เลยครับ</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="aiInput" placeholder="พิมพ์ถามระเบียบ..." style="flex-grow: 1; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: 'Sarabun'; outline: none;">
+                            <button onclick="chatAI()" style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbynVPzzecMuLQdJqsg2Bct_C5MaGchty7SP16RFXukVGFnB1NAacS9bbpcb3Ct62PYq/exec"; // ใส่ URL ของ Web App (Google Apps Script) ตรงนี้
+
+        window.onload = () => {
+            const user = localStorage.getItem('sciusUser');
+            if (user) showApp(JSON.parse(user));
+        };
+
+        async function login() {
+            const empId = document.getElementById('loginId').value;
+            const pass = document.getElementById('loginPass').value;
+            const btn = document.getElementById('loginBtn');
+            const err = document.getElementById('errorMsg');
+            
+            btn.innerText = "กำลังตรวจสอบ...";
+            err.style.display = 'none';
+
+            if(API_URL === "") {
+                setTimeout(() => {
+                    if(empId === 'EMP001' && pass === '1234') {
+                        const mockUser = { Name: 'คุณธนพร (SCiUS Admin)', Role: 'บุคลากรสายสนับสนุนโครงการ วมว.', BadgesList: ['กูรูระเบียบ วมว.', 'นักจัดการงบประมาณ'] };
+                        localStorage.setItem('sciusUser', JSON.stringify(mockUser));
+                        showApp(mockUser);
+                    } else {
+                        err.innerText = "รหัสไม่ถูกต้อง"; err.style.display = 'block'; btn.innerText = "เข้าสู่ระบบ";
+                    }
+                }, 800);
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'login', empId: empId, password: pass }) });
+                const data = await res.json();
+                if(data.success) {
+                    localStorage.setItem('sciusUser', JSON.stringify(data.user));
+                    showApp(data.user);
+                } else {
+                    err.innerText = data.message; err.style.display = 'block'; btn.innerText = "เข้าสู่ระบบ";
+                }
+            } catch(e) {
+                err.innerText = "ไม่สามารถเชื่อมต่อฐานข้อมูลได้"; err.style.display = 'block'; btn.innerText = "เข้าสู่ระบบ";
+            }
+        }
+
+        function showApp(user) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-screen').style.display = 'flex';
+            document.getElementById('uName').innerText = user.Name;
+            document.getElementById('uRole').innerText = user.Role;
+            document.getElementById('welcomeText').innerText = `สวัสดี, ${user.Name} 👋`;
+            
+            const badgesDiv = document.getElementById('badgesContainer');
+            badgesDiv.innerHTML = '';
+            user.BadgesList.forEach(badgeName => {
+                badgesDiv.innerHTML += `<div class="skill-badge"><i class="fa-solid fa-award"></i> ${badgeName.trim()}</div>`;
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('sciusUser');
+            window.location.reload();
+        }
+
+        function chatAI() {
+            const input = document.getElementById('aiInput');
+            const history = document.getElementById('chatHistory');
+            const text = input.value.trim();
+            if(!text) return;
+
+            history.innerHTML += `<div style="text-align: right; margin-bottom: 10px;"><span style="background: var(--secondary); color: white; padding: 10px; border-radius: 8px; display: inline-block; font-size: 14px;">${text}</span></div>`;
+            input.value = '';
+            history.scrollTop = history.scrollHeight;
+
+            setTimeout(() => {
+                history.innerHTML += `<div style="margin-bottom: 10px;"><span style="background: white; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; display: inline-block; font-size: 14px;">สามารถเข้าไปดู <b>SOP และ Template</b> ที่เกี่ยวข้องกับ <b>"${text}"</b> ได้ในเมนู <b>คลังทรัพยากร (OER)</b> ด้านซ้ายมือเลยครับ</span></div>`;
+                history.scrollTop = history.scrollHeight;
+            }, 800);
+        }
+    </script>
+</body>
+</html>
