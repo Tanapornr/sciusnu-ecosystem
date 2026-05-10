@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชุมชนแลกเปลี่ยนเรียนรู้ (CoP)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #003355; --secondary: #11caa0; --bg-light: #f8fafc; --text-dark: #1e293b; --text-muted: #64748b; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sarabun', sans-serif; }
+        body { background-color: var(--bg-light); display: flex; height: 100vh; overflow: hidden; }
+        h1, h2, h3, h4 { font-family: 'Kanit', sans-serif; }
+
+        .sidebar { width: 260px; background: white; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+        .nav-item { padding: 15px 24px; display: flex; align-items: center; gap: 15px; color: var(--text-muted); text-decoration: none; border-left: 4px solid transparent; }
+        .nav-item:hover, .nav-item.active { background: #f0fdfa; color: var(--secondary); border-left-color: var(--secondary); }
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .header { background: white; padding: 15px 40px; border-bottom: 1px solid #e2e8f0; }
+        .page-container { padding: 30px 40px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; margin-bottom: 20px;}
+        .post-input { display: flex; gap: 10px; margin-bottom: 25px; }
+        .post-input input { flex-grow: 1; padding: 12px 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 15px; font-family: 'Sarabun'; outline: none;}
+        .post-input button { background: var(--primary); color: white; border: none; padding: 0 25px; border-radius: 8px; cursor: pointer; font-family: 'Kanit'; font-size: 16px; transition: 0.2s;}
+        .post-input button:hover { background: var(--secondary); }
+        
+        .feed-post { border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 15px; background: white;}
+        .feed-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .feed-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); color: white; display: flex; justify-content: center; align-items: center; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div style="padding: 20px; border-bottom: 1px solid #e2e8f0;"><h3 style="color: var(--primary);"><i class="fa-solid fa-flask-vial"></i> SCiUS OER</h3></div>
+        <div style="padding: 15px 0;">
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> หน้าหลัก (Dashboard)</a>
+            <a href="oer.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> คลังทรัพยากร (OER)</a>
+            <a href="course.html" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> คอร์สเรียนสั้น</a>
+            <a href="cop.html" class="nav-item active"><i class="fa-solid fa-comments"></i> ชุมชน (CoP)</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="header"><h3 style="color: var(--primary);">ชุมชนนักปฏิบัติ (CoP)</h3></header>
+        <div class="page-container">
+            <div class="card">
+                <div class="post-input">
+                    <input type="text" id="postContent" placeholder="แชร์เทคนิคการทำงาน หรือสอบถามปัญหาที่นี่...">
+                    <button onclick="submitPost()">โพสต์</button>
+                </div>
+                
+                <div id="copContainer">
+                    <p id="loadingText" style="color: var(--text-muted);">กำลังโหลดโพสต์...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const userStr = localStorage.getItem('sciusUser');
+        if(!userStr) window.location.href = "index.html";
+        const currentUser = JSON.parse(userStr);
+
+        const API_URL = "https://script.google.com/macros/s/AKfycbynVPzzecMuLQdJqsg2Bct_C5MaGchty7SP16RFXukVGFnB1NAacS9bbpcb3Ct62PYq/exec"; 
+
+        window.onload = loadPosts;
+
+        async function loadPosts() {
+            const container = document.getElementById('copContainer');
+            if(API_URL === "") {
+                container.innerHTML = `
+                    <div class="feed-post">
+                        <div class="feed-header">
+                            <div class="feed-avatar"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <h4 style="color: var(--primary);">อ.เอก (Mentor)</h4>
+                                <div style="font-size: 12px; color: var(--text-muted);">2 ชม. ที่แล้ว</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 15px;">พรุ่งนี้ระบบ ERP ปิดปรับปรุง 18.00 น. นะครับ กรุณาเคลียร์งานด่วนด้วยครับ</p>
+                    </div>`;
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'getCoP' }) });
+                const data = await res.json();
+                if(data.success) {
+                    renderPosts(data.data, container);
+                }
+            } catch(e) {
+                container.innerHTML = "โหลดข้อมูลล้มเหลว";
+            }
+        }
+
+        function renderPosts(posts, container) {
+            container.innerHTML = '';
+            posts.forEach(post => {
+                container.innerHTML += `
+                    <div class="feed-post">
+                        <div class="feed-header">
+                            <div class="feed-avatar"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <h4 style="color: var(--primary);">${post.Author}</h4>
+                                <div style="font-size: 12px; color: var(--text-muted);">${post.Time}</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 15px;">${post.Content}</p>
+                    </div>
+                `;
+            });
+        }
+
+        async function submitPost() {
+            const content = document.getElementById('postContent').value.trim();
+            if(!content) return;
+            document.getElementById('postContent').value = 'กำลังโพสต์...';
+
+            if(API_URL === "") {
+                alert("แชร์ความรู้สำเร็จ (โหมดจำลอง ไม่มีการบันทึกลงฐานข้อมูลจริง)");
+                document.getElementById('postContent').value = '';
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL, { 
+                    method: 'POST', 
+                    body: JSON.stringify({ action: 'addPost', author: currentUser.Name, content: content }) 
+                });
+                const data = await res.json();
+                if(data.success) {
+                    renderPosts(data.data, document.getElementById('copContainer'));
+                    document.getElementById('postContent').value = '';
+                }
+            } catch(e) {
+                alert("โพสต์ล้มเหลว");
+                document.getElementById('postContent').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
