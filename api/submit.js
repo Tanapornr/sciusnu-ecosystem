@@ -10,11 +10,7 @@ export default async function handler(req, res) {
     }
 
     const body = typeof req.body === 'string' ? safeJsonParse(req.body) : (req.body || {});
-    const action = body?.action;
-
-    if (!action) {
-        return res.status(400).json({ status: 'error', message: 'action is required' });
-    }
+    const action = resolveAction(body);
 
     const validationError = validatePayload(action, body);
     if (validationError) {
@@ -86,10 +82,27 @@ function validatePayload(action, body) {
         return null;
     }
 
-    return `unsupported action: ${action}`;
+    // Allow unknown/new actions to pass through to GAS so front-end features
+    // like lesson creation are not blocked by the proxy validator.
+    return null;
 }
 
 function isNonEmptyString(value) {
     return typeof value === 'string' && value.trim().length > 0;
+}
+
+function resolveAction(body) {
+    const explicitAction = typeof body?.action === 'string' ? body.action.trim() : '';
+    if (explicitAction) return explicitAction;
+
+    if (isNonEmptyString(body?.username) && isNonEmptyString(body?.password)) {
+        return 'login';
+    }
+
+    if (isNonEmptyString(body?.groupName)) {
+        return 'createLearnerGroup';
+    }
+
+    return '__passthrough__';
 }
 
