@@ -20,6 +20,16 @@
     </script>
     <style>
         body { font-family: 'Prompt', sans-serif; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); user-select: none; }
+        /* Animation สำหรับพื้นหลัง */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 </head>
 <body class="flex items-center justify-center h-screen p-4 relative overflow-hidden">
@@ -40,7 +50,7 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">ชื่อผู้ใช้งาน (Username)</label>
                 <div class="relative">
                     <i class="ph ph-user absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="text" id="username" required placeholder="เช่น staff01" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium">
+                    <input type="text" id="username" required placeholder="เช่น staff01" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium transition">
                 </div>
             </div>
 
@@ -48,7 +58,7 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">รหัสผ่าน (Password)</label>
                 <div class="relative">
                     <i class="ph ph-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" id="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium">
+                    <input type="password" id="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium transition">
                 </div>
             </div>
 
@@ -73,30 +83,39 @@
             <div class="bg-slate-50 rounded-2xl p-4 text-left space-y-3 mb-6 border border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="ph-fill ph-user"></i></div>
-                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">ชื่อ-นามสกุล</p><p id="welcomeName" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">ชื่อ-นามสกุล</p>
+                        <p id="welcomeName" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p>
+                    </div>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center"><i class="ph-fill ph-briefcase"></i></div>
-                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สังกัดฝ่ายงาน</p><p id="welcomeDept" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สังกัดฝ่ายงาน</p>
+                        <p id="welcomeDept" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p>
+                    </div>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="ph-fill ph-shield-check"></i></div>
-                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สิทธิ์การเข้าใช้งาน</p><p id="welcomeRole" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สิทธิ์การเข้าใช้งาน</p>
+                        <p id="welcomeRole" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="flex items-center justify-center gap-2 text-indigo-600 text-xs font-semibold">
+            <div class="flex items-center justify-center gap-2 text-primary text-xs font-semibold">
                 <i class="ph-bold ph-spinner animate-spin text-base"></i> กำลังพาท่านเข้าสู่ระบบ...
             </div>
         </div>
     </div>
 
     <script>
-        // ⚠️ สำคัญมาก: ให้นำ URL Web App จาก Google Apps Script ของคุณมาใส่ตรงนี้
-        const API_URL = "https://script.google.com/macros/s/AKfycbwMCWP83N6hqcIVJMgIcDveHkh-0qmp94vJ5Hkt1dH4mQR6KlLfNKjYM8PsPB54WDXNgg/exec"; 
+        // ⚠️ เอาลิงก์ Web App จาก Google Apps Script (ที่เพิ่ง Deploy) มาใส่ตรงนี้
+        const API_URL = "YOUR_WEB_APP_URL_HERE"; 
 
         async function handleLogin(event) {
-            event.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บ
+            event.preventDefault(); 
 
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
@@ -107,10 +126,20 @@
             // รีเซ็ตข้อความแจ้งเตือน
             errorMsg.classList.add('hidden');
             loginBtn.disabled = true;
-            loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบข้อมูลชีต...';
+            // ถอดคำว่า "ชีต" ออก ตามความต้องการ
+            loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบข้อมูล...';
+
+            // กรณีลืมใส่ลิงก์ API ให้แสดงแจ้งเตือน (ป้องกันการเข้าแบบมั่วๆ โดยไม่เชื่อมฐานข้อมูล)
+            if (API_URL === "YOUR_WEB_APP_URL_HERE" || API_URL.trim() === "") {
+                errorText.innerText = "ยังไม่ได้เชื่อมต่อ API กรุณาระบุ Web App URL";
+                errorMsg.classList.remove('hidden');
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
+                return;
+            }
 
             try {
-                // ส่งข้อมูลด้วย POST ไปยัง Apps Script พร้อม action: "login"
+                // ส่งข้อมูล POST ไปยัง Apps Script พร้อม action: "login" ให้ตรงกับ code.gs
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -121,7 +150,6 @@
                     })
                 });
 
-                // แปลงผลลัพธ์เป็น JSON
                 const result = await response.json();
 
                 if (result.status === "success") {
@@ -131,30 +159,29 @@
                     // อัปเดตข้อมูลบนหน้าต่างต้อนรับ
                     document.getElementById('welcomeName').innerText = result.user.name;
                     document.getElementById('welcomeDept').innerText = result.user.department;
-                    document.getElementById('welcomeRole').innerText = result.user.role === 'admin' ? 'ผู้ดูแลระบบ (Admin)' : 'บุคลากรสายสนับสนุน (Staff)';
+                    document.getElementById('welcomeRole').innerText = result.user.role === 'admin' ? 'ผู้ดูแลระบบ (Admin)' : 'บุคลากร (Staff)';
                     
                     // แสดงหน้าต่างต้อนรับ
                     const modal = document.getElementById('successModal');
                     const modalContent = document.getElementById('successModalContent');
                     modal.classList.remove('hidden');
-                    // ใส่ดีเลย์นิดนึงให้ Animation เฟดเข้าทำงาน
                     setTimeout(() => {
                         modal.classList.remove('opacity-0');
                         modalContent.classList.remove('scale-95');
                     }, 50);
 
-                    // ดีเลย์ 2.5 วินาทีแล้วทำการเปลี่ยนหน้า
+                    // ดีเลย์ 2 วินาทีเพื่อให้ผู้ใช้ได้เห็นรายละเอียด ก่อนเปลี่ยนหน้า
                     setTimeout(() => {
                         if (result.user.role === 'admin') {
                             window.location.href = 'admin.html';
                         } else {
                             window.location.href = 'staff.html'; 
                         }
-                    }, 2500);
+                    }, 2000);
 
                 } else {
-                    // หากเชื่อมต่อสำเร็จแต่รหัสผิด
-                    errorText.innerText = result.message || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
+                    // หากเชื่อมต่อสำเร็จแต่รหัสผิด (ระบบตอบกลับมาจากหลังบ้าน)
+                    errorText.innerText = result.message || "ชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง";
                     errorMsg.classList.remove('hidden');
                     loginBtn.disabled = false;
                     loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
@@ -162,22 +189,26 @@
             } catch (error) {
                 // หากการเชื่อมต่อมีปัญหา
                 console.error(error);
-                errorText.innerText = "ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ โปรดตรวจสอบ API URL";
+                errorText.innerText = "ไม่สามารถเชื่อมต่อกับระบบฐานข้อมูลได้";
                 errorMsg.classList.remove('hidden');
                 loginBtn.disabled = false;
                 loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
             }
         }
 
-        // หากผู้ใช้เคยล็อกอินไว้แล้ว ให้ข้ามหน้าล็อกอินไปเลย (ปิดการทำงานส่วนนี้ได้หากต้องการให้กรอกใหม่ทุกครั้ง)
+        // หากผู้ใช้เคยล็อกอินไว้แล้ว ให้ข้ามหน้าล็อกอินไปเลย (ป้องกันการหลุดออกจากระบบ)
         window.onload = function() {
             const storedUser = localStorage.getItem('user');
             if(storedUser) {
-                const user = JSON.parse(storedUser);
-                if(user.role === 'admin') {
-                    window.location.href = 'admin.html';
-                } else {
-                    window.location.href = 'staff.html';
+                try {
+                    const user = JSON.parse(storedUser);
+                    if(user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'staff.html';
+                    }
+                } catch(e) {
+                    localStorage.clear();
                 }
             }
         }
