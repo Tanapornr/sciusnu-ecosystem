@@ -57,11 +57,24 @@
                 <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
                     <i class="ph-fill ph-git-branch text-xl"></i> แผนการเรียนรู้
                 </a>
-                <a href="#" onclick="showToast('ใบประกาศนียบัตร')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
                 </a>
                 <a href="#" onclick="showToast('ประวัติการเรียน')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
+                </a>
+                <a href="#" onclick="showToast('รายการโปรด')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-heart text-xl"></i> รายการโปรด
+                </a>
+                <a href="#" onclick="showToast('กิจกรรมของฉัน')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
+                </a>
+                <a href="#" onclick="showToast('ข้อความ')" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </a>
+                <a href="#" onclick="showToast('ตั้งค่า')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-gear text-xl"></i> ตั้งค่า
                 </a>
             </nav>
         </div>
@@ -107,15 +120,14 @@
 
                 <div class="glass-card p-8 bg-white relative border border-slate-200">
                     <div class="absolute left-11 top-14 bottom-14 w-0.5 bg-slate-200"></div>
-                    
                     <div class="space-y-8 relative">
                         
-                        <div onclick="selectPhase(1)" class="phase-card flex gap-6 items-start p-3 rounded-2xl hover:bg-slate-50 cursor-pointer transition border border-transparent hover:border-slate-100">
+                        <div onclick="selectPhase(1)" class="phase-card flex gap-6 items-start p-3 rounded-2xl hover:bg-slate-50 cursor-pointer transition border border-transparent">
                             <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold z-10 shrink-0 mt-1 shadow shadow-emerald-500/30"><i class="ph ph-check"></i></div>
                             <div class="flex-1">
                                 <span class="bg-emerald-50 text-emerald-600 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-200">เสร็จสิ้นแล้ว</span>
                                 <h4 class="text-sm font-semibold text-slate-800 mt-1.5">ขั้นตอนที่ 1: Digital Mindset & Cloud Collaboration</h4>
-                                <p class="text-xs text-slate-400 mt-1">ปรับพื้นฐานการใช้เครื่องมือ Google Workspace เพื่อการทำงานร่วมกันแบบลดกระดาษในคณะวิทยาศาสตร์</p>
+                                <p class="text-xs text-slate-400 mt-1">ปรับพื้นฐานการใช้เครื่องมือ Google Workspace เพื่อการทำงานร่วมกันภายในคณะวิทยาศาสตร์ มน.</p>
                             </div>
                         </div>
 
@@ -124,16 +136,16 @@
                             <div class="flex-1">
                                 <span class="bg-indigo-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded">กำลังดำเนินการอยู่</span>
                                 <h4 class="text-sm font-semibold text-indigo-600 mt-1.5">ขั้นตอนที่ 2: AI For Official Administration</h4>
-                                <p class="text-xs text-slate-500 mt-1">ประยุกต์ใช้ Generative AI (Gemini) ช่วยร่างหนังสือราชการ สรุปรายงานการประชุม และงานธุรการสนับสนุนโครงการ</p>
+                                <p class="text-xs text-slate-500 mt-1">ประยุกต์ใช้ Generative AI (Gemini) ช่วยร่างหนังสือราชการ และสรุปรายงานการประชุมโครงการ</p>
                             </div>
                         </div>
 
-                        <div onclick="selectPhase(3)" class="phase-card flex gap-6 items-start p-3 rounded-2xl hover:bg-slate-50 cursor-pointer transition border border-transparent hover:border-slate-100 opacity-60">
+                        <div onclick="selectPhase(3)" class="phase-card flex gap-6 items-start p-3 rounded-2xl hover:bg-slate-50 cursor-pointer transition border border-transparent opacity-60">
                             <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold z-10 shrink-0 mt-1">3</div>
                             <div class="flex-1">
                                 <span class="bg-slate-100 text-slate-500 text-[10px] font-semibold px-2 py-0.5 rounded border">🔒 ล็อกอยู่</span>
                                 <h4 class="text-sm font-semibold text-slate-400 mt-1.5">ขั้นตอนที่ 3: Information System & Automation Workflow</h4>
-                                <p class="text-xs text-slate-400 mt-1">การออกแบบโครงสร้างสถาปัตยกรรมระบบงาน Low-code, การจัดการ Google Sheets แดชบอร์ด และระบบแจ้งเตือนผ่านไลน์</p>
+                                <p class="text-xs text-slate-400 mt-1">การออกแบบระบบงาน Low-code, การจัดการฐานข้อมูลผ่าน Google Sheets และระบบแจ้งเตือนอัตโนมัติ</p>
                             </div>
                         </div>
 
@@ -147,7 +159,6 @@
                         <h3 class="font-bold text-slate-800 text-sm border-b pb-3 mb-4 flex items-center gap-2">
                             <i class="ph-bold ph-info text-indigo-600"></i> รายละเอียดสมรรถนะย่อย
                         </h3>
-                        
                         <div id="phase-details-content" class="space-y-4">
                             <div>
                                 <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">เฟสปัจจุบัน</h4>
@@ -157,19 +168,16 @@
                                 <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ทักษะที่คุณจะได้รับ</h4>
                                 <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 mt-2 font-medium">
                                     <li>การเขียน Prompt ร่างจดหมายราชการ</li>
-                                    <li>การสรุปวาระการประชุมโครงการด้วย AI</li>
-                                    <li>การใช้ AI คัดกรองและวิเคราะห์คำร้องนิสิต</li>
+                                    <li>การสรุปวาระรายงานโครงการด้วย AI</li>
+                                    <li>การใช้ AI คัดกรองและวิเคราะห์คำร้องเบื้องต้น</li>
                                 </ul>
-                            </div>
-                            <div class="bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/40 text-xs text-slate-600 leading-relaxed font-medium">
-                                💡 แนะนำให้เรียนวิชา **AI Tools for Education** ให้ผ่านเกณฑ์ 100% เพื่อปลดล็อกเข้าสู่กระบวนการขั้นตอนถัดไป
                             </div>
                         </div>
                     </div>
 
                     <div class="pt-6">
                         <a href="staff.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20">
-                            <i class="ph-bold ph-play"></i> ไปที่คอร์สเรียนปัจจุบัน
+                            <i class="ph-bold ph-play"></i> กลับไปที่คอร์สเรียนหลัก
                         </a>
                     </div>
                 </div>
@@ -185,7 +193,6 @@
 
     <script>
         window.onload = function() {
-            // ระบบดึงข้อมูลชื่อบุคลากรที่ล็อกอินมาจากหน้าแรกจริง
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
@@ -197,70 +204,29 @@
             }
         };
 
-        // ระบบเปลี่ยนข้อมูลกล่องขวาเมื่อคลิกเลือกขั้นตอน (Phase) ด้านซ้าย
         function selectPhase(phaseNumber) {
             const detailsBox = document.getElementById('phase-details-content');
-            
             if (phaseNumber === 1) {
                 detailsBox.innerHTML = `
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ข้อมูลขั้นตอน</h4>
-                        <p class="text-sm font-semibold text-emerald-600 mt-1">Digital Mindset & Cloud Tools</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ทักษะที่ผ่านการตรวจสอบแล้ว</h4>
-                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 mt-2 font-medium">
-                            <li>การแชร์เอกสารร่วมกันผ่าน Google Drive</li>
-                            <li>การใช้งานระบบกรอกฟอร์มคลังเอกสารดิจิทัล</li>
-                            <li>การแชร์ปฏิทินงานร่วมภายในคณะวิทย์ มน.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-emerald-50 text-emerald-700 p-3 rounded-xl border border-emerald-200 text-xs leading-relaxed font-medium">
-                        ✅ คุณได้ผ่านสมรรถนะขั้นตอนนี้เรียบร้อยแล้วเมื่อวันที่ 15 พ.ค. 2569
-                    </div>
+                    <div><p class="text-sm font-semibold text-emerald-600 mt-1">Digital Mindset & Cloud Tools</p></div>
+                    <div><ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 mt-2 font-medium"><li>การแชร์เอกสารร่วมผ่าน Google Drive</li><li>การแชร์ปฏิทินงานภายในคณะวิทย์ มน.</li></ul></div>
                 `;
             } else if (phaseNumber === 2) {
                 detailsBox.innerHTML = `
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">เฟสปัจจุบัน</h4>
-                        <p class="text-sm font-semibold text-indigo-600 mt-1">AI For Official Administration</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ทักษะที่คุณจะได้รับ</h4>
-                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 mt-2 font-medium">
-                            <li>การเขียน Prompt ร่างจดหมายราชการ</li>
-                            <li>การสรุปวาระการประชุมโครงการด้วย AI</li>
-                            <li>การใช้ AI คัดกรองและวิเคราะห์คำร้องนิสิต</li>
-                        </ul>
-                    </div>
-                    <div class="bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/40 text-xs text-slate-600 leading-relaxed font-medium">
-                        💡 แนะนำให้เรียนวิชา **AI Tools for Education** ให้ผ่านเกณฑ์ 100% เพื่อปลดล็อกเข้าสู่กระบวนการขั้นตอนถัดไป
-                    </div>
+                    <div><p class="text-sm font-semibold text-indigo-600 mt-1">AI For Official Administration</p></div>
+                    <div><ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 mt-2 font-medium"><li>การเขียน Prompt ร่างจดหมายราชการ</li><li>การสรุปวาระรายงานโครงการด้วย AI</li></ul></div>
                 `;
             } else if (phaseNumber === 3) {
                 detailsBox.innerHTML = `
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ขั้นตอนถัดไป (ล็อกอยู่)</h4>
-                        <p class="text-sm font-semibold text-slate-400 mt-1">Information System & Automation Workflow</p>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-slate-400 tracking-wider uppercase">ทักษะในอนาคต</h4>
-                        <ul class="list-disc list-inside text-xs text-slate-400 space-y-1.5 mt-2 font-medium">
-                            <li>การเชื่อมโยงระบบฐานข้อมูล Google Sheets</li>
-                            <li>การทำระบบตอบกลับการแจ้งเตือนอัตโนมัติ (GAS)</li>
-                            <li>การบริหารโปรเจกต์งานขึ้นคลาวด์ Vercel</li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border text-slate-400 text-xs leading-relaxed font-medium">
-                        🔒 หน้านี้จะปลดล็อกอัตโนมัติเมื่อท่านผ่านการประเมินทักษะการใช้ AI ในเฟสที่ 2 เรียบร้อยแล้ว
-                    </div>
+                    <div><p class="text-sm font-semibold text-slate-400 mt-1">Information System & Automation Workflow</p></div>
+                    <div><p class="text-xs text-slate-400 mt-2">🔒 หน้านี้จะปลดล็อกอัตโนมัติเมื่อท่านผ่านเกณฑ์ในขั้นตอนที่ 2 เรียบร้อยแล้ว</p></div>
                 `;
             }
         }
 
         function showToast(message) {
             const toast = document.getElementById('toastBox');
-            document.getElementById('toastMessage').innerText = `ระบบกำลังทำงาน: ${message}`;
+            document.getElementById('toastMessage').innerText = `ระบบกำลังจำลองหน้า: ${message}`;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
         }
