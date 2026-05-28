@@ -6,36 +6,41 @@
     <title>เข้าสู่ระบบ - Learning Ecosystem</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { primary: '#1e3a8a' }
+                    colors: { primary: '#1e3a8a', bgLight: '#f8fafc' }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Prompt', sans-serif; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        body { font-family: 'Prompt', sans-serif; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); user-select: none; }
     </style>
 </head>
-<body class="flex items-center justify-center h-screen p-4">
+<body class="flex items-center justify-center h-screen p-4 relative overflow-hidden">
 
-    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white max-w-md w-full text-center">
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+    <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+    <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+
+    <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white max-w-md w-full text-center relative z-10">
         <div class="bg-primary text-white w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-md">
-            <i class="ph-fill ph-graduation-cap"></i>
+            <i class="ph-fill ph-book-open"></i>
         </div>
         <h2 class="text-2xl font-bold text-slate-800 mb-1">Learning Ecosystem</h2>
         <p class="text-sm text-slate-500 mb-6">ระบบนิเวศการเรียนรู้ดิจิทัล คณะวิทยาศาสตร์ มน.</p>
 
-        <form onsubmit="handleLogin(event)" class="text-left space-y-4">
+        <form id="loginForm" onsubmit="handleLogin(event)" class="text-left space-y-4">
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">ชื่อผู้ใช้งาน (Username)</label>
                 <div class="relative">
                     <i class="ph ph-user absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="text" id="username" required placeholder="เช่น staff01 หรือ admin01" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50">
+                    <input type="text" id="username" required placeholder="เช่น staff01" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium">
                 </div>
             </div>
 
@@ -43,74 +48,137 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">รหัสผ่าน (Password)</label>
                 <div class="relative">
                     <i class="ph ph-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="password" id="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50">
+                    <input type="password" id="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-slate-700 font-medium">
                 </div>
             </div>
 
-            <div id="errorMessage" class="text-red-500 text-xs hidden text-center font-medium bg-red-50 py-2 rounded-lg border border-red-100"></div>
+            <div id="errorMessage" class="text-red-500 text-xs hidden text-center font-semibold bg-red-50 py-2.5 rounded-xl border border-red-100 shadow-sm flex items-center justify-center gap-1.5">
+                <i class="ph-fill ph-warning-circle text-base"></i> <span id="errorText">ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</span>
+            </div>
 
-            <button type="submit" id="loginBtn" class="w-full bg-primary hover:bg-blue-800 text-white font-medium py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
+            <button type="submit" id="loginBtn" class="w-full bg-primary hover:bg-blue-800 text-white font-semibold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
                 <i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ
             </button>
         </form>
     </div>
 
+    <div id="successModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-8 shadow-2xl text-center transform scale-95 transition-transform duration-300 border border-slate-100" id="successModalContent">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-5 shadow-inner">
+                <i class="ph-fill ph-check-circle"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-1">เข้าสู่ระบบสำเร็จ!</h3>
+            <p class="text-sm text-slate-500 mb-6 border-b pb-4">ยินดีต้อนรับเข้าสู่ Learning Ecosystem</p>
+            
+            <div class="bg-slate-50 rounded-2xl p-4 text-left space-y-3 mb-6 border border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="ph-fill ph-user"></i></div>
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">ชื่อ-นามสกุล</p><p id="welcomeName" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center"><i class="ph-fill ph-briefcase"></i></div>
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สังกัดฝ่ายงาน</p><p id="welcomeDept" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center"><i class="ph-fill ph-shield-check"></i></div>
+                    <div><p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">สิทธิ์การเข้าใช้งาน</p><p id="welcomeRole" class="text-sm font-semibold text-slate-700">กำลังโหลด...</p></div>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-center gap-2 text-indigo-600 text-xs font-semibold">
+                <i class="ph-bold ph-spinner animate-spin text-base"></i> กำลังพาท่านเข้าสู่ระบบ...
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ใส่ลิงก์ Web App URL ของคุณที่นี่เพื่อต่อหลังบ้านเข้า Google Sheets ตัวอย่าง:
-        const API_URL = "YOUR_WEB_APP_URL_HERE"; 
+        // ⚠️ สำคัญมาก: ให้นำ URL Web App จาก Google Apps Script ของคุณมาใส่ตรงนี้
+        const API_URL = "https://script.google.com/macros/s/AKfycbwMCWP83N6hqcIVJMgIcDveHkh-0qmp94vJ5Hkt1dH4mQR6KlLfNKjYM8PsPB54WDXNgg/exec"; 
 
         async function handleLogin(event) {
-            event.preventDefault();
+            event.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บ
+
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
             const errorMsg = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
             const loginBtn = document.getElementById('loginBtn');
 
+            // รีเซ็ตข้อความแจ้งเตือน
             errorMsg.classList.add('hidden');
             loginBtn.disabled = true;
-            loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบ...';
-
-            // ถ้าไม่ได้ผูก API ลิงก์ ให้จำลองระบบล็อกอินเข้าหน้าบ้านปกติเพื่อทดสอบโครงสร้างระบบก่อนได้
-            if (API_URL === "YOUR_WEB_APP_URL_HERE") {
-                setTimeout(() => {
-                    loginBtn.disabled = false;
-                    loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
-                    if (user === 'admin01') {
-                        localStorage.setItem('user', JSON.stringify({ id: "NU-998", username: "admin01", name: "เจ้าหน้าที่ ดูแลระบบ", department: "งานพัฒนาระบบ", role: "admin" }));
-                        window.location.href = 'admin.html';
-                    } else {
-                        localStorage.setItem('user', JSON.stringify({ id: "NU-001", username: "staff01", name: "นางสาวสมหญิง รักงาน", department: "งานธุรการ", role: "staff" }));
-                        window.location.href = 'staff.html';
-                    }
-                }, 800);
-                return;
-            }
+            loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบข้อมูลชีต...';
 
             try {
+                // ส่งข้อมูลด้วย POST ไปยัง Apps Script พร้อม action: "login"
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ username: user, password: pass })
+                    body: JSON.stringify({ 
+                        action: "login", 
+                        username: user, 
+                        password: pass 
+                    })
                 });
+
+                // แปลงผลลัพธ์เป็น JSON
                 const result = await response.json();
 
                 if (result.status === "success") {
+                    // หากสำเร็จ ให้บันทึกข้อมูลผู้ใช้ลงในบราวเซอร์
                     localStorage.setItem('user', JSON.stringify(result.user));
-                    if (result.user.role === 'admin') {
-                        window.location.href = 'admin.html';
-                    } else {
-                        window.location.href = 'staff.html'; 
-                    }
+                    
+                    // อัปเดตข้อมูลบนหน้าต่างต้อนรับ
+                    document.getElementById('welcomeName').innerText = result.user.name;
+                    document.getElementById('welcomeDept').innerText = result.user.department;
+                    document.getElementById('welcomeRole').innerText = result.user.role === 'admin' ? 'ผู้ดูแลระบบ (Admin)' : 'บุคลากรสายสนับสนุน (Staff)';
+                    
+                    // แสดงหน้าต่างต้อนรับ
+                    const modal = document.getElementById('successModal');
+                    const modalContent = document.getElementById('successModalContent');
+                    modal.classList.remove('hidden');
+                    // ใส่ดีเลย์นิดนึงให้ Animation เฟดเข้าทำงาน
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0');
+                        modalContent.classList.remove('scale-95');
+                    }, 50);
+
+                    // ดีเลย์ 2.5 วินาทีแล้วทำการเปลี่ยนหน้า
+                    setTimeout(() => {
+                        if (result.user.role === 'admin') {
+                            window.location.href = 'admin.html';
+                        } else {
+                            window.location.href = 'staff.html'; 
+                        }
+                    }, 2500);
+
                 } else {
-                    errorMsg.innerText = "⚠️ " + result.message;
+                    // หากเชื่อมต่อสำเร็จแต่รหัสผิด
+                    errorText.innerText = result.message || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
                     errorMsg.classList.remove('hidden');
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
                 }
             } catch (error) {
-                errorMsg.innerText = "⚠️ ไม่สามารถเชื่อมต่อกับฐานข้อมูลซีตได้";
+                // หากการเชื่อมต่อมีปัญหา
+                console.error(error);
+                errorText.innerText = "ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้ โปรดตรวจสอบ API URL";
                 errorMsg.classList.remove('hidden');
-            } finally {
                 loginBtn.disabled = false;
                 loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
+            }
+        }
+
+        // หากผู้ใช้เคยล็อกอินไว้แล้ว ให้ข้ามหน้าล็อกอินไปเลย (ปิดการทำงานส่วนนี้ได้หากต้องการให้กรอกใหม่ทุกครั้ง)
+        window.onload = function() {
+            const storedUser = localStorage.getItem('user');
+            if(storedUser) {
+                const user = JSON.parse(storedUser);
+                if(user.role === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'staff.html';
+                }
             }
         }
     </script>
