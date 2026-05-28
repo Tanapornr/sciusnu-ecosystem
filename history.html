@@ -63,7 +63,7 @@
                 <a href="history.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
                     <i class="ph-fill ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
                 </a>
-                <a href="#" onclick="showToast('รายการโปรด')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-heart text-xl"></i> รายการโปรด
                 </a>
                 <a href="#" onclick="showToast('กิจกรรมของฉัน')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
@@ -132,7 +132,7 @@
                                     <th class="p-4 text-center">Pre-test</th>
                                     <th class="p-4 text-center">Post-test</th>
                                     <th class="p-4">เวลาเรียนรวม</th>
-                                    <th class="p-4 text-center">สถานะ</th>
+                                    <th class="p-4 text-center">status</th>
                                 </tr>
                             </thead>
                             <tbody class="text-slate-600 font-medium divide-y divide-slate-100">
@@ -183,7 +183,6 @@
                     <h3 class="font-bold text-slate-800 text-sm border-b pb-3 flex items-center gap-2">
                         <i class="ph-bold ph-chart-bar text-indigo-600"></i> สถิติการเรียนรู้สะสม
                     </h3>
-                    
                     <div class="grid grid-cols-2 gap-4 text-xs font-medium">
                         <div class="p-3 bg-slate-50 rounded-xl border">
                             <p class="text-slate-400">เวลาเรียนรวมทั้งหมด</p>
@@ -194,7 +193,6 @@
                             <p class="text-base font-bold text-slate-800 mt-1">12 ครั้ง</p>
                         </div>
                     </div>
-
                     <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/40 text-xs text-slate-600 leading-relaxed font-medium">
                         📌 ระบบจะทำการส่งประวัติการเรียน บันทึกข้อความ และคะแนน Post-test ทั้งหมดนี้ไปยังฝ่ายพัฒนาระบบ คณะวิทยาศาสตร์ เพื่อประกอบเอกสารรับใบประกาศนียบัตรแบบดิจิทัลโดยอัตโนมัติครับ
                     </div>
@@ -211,21 +209,18 @@
 
     <script>
         window.onload = function() {
-            // ดึงข้อมูลผู้ใช้จริงที่บันทึกจากการล็อกอินสำเร็จ
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
                 document.getElementById('userNameText').innerText = user.name;
                 document.getElementById('userDeptText').innerText = user.department;
                 document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
-            } else {
-                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
             }
         };
 
         function showToast(message) {
             const toast = document.getElementById('toastBox');
-            document.getElementById('toastMessage').innerText = `ระบบกำลังจำลองหน้า: ${message}`;
+            document.getElementById('toastMessage').innerText = message;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
         }
