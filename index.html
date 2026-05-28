@@ -35,7 +35,7 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">ชื่อผู้ใช้งาน (Username)</label>
                 <div class="relative">
                     <i class="ph ph-user absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                    <input type="text" id="username" required placeholder="admin หรือ student" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50">
+                    <input type="text" id="username" required placeholder="เช่น staff01 หรือ admin01" class="w-full border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50">
                 </div>
             </div>
 
@@ -47,33 +47,55 @@
                 </div>
             </div>
 
-            <div id="errorMessage" class="text-red-500 text-xs hidden text-center font-medium bg-red-50 py-2 rounded-lg border border-red-100">
-                ⚠️ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง
-            </div>
+            <div id="errorMessage" class="text-red-500 text-xs hidden text-center font-medium bg-red-50 py-2 rounded-lg border border-red-100"></div>
 
-            <button type="submit" class="w-full bg-primary hover:bg-blue-800 text-white font-medium py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
+            <button type="submit" id="loginBtn" class="w-full bg-primary hover:bg-blue-800 text-white font-medium py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-2">
                 <i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ
             </button>
         </form>
-        
-        <div class="mt-6 pt-4 border-t border-slate-100 text-slate-400 text-xs">
-            Admin: admin/1234 | ผู้เรียน: student/1234
-        </div>
     </div>
 
     <script>
-        function handleLogin(event) {
+        // ⚠️ อย่าลืมนำ Web App URL จาก Google Apps Script มาใส่ตรงนี้แทนข้อความข้างล่างนะครับ
+        const API_URL = "YOUR_WEB_APP_URL_HERE"; 
+
+        async function handleLogin(event) {
             event.preventDefault();
             const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
             const errorMsg = document.getElementById('errorMessage');
+            const loginBtn = document.getElementById('loginBtn');
 
-            if (user === 'admin' && pass === '1234') {
-                window.location.href = 'admin.html';
-            } else if (user === 'student' && pass === '1234') {
-                window.location.href = 'student.html';
-            } else {
+            errorMsg.classList.add('hidden');
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบ...';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ username: user, password: pass })
+                });
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    localStorage.setItem('user', JSON.stringify(result.user));
+
+                    if (result.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'staff.html'; 
+                    }
+                } else {
+                    errorMsg.innerText = "⚠️ " + result.message;
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (error) {
+                errorMsg.innerText = "⚠️ ไม่สามารถเชื่อมต่อกับฐานข้อมูลชีตได้";
                 errorMsg.classList.remove('hidden');
+            } finally { // แก้ไขจาก final เป็น finally เรียบร้อยครับ
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
             }
         }
     </script>
