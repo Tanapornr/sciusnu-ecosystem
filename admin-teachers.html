@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> เพิ่มครู/ผู้สอน</button>
+                    <button id="openAddStaffBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> เพิ่มครู/ผู้สอน</button>
                     <button class="border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 px-3 py-2.5 rounded-lg transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                                     <td class="p-4 text-center font-medium">24 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -194,7 +194,7 @@
                                     <td class="p-4 text-center font-medium">20 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -209,7 +209,7 @@
                                     <td class="p-4 text-center font-medium">22 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -224,7 +224,7 @@
                                     <td class="p-4 text-center font-medium">18 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -239,7 +239,7 @@
                                     <td class="p-4 text-center font-medium">16 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -254,7 +254,7 @@
                                     <td class="p-4 text-center font-medium">14 ชั่วโมง/สัปดาห์</td>
                                     <td class="p-4"><span class="flex items-center gap-1.5 text-amber-500 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> ลาศึกษาต่อ</span></td>
                                     <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
-                                        <button class="p-1.5 hover:text-indigo-600 transition"><i class="ph-bold ph-eye"></i></button>
+                                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
                                         <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
                                         <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                                     </td>
@@ -340,6 +340,69 @@
         </div>
     </main>
 
+    <div id="addStaffModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-slate-100">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-800">เพิ่มข้อมูล Staff/ผู้สอน</h3>
+                <button id="closeAddStaffModalBtn" class="text-slate-400 hover:text-slate-700"><i class="ph-bold ph-x text-xl"></i></button>
+            </div>
+            <form id="addStaffForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">ชื่อ - นามสกุล</label>
+                    <input id="addName" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">อีเมล</label>
+                    <input id="addEmail" type="email" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">กลุ่มสาระ/สาขา</label>
+                    <input id="addSubject" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">บทบาท</label>
+                    <select id="addRole" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                        <option>ครูประจำการ</option>
+                        <option>หัวหน้ากลุ่มสาระ</option>
+                        <option>ครูผู้ช่วย</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">ภาระงานสอน (ชั่วโมง/สัปดาห์)</label>
+                    <input id="addLoad" type="number" min="1" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="text-xs font-semibold text-slate-600">สถานะ</label>
+                    <select id="addStatus" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                        <option>ปฏิบัติงาน</option>
+                        <option>ลาศึกษาต่อ</option>
+                    </select>
+                </div>
+                <div class="md:col-span-2 flex justify-end gap-2 pt-2">
+                    <button type="button" id="cancelAddStaffBtn" class="px-4 py-2 text-sm rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">บันทึกข้อมูล</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="viewStaffModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl border border-slate-100">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-800">ดูข้อมูล Staff/ผู้สอน</h3>
+                <button id="closeViewStaffModalBtn" class="text-slate-400 hover:text-slate-700"><i class="ph-bold ph-x text-xl"></i></button>
+            </div>
+            <div class="p-6 space-y-3 text-sm">
+                <p><span class="font-semibold text-slate-700">ชื่อ:</span> <span id="viewName"></span></p>
+                <p><span class="font-semibold text-slate-700">อีเมล:</span> <span id="viewEmail"></span></p>
+                <p><span class="font-semibold text-slate-700">กลุ่มสาระ/สาขา:</span> <span id="viewSubject"></span></p>
+                <p><span class="font-semibold text-slate-700">บทบาท:</span> <span id="viewRole"></span></p>
+                <p><span class="font-semibold text-slate-700">ภาระงานสอน:</span> <span id="viewLoad"></span></p>
+                <p><span class="font-semibold text-slate-700">สถานะ:</span> <span id="viewStatus"></span></p>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.onload = function() {
             // ระบบตรวจสอบ Auth ย้อนกลับ
@@ -357,6 +420,7 @@
             }
             document.getElementById('userNameText').innerText = user.name;
             document.getElementById('userDeptText').innerText = user.department;
+            initStaffModals();
 
             // วาดกราฟ Donut
             const ctxDonut = document.getElementById('donutChart').getContext('2d');
@@ -413,6 +477,99 @@
             });
         };
 
+        function initStaffModals() {
+            const addModal = document.getElementById('addStaffModal');
+            const viewModal = document.getElementById('viewStaffModal');
+            const openAddBtn = document.getElementById('openAddStaffBtn');
+            const closeAddBtn = document.getElementById('closeAddStaffModalBtn');
+            const cancelAddBtn = document.getElementById('cancelAddStaffBtn');
+            const closeViewBtn = document.getElementById('closeViewStaffModalBtn');
+            const addForm = document.getElementById('addStaffForm');
+            const tableBody = document.querySelector('tbody');
+
+            const openModal = (el) => {
+                el.classList.remove('hidden');
+                el.classList.add('flex');
+            };
+            const closeModal = (el) => {
+                el.classList.add('hidden');
+                el.classList.remove('flex');
+            };
+
+            openAddBtn.addEventListener('click', () => openModal(addModal));
+            closeAddBtn.addEventListener('click', () => closeModal(addModal));
+            cancelAddBtn.addEventListener('click', () => closeModal(addModal));
+            closeViewBtn.addEventListener('click', () => closeModal(viewModal));
+
+            addModal.addEventListener('click', (e) => { if (e.target === addModal) closeModal(addModal); });
+            viewModal.addEventListener('click', (e) => { if (e.target === viewModal) closeModal(viewModal); });
+
+            addForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = {
+                    name: document.getElementById('addName').value.trim(),
+                    email: document.getElementById('addEmail').value.trim(),
+                    subject: document.getElementById('addSubject').value.trim(),
+                    role: document.getElementById('addRole').value,
+                    load: `${document.getElementById('addLoad').value} ชั่วโมง/สัปดาห์`,
+                    status: document.getElementById('addStatus').value
+                };
+
+                if (!data.name || !data.email || !data.subject) return;
+
+                tableBody.insertAdjacentHTML('afterbegin', buildStaffRow(data));
+                addForm.reset();
+                closeModal(addModal);
+            });
+
+            tableBody.addEventListener('click', (e) => {
+                const viewBtn = e.target.closest('.js-view-staff');
+                if (!viewBtn) return;
+
+                const row = viewBtn.closest('tr');
+                const name = row.querySelector('td:nth-child(1) p.font-bold')?.innerText?.trim() || '-';
+                const email = row.querySelector('td:nth-child(1) p.text-\\[10px\\]')?.innerText?.trim() || '-';
+                const subject = row.querySelector('td:nth-child(2)')?.innerText?.trim() || '-';
+                const role = row.querySelector('td:nth-child(3)')?.innerText?.trim() || '-';
+                const load = row.querySelector('td:nth-child(4)')?.innerText?.trim() || '-';
+                const status = row.querySelector('td:nth-child(5)')?.innerText?.trim() || '-';
+
+                document.getElementById('viewName').innerText = name;
+                document.getElementById('viewEmail').innerText = email;
+                document.getElementById('viewSubject').innerText = subject;
+                document.getElementById('viewRole').innerText = role;
+                document.getElementById('viewLoad').innerText = load;
+                document.getElementById('viewStatus').innerText = status;
+                openModal(viewModal);
+            });
+        }
+
+        function buildStaffRow(data) {
+            const roleClass = data.role === 'หัวหน้ากลุ่มสาระ'
+                ? 'bg-blue-50 text-blue-600 border-blue-100'
+                : (data.role === 'ครูผู้ช่วย' ? 'bg-purple-50 text-purple-600 border-purple-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100');
+            const statusTone = data.status === 'ปฏิบัติงาน'
+                ? { text: 'text-emerald-600', dot: 'bg-emerald-500' }
+                : { text: 'text-amber-500', dot: 'bg-amber-400' };
+
+            return `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-4 flex items-center gap-3">
+                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=334155&color=fff" class="w-8 h-8 rounded-full">
+                        <div><p class="font-bold text-slate-800">${data.name}</p><p class="text-[10px] text-slate-400">${data.email}</p></div>
+                    </td>
+                    <td class="p-4 font-medium">${data.subject}</td>
+                    <td class="p-4 text-center"><span class="${roleClass} px-2.5 py-1 rounded-md text-[10px] font-semibold border">${data.role}</span></td>
+                    <td class="p-4 text-center font-medium">${data.load}</td>
+                    <td class="p-4"><span class="flex items-center gap-1.5 ${statusTone.text} font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full ${statusTone.dot}"></span> ${data.status}</span></td>
+                    <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
+                        <button class="p-1.5 hover:text-indigo-600 transition js-view-staff"><i class="ph-bold ph-eye"></i></button>
+                        <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
+                        <button class="p-1.5 hover:text-slate-800 transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
+                    </td>
+                </tr>`;
+        }
+
         function handleLogout() {
             localStorage.clear();
             window.location.href = 'index.html';
@@ -420,4 +577,5 @@
     </script>
 </body>
 </html>
+
 
