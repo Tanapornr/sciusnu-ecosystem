@@ -3,291 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Ecosystem Dashboard</title>
+    <title>Admin Dashboard - Learning Ecosystem</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght=300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { primary: '#1e3a8a', secondary: '#eff6ff' }
+                    colors: { 
+                        sidebarBg: '#0f172a',
+                        primaryPurple: '#4f46e5',
+                        bgLight: '#f8fafc'
+                    }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #f4f7f6; }
-        /* สไตล์ Glassmorphism อ่อนๆ สำหรับการ์ด */
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+            border-radius: 1.25rem;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .glass-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
         }
+        /* ซ่อน Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden text-slate-700">
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
 
-    <aside class="w-64 bg-primary text-white flex flex-col justify-between hidden md:flex z-20">
-        <div>
-            <div class="p-6 flex items-center gap-3">
-                <div class="bg-white text-primary p-2 rounded-lg"><i class="ph-fill ph-graduation-cap text-2xl"></i></div>
-                <h1 class="text-lg font-semibold leading-tight">Learning<br>Ecosystem</h1>
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div class="overflow-y-auto h-full pb-4">
+            <div class="p-6 flex items-center gap-3 sticky top-0 bg-sidebarBg z-10">
+                <div class="bg-emerald-500 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                    <i class="ph-fill ph-book-open text-xl"></i>
+                </div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
             </div>
             
-            <nav class="px-4 space-y-1">
-                <a href="index.html" class="flex items-center gap-3 px-4 py-3 bg-blue-800 rounded-xl font-medium text-white">
-                    <i class="ph ph-house text-xl"></i> หน้าหลัก
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition">
+                    <i class="ph-fill ph-house text-xl"></i> หน้าหลัก
                 </a>
-                
-                <div class="pt-4 pb-2 px-4 text-xs text-blue-300 font-medium">องค์ประกอบ</div>
-                <a href="learners.html" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition">
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
+                <a href="learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
                     <i class="ph ph-users text-xl"></i> Learners
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-chalkboard-teacher text-xl"></i> Teachers</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-briefcase text-xl"></i> Workplace</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-book-open-text text-xl"></i> Learning Resources</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-clipboard-text text-xl"></i> Assessment</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-brain text-xl"></i> AI Integration</a>
+                <a href="#" onclick="showToast('หน้าจัดการ Teachers')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-graduation-cap text-xl"></i> Teachers
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ Technology')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-desktop text-xl"></i> Technology
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ Community')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-users-three text-xl"></i> Community
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ Workplace')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-briefcase text-xl"></i> Workplace
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ Learning Resources')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-books text-xl"></i> Learning Resources
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ Assessment')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-clipboard-text text-xl"></i> Assessment
+                </a>
+                <a href="#" onclick="showToast('หน้าจัดการ AI Integration')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-brain text-xl"></i> AI Integration
+                </a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="#" onclick="showToast('ดูแผนภาพ Ecosystem ทั้งหมด')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-graph text-xl"></i> แผนภาพ Ecosystem
+                </a>
+                <a href="#" onclick="showToast('หน้ารายงานและวิเคราะห์ข้อมูล')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์
+                </a>
+                <a href="#" onclick="showToast('ตั้งค่าระบบหลังบ้าน')" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition">
+                    <i class="ph ph-gear text-xl"></i> การตั้งค่า
+                </a>
             </nav>
         </div>
         
-        <div class="p-4">
-            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-4 rounded-2xl relative overflow-hidden text-center">
-                <i class="ph-fill ph-sparkle text-yellow-300 absolute top-2 left-2"></i>
-                <i class="ph-fill ph-book-open text-white text-3xl mb-2 inline-block"></i>
-                <p class="text-sm font-medium mb-3">ยกระดับการเรียนรู้<br>ไปอีกขั้นด้วย AI</p>
-                <button class="w-full bg-white text-primary text-sm font-semibold py-2 rounded-lg hover:bg-slate-50 transition">เริ่มต้นใช้งาน</button>
-            </div>
+        <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50">
+                <i class="ph ph-sign-out"></i> ออกจากระบบ
+            </button>
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
         
-        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-slate-200 px-8 py-4 flex justify-between items-center">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
             <div class="relative w-96">
-                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                <input type="text" placeholder="ค้นหาในระบบ..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
+                <input type="text" placeholder="ค้นหาในระบบหลังบ้าน..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 border border-transparent focus:border-slate-300 transition">
             </div>
+            
             <div class="flex items-center gap-4">
-                <button class="relative p-2 text-slate-500 hover:text-primary transition">
+                <button class="p-2 text-slate-400 hover:text-slate-600 relative transition" onclick="showToast('แจ้งเตือนระบบ')">
                     <i class="ph ph-bell text-xl"></i>
                     <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 </button>
-                <button class="p-2 text-slate-500 hover:text-primary transition"><i class="ph ph-question text-xl"></i></button>
-                <div class="flex items-center gap-3 border-l border-slate-200 pl-4">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="Profile" class="w-9 h-9 rounded-full">
-                    <div class="hidden md:block text-sm">
-                        <p class="font-semibold text-slate-800">Admin User</p>
-                        <p class="text-xs text-slate-500">ผู้ดูแลระบบ</p>
+                <button class="p-2 text-slate-400 hover:text-slate-600 transition" onclick="showToast('คู่มือการใช้งานระบบแอดมิน')">
+                    <i class="ph ph-question text-xl"></i>
+                </button>
+                
+                <div class="flex items-center gap-3 border-l pl-4 cursor-pointer">
+                    <div id="avatarContainer" class="w-9 h-9 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center text-sm shadow-inner overflow-hidden">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" alt="Admin" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
                     </div>
                 </div>
             </div>
         </header>
 
-        <div class="p-8 max-w-7xl mx-auto w-full">
+        <div class="p-8 max-w-[1400px] w-full mx-auto flex-1 overflow-y-auto h-[calc(100vh-70px)] space-y-8">
             
-            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 mb-8 flex justify-between items-center border border-blue-100">
-                <div>
-                    <h2 class="text-3xl font-semibold text-primary mb-2">การออกแบบ Learning Ecosystem</h2>
-                    <p class="text-slate-600">ออกแบบและจัดการองค์ประกอบของระบบนิเวศการเรียนรู้ เพื่อสร้างประสบการณ์การเรียนรู้ที่มีประสิทธิภาพ</p>
+            <div class="bg-gradient-to-r from-slate-800 to-indigo-900 rounded-3xl p-8 flex justify-between items-center text-white shadow-lg relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-10 text-9xl transform translate-x-4 -translate-y-8"><i class="ph-fill ph-squares-four"></i></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-semibold mb-2">ภาพรวมระบบ Learning Ecosystem</h2>
+                    <p class="text-indigo-200 text-sm max-w-xl leading-relaxed">แผงควบคุมหลักสำหรับติดตามและจัดการการเรียนรู้ของบุคลากรสายสนับสนุน คณะวิทยาศาสตร์ มหาวิทยาลัยนเรศวร</p>
                 </div>
-                <div class="hidden lg:flex items-center justify-center text-blue-300 text-6xl">
-                    <i class="ph-fill ph-monitor-play mr-2"></i><i class="ph-fill ph-books"></i>
+                <button onclick="showToast('สร้างรายงานสรุปผลประจำเดือน')" class="relative z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition flex items-center gap-2">
+                    <i class="ph ph-download-simple"></i> ออกรายงานระบบ
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-card p-5">
+                    <div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i class="ph-fill ph-users"></i></div><p class="text-xs text-slate-500 font-medium">จำนวนผู้เรียนทั้งหมด</p></div>
+                    <p class="text-2xl font-bold text-slate-800">82 <span class="text-xs font-medium text-slate-400">คน</span></p>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="ph-fill ph-check-circle"></i></div><p class="text-xs text-slate-500 font-medium">อัตราการเรียนจบ</p></div>
+                    <p class="text-2xl font-bold text-slate-800">45% <span class="text-xs font-medium text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded ml-1">+12%</span></p>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center"><i class="ph-fill ph-books"></i></div><p class="text-xs text-slate-500 font-medium">หลักสูตรที่เปิดสอน</p></div>
+                    <p class="text-2xl font-bold text-slate-800">14 <span class="text-xs font-medium text-slate-400">คอร์ส</span></p>
+                </div>
+                <div class="glass-card p-5">
+                    <div class="flex items-center gap-3 mb-2"><div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center"><i class="ph-fill ph-clock-counter-clockwise"></i></div><p class="text-xs text-slate-500 font-medium">เข้าใช้งานระบบวันนี้</p></div>
+                    <p class="text-2xl font-bold text-slate-800">28 <span class="text-xs font-medium text-slate-400">ครั้ง</span></p>
                 </div>
             </div>
 
-            <h3 class="text-lg font-medium border-l-4 border-primary pl-3 mb-6 text-slate-800">องค์ประกอบการออกแบบ</h3>
+            <h3 class="text-lg font-bold text-slate-800 border-l-4 border-indigo-600 pl-3">การออกแบบองค์ประกอบ (Ecosystem Design)</h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                
-                <div onclick="window.location.href='learners.html'" class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <a href="learners.html" class="glass-card p-5 flex flex-col justify-between cursor-pointer group hover:border-blue-300">
                     <div>
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-users"></i></div>
-                            <h4 class="font-semibold text-slate-800">Learners</h4>
+                            <div class="w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-2xl"><i class="ph-fill ph-users"></i></div>
+                            <h4 class="font-bold text-slate-800">Learners</h4>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">กำหนดกลุ่มผู้เรียน<br>และความต้องการในการเรียนรู้</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">จัดการกลุ่มผู้เรียน, ติดตามความก้าวหน้า, และดูแลบัญชีผู้ใช้งาน</p>
                     </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
+                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-blue-500 group-hover:text-white transition"><i class="ph ph-arrow-right text-xs"></i></div></div>
+                </a>
+
+                <div onclick="showToast('เข้าสู่ระบบจัดการ Teachers')" class="glass-card p-5 flex flex-col justify-between cursor-pointer group hover:border-emerald-300">
+                    <div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
+                            <h4 class="font-bold text-slate-800">Teachers</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">กำหนดบทบาทครูและผู้สอน จัดการภาระงานสอนและการพัฒนา</p>
+                    </div>
+                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-emerald-500 group-hover:text-white transition"><i class="ph ph-arrow-right text-xs"></i></div></div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
+                <div onclick="showToast('เข้าสู่ระบบจัดการ Technology')" class="glass-card p-5 flex flex-col justify-between cursor-pointer group hover:border-purple-300">
                     <div>
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-green-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-graduation-cap"></i></div>
-                            <h4 class="font-semibold text-slate-800">Teachers</h4>
+                            <div class="w-12 h-12 rounded-xl bg-purple-500 text-white flex items-center justify-center text-2xl"><i class="ph-fill ph-desktop"></i></div>
+                            <h4 class="font-bold text-slate-800">Technology</h4>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">กำหนดบทบาทของครู<br>และผู้สอน</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">จัดการสถาปัตยกรรมระบบ, โฮสติ้ง Vercel และฐานข้อมูลชีต</p>
                     </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
+                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-purple-500 group-hover:text-white transition"><i class="ph ph-arrow-right text-xs"></i></div></div>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
+                <div onclick="showToast('เข้าสู่ระบบจัดการ Learning Resources')" class="glass-card p-5 flex flex-col justify-between cursor-pointer group hover:border-amber-300">
                     <div>
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-blue-400 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-desktop"></i></div>
-                            <h4 class="font-semibold text-slate-800">Technology</h4>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center text-2xl"><i class="ph-fill ph-books"></i></div>
+                            <h4 class="font-bold text-slate-800">Resources</h4>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">เครื่องมือและเทคโนโลยี<br>ที่ใช้ในการเรียนรู้</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">อัปโหลดสื่อการสอน, วิดีโอ, แผนการเรียนรู้ และจัดการคลังความรู้</p>
                     </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-orange-400 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-users-three"></i></div>
-                            <h4 class="font-semibold text-slate-800">Community</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">ชุมชนและเครือข่าย<br>การเรียนรู้</p>
-                    </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-yellow-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-briefcase"></i></div>
-                            <h4 class="font-semibold text-slate-800">Workplace</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">สภาพแวดล้อมการทำงาน<br>และการเรียนรู้ในองค์กร</p>
-                    </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-book-open"></i></div>
-                            <h4 class="font-semibold text-slate-800">Learning Resources</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">แหล่งเรียนรู้และสื่อ<br>การเรียนรู้</p>
-                    </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-pink-400 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-clipboard-text"></i></div>
-                            <h4 class="font-semibold text-slate-800">Assessment</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">การประเมินผลและ<br>ติดตามความก้าวหน้า</p>
-                    </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
-                </div>
-
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-purple-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-cpu"></i></div>
-                            <h4 class="font-semibold text-slate-800">AI Integration</h4>
-                        </div>
-                        <p class="text-xs text-slate-500 leading-relaxed">การบูรณาการ AI<br>เพื่อการเรียนรู้</p>
-                    </div>
-                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition"><i class="ph ph-caret-right text-xs"></i></div></div>
+                    <div class="flex justify-end mt-4"><div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-amber-500 group-hover:text-white transition"><i class="ph ph-arrow-right text-xs"></i></div></div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="glass-card rounded-2xl p-6 lg:col-span-2">
-                    <h3 class="font-semibold text-slate-800 mb-6">ภาพรวม Ecosystem</h3>
-                    <div class="flex flex-col md:flex-row items-center justify-around gap-6">
-                        <div class="relative w-48 h-48 border-2 border-dashed border-slate-200 rounded-full flex items-center justify-center bg-slate-50">
-                            <div class="text-center">
-                                <div class="bg-blue-100 text-primary w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2"><i class="ph-fill ph-users text-2xl"></i></div>
-                                <span class="text-xs font-semibold">Learners</span>
-                            </div>
-                            <div class="absolute -top-3 text-green-500"><i class="ph-fill ph-graduation-cap text-xl"></i></div>
-                            <div class="absolute -bottom-3 text-emerald-500"><i class="ph-fill ph-book-open text-xl"></i></div>
-                            <div class="absolute -left-3 text-orange-400"><i class="ph-fill ph-users-three text-xl"></i></div>
-                            <div class="absolute -right-3 text-pink-400"><i class="ph-fill ph-clipboard-text text-xl"></i></div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <i class="ph ph-files text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">องค์ประกอบทั้งหมด</p><p class="text-sm font-semibold text-primary id-comp-count">8 องค์ประกอบ</p></div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="ph ph-briefcase text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">自由สถานะการออกแบบ</p><p class="text-sm font-semibold text-blue-500">กำลังดำเนินการ</p></div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="ph ph-clock text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">อัปเดตล่าสุด</p><p class="text-xs text-slate-500 mt-1">28 พ.ค. 2569 14:30</p></div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="glass-card p-6 bg-white">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-slate-800">กิจกรรมล่าสุดในระบบ (System Logs)</h3>
+                    <button class="text-xs text-indigo-600 font-medium hover:underline">ดูประวัติทั้งหมด</button>
                 </div>
-
-                <div class="glass-card rounded-2xl p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-semibold text-slate-800">กิจกรรมล่าสุด</h3>
-                        <a href="#" class="text-xs text-primary hover:underline">ดูทั้งหมด</a>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="ph-bold ph-check"></i></div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-700">นางสาวสมหญิง รักงาน ทำแบบทดสอบ AI Tools สำเร็จ</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">หมวดหมู่: Assessment • 15 นาทีที่แล้ว</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-semibold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">คะแนน 3/5</span>
                     </div>
                     
-                    <div class="space-y-4 relative before:absolute before:inset-0 before:ml-1.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent activity-container">
-                        <p class="text-xs text-slate-400 text-center py-4">กำลังโหลดข้อมูลล่าสุด...</p>
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"><i class="ph-bold ph-user-plus"></i></div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-700">เพิ่มข้อมูลกลุ่มผู้เรียน "งานการเงินและพัสดุ" ใหม่</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">หมวดหมู่: Learners • 2 ชั่วโมงที่แล้ว</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-slate-500 font-medium">โดย Admin User</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between pb-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center"><i class="ph-bold ph-upload-simple"></i></div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-700">อัปเดตสื่อวิดีโอ "Active Learning" ลงในฐานข้อมูล</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5">หมวดหมู่: Learning Resources • เมื่อวานนี้</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-slate-500 font-medium">โดย Kritsada S.</span>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </main>
 
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-info text-blue-400 text-lg"></i>
+        <span id="toastMessage">ข้อความแจ้งเตือน</span>
+    </div>
+
     <script>
-        // ใส่ลิงก์ Web App URL ของคุณตรงนี้ เพื่อเชื่อมต่อฐานข้อมูลจริง
-        const API_URL = "YOUR_WEB_APP_URL_HERE";
-
-        async function loadDashboardData() {
-            if (API_URL === "YOUR_WEB_APP_URL_HERE") return;
-            
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-
-                // 1. อัปเดตกิจกรรมล่าสุด (Activities)
-                const container = document.querySelector('.activity-container');
-                container.innerHTML = ''; 
-
-                data.activities.forEach(act => {
-                    const html = `
-                        <div class="relative flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-3 h-3 rounded-full bg-blue-500 shadow ring-4 ring-white z-10"></div>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">${act.action}</p>
-                                    <p class="text-xs text-slate-400">${act.date}</p>
-                                </div>
-                            </div>
-                            <span class="text-xs text-slate-400">โดย ${act.user}</span>
-                        </div>
-                    `;
-                    container.insertAdjacentHTML('beforeend', html);
-                });
-
-                // 2. อัปเดตตัวเลขจำนวนองค์ประกอบ
-                document.querySelector('.id-comp-count').innerText = `${data.components.length} องค์ประกอบ`;
-
-            } catch (error) {
-                console.error("Error loading data:", error);
+        window.onload = function() {
+            // ดึงข้อมูลแอดมินที่ล็อกอิน
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                
+                // ถ้าระบบพบว่าคนล็อกอินเข้ามาไม่ใช่ Role 'admin' ให้เตะกลับไปหน้าแรกทันทีเพื่อความปลอดภัย
+                if(user.role !== 'admin') {
+                    alert("⚠️ คุณไม่มีสิทธิ์เข้าถึงหน้าผู้ดูแลระบบ");
+                    window.location.href = 'staff.html';
+                    return;
+                }
+                
+                document.getElementById('userNameText').innerText = user.name;
+                document.getElementById('userDeptText').innerText = user.department;
+            } else {
+                // หากไม่ได้ล็อกอิน ให้เด้งกลับหน้า index
+                window.location.href = 'index.html';
             }
+        };
+
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = `กำลังจำลองการเปิด: ${message}`;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
         }
 
-        // เรียกฟังก์ชันเมื่อเปิดหน้าเว็บ
-        window.onload = loadDashboardData;
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
