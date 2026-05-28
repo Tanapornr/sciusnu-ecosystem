@@ -7,30 +7,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { 
-                        sidebarBg: '#0f172a',
-                        primaryPurple: '#4f46e5',
-                        bgLight: '#f8fafc'
-                    }
+                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
                 }
             }
         }
     </script>
     <style>
         body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
-        .glass-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
-            border-radius: 1.25rem;
-        }
-        /* ซ่อน Scrollbar */
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01); border-radius: 1.25rem; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -41,170 +30,68 @@
     <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
         <div>
             <div class="p-6 flex items-center gap-3">
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
-                    <i class="ph-fill ph-book-open text-xl"></i>
-                </div>
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
                 <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
             </div>
-            
             <nav class="px-4 space-y-1 text-sm">
-                <a href="#" onclick="showToast('หน้าหลัก')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-house text-xl"></i> หน้าหลัก
-                </a>
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน
-                </a>
-                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้
-                </a>
-                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
-                </a>
-                <a href="history.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
-                    <i class="ph-fill ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
-                </a>
-                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-heart text-xl"></i> รายการโปรด
-                </a>
-                <a href="#" onclick="showToast('กิจกรรมของฉัน')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
-                </a>
-                <a href="#" onclick="showToast('ข้อความ')" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
-                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
-                </a>
-                <a href="#" onclick="showToast('ตั้งค่า')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
-                    <i class="ph ph-gear text-xl"></i> ตั้งค่า
-                </a>
+                <a href="#" onclick="showToast('หน้าหลัก')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+                <a href="history.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
             </nav>
         </div>
         <div class="p-4 border-t border-slate-800">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
-                <i class="ph ph-sign-out"></i> ออกจากระบบ
-            </button>
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
         </div>
     </aside>
 
     <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
-            <div class="relative w-96">
-                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" placeholder="ค้นหาประวัติหลักสูตร..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none">
-            </div>
-            
+            <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i><input type="text" placeholder="ค้นหาประวัติหลักสูตร..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none"></div>
             <div class="flex items-center gap-4">
-                <button onclick="showToast('ศูนย์แจ้งเตือน')" class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i></button>
                 <div class="flex items-center gap-3 border-l pl-4">
                     <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
-                    <div class="text-sm">
-                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p>
-                        <p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p>
-                    </div>
+                    <div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p><p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p></div>
                 </div>
             </div>
         </header>
 
         <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
-            
             <div class="lg:col-span-2 space-y-6">
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30">
-                        <i class="ph-fill ph-clock-counter-clockwise"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">ประวัติการเรียนและคะแนนทดสอบ</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">ตรวจสอบบันทึกผลการเข้าเรียน คะแนน Pre-test และ Post-test ทั้งหมดของคุณ</p>
-                    </div>
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30"><i class="ph-fill ph-clock-counter-clockwise"></i></div>
+                    <div><h2 class="text-xl font-bold text-slate-800">ประวัติการเรียนและคะแนนทดสอบ</h2><p class="text-xs text-slate-400 mt-0.5">ตรวจสอบบันทึกผลการเข้าเรียน คะแนน Pre-test และ Post-test ทั้งหมดของคุณ</p></div>
                 </div>
 
                 <div class="glass-card overflow-hidden bg-white border border-slate-200">
                     <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
                         <h3 class="font-bold text-xs text-slate-400 uppercase tracking-wider">บันทึกคะแนนรวมตามหลักสูตร</h3>
-                        <span class="text-[11px] bg-indigo-50 text-indigo-600 border px-2 py-0.5 rounded font-semibold">อัปเดตล่าสุดเรียลไทม์</span>
                     </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-slate-50/50 text-slate-500 font-bold border-b border-slate-200">
-                                <tr>
-                                    <th class="p-4">รายชื่อคอร์สหลักสูตร</th>
-                                    <th class="p-4 text-center">Pre-test</th>
-                                    <th class="p-4 text-center">Post-test</th>
-                                    <th class="p-4">เวลาเรียนรวม</th>
-                                    <th class="p-4 text-center">status</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-slate-600 font-medium divide-y divide-slate-100">
-                                <tr class="hover:bg-slate-50/60 transition">
-                                    <td class="p-4">
-                                        <p class="font-semibold text-slate-800">AI Tools for Education</p>
-                                        <p class="text-[10px] text-slate-400 mt-0.5">รหัสวิชา: L-866 | โดย Admin User</p>
-                                    </td>
-                                    <td class="p-4 text-center text-red-500 font-semibold">0 / 5</td>
-                                    <td class="p-4 text-center text-emerald-500 font-bold">3 / 5</td>
-                                    <td class="p-4 text-slate-500">2 ชม. 35 นาที</td>
-                                    <td class="p-4 text-center">
-                                        <span class="bg-indigo-50 text-indigo-600 text-[10px] px-2 py-0.5 rounded-md font-semibold border border-indigo-100">กำลังศึกษา</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50/60 transition">
-                                    <td class="p-4">
-                                        <p class="font-semibold text-slate-800">การออกแบบการเรียนรู้แบบ Active Learning</p>
-                                        <p class="text-[10px] text-slate-400 mt-0.5">รหัสวิชา: L-688 | โดย Kritsada S.</p>
-                                    </td>
-                                    <td class="p-4 text-center text-slate-400">1 / 5</td>
-                                    <td class="p-4 text-center text-slate-400">-</td>
-                                    <td class="p-4 text-slate-500">1 ชม. 20 นาที</td>
-                                    <td class="p-4 text-center">
-                                        <span class="bg-indigo-50 text-indigo-600 text-[10px] px-2 py-0.5 rounded-md font-semibold border border-indigo-100">กำลังศึกษา</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50/60 transition bg-emerald-50/10">
-                                    <td class="p-4">
-                                        <p class="font-semibold text-slate-800">Cloud Technology for Productivity</p>
-                                        <p class="text-[10px] text-slate-400 mt-0.5">รหัสวิชา: L-012 | โดย คณะวิทยาศาสตร์ มน.</p>
-                                    </td>
-                                    <td class="p-4 text-center text-emerald-500 font-semibold">3 / 5</td>
-                                    <td class="p-4 text-center text-emerald-500 font-bold">5 / 5</td>
-                                    <td class="p-4 text-slate-500">4 ชม. 00 นาที</td>
-                                    <td class="p-4 text-center">
-                                        <span class="bg-emerald-50 text-emerald-600 text-[10px] px-2 py-0.5 rounded-md font-semibold border border-emerald-200">✓ จบหลักสูตร</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b font-bold text-slate-500">
+                            <tr><th class="p-4">รายชื่อคอร์สหลักสูตร</th><th class="p-4 text-center">Pre-test</th><th class="p-4 text-center">Post-test</th><th class="p-4 text-center">สถานะ</th></tr>
+                        </thead>
+                        <tbody class="divide-y text-slate-600 font-medium">
+                            <tr class="hover:bg-slate-50/60 transition">
+                                <td class="p-4"><p class="font-semibold text-slate-800">AI Tools for Education</p><p class="text-[10px] text-slate-400">รหัสวิชา: L-866 | โดย Admin User</p></td>
+                                <td class="p-4 text-center text-red-500">0 / 5</td><td class="p-4 text-center text-emerald-500">3 / 5</td>
+                                <td class="p-4 text-center"><span class="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded border text-[10px]">กำลังศึกษา</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="space-y-6">
-                <div class="glass-card p-6 bg-white border border-slate-200 space-y-5">
-                    <h3 class="font-bold text-slate-800 text-sm border-b pb-3 flex items-center gap-2">
-                        <i class="ph-bold ph-chart-bar text-indigo-600"></i> สถิติการเรียนรู้สะสม
-                    </h3>
-                    <div class="grid grid-cols-2 gap-4 text-xs font-medium">
-                        <div class="p-3 bg-slate-50 rounded-xl border">
-                            <p class="text-slate-400">เวลาเรียนรวมทั้งหมด</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">7 ชม. 55 นาที</p>
-                        </div>
-                        <div class="p-3 bg-slate-50 rounded-xl border">
-                            <p class="text-slate-400">เข้าสู่ระบบสะสม</p>
-                            <p class="text-base font-bold text-slate-800 mt-1">12 ครั้ง</p>
-                        </div>
-                    </div>
-                    <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100/40 text-xs text-slate-600 leading-relaxed font-medium">
-                        📌 ระบบจะทำการส่งประวัติการเรียน บันทึกข้อความ และคะแนน Post-test ทั้งหมดนี้ไปยังฝ่ายพัฒนาระบบ คณะวิทยาศาสตร์ เพื่อประกอบเอกสารรับใบประกาศนียบัตรแบบดิจิทัลโดยอัตโนมัติครับ
-                    </div>
-                </div>
-            </div>
-
+            <div class="space-y-6"><div class="glass-card p-6 bg-white border border-slate-200"><h3 class="font-bold text-slate-800 text-sm border-b pb-3 mb-3"><i class="ph-bold ph-chart-bar text-indigo-600"></i> สถิติสะสม</h3><p class="text-xs text-slate-500 font-semibold leading-relaxed">เวลาเรียนรวมทั้งหมดในระบบ: 7 ชม. 55 นาที <br>การล็อกอินสะสม: 12 ครั้ง</p></div></div>
         </div>
     </main>
 
     <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i>
-        <span id="toastMessage">ข้อความแจ้งเตือน</span>
+        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i><span id="toastMessage">ข้อความแจ้งเตือน</span>
     </div>
 
     <script>
@@ -217,18 +104,8 @@
                 document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
             }
         };
-
-        function showToast(message) {
-            const toast = document.getElementById('toastBox');
-            document.getElementById('toastMessage').innerText = message;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
-        }
-
-        function handleLogout() {
-            localStorage.clear();
-            window.location.href = 'index.html';
-        }
+        function showToast(message) { const toast = document.getElementById('toastBox'); document.getElementById('toastMessage').innerText = message; toast.classList.remove('translate-y-20', 'opacity-0'); setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500); }
+        function handleLogout() { localStorage.clear(); window.location.href = 'index.html'; }
     </script>
 </body>
 </html>
