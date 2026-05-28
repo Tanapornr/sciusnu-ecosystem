@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosystem Diagram - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); border-radius: 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div class="overflow-y-auto h-full pb-4">
+            <div class="p-6 flex items-center gap-3 sticky top-0 bg-sidebarBg z-10">
+                <div class="bg-emerald-500 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
+                <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
+                <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> Teachers</a>
+                <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
+                <a href="admin-community.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
+                <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-briefcase text-xl"></i> Workplace</a>
+                <a href="admin-resources.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-books text-xl"></i> Learning Resources</a>
+                <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-clipboard-text text-xl"></i> Assessment</a>
+                <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-brain text-xl"></i> AI Integration</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="admin-ecosystem.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-graph text-xl"></i> แผนภาพ Ecosystem</a>
+                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์</a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> การตั้งค่า</a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#f4f7f9]">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <div class="relative w-96 text-slate-400 font-medium text-sm">
+                โหมดโครงสร้างสถาปัตยกรรมระบบ (Architecture Mode)
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 border-l pl-4 cursor-pointer">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" class="w-9 h-9 rounded-full object-cover">
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1500px] w-full mx-auto flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md shadow-indigo-600/20"><i class="ph-fill ph-graph"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Ecosystem Architecture</h2>
+                        <p class="text-sm text-slate-500">แผนภาพแสดงความเชื่อมโยงระบบนิเวศการเรียนรู้ 8 องค์ประกอบ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card bg-white p-10 flex items-center justify-center min-h-[600px] relative overflow-hidden">
+                <div class="relative z-10 w-48 h-48 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex flex-col items-center justify-center text-white shadow-2xl border-4 border-white">
+                    <i class="ph-fill ph-infinity text-5xl mb-2"></i>
+                    <p class="font-bold text-center leading-tight text-sm">Digital Learning<br>Ecosystem</p>
+                </div>
+
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-dashed border-indigo-200 rounded-full animate-[spin_60s_linear_infinite]"></div>
+                
+                <div class="absolute top-1/4 left-1/4 bg-blue-50 text-blue-600 px-4 py-3 rounded-xl border border-blue-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-users text-xl"></i> <span class="font-bold text-sm">Learners</span></div>
+                
+                <div class="absolute top-1/4 right-1/4 bg-emerald-50 text-emerald-600 px-4 py-3 rounded-xl border border-emerald-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-graduation-cap text-xl"></i> <span class="font-bold text-sm">Teachers</span></div>
+                
+                <div class="absolute bottom-1/4 left-1/4 bg-purple-50 text-purple-600 px-4 py-3 rounded-xl border border-purple-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-desktop text-xl"></i> <span class="font-bold text-sm">Technology</span></div>
+                
+                <div class="absolute bottom-1/4 right-1/4 bg-amber-50 text-amber-600 px-4 py-3 rounded-xl border border-amber-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-books text-xl"></i> <span class="font-bold text-sm">Resources</span></div>
+                
+                <div class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-teal-50 text-teal-600 px-4 py-3 rounded-xl border border-teal-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-users-three text-xl"></i> <span class="font-bold text-sm">Community</span></div>
+                
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-orange-50 text-orange-600 px-4 py-3 rounded-xl border border-orange-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-briefcase text-xl"></i> <span class="font-bold text-sm">Workplace</span></div>
+                
+                <div class="absolute left-10 top-1/2 transform -translate-y-1/2 bg-rose-50 text-rose-600 px-4 py-3 rounded-xl border border-rose-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-clipboard-text text-xl"></i> <span class="font-bold text-sm">Assessment</span></div>
+                
+                <div class="absolute right-10 top-1/2 transform -translate-y-1/2 bg-pink-50 text-pink-600 px-4 py-3 rounded-xl border border-pink-200 shadow-sm flex items-center gap-2"><i class="ph-fill ph-brain text-xl"></i> <span class="font-bold text-sm">AI Integration</span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            let user = null;
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                user = JSON.parse(storedUser);
+            } else {
+                user = { id: "NU-998", username: "admin01", name: "Admin User", department: "ผู้ดูแลระบบ", role: "admin" };
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            if(user.role !== 'admin') {
+                window.location.href = 'staff.html';
+                return;
+            }
+            document.getElementById('userNameText').innerText = user.name;
+            document.getElementById('userDeptText').innerText = user.department;
+        };
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
