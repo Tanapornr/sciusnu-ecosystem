@@ -6,7 +6,7 @@
     <title>Learning Ecosystem Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght=300;400;500;600&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -44,12 +44,14 @@
             </div>
             
             <nav class="px-4 space-y-1">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-800 rounded-xl font-medium text-white">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 bg-blue-800 rounded-xl font-medium text-white">
                     <i class="ph ph-house text-xl"></i> หน้าหลัก
                 </a>
                 
                 <div class="pt-4 pb-2 px-4 text-xs text-blue-300 font-medium">องค์ประกอบ</div>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
+                <a href="learners.html" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition">
+                    <i class="ph ph-users text-xl"></i> Learners
+                </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-chalkboard-teacher text-xl"></i> Teachers</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
@@ -108,7 +110,8 @@
             <h3 class="text-lg font-medium border-l-4 border-primary pl-3 mb-6 text-slate-800">องค์ประกอบการออกแบบ</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
+                
+                <div onclick="window.location.href='learners.html'" class="glass-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer group">
                     <div>
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 rounded-xl bg-blue-500 text-white flex items-center justify-center text-2xl shadow-sm"><i class="ph-fill ph-users"></i></div>
@@ -215,15 +218,15 @@
                         <div class="space-y-4">
                             <div class="flex items-start gap-3">
                                 <i class="ph ph-files text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">องค์ประกอบทั้งหมด</p><p class="text-sm font-semibold text-primary">8 องค์ประกอบ</p></div>
+                                <div><p class="text-sm font-medium">องค์ประกอบทั้งหมด</p><p class="text-sm font-semibold text-primary id-comp-count">8 องค์ประกอบ</p></div>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i class="ph ph-briefcase text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">สถานะการออกแบบ</p><p class="text-sm font-semibold text-blue-500">กำลังดำเนินการ</p></div>
+                                <div><p class="text-sm font-medium">自由สถานะการออกแบบ</p><p class="text-sm font-semibold text-blue-500">กำลังดำเนินการ</p></div>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i class="ph ph-clock text-slate-400 mt-1"></i>
-                                <div><p class="text-sm font-medium">อัปเดตล่าสุด</p><p class="text-xs text-slate-500 mt-1">20 พ.ค. 2567 14:30</p></div>
+                                <div><p class="text-sm font-medium">อัปเดตล่าสุด</p><p class="text-xs text-slate-500 mt-1">28 พ.ค. 2569 14:30</p></div>
                             </div>
                         </div>
                     </div>
@@ -235,37 +238,8 @@
                         <a href="#" class="text-xs text-primary hover:underline">ดูทั้งหมด</a>
                     </div>
                     
-                    <div class="space-y-4 relative before:absolute before:inset-0 before:ml-1.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
-                        <div class="relative flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-3 h-3 rounded-full bg-blue-500 shadow ring-4 ring-white z-10"></div>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">แก้ไของค์ประกอบ Learners</p>
-                                    <p class="text-xs text-slate-400">20 พ.ค. 2567 14:30</p>
-                                </div>
-                            </div>
-                            <span class="text-xs text-slate-400">โดย Admin User</span>
-                        </div>
-                        <div class="relative flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-3 h-3 rounded-full bg-emerald-500 shadow ring-4 ring-white z-10"></div>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">เพิ่ม Learning Resources</p>
-                                    <p class="text-xs text-slate-400">20 พ.ค. 2567 13:45</p>
-                                </div>
-                            </div>
-                            <span class="text-xs text-slate-400">โดย Admin User</span>
-                        </div>
-                        <div class="relative flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-3 h-3 rounded-full bg-orange-400 shadow ring-4 ring-white z-10"></div>
-                                <div>
-                                    <p class="text-sm font-medium text-slate-700">อัปเดต Technology</p>
-                                    <p class="text-xs text-slate-400">20 พ.ค. 2567 11:20</p>
-                                </div>
-                            </div>
-                            <span class="text-xs text-slate-400">โดย Admin User</span>
-                        </div>
+                    <div class="space-y-4 relative before:absolute before:inset-0 before:ml-1.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent activity-container">
+                        <p class="text-xs text-slate-400 text-center py-4">กำลังโหลดข้อมูลล่าสุด...</p>
                     </div>
                 </div>
             </div>
@@ -273,5 +247,47 @@
         </div>
     </main>
 
+    <script>
+        // ใส่ลิงก์ Web App URL ของคุณตรงนี้ เพื่อเชื่อมต่อฐานข้อมูลจริง
+        const API_URL = "YOUR_WEB_APP_URL_HERE";
+
+        async function loadDashboardData() {
+            if (API_URL === "YOUR_WEB_APP_URL_HERE") return;
+            
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                // 1. อัปเดตกิจกรรมล่าสุด (Activities)
+                const container = document.querySelector('.activity-container');
+                container.innerHTML = ''; 
+
+                data.activities.forEach(act => {
+                    const html = `
+                        <div class="relative flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 rounded-full bg-blue-500 shadow ring-4 ring-white z-10"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-slate-700">${act.action}</p>
+                                    <p class="text-xs text-slate-400">${act.date}</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-slate-400">โดย ${act.user}</span>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+
+                // 2. อัปเดตตัวเลขจำนวนองค์ประกอบ
+                document.querySelector('.id-comp-count').innerText = `${data.components.length} องค์ประกอบ`;
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+            }
+        }
+
+        // เรียกฟังก์ชันเมื่อเปิดหน้าเว็บ
+        window.onload = loadDashboardData;
+    </script>
 </body>
 </html>
