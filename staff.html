@@ -12,7 +12,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { primary: '#121829' }
+                    colors: { primary: '#121829', accent: '#6366f1' }
                 }
             }
         }
@@ -30,16 +30,24 @@
                 <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div>
                 <h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1>
             </div>
-            <nav class="px-4 space-y-1 text-sm">
+            <nav class="px-4 space-y-1">
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition justify-between">
+                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
             </nav>
         </div>
+        
         <div class="p-4">
-            <button onclick="localStorage.clear(); window.location.href='index.html'" class="w-full bg-slate-800 text-slate-300 hover:text-red-200 text-sm py-2 rounded-xl transition flex items-center justify-center gap-2">
+            <button onclick="window.location.href='index.html'" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
                 <i class="ph ph-sign-out"></i> ออกจากระบบ
             </button>
         </div>
@@ -51,72 +59,135 @@
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
                 <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none">
             </div>
-            <div class="flex items-center gap-3 border-l pl-4">
-                <img src="https://ui-avatars.com/api/?name=Staff+User&background=6366F1&color=fff" class="w-9 h-9 rounded-full">
-                <div class="text-sm">
-                    <p class="font-semibold text-slate-800 leading-tight id-user-name">กำลังโหลดชื่อ...</p>
-                    <p class="text-xs text-slate-400 id-user-dept">งานสนับสนุน คณะวิทยาศาสตร์</p>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
+                <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
+                <div class="flex items-center gap-3 border-l pl-4">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" class="w-9 h-9 rounded-full object-cover">
+                    <div class="text-sm">
+                        <p class="font-semibold text-slate-800 leading-tight id-user-name">นภัสสรา วงศ์สกุล</p>
+                        <p class="text-xs text-slate-400 id-user-dept">บุคลากรสายสนับสนุน</p>
+                    </div>
                 </div>
             </div>
         </header>
 
         <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
             <div class="lg:col-span-2 space-y-6">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
                     <div>
                         <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
-                        <p class="text-xs text-slate-400">ติดตามความก้าวหน้าและเรียนรู้อย่างต่อเนื่อง</p>
+                        <p class="text-xs text-slate-400">ติดตามความก้าวหน้าและเรียนรู้อย่างต่อเนื่องเพื่อพัฒนาทักษะการทำงานด้วย AI</p>
                     </div>
                 </div>
 
-                <div class="border-b flex gap-6 text-sm font-medium text-slate-400 pb-2">
-                    <span class="text-indigo-600 border-b-2 border-indigo-600 pb-1">ทั้งหมด</span>
-                    <span>กำลังเรียน</span><span>ยังไม่เริ่มเรียน</span><span>เรียนจบแล้ว</span>
+                <div class="border-b flex gap-6 text-sm font-medium text-slate-400">
+                    <span class="text-indigo-600 border-b-2 border-indigo-600 pb-2 cursor-pointer">ทั้งหมด</span>
+                    <span class="hover:text-slate-600 pb-2 cursor-pointer">กำลังเรียน</span>
+                    <span class="hover:text-slate-600 pb-2 cursor-pointer">ยังไม่เริ่มเรียน</span>
+                    <span class="hover:text-slate-600 pb-2 cursor-pointer">เรียนจบแล้ว</span>
                 </div>
 
                 <div class="space-y-4">
                     <h3 class="text-sm font-semibold text-slate-800">คอร์สที่กำลังเรียน</h3>
+                    
                     <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-24 h-16 bg-indigo-900 text-white rounded-xl flex items-center justify-center font-bold text-lg shrink-0">AI</div>
+                        <div class="w-28 h-20 bg-indigo-900 text-white rounded-xl flex flex-col items-center justify-center font-bold text-xl relative overflow-hidden shrink-0">
+                            AI <span class="text-[10px] font-normal text-indigo-300">TECHNOLOGY</span>
+                        </div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-semibold text-slate-800 truncate">AI Tools for Education</h4>
-                            <div class="flex items-center gap-2 mt-2">
+                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">กำลังเรียน</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">AI Tools for Education</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">โดย Admin User</p>
+                            <div class="flex items-center gap-3 mt-3">
                                 <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 72%"></div></div>
                                 <span class="text-xs font-semibold text-slate-600">72%</span>
                             </div>
                         </div>
-                        <button class="border px-3 py-1 rounded-lg text-xs font-medium">เรียนต่อ</button>
+                        <div class="text-right shrink-0">
+                            <p class="text-xs text-slate-400 mb-2">2 ชม. 35 น. จาก 4 ชม.</p>
+                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">เรียนต่อ</button>
+                        </div>
                     </div>
+
                     <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-24 h-16 bg-amber-500 text-white rounded-xl flex items-center justify-center font-bold text-xs text-center shrink-0 p-1">Active Learning</div>
+                        <div class="w-28 h-20 bg-amber-500 text-white rounded-xl flex flex-col items-center justify-center font-bold text-sm text-center px-1 shrink-0">
+                            Active Learning
+                        </div>
                         <div class="flex-1 min-w-0">
-                            <h4 class="text-sm font-semibold text-slate-800 truncate">การออกแบบการเรียนรู้แบบ Active Learning</h4>
-                            <div class="flex items-center gap-2 mt-2">
+                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">กำลังเรียน</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">การออกแบบการเรียนรู้แบบ Active Learning</h4>
+                            <p class="text-xs text-slate-400 mt-0.5">โดย Kritsada S.</p>
+                            <div class="flex items-center gap-3 mt-3">
                                 <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 45%"></div></div>
                                 <span class="text-xs font-semibold text-slate-600">45%</span>
                             </div>
                         </div>
-                        <button class="border px-3 py-1 rounded-lg text-xs font-medium">เรียนต่อ</button>
+                        <div class="text-right shrink-0">
+                            <p class="text-xs text-slate-400 mb-2">1 ชม. 20 น. จาก 3 ชม.</p>
+                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">เรียนต่อ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center"><h3 class="text-sm font-semibold text-slate-800">ยังไม่เริ่มเรียน</h3><span class="text-xs text-indigo-600 hover:underline cursor-pointer">ดูทั้งหมด</span></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-4 bg-white">
+                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-presentation-chart text-3xl"></i></div>
+                            <h4 class="text-xs font-semibold text-slate-800 truncate">Presentation Skills</h4>
+                            <p class="text-[10px] text-slate-400 mt-0.5">โดย Admin User</p>
+                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">เริ่มเรียน</button>
+                        </div>
+                        <div class="glass-card p-4 bg-white">
+                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-chart-bar text-3xl"></i></div>
+                            <h4 class="text-xs font-semibold text-slate-800 truncate">Data Visualization</h4>
+                            <p class="text-[10px] text-slate-400 mt-0.5">โดย Nuttida P.</p>
+                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">เริ่มเรียน</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-6 text-xs">
+            <div class="space-y-6">
                 <div class="glass-card p-5 bg-white">
-                    <div class="flex justify-between font-semibold mb-2"><span>ความคืบหน้ารวม</span><span class="text-indigo-600">65%</span></div>
+                    <div class="flex justify-between text-sm font-semibold mb-2"><span>ความคืบหน้ารวม</span><span class="text-indigo-600">65%</span></div>
                     <div class="bg-slate-100 h-2 rounded-full w-full"><div class="bg-indigo-600 h-2 rounded-full" style="width: 65%"></div></div>
+                    <p class="text-xs text-slate-400 mt-2">เรียนจบ 8 จาก 12 คอร์ส</p>
                 </div>
-                <div class="glass-card p-5 bg-white text-center">
-                    <p class="font-bold mb-2">พฤษภาคม 2569</p>
-                    <div class="grid grid-cols-7 gap-1 text-slate-400">
+
+                <div class="glass-card p-5 bg-white text-xs">
+                    <div class="flex justify-between items-center mb-4"><span class="font-bold text-slate-800">ปฏิทินการเรียน</span><span class="text-indigo-600 cursor-pointer">ดูปฏิทินทั้งหมด</span></div>
+                    <div class="text-center font-medium text-slate-700 mb-2">พฤษภาคม 2569</div>
+                    <div class="grid grid-cols-7 gap-y-2 text-center text-slate-400">
                         <span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span><span>อา</span>
-                        <span>27</span><span>28</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                        <span class="text-slate-300">27</span><span class="text-slate-300">28</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                         <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                        <span>13</span><span>14</span><span>15</span><span class="bg-indigo-600 text-white rounded-full p-0.5">16</span><span>17</span><span>18</span><span>19</span>
+                        <span>13</span><span>14</span><span>15</span><span class="bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center mx-auto">16</span><span>17</span><span>18</span><span>19</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 bg-white">
+                    <h3 class="text-sm font-semibold mb-4 text-slate-800">ความสำเร็จของฉัน</h3>
+                    <div class="flex gap-4 justify-around text-center">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-rocket"></i></div>
+                            <p class="text-[10px] font-medium mt-1 text-slate-700">ผู้เรียนที่ดี</p>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-fire"></i></div>
+                            <p class="text-[10px] font-medium mt-1 text-slate-700">เรียนต่อเนื่อง</p>
+                        </div>
+                        <div>
+                            <div class="w-12 h-12 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-trophy"></i></div>
+                            <p class="text-[10px] font-medium mt-1 text-slate-700">นักเรียนคุณภาพ</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -125,10 +196,9 @@
             const userDataString = localStorage.getItem('user');
             if (userDataString) {
                 const user = JSON.parse(userDataString);
+                // แสดงชื่อจริง และ หน่วยงานสังกัดจริงของบุคลากรคนนั้นๆ
                 document.querySelector('.id-user-name').innerText = user.name;
                 document.querySelector('.id-user-dept').innerText = user.department;
-            } else {
-                window.location.href = 'index.html';
             }
         };
     </script>
