@@ -1,12 +1,12 @@
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+        return res.status(405).json({ status: 'error', message: 'Method not allowed' });
     }
 
     const scriptUrl = process.env.GAS_API_URL;
 
     if (!scriptUrl) {
-        return res.status(500).json({ error: 'GAS_API_URL is not defined in Environment Variables' });
+        return res.status(500).json({ status: 'error', message: 'GAS_API_URL is not defined in Environment Variables' });
     }
 
     const body = typeof req.body === 'string' ? safeJsonParse(req.body) : (req.body || {});
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         return res.status(response.ok ? 200 : 502).json(result);
     } catch (error) {
         console.error('Fetch error:', error);
-        return res.status(500).json({ error: 'Failed to connect to database' });
+        return res.status(500).json({ status: 'error', message: 'Failed to connect to database' });
     }
 }
 
@@ -88,3 +88,4 @@ function validatePayload(action, body) {
 function isNonEmptyString(value) {
     return typeof value === 'string' && value.trim().length > 0;
 }
+

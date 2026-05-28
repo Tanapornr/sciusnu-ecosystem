@@ -174,7 +174,7 @@
 
                 } else {
                     // หากเชื่อมต่อสำเร็จแต่รหัสผิด (ระบบตอบกลับมาจากหลังบ้าน)
-                    errorText.innerText = result.message || "ชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง";
+                    errorText.innerText = result.message || result.error || "ชื่อผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง";
                     errorMsg.classList.remove('hidden');
                     loginBtn.disabled = false;
                     loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
