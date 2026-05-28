@@ -173,7 +173,404 @@
 
     <script>
         // ⚠️ สำคัญ: ใส่ Web App URL ของคุณที่นี่ (เหมือนหน้าอื่น)
-        const API_URL = "YOUR_WEB_APP_URL_HERE"; 
+        const API_URL = "<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); border-radius: 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .glass-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); }
+        .active-modal-tab { border-bottom: 2px solid #3b82f6; color: #3b82f6; font-weight: bold; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div class="overflow-y-auto h-full pb-4">
+            <div class="p-6 flex items-center gap-3 sticky top-0 bg-sidebarBg z-10">
+                <div class="bg-emerald-500 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
+                <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
+                <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> Teachers</a>
+                <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
+                <a href="admin-community.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
+                <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-briefcase text-xl"></i> Workplace</a>
+                <a href="admin-resources.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-books text-xl"></i> Learning Resources</a>
+                <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-clipboard-text text-xl"></i> Assessment</a>
+                <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-brain text-xl"></i> AI Integration</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="admin-ecosystem.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graph text-xl"></i> แผนภาพ Ecosystem</a>
+                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์</a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> การตั้งค่า</a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#f4f7f9]">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <div class="relative w-96">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
+                <input type="text" placeholder="ค้นหาเอกสาร, วิดีโอ..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500/20 border border-transparent focus:border-slate-300 transition">
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i></button>
+                <div class="flex items-center gap-3 border-l pl-4 cursor-pointer">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" class="w-9 h-9 rounded-full object-cover">
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1500px] w-full mx-auto flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md shadow-blue-600/20"><i class="ph-fill ph-books"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Learning Resources</h2>
+                        <p class="text-sm text-slate-500">จัดการคลังสื่อการเรียนรู้และเอกสารสำหรับผู้เรียน</p>
+                    </div>
+                </div>
+                <button onclick="openUploadModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-upload-simple"></i> อัปโหลดสื่อใหม่</button>
+            </div>
+
+            <div id="loadingBox" class="text-center py-10 hidden">
+                <i class="ph-bold ph-spinner animate-spin text-4xl text-blue-500 mb-2"></i>
+                <p class="text-slate-500">กำลังดึงข้อมูลจากระบบ...</p>
+            </div>
+
+            <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+
+        </div>
+    </main>
+
+    <div id="uploadModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl border border-slate-100">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><i class="ph-fill ph-upload-simple text-blue-600"></i> เพิ่มบทเรียนและแบบทดสอบ</h3>
+                <button onclick="closeUploadModal()" class="text-slate-400 hover:text-rose-500 transition"><i class="ph-bold ph-x text-xl"></i></button>
+            </div>
+            
+            <div class="flex gap-6 px-6 border-b border-slate-100 bg-slate-50/50 shrink-0 text-sm font-medium text-slate-500">
+                <button id="btn-tab-info" onclick="switchModalTab('info')" class="pb-3 pt-4 active-modal-tab">1. ข้อมูลสื่อการเรียนรู้</button>
+                <button id="btn-tab-pre" onclick="switchModalTab('pre')" class="pb-3 pt-4 hover:text-blue-600">2. ก่อนเรียน (Pre-test)</button>
+                <button id="btn-tab-post" onclick="switchModalTab('post')" class="pb-3 pt-4 hover:text-blue-600">3. หลังเรียน (Post-test)</button>
+            </div>
+
+            <form id="uploadForm" onsubmit="handleUploadSubmit(event)" class="flex-1 overflow-y-auto p-6 bg-slate-50/30">
+                
+                <div id="tab-info" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">ชื่อบทเรียน/สื่อ <span class="text-rose-500">*</span></label>
+                            <input type="text" id="resTitle" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">ประเภทสื่อ <span class="text-rose-500">*</span></label>
+                            <select id="resType" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                                <option value="Video">วิดีโอ (Video)</option>
+                                <option value="PDF">เอกสาร (PDF)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">ลิงก์สื่อ (URL / Google Drive Link / YouTube) <span class="text-rose-500">*</span></label>
+                        <input type="url" id="resUrl" required class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500" placeholder="https://...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">คำอธิบายรายวิชา (Description)</label>
+                        <textarea id="resDesc" rows="3" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500"></textarea>
+                    </div>
+                </div>
+
+                <div id="tab-pre" class="hidden space-y-5">
+                    <div class="bg-blue-50 text-blue-700 px-4 py-3 rounded-xl text-sm font-semibold mb-4 border border-blue-100 flex items-center gap-2">
+                        <i class="ph-fill ph-info"></i> กรุณากรอกแบบทดสอบก่อนเรียนจำนวน 5 ข้อ
+                    </div>
+                    <div id="preTestContainer" class="space-y-4"></div>
+                </div>
+
+                <div id="tab-post" class="hidden space-y-5">
+                    <div class="bg-emerald-50 text-emerald-700 px-4 py-3 rounded-xl text-sm font-semibold mb-4 border border-emerald-100 flex items-center gap-2">
+                        <i class="ph-fill ph-info"></i> กรุณากรอกแบบทดสอบหลังเรียนจำนวน 5 ข้อ
+                    </div>
+                    <div id="postTestContainer" class="space-y-4"></div>
+                </div>
+
+                <button type="submit" id="realSubmitBtn" class="hidden"></button>
+            </form>
+            
+            <div class="p-4 border-t border-slate-100 bg-white shrink-0 flex justify-between items-center">
+                <span class="text-xs text-slate-400" id="stepIndicator">ขั้นตอนที่ 1 จาก 3</span>
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeUploadModal()" class="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 text-sm font-medium">ยกเลิก</button>
+                    <button type="button" id="nextStepBtn" onclick="nextTab()" class="px-6 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm font-medium shadow-md">ถัดไป <i class="ph-bold ph-arrow-right inline-block ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-check-circle text-emerald-400 text-lg"></i><span id="toastMessage">แจ้งเตือน</span>
+    </div>
+
+    <script>
+        // ⚠️ สำคัญ: ใส่ Web App URL ของคุณที่นี่ (เหมือนหน้าอื่น)
+        const API_URL = "https://script.google.com/macros/s/AKfycbxrxSDxFyqCTaG_byVFFw4n9h1o1YZiNENxSqmq7CjntclCvL0ks2SsKbH1Ll_s8qjItg/exec"; 
+        let currentUser = null;
+        let currentModalTab = 'info';
+
+        window.onload = function() {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                if(currentUser.role !== 'admin') {
+                    window.location.href = 'staff.html';
+                    return;
+                }
+                document.getElementById('userNameText').innerText = currentUser.name;
+                document.getElementById('userDeptText').innerText = currentUser.department;
+            } else {
+                window.location.href = 'index.html';
+            }
+
+            // สร้างฟอร์มข้อสอบ 5 ข้อ เตรียมไว้ใน Modal
+            generateQuizForms('pre', 'preTestContainer');
+            generateQuizForms('post', 'postTestContainer');
+
+            // ดึงข้อมูลสื่อทั้งหมดจากระบบ
+            fetchResources();
+        };
+
+        // --- ระบบดึงข้อมูลและแสดงผลการ์ดหน้าเว็บ ---
+        async function fetchResources() {
+            if(API_URL === "YOUR_WEB_APP_URL_HERE") {
+                document.getElementById('resourceGrid').innerHTML = `<p class="col-span-3 text-red-500 font-medium">⚠️ กรุณาระบุ API URL ในโค้ด</p>`;
+                return;
+            }
+            document.getElementById('loadingBox').classList.remove('hidden');
+            document.getElementById('resourceGrid').innerHTML = '';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: "getLessons" })
+                });
+                const result = await response.json();
+                
+                if(result.status === "success") {
+                    renderCards(result.lessons);
+                }
+            } catch (error) {
+                console.error(error);
+                showToast("ไม่สามารถดึงข้อมูลได้");
+            } finally {
+                document.getElementById('loadingBox').classList.add('hidden');
+            }
+        }
+
+        function renderCards(lessons) {
+            const grid = document.getElementById('resourceGrid');
+            if(lessons.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-10 text-slate-400 font-medium border-2 border-dashed rounded-xl">ยังไม่มีสื่อในระบบ</div>`;
+                return;
+            }
+
+            let html = '';
+            lessons.forEach(l => {
+                const isVid = l.type === 'Video';
+                const bgClass = isVid ? 'bg-slate-800' : 'bg-indigo-50';
+                const icon = isVid ? '<i class="ph-fill ph-play-circle text-5xl text-white/50 group-hover:text-white transition"></i>' : '<i class="ph-fill ph-file-pdf text-5xl text-indigo-400"></i>';
+                const badgeClass = isVid ? 'bg-purple-100 text-purple-600' : 'bg-rose-100 text-rose-600';
+
+                html += `
+                <a href="${l.url}" target="_blank" class="glass-card overflow-hidden block group">
+                    <div class="aspect-video ${bgClass} relative flex items-center justify-center">
+                        ${icon}
+                    </div>
+                    <div class="p-4 bg-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="${badgeClass} text-[10px] font-bold px-2 py-0.5 rounded">${l.type}</span>
+                            <span class="text-[10px] text-slate-400"><i class="ph-fill ph-brain"></i> มีข้อสอบแนบ</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 mb-1 truncate">${l.title}</h4>
+                        <p class="text-xs text-slate-500 mb-2 truncate">${l.description || 'ไม่มีคำอธิบาย'}</p>
+                        <p class="text-[10px] text-slate-400 pt-3 border-t border-slate-100">เพิ่มโดย ${l.author} • ${l.createdAt}</p>
+                    </div>
+                </a>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // --- ระบบวาดฟอร์มข้อสอบอัตโนมัติ 5 ข้อ ---
+        function generateQuizForms(typePrefix, containerId) {
+            let html = '';
+            for(let i=1; i<=5; i++) {
+                html += `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative">
+                    <div class="absolute top-0 left-0 bg-slate-800 text-white text-[10px] px-2 py-1 rounded-br-lg font-bold">ข้อ ${i}</div>
+                    <div class="mt-2 mb-3">
+                        <input type="text" id="${typePrefix}_q${i}" class="w-full border-b border-slate-300 px-1 py-2 text-sm outline-none focus:border-blue-500 bg-transparent font-medium" placeholder="พิมพ์โจทย์คำถามข้อที่ ${i} ที่นี่..." required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div class="flex items-center gap-2"><span class="text-xs text-slate-400 font-bold w-4">1.</span><input type="text" id="${typePrefix}_q${i}_o1" class="flex-1 border rounded-lg px-2 py-1.5 text-xs outline-none focus:border-blue-500" placeholder="ตัวเลือกที่ 1" required></div>
+                        <div class="flex items-center gap-2"><span class="text-xs text-slate-400 font-bold w-4">2.</span><input type="text" id="${typePrefix}_q${i}_o2" class="flex-1 border rounded-lg px-2 py-1.5 text-xs outline-none focus:border-blue-500" placeholder="ตัวเลือกที่ 2" required></div>
+                        <div class="flex items-center gap-2"><span class="text-xs text-slate-400 font-bold w-4">3.</span><input type="text" id="${typePrefix}_q${i}_o3" class="flex-1 border rounded-lg px-2 py-1.5 text-xs outline-none focus:border-blue-500" placeholder="ตัวเลือกที่ 3" required></div>
+                        <div class="flex items-center gap-2"><span class="text-xs text-slate-400 font-bold w-4">4.</span><input type="text" id="${typePrefix}_q${i}_o4" class="flex-1 border rounded-lg px-2 py-1.5 text-xs outline-none focus:border-blue-500" placeholder="ตัวเลือกที่ 4" required></div>
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 flex items-center justify-between">
+                        <label class="text-xs font-semibold text-slate-600">เฉลยที่ถูกต้อง:</label>
+                        <select id="${typePrefix}_q${i}_ans" class="border rounded px-3 py-1 text-xs outline-none bg-white font-bold text-emerald-600" required>
+                            <option value="1">ตัวเลือกที่ 1</option>
+                            <option value="2">ตัวเลือกที่ 2</option>
+                            <option value="3">ตัวเลือกที่ 3</option>
+                            <option value="4">ตัวเลือกที่ 4</option>
+                        </select>
+                    </div>
+                </div>`;
+            }
+            document.getElementById(containerId).innerHTML = html;
+        }
+
+        // --- ระบบควบคุมหน้าต่าง Modal ---
+        function openUploadModal() { document.getElementById('uploadModal').classList.remove('hidden'); }
+        function closeUploadModal() { document.getElementById('uploadModal').classList.add('hidden'); }
+
+        function switchModalTab(tabId) {
+            currentModalTab = tabId;
+            ['info', 'pre', 'post'].forEach(t => {
+                document.getElementById('btn-tab-'+t).classList.remove('active-modal-tab', 'text-blue-600');
+                document.getElementById('tab-'+t).classList.add('hidden');
+            });
+            document.getElementById('btn-tab-'+tabId).classList.add('active-modal-tab');
+            document.getElementById('tab-'+tabId).classList.remove('hidden');
+
+            const nextBtn = document.getElementById('nextStepBtn');
+            if(tabId === 'info') { document.getElementById('stepIndicator').innerText = "ขั้นตอนที่ 1 จาก 3"; nextBtn.innerHTML = 'ถัดไป (Pre-test) <i class="ph-bold ph-arrow-right"></i>'; nextBtn.onclick = () => switchModalTab('pre'); nextBtn.classList.remove('bg-emerald-600','hover:bg-emerald-700'); nextBtn.classList.add('bg-blue-600','hover:bg-blue-700'); }
+            if(tabId === 'pre') { document.getElementById('stepIndicator').innerText = "ขั้นตอนที่ 2 จาก 3"; nextBtn.innerHTML = 'ถัดไป (Post-test) <i class="ph-bold ph-arrow-right"></i>'; nextBtn.onclick = () => switchModalTab('post'); nextBtn.classList.remove('bg-emerald-600','hover:bg-emerald-700'); nextBtn.classList.add('bg-blue-600','hover:bg-blue-700'); }
+            if(tabId === 'post') { document.getElementById('stepIndicator').innerText = "ขั้นตอนที่ 3 จาก 3"; nextBtn.innerHTML = '<i class="ph-bold ph-check"></i> บันทึกและอัปโหลดสื่อ'; nextBtn.onclick = triggerSubmit; nextBtn.classList.remove('bg-blue-600','hover:bg-blue-700'); nextBtn.classList.add('bg-emerald-600','hover:bg-emerald-700'); }
+        }
+
+        function nextTab() {
+            if(currentModalTab === 'info') switchModalTab('pre');
+            else if(currentModalTab === 'pre') switchModalTab('post');
+        }
+
+        function triggerSubmit() { document.getElementById('realSubmitBtn').click(); }
+
+        // --- ระบบส่งข้อมูลกลับไปบันทึกที่ชีต (Save Data) ---
+        async function handleUploadSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('nextStepBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังบันทึก...';
+
+            // รวบรวมข้อมูล
+            let payload = {
+                title: document.getElementById('resTitle').value.trim(),
+                type: document.getElementById('resType').value,
+                url: document.getElementById('resUrl').value.trim(),
+                description: document.getElementById('resDesc').value.trim(),
+                author: currentUser.name,
+                quizzes: { pre: [], post: [] }
+            };
+
+            // ดึงข้อสอบ Pre-test 5 ข้อ
+            for(let i=1; i<=5; i++) {
+                payload.quizzes.pre.push({
+                    q: document.getElementById(`pre_q${i}`).value.trim(),
+                    opts: [
+                        document.getElementById(`pre_q${i}_o1`).value.trim(),
+                        document.getElementById(`pre_q${i}_o2`).value.trim(),
+                        document.getElementById(`pre_q${i}_o3`).value.trim(),
+                        document.getElementById(`pre_q${i}_o4`).value.trim()
+                    ],
+                    ans: document.getElementById(`pre_q${i}_ans`).value
+                });
+                
+                // ดึงข้อสอบ Post-test 5 ข้อ
+                payload.quizzes.post.push({
+                    q: document.getElementById(`post_q${i}`).value.trim(),
+                    opts: [
+                        document.getElementById(`post_q${i}_o1`).value.trim(),
+                        document.getElementById(`post_q${i}_o2`).value.trim(),
+                        document.getElementById(`post_q${i}_o3`).value.trim(),
+                        document.getElementById(`post_q${i}_o4`).value.trim()
+                    ],
+                    ans: document.getElementById(`post_q${i}_ans`).value
+                });
+            }
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: "saveLesson", lesson: payload })
+                });
+                const result = await response.json();
+                
+                if(result.status === "success") {
+                    showToast("✅ อัปโหลดสื่อและข้อสอบเรียบร้อยแล้ว");
+                    closeUploadModal();
+                    document.getElementById('uploadForm').reset();
+                    switchModalTab('info');
+                    fetchResources(); // รีโหลดแสดงการ์ดใหม่ทันที
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อ");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ph-bold ph-check"></i> บันทึกและอัปโหลดสื่อ';
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        }
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>"; 
         let currentUser = null;
         let currentModalTab = 'info';
 
