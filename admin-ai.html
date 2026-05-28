@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Integration - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); border-radius: 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .glass-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div class="overflow-y-auto h-full pb-4">
+            <div class="p-6 flex items-center gap-3 sticky top-0 bg-sidebarBg z-10">
+                <div class="bg-emerald-500 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
+                <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
+                <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> Teachers</a>
+                <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
+                <a href="admin-community.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
+                <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-briefcase text-xl"></i> Workplace</a>
+                <a href="admin-resources.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-books text-xl"></i> Learning Resources</a>
+                <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-clipboard-text text-xl"></i> Assessment</a>
+                <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-brain text-xl"></i> AI Integration</a>
+
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="admin-ecosystem.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graph text-xl"></i> แผนภาพ Ecosystem</a>
+                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์</a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> การตั้งค่า</a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#f4f7f9]">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <div class="relative w-96">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
+                <input type="text" placeholder="ค้นหาประวัติการใช้ Prompt..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500/20 border border-transparent focus:border-slate-300 transition">
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i></button>
+                <div class="flex items-center gap-3 border-l pl-4 cursor-pointer">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" class="w-9 h-9 rounded-full object-cover">
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1500px] w-full mx-auto flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-purple-600 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md shadow-purple-600/20"><i class="ph-fill ph-brain"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">AI Integration (Gemini)</h2>
+                        <p class="text-sm text-slate-500">จัดการคลัง Prompt และตรวจสอบการใช้งาน API ปัญญาประดิษฐ์</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="glass-card p-6 border-l-4 border-l-purple-500">
+                    <p class="text-xs text-slate-500 font-medium mb-1">API Requests (Today)</p>
+                    <p class="text-3xl font-bold text-slate-800">342 <span class="text-sm font-medium text-slate-400">ครั้ง</span></p>
+                    <p class="text-[10px] text-emerald-500 mt-2 font-semibold">🟢 ภายในโควต้ารายวัน</p>
+                </div>
+                <div class="glass-card p-6 border-l-4 border-l-blue-500">
+                    <p class="text-xs text-slate-500 font-medium mb-1">โมเดลที่ใช้งาน</p>
+                    <p class="text-xl font-bold text-slate-800 mt-2">Gemini 1.5 Pro</p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-medium">Google Generative AI</p>
+                </div>
+                <div class="glass-card p-6 border-l-4 border-l-amber-500">
+                    <p class="text-xs text-slate-500 font-medium mb-1">Prompt Templates</p>
+                    <p class="text-3xl font-bold text-slate-800">12 <span class="text-sm font-medium text-slate-400">ชุดต้นแบบ</span></p>
+                    <p class="text-[10px] text-slate-400 mt-2 font-medium">แชร์ให้เจ้าหน้าที่ใช้งาน</p>
+                </div>
+            </div>
+
+            <div class="glass-card bg-white p-6">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-4">
+                    <h3 class="font-bold text-slate-800">คลังชุดคำสั่ง (Prompt Library สำหรับงานธุรการ)</h3>
+                    <button class="text-xs bg-purple-100 text-purple-700 px-3 py-1.5 rounded-lg font-semibold hover:bg-purple-200 transition">+ สร้าง Prompt ใหม่</button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold bg-blue-100 text-blue-600 px-2 py-0.5 rounded">งานสารบรรณ</span>
+                            <i class="ph ph-copy text-slate-400 hover:text-slate-700 cursor-pointer"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 mb-1">ร่างหนังสือเชิญวิทยากร</h4>
+                        <p class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100 italic">"จงทำหน้าที่เป็นเจ้าหน้าที่ธุรการ คณะวิทยาศาสตร์ มหาวิทยาลัยนเรศวร ช่วยร่างหนังสือราชการเชิญวิทยากร หัวข้อ [ใส่หัวข้อ] ในวันที่ [ใส่วันที่]..."</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold bg-emerald-100 text-emerald-600 px-2 py-0.5 rounded">งานการประชุม</span>
+                            <i class="ph ph-copy text-slate-400 hover:text-slate-700 cursor-pointer"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 mb-1">สรุปวาระการประชุม (Minutes)</h4>
+                        <p class="text-xs text-slate-500 bg-white p-2 rounded border border-slate-100 italic">"นำข้อความการประชุมต่อไปนี้ มาสรุปแยกเป็นหัวข้อ 1.ประเด็นที่หารือ 2.มติที่ประชุม 3.ผู้รับผิดชอบ โดยใช้ภาษาราชการ..."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function() {
+            let user = null;
+            const storedUser = localStorage.getItem('user');
+            
+            if (storedUser) {
+                user = JSON.parse(storedUser);
+            } else {
+                user = { id: "NU-998", username: "admin01", name: "Admin User", department: "ผู้ดูแลระบบ", role: "admin" };
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+
+            if(user.role !== 'admin') {
+                window.location.href = 'staff.html';
+                return;
+            }
+            
+            document.getElementById('userNameText').innerText = user.name;
+            document.getElementById('userDeptText').innerText = user.department;
+        };
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
