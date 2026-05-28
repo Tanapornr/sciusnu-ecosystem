@@ -56,8 +56,8 @@
     </div>
 
     <script>
-        // ⚠️ อย่าลืมนำ Web App URL จาก Google Apps Script มาใส่ตรงนี้แทนข้อความข้างล่างนะครับ
-        const API_URL = "https://script.google.com/macros/s/AKfycbyfIAYxEOSqTZTFjfFs2QRn8GG1DK8GmhrLNWzOw-8C8AMv0SJEY8i6asIrgsGTOXcPGw/exec"; 
+        // ใส่ลิงก์ Web App URL ของคุณที่นี่เพื่อต่อหลังบ้านเข้า Google Sheets ตัวอย่าง:
+        const API_URL = "YOUR_WEB_APP_URL_HERE"; 
 
         async function handleLogin(event) {
             event.preventDefault();
@@ -70,6 +70,22 @@
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบ...';
 
+            // ถ้าไม่ได้ผูก API ลิงก์ ให้จำลองระบบล็อกอินเข้าหน้าบ้านปกติเพื่อทดสอบโครงสร้างระบบก่อนได้
+            if (API_URL === "YOUR_WEB_APP_URL_HERE") {
+                setTimeout(() => {
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
+                    if (user === 'admin01') {
+                        localStorage.setItem('user', JSON.stringify({ id: "NU-998", username: "admin01", name: "เจ้าหน้าที่ ดูแลระบบ", department: "งานพัฒนาระบบ", role: "admin" }));
+                        window.location.href = 'admin.html';
+                    } else {
+                        localStorage.setItem('user', JSON.stringify({ id: "NU-001", username: "staff01", name: "นางสาวสมหญิง รักงาน", department: "งานธุรการ", role: "staff" }));
+                        window.location.href = 'staff.html';
+                    }
+                }, 800);
+                return;
+            }
+
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -80,7 +96,6 @@
 
                 if (result.status === "success") {
                     localStorage.setItem('user', JSON.stringify(result.user));
-
                     if (result.user.role === 'admin') {
                         window.location.href = 'admin.html';
                     } else {
@@ -91,9 +106,9 @@
                     errorMsg.classList.remove('hidden');
                 }
             } catch (error) {
-                errorMsg.innerText = "⚠️ ไม่สามารถเชื่อมต่อกับฐานข้อมูลชีตได้";
+                errorMsg.innerText = "⚠️ ไม่สามารถเชื่อมต่อกับฐานข้อมูลซีตได้";
                 errorMsg.classList.remove('hidden');
-            } finally { // แก้ไขจาก final เป็น finally เรียบร้อยครับ
+            } finally {
                 loginBtn.disabled = false;
                 loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
             }
