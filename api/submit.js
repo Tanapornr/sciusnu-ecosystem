@@ -82,6 +82,10 @@ function validatePayload(action, body) {
         return null;
     }
 
+    if (action === 'getUsers' || action === 'getTeachersData') {
+        return null;
+    }
+
     return `unsupported action: ${action}`;
 }
 
