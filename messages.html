@@ -73,7 +73,7 @@
                     <span class="flex items-center gap-3"><i class="ph-fill ph-chat-circle-dots text-xl"></i> ข้อความ</span>
                     <span id="sidebarMessageBadge" class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
                 </a>
-                <a href="#" onclick="showToast('ตั้งค่า')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-gear text-xl"></i> ตั้งค่า
                 </a>
             </nav>
@@ -147,7 +147,6 @@
             </div>
 
             <div class="flex-1 flex flex-col justify-between bg-slate-50/30">
-                
                 <div class="px-6 py-3.5 border-b bg-white flex items-center gap-3">
                     <div id="activeChatAvatar" class="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">AU</div>
                     <span id="activeChatName" class="text-xs font-bold text-slate-800">Admin User (ผู้ดูแลระบบ)</span>
@@ -160,7 +159,6 @@
                             สวัสดีครับเจ้าหน้าที่โครงการ คณะวิทยาศาสตร์ ยินดีด้วยที่ผ่านทักษะเฟสที่ 1 นะครับ อย่าลืมส่งบันทึกการเรียนรู้ (Reflection) ของคอร์สปัจุจบันถัดไปด้วยนะครับผมเพื่อประเมินผลชั่วโมงสะสม
                         </div>
                     </div>
-
                     <div class="flex gap-3 items-end justify-end max-w-lg ml-auto">
                         <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-br-none shadow-sm leading-relaxed">
                             รับทราบค่ะ กำลังเร่งทำและเรียนจบวิดีโอสมรรถนะย่อยที่ 2 อยู่ค่ะอาจารย์
@@ -174,7 +172,6 @@
                         <span>ส่ง</span> <i class="ph-bold ph-paper-plane-right"></i>
                     </button>
                 </div>
-
             </div>
         </div>
     </main>
@@ -186,8 +183,6 @@
 
     <script>
         let activeChatId = 1;
-        
-        // คลังจำลองประวัติข้อมูลแชทแยกห้อง
         const chatDatabases = {
             1: [
                 { sender: 'them', avatar: 'AU', text: 'สวัสดีครับเจ้าหน้าที่โครงการ คณะวิทยาศาสตร์ ยินดีด้วยที่ผ่านทักษะเฟสที่ 1 นะครับ อย่าลืมส่งบันทึกการเรียนรู้ (Reflection) ของคอร์สปัจุจบันถัดไปด้วยนะครับผมเพื่อประเมินผลชั่วโมงสะสม' },
@@ -203,7 +198,6 @@
         };
 
         window.onload = function() {
-            // ระบบดึงข้อมูลเจ้าหน้าที่ที่ล็อกอินมาจริง
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
@@ -216,11 +210,8 @@
             loadChatRoom();
         };
 
-        // ระบบเปลี่ยนเลือกห้องแชทสลับคนคุยจริง
         function selectChat(chatId) {
             activeChatId = chatId;
-            
-            // เปลี่ยนไฮไลท์สีที่แท็บรายชื่อด้านซ้าย
             document.querySelectorAll('#inboxList > div').forEach(el => {
                 el.classList.remove('bg-indigo-50/60', 'border-indigo-600');
                 el.classList.add('border-transparent');
@@ -229,25 +220,20 @@
             activeTab.classList.remove('border-transparent');
             activeTab.classList.add('bg-indigo-50/60', 'border-indigo-600');
 
-            // เปลี่ยนข้อความหัวแชท
             const nameText = activeTab.querySelector('.font-bold').innerText;
             const avatarText = chatId === 1 ? 'AU' : (chatId === 2 ? 'KS' : 'SYS');
             document.getElementById('activeChatName').innerText = nameText;
             document.getElementById('activeChatAvatar').innerText = avatarText;
 
             loadChatRoom();
-            
-            // ลดจำนวนแจ้งเตือนกล่องข้อความลงเพื่อความสมจริงเมื่อเปิดอ่านแล้ว
             if(chatId === 1) {
                 document.getElementById('sidebarMessageBadge').innerText = "2";
             }
         }
 
-        // โหลดฟองคำพูดเข้าห้องแชท
         function loadChatRoom() {
             const container = document.getElementById('chatBubblesArea');
             container.innerHTML = '';
-            
             const messages = chatDatabases[activeChatId];
             messages.forEach(msg => {
                 let bubbleHtml = '';
@@ -267,24 +253,16 @@
                 }
                 container.insertAdjacentHTML('beforeend', bubbleHtml);
             });
-            
-            // เลื่อนหน้าต่างลงล่างสุดอัตโนมัติเมื่อข้อความยาว
             container.scrollTop = container.scrollHeight;
         }
 
-        // ฟังก์ชันประมวลผลกดปุ่มพิมพ์ส่งข้อความแชทตอบกลับสด
         function sendMessage() {
             const input = document.getElementById('messageInput');
             const txt = input.value.trim();
             if (txt === '') return;
 
-            // อัดข้อมูลลงฐานชั่วคราว
             chatDatabases[activeChatId].push({ sender: 'me', avatar: 'นร', text: txt });
-            
-            // อัปเดตตัวหนังสือพรีวิวแชทแถบซ้ายด่วน
             document.getElementById('last-msg-' + activeChatId).innerText = txt;
-            document.getElementById('last-msg-' + activeChatId).classList.add('font-medium', 'text-slate-600');
-
             input.value = '';
             loadChatRoom();
         }
