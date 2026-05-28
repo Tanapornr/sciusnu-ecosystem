@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กล่องข้อความ - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { 
+                        sidebarBg: '#0f172a',
+                        primaryPurple: '#4f46e5',
+                        bgLight: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+            border-radius: 1.25rem;
+        }
+        /* ซ่อน Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div>
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                    <i class="ph-fill ph-book-open text-xl"></i>
+                </div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="#" onclick="showToast('หน้าหลัก')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-house text-xl"></i> หน้าหลัก
+                </a>
+                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน
+                </a>
+                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้
+                </a>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
+                </a>
+                <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
+                </a>
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-heart text-xl"></i> รายการโปรด
+                </a>
+                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
+                </a>
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
+                    <span class="flex items-center gap-3"><i class="ph-fill ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+                    <span id="sidebarMessageBadge" class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </a>
+                <a href="#" onclick="showToast('ตั้งค่า')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-gear text-xl"></i> ตั้งค่า
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                <i class="ph ph-sign-out"></i> ออกจากระบบ
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                <i class="ph-fill ph-chat-circle-dots text-indigo-600 text-xl"></i> กล่องข้อความแชทสนับสนุน
+            </h2>
+            
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 border-l pl-4">
+                    <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden bg-white border border-slate-100">
+            
+            <div class="w-80 border-r border-slate-200 bg-slate-50/50 flex flex-col overflow-y-auto shrink-0">
+                <div class="p-4 border-b bg-white">
+                    <input type="text" placeholder="ค้นหาแชท..." class="w-full bg-slate-100 text-xs px-4 py-2 rounded-xl focus:outline-none border border-transparent focus:border-slate-200 text-slate-600">
+                </div>
+                
+                <div class="divide-y divide-slate-100" id="inboxList">
+                    <div onclick="selectChat(1)" id="chat-tab-1" class="p-4 flex gap-3 items-start bg-indigo-50/60 cursor-pointer border-l-4 border-indigo-600">
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-sm shrink-0">AU</div>
+                        <div class="flex-1 min-w-0 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-slate-800">Admin User (ผู้ดูแลระบบ)</span>
+                                <span class="text-[10px] text-slate-400">14:16 น.</span>
+                            </div>
+                            <p class="text-slate-500 mt-1 truncate font-medium" id="last-msg-1">อย่าลืมส่งบันทึกความรู้นะครับ...</p>
+                        </div>
+                    </div>
+
+                    <div onclick="selectChat(2)" id="chat-tab-2" class="p-4 flex gap-3 items-start hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                        <div class="w-10 h-10 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center shadow-sm shrink-0">KS</div>
+                        <div class="flex-1 min-w-0 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-slate-800">Kritsada S. (ผู้สอน)</span>
+                                <span class="text-[10px] text-slate-400">เมื่อวาน</span>
+                            </div>
+                            <p class="text-slate-400 mt-1 truncate" id="last-msg-2">ตรวจแผนการเรียนเฟส 2 แล้วครับ</p>
+                        </div>
+                    </div>
+
+                    <div onclick="selectChat(3)" id="chat-tab-3" class="p-4 flex gap-3 items-start hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center shadow-sm shrink-0">SYS</div>
+                        <div class="flex-1 min-w-0 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-slate-800">ระบบนิเวศอัตโนมัติ</span>
+                                <span class="text-[10px] text-slate-400">25 พ.ค.</span>
+                            </div>
+                            <p class="text-slate-400 mt-1 truncate" id="last-msg-3">อนุมัติใบประกาศเรียบร้อยแล้ว</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between bg-slate-50/30">
+                
+                <div class="px-6 py-3.5 border-b bg-white flex items-center gap-3">
+                    <div id="activeChatAvatar" class="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">AU</div>
+                    <span id="activeChatName" class="text-xs font-bold text-slate-800">Admin User (ผู้ดูแลระบบ)</span>
+                </div>
+
+                <div id="chatBubblesArea" class="flex-1 p-6 overflow-y-auto space-y-4 text-xs font-medium">
+                    <div class="flex gap-3 items-end max-w-lg">
+                        <div class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-[10px] flex items-center justify-center shadow-sm shrink-0">AU</div>
+                        <div class="bg-white p-3 rounded-2xl rounded-bl-none border border-slate-200 text-slate-700 shadow-sm leading-relaxed">
+                            สวัสดีครับเจ้าหน้าที่โครงการ คณะวิทยาศาสตร์ ยินดีด้วยที่ผ่านทักษะเฟสที่ 1 นะครับ อย่าลืมส่งบันทึกการเรียนรู้ (Reflection) ของคอร์สปัจุจบันถัดไปด้วยนะครับผมเพื่อประเมินผลชั่วโมงสะสม
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 items-end justify-end max-w-lg ml-auto">
+                        <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-br-none shadow-sm leading-relaxed">
+                            รับทราบค่ะ กำลังเร่งทำและเรียนจบวิดีโอสมรรถนะย่อยที่ 2 อยู่ค่ะอาจารย์
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 border-t bg-white flex gap-3 items-center shrink-0">
+                    <input type="text" id="messageInput" onkeypress="checkEnter(event)" placeholder="พิมพ์ข้อความตอบกลับที่นี่..." class="flex-1 bg-slate-100 text-xs px-4 py-3 rounded-xl focus:outline-none border focus:bg-white focus:border-slate-300 text-slate-700">
+                    <button onclick="sendMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-md shadow-indigo-600/10">
+                        <span>ส่ง</span> <i class="ph-bold ph-paper-plane-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i>
+        <span id="toastMessage">ข้อความแจ้งเตือน</span>
+    </div>
+
+    <script>
+        let activeChatId = 1;
+        
+        // คลังจำลองประวัติข้อมูลแชทแยกห้อง
+        const chatDatabases = {
+            1: [
+                { sender: 'them', avatar: 'AU', text: 'สวัสดีครับเจ้าหน้าที่โครงการ คณะวิทยาศาสตร์ ยินดีด้วยที่ผ่านทักษะเฟสที่ 1 นะครับ อย่าลืมส่งบันทึกการเรียนรู้ (Reflection) ของคอร์สปัจุจบันถัดไปด้วยนะครับผมเพื่อประเมินผลชั่วโมงสะสม' },
+                { sender: 'me', avatar: 'นร', text: 'รับทราบค่ะ กำลังเร่งทำและเรียนจบวิดีโอสมรรถนะย่อยที่ 2 อยู่ค่ะอาจารย์' }
+            ],
+            2: [
+                { sender: 'them', avatar: 'KS', text: 'สวัสดีครับ ผมได้ทำการอนุมัติส่งคะแนนตรวจแผนการเรียนรู้เฟส 2 ของคุณเรียบร้อยแล้วนะครับ ทักษะ Active Learning ทำออกมาสอดคล้องกับหน้างานธุรการได้ดีมากครับ' },
+                { sender: 'me', avatar: 'นร', text: 'ขอบพระคุณอาจารย์กฤษฎามากๆ เลยค่ะ' }
+            ],
+            3: [
+                { sender: 'them', avatar: 'SYS', text: '🤖 แจ้งเตือนระบบอัตโนมัติ: ยินดีด้วย! ใบประกาศนียบัตรหลักสูตร Digital Literacy & Cloud Tools ของคุณได้รับการอนุมัติและพร้อมให้ดาวน์โหลดได้แล้วที่หน้ารายงานความสำเร็จ' }
+            ]
+        };
+
+        window.onload = function() {
+            // ระบบดึงข้อมูลเจ้าหน้าที่ที่ล็อกอินมาจริง
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                document.getElementById('userNameText').innerText = user.name;
+                document.getElementById('userDeptText').innerText = user.department;
+                document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+            } else {
+                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
+            }
+            loadChatRoom();
+        };
+
+        // ระบบเปลี่ยนเลือกห้องแชทสลับคนคุยจริง
+        function selectChat(chatId) {
+            activeChatId = chatId;
+            
+            // เปลี่ยนไฮไลท์สีที่แท็บรายชื่อด้านซ้าย
+            document.querySelectorAll('#inboxList > div').forEach(el => {
+                el.classList.remove('bg-indigo-50/60', 'border-indigo-600');
+                el.classList.add('border-transparent');
+            });
+            const activeTab = document.getElementById('chat-tab-' + chatId);
+            activeTab.classList.remove('border-transparent');
+            activeTab.classList.add('bg-indigo-50/60', 'border-indigo-600');
+
+            // เปลี่ยนข้อความหัวแชท
+            const nameText = activeTab.querySelector('.font-bold').innerText;
+            const avatarText = chatId === 1 ? 'AU' : (chatId === 2 ? 'KS' : 'SYS');
+            document.getElementById('activeChatName').innerText = nameText;
+            document.getElementById('activeChatAvatar').innerText = avatarText;
+
+            loadChatRoom();
+            
+            // ลดจำนวนแจ้งเตือนกล่องข้อความลงเพื่อความสมจริงเมื่อเปิดอ่านแล้ว
+            if(chatId === 1) {
+                document.getElementById('sidebarMessageBadge').innerText = "2";
+            }
+        }
+
+        // โหลดฟองคำพูดเข้าห้องแชท
+        function loadChatRoom() {
+            const container = document.getElementById('chatBubblesArea');
+            container.innerHTML = '';
+            
+            const messages = chatDatabases[activeChatId];
+            messages.forEach(msg => {
+                let bubbleHtml = '';
+                if (msg.sender === 'them') {
+                    bubbleHtml = `
+                        <div class="flex gap-3 items-end max-w-lg">
+                            <div class="w-7 h-7 rounded-full bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center shadow-sm shrink-0">${msg.avatar}</div>
+                            <div class="bg-white p-3 rounded-2xl rounded-bl-none border border-slate-200 text-slate-700 shadow-sm leading-relaxed">${msg.text}</div>
+                        </div>
+                    `;
+                } else {
+                    bubbleHtml = `
+                        <div class="flex gap-3 items-end justify-end max-w-lg ml-auto">
+                            <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-br-none shadow-sm leading-relaxed">${msg.text}</div>
+                        </div>
+                    `;
+                }
+                container.insertAdjacentHTML('beforeend', bubbleHtml);
+            });
+            
+            // เลื่อนหน้าต่างลงล่างสุดอัตโนมัติเมื่อข้อความยาว
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ฟังก์ชันประมวลผลกดปุ่มพิมพ์ส่งข้อความแชทตอบกลับสด
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const txt = input.value.trim();
+            if (txt === '') return;
+
+            // อัดข้อมูลลงฐานชั่วคราว
+            chatDatabases[activeChatId].push({ sender: 'me', avatar: 'นร', text: txt });
+            
+            // อัปเดตตัวหนังสือพรีวิวแชทแถบซ้ายด่วน
+            document.getElementById('last-msg-' + activeChatId).innerText = txt;
+            document.getElementById('last-msg-' + activeChatId).classList.add('font-medium', 'text-slate-600');
+
+            input.value = '';
+            loadChatRoom();
+        }
+
+        function checkEnter(event) { if (event.key === 'Enter') { sendMessage(); } }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
+        }
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
