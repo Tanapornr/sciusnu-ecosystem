@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learners - Learning Ecosystem</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Google Fonts: Prompt -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script>
@@ -33,7 +30,6 @@
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700">
 
-    <!-- Sidebar (แถบเมนูด้านซ้าย) -->
     <aside class="w-64 bg-primary text-white flex flex-col justify-between hidden md:flex z-20">
         <div>
             <div class="p-6 flex items-center gap-3">
@@ -45,7 +41,6 @@
                 <a href="index.html" class="flex items-center gap-3 px-4 py-2 text-blue-100 hover:bg-blue-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
                 
                 <div class="pt-4 pb-2 px-4 text-xs text-blue-300 font-medium">องค์ประกอบ</div>
-                <!-- Active Menu: Learners -->
                 <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-600 rounded-xl font-medium text-white shadow-md">
                     <i class="ph-fill ph-users text-xl"></i> Learners
                 </a>
@@ -59,7 +54,6 @@
             </nav>
         </div>
         
-        <!-- Banner ด้านล่าง -->
         <div class="p-4">
             <div class="bg-gradient-to-br from-blue-600 to-indigo-700 p-4 rounded-2xl relative overflow-hidden text-center shadow-lg">
                 <i class="ph-fill ph-sparkle text-yellow-300 absolute top-2 left-2"></i>
@@ -70,10 +64,8 @@
         </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto bg-[#f8fafc]">
         
-        <!-- Top Navbar -->
         <header class="bg-white sticky top-0 z-10 border-b border-slate-200 px-8 py-4 flex justify-between items-center">
             <div class="relative w-96">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
@@ -95,10 +87,8 @@
             </div>
         </header>
 
-        <!-- Content Area -->
         <div class="p-8 max-w-7xl mx-auto w-full">
             
-            <!-- Page Header -->
             <div class="flex justify-between items-end mb-6">
                 <div class="flex items-center gap-4">
                     <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-md">
@@ -110,7 +100,7 @@
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-sm">
+                    <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-sm">
                         <i class="ph-bold ph-plus"></i> สร้างกลุ่มผู้เรียน
                     </button>
                     <button class="bg-white border border-slate-200 text-slate-600 p-2 rounded-lg hover:bg-slate-50 transition">
@@ -119,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- Tabs -->
             <div class="border-b border-slate-200 mb-6">
                 <nav class="flex gap-8 text-sm font-medium">
                     <a href="#" class="text-blue-600 border-b-2 border-blue-600 pb-3 px-1">ภาพรวม</a>
@@ -131,58 +120,44 @@
                 </nav>
             </div>
 
-            <!-- 4 Summary Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-                <!-- Card 1 -->
                 <div class="glass-card p-5 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl"><i class="ph-fill ph-users"></i></div>
                     <div>
                         <p class="text-xs text-slate-500 font-medium">ผู้เรียนทั้งหมด</p>
                         <p class="text-xl font-bold text-slate-800">128 <span class="text-sm font-normal text-slate-500">คน</span></p>
-                        <p class="text-xs text-emerald-500 flex items-center mt-1"><i class="ph-bold ph-arrow-up mr-1"></i> 12.5% <span class="text-slate-400 ml-1">เทียบกับเดือนที่แล้ว</span></p>
                     </div>
                 </div>
-                <!-- Card 2 -->
                 <div class="glass-card p-5 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
                     <div>
-                        <p class="text-xs text-slate-500 font-medium">กลุ่มสายงาน (Support Staff)</p>
+                        <p class="text-xs text-slate-500 font-medium">กลุ่มสายงาน</p>
                         <p class="text-xl font-bold text-slate-800">8 <span class="text-sm font-normal text-slate-500">กลุ่ม</span></p>
-                        <p class="text-xs text-emerald-500 flex items-center mt-1"><i class="ph-bold ph-arrow-up mr-1"></i> 5.0% <span class="text-slate-400 ml-1">เทียบกับเดือนที่แล้ว</span></p>
                     </div>
                 </div>
-                <!-- Card 3 -->
                 <div class="glass-card p-5 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-2xl"><i class="ph-fill ph-book-open"></i></div>
                     <div>
                         <p class="text-xs text-slate-500 font-medium">หลักสูตรที่เรียนอยู่</p>
                         <p class="text-xl font-bold text-slate-800">12 <span class="text-sm font-normal text-slate-500">หลักสูตร</span></p>
-                        <p class="text-xs text-emerald-500 flex items-center mt-1"><i class="ph-bold ph-arrow-up mr-1"></i> 15.7% <span class="text-slate-400 ml-1">เทียบกับเดือนที่แล้ว</span></p>
                     </div>
                 </div>
-                <!-- Card 4 -->
                 <div class="glass-card p-5 flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-2xl"><i class="ph-fill ph-chart-line-up"></i></div>
                     <div>
                         <p class="text-xs text-slate-500 font-medium">ความก้าวหน้าเฉลี่ย</p>
                         <p class="text-xl font-bold text-slate-800">72.4%</p>
-                        <p class="text-xs text-emerald-500 flex items-center mt-1"><i class="ph-bold ph-arrow-up mr-1"></i> 6.2% <span class="text-slate-400 ml-1">เทียบกับเดือนที่แล้ว</span></p>
                     </div>
                 </div>
             </div>
 
-            <!-- 2-Column Section -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                
-                <!-- กลุ่มผู้เรียนล่าสุด (ปรับเป็นสายงานของคณะวิทย์) -->
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="font-semibold text-slate-800">กลุ่มสายงานล่าสุด</h3>
                         <a href="#" class="text-xs font-medium text-blue-600 hover:underline">ดูทั้งหมด</a>
                     </div>
-                    
                     <div class="space-y-5">
-                        <!-- Group 1 -->
                         <div class="flex items-center gap-4">
                             <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg"><i class="ph-fill ph-users"></i></div>
                             <div class="flex-1">
@@ -193,9 +168,7 @@
                                 <div class="flex justify-between text-xs mb-1"><span class="text-slate-500">ความก้าวหน้า</span><span class="font-medium">78%</span></div>
                                 <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-blue-500 h-1.5 rounded-full" style="width: 78%"></div></div>
                             </div>
-                            <button class="text-slate-400 hover:text-slate-600"><i class="ph-bold ph-dots-three-vertical"></i></button>
                         </div>
-                        <!-- Group 2 -->
                         <div class="flex items-center gap-4">
                             <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg"><i class="ph-fill ph-users"></i></div>
                             <div class="flex-1">
@@ -206,58 +179,16 @@
                                 <div class="flex justify-between text-xs mb-1"><span class="text-slate-500">ความก้าวหน้า</span><span class="font-medium">65%</span></div>
                                 <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-green-500 h-1.5 rounded-full" style="width: 65%"></div></div>
                             </div>
-                            <button class="text-slate-400 hover:text-slate-600"><i class="ph-bold ph-dots-three-vertical"></i></button>
-                        </div>
-                        <!-- Group 3 -->
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center text-lg"><i class="ph-fill ph-users"></i></div>
-                            <div class="flex-1">
-                                <h4 class="text-sm font-medium text-slate-800">งานบริการการศึกษา</h4>
-                                <p class="text-xs text-slate-500">บุคลากร 28 คน</p>
-                            </div>
-                            <div class="w-24">
-                                <div class="flex justify-between text-xs mb-1"><span class="text-slate-500">ความก้าวหน้า</span><span class="font-medium">82%</span></div>
-                                <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-orange-500 h-1.5 rounded-full" style="width: 82%"></div></div>
-                            </div>
-                            <button class="text-slate-400 hover:text-slate-600"><i class="ph-bold ph-dots-three-vertical"></i></button>
-                        </div>
-                        <!-- Group 4 -->
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg"><i class="ph-fill ph-users"></i></div>
-                            <div class="flex-1">
-                                <h4 class="text-sm font-medium text-slate-800">งานนโยบายและแผน</h4>
-                                <p class="text-xs text-slate-500">บุคลากร 12 คน</p>
-                            </div>
-                            <div class="w-24">
-                                <div class="flex justify-between text-xs mb-1"><span class="text-slate-500">ความก้าวหน้า</span><span class="font-medium">58%</span></div>
-                                <div class="w-full bg-slate-100 rounded-full h-1.5"><div class="bg-cyan-500 h-1.5 rounded-full" style="width: 58%"></div></div>
-                            </div>
-                            <button class="text-slate-400 hover:text-slate-600"><i class="ph-bold ph-dots-three-vertical"></i></button>
                         </div>
                     </div>
-                    
-                    <button class="w-full mt-6 py-2 border border-slate-200 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 transition">
-                        ดูทั้งหมด
-                    </button>
+                    <button class="w-full mt-6 py-2 border border-slate-200 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 transition">ดูทั้งหมด</button>
                 </div>
 
-                <!-- แนวโน้มการเรียนรู้ (Chart Placeholder) -->
                 <div class="glass-card p-6 lg:col-span-2 flex flex-col">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="font-semibold text-slate-800">แนวโน้มการเรียนรู้หลักสูตร AI</h3>
-                        <select class="text-xs border border-slate-200 rounded-md px-2 py-1 bg-white text-slate-600 outline-none">
-                            <option>6 เดือนล่าสุด</option>
-                            <option>ปีนี้</option>
-                        </select>
                     </div>
-                    
-                    <!-- กราฟจำลองด้วย CSS -->
                     <div class="flex-1 border border-slate-100 rounded-xl bg-slate-50 flex items-center justify-center relative p-4">
-                        <div class="absolute top-4 left-0 right-0 flex justify-center gap-6 text-xs font-medium">
-                            <div class="flex items-center gap-2"><div class="w-3 h-1 bg-blue-500"></div> <span class="text-slate-600">จำนวนผู้เข้าเรียน (คน)</span></div>
-                            <div class="flex items-center gap-2"><div class="w-3 h-1 bg-green-500"></div> <span class="text-slate-600">ความก้าวหน้าเฉลี่ย (%)</span></div>
-                        </div>
-                        
                         <div class="text-center text-slate-400">
                             <i class="ph ph-chart-line text-4xl mb-2"></i>
                             <p class="text-sm">พื้นที่แสดงกราฟ (Chart.js / Recharts)</p>
@@ -266,22 +197,110 @@
                 </div>
             </div>
 
-            <!-- Bottom Banner -->
-            <div class="glass-card p-5 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl shadow-md"><i class="ph-fill ph-lightbulb"></i></div>
-                    <div>
-                        <h4 class="font-semibold text-slate-800">สร้างประสบการณ์การเรียนรู้ที่ตรงใจผู้เรียน</h4>
-                        <p class="text-xs text-slate-500 mt-0.5">เข้าใจกลุ่มบุคลากรสายสนับสนุนทั้งข้อมูลพื้นฐาน ความต้องการ เพื่อออกแบบหลักสูตร AI ที่ประยุกต์ใช้กับงานได้จริง</p>
-                    </div>
-                </div>
-                <button class="whitespace-nowrap px-4 py-2 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 flex items-center gap-2 transition">
-                    ดูแนวทางการใช้งาน <i class="ph-bold ph-caret-right"></i>
-                </button>
-            </div>
-
         </div>
     </main>
 
+    <div id="createGroupModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm hidden z-50 flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modalContent">
+            
+            <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                    <i class="ph-fill ph-users text-blue-600"></i> สร้างกลุ่มผู้เรียนใหม่
+                </h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+
+            <form id="groupForm" onsubmit="submitForm(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">ชื่อกลุ่มสายงาน</label>
+                    <input type="text" id="groupName" required placeholder="เช่น งานบริหารและธุรการ" class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-slate-700">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">จำนวนบุคลากร (คน)</label>
+                    <input type="number" id="groupMembers" required placeholder="เช่น 15" class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-slate-700">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">ความก้าวหน้าเริ่มต้น (%)</label>
+                    <input type="number" id="groupProgress" value="0" min="0" max="100" class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-slate-700 bg-slate-50">
+                </div>
+
+                <div class="pt-4 flex gap-3">
+                    <button type="button" onclick="closeModal()" class="flex-1 px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50 transition">
+                        ยกเลิก
+                    </button>
+                    <button type="submit" id="submitBtn" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-floppy-disk"></i> บันทึกข้อมูล
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // สำคัญ: นำ Web App URL ของคุณมาวางแทนข้อความด้านล่างนี้
+        const API_URL = "YOUR_NEW_WEB_APP_URL_HERE"; 
+
+        const modal = document.getElementById('createGroupModal');
+        const modalContent = document.getElementById('modalContent');
+        const submitBtn = document.getElementById('submitBtn');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('groupForm').reset();
+            }, 300);
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังบันทึก...';
+            submitBtn.disabled = true;
+
+            const formData = {
+                groupName: document.getElementById('groupName').value,
+                members: document.getElementById('groupMembers').value,
+                progress: document.getElementById('groupProgress').value
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    alert('บันทึกข้อมูลสำเร็จ! ตรวจสอบได้ที่ Google Sheets');
+                    closeModal();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert('ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้');
+            } finally {
+                submitBtn.innerHTML = originalBtnHtml;
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
 </body>
 </html>
