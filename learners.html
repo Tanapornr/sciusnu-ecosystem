@@ -242,7 +242,7 @@
 
     <script>
         // สำคัญ: นำ Web App URL ของคุณมาวางแทนข้อความด้านล่างนี้
-        const API_URL = "YOUR_NEW_WEB_APP_URL_HERE"; 
+        const API_URL = "/api/submit";
 
         const modal = document.getElementById('createGroupModal');
         const modalContent = document.getElementById('modalContent');
@@ -272,11 +272,21 @@
             submitBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังบันทึก...';
             submitBtn.disabled = true;
 
+            const members = Number(document.getElementById('groupMembers').value);
+            const progress = Number(document.getElementById('groupProgress').value);
             const formData = {
-                groupName: document.getElementById('groupName').value,
-                members: document.getElementById('groupMembers').value,
-                progress: document.getElementById('groupProgress').value
+                action: "createLearnerGroup",
+                groupName: document.getElementById('groupName').value.trim(),
+                members,
+                progress
             };
+
+            if (!formData.groupName || Number.isNaN(members) || members <= 0 || Number.isNaN(progress) || progress < 0 || progress > 100) {
+                alert('Please check the form data and try again.');
+                submitBtn.innerHTML = originalBtnHtml;
+                submitBtn.disabled = false;
+                return;
+            }
 
             try {
                 const response = await fetch(API_URL, {
@@ -291,7 +301,7 @@
                     alert('บันทึกข้อมูลสำเร็จ! ตรวจสอบได้ที่ Google Sheets');
                     closeModal();
                 } else {
-                    alert('เกิดข้อผิดพลาด: ' + result.message);
+                    alert('เกิดข้อผิดพลาด: ' + (result.message || 'Unknown error'));
                 }
             } catch (error) {
                 console.error("Error:", error);

@@ -112,7 +112,7 @@
 
     <script>
         // ⚠️ เอาลิงก์ Web App จาก Google Apps Script (ที่เพิ่ง Deploy) มาใส่ตรงนี้
-        const API_URL = "https://script.google.com/macros/s/AKfycbyfIAYxEOSqTZTFjfFs2QRn8GG1DK8GmhrLNWzOw-8C8AMv0SJEY8i6asIrgsGTOXcPGw/exec"; 
+        const API_URL = "/api/submit";
 
         async function handleLogin(event) {
             event.preventDefault(); 
@@ -130,13 +130,6 @@
             loginBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> กำลังตรวจสอบข้อมูล...';
 
             // กรณีลืมใส่ลิงก์ API ให้แสดงแจ้งเตือน (ป้องกันการเข้าแบบมั่วๆ โดยไม่เชื่อมฐานข้อมูล)
-            if (API_URL === "YOUR_WEB_APP_URL_HERE" || API_URL.trim() === "") {
-                errorText.innerText = "ยังไม่ได้เชื่อมต่อ API กรุณาระบุ Web App URL";
-                errorMsg.classList.remove('hidden');
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = '<i class="ph-bold ph-sign-in"></i> เข้าสู่ระบบ';
-                return;
-            }
 
             try {
                 // ส่งข้อมูล POST ไปยัง Apps Script พร้อม action: "login" ให้ตรงกับ code.gs
@@ -215,3 +208,4 @@
     </script>
 </body>
 </html>
+
