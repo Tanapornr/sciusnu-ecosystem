@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คอร์สเรียนของฉัน - Learning Ecosystem</title>
+    <title>ระบบนิเวศการเรียนรู้ดิจิทัล - คณะวิทยาศาสตร์ มน.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+                    colors: { 
+                        sidebarBg: '#0f172a',
+                        primaryPurple: '#4f46e5',
+                        bgLight: '#f8fafc'
+                    }
                 }
             }
         }
     </script>
     <style>
         body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
-        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01); border-radius: 1.25rem; }
-        .active-tab { color: #4f46e5; border-bottom: 2px solid #4f46e5; font-weight: 600; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+            border-radius: 1.25rem;
+        }
+        .active-tab {
+            color: #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
@@ -31,32 +42,43 @@
     <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
         <div>
             <div class="p-6 flex items-center gap-3">
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                    <i class="ph-fill ph-book-open text-xl"></i>
+                </div>
                 <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
             </div>
-            <nav class="px-4 space-y-1 text-sm">
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
-                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
-                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
-                <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
-                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
-                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
-                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+            
+            <nav id="sidebar-menu" class="px-4 space-y-1 text-sm">
+               
+                <button onclick="switchSection('courses', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md text-left">
+                    <i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน
+                </button>
+                <button onclick="switchSection('learning-plan', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition text-left">
+                    <i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้
+                </button>
+                <button onclick="switchSection('certificates', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition text-left">
+                    <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
+                </button>
+                <button onclick="switchSection('history', this)" class="menu-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition text-left">
+                    <i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
+                </button>
             </nav>
         </div>
         <div class="p-4 border-t border-slate-800">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                <i class="ph ph-sign-out"></i> ออกจากระบบ
+            </button>
         </div>
     </aside>
 
     <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
             <div class="relative w-96">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
                 <input type="text" id="courseSearch" oninput="filterCourses()" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 border border-transparent focus:border-slate-300 transition">
             </div>
+            
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3 border-l pl-4">
                     <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
@@ -69,23 +91,117 @@
         </header>
 
         <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30"><i class="ph-fill ph-graduation-cap"></i></div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
-                        <p class="text-xs text-slate-400">ติดตามความก้าวหน้าและเรียนรู้อย่างต่อเนื่องเพื่อเพิ่มประสิทธิภาพการทำงาน</p>
+            
+            <div class="lg:col-span-2">
+                
+                <div id="section-home" class="main-section hidden space-y-6">
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-2xl text-white shadow-md">
+                        <h2 class="text-xl font-bold mb-1">ยินดีต้อนรับเข้าสู่ระบบการเรียนรู้ดิจิทัล</h2>
+                        <p class="text-xs text-indigo-100">คณะวิทยาศาสตร์ มหาวิทยาลัยนเรศวร มุ่งเน้นการยกระดับทักษะการทำงานด้วย AI</p>
+                    </div>
+                    <div class="glass-card p-6 bg-white">
+                        <h3 class="font-semibold text-slate-800 mb-3">คำแนะนำในการเรียนรู้</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">กรุณาเข้าเรียนตามแผนการเรียนรู้ที่ได้รับมอบหมาย เพื่อนำทักษะปัญญาประดิษฐ์ (AI) และระบบจัดการข้อมูลอัตโนมัติ (Automation Workflow) ไปประยุกต์ลดภาระงานเอกสารภายในฝ่ายงานของคุณ</p>
                     </div>
                 </div>
 
-                <div class="border-b flex gap-6 text-sm font-medium text-slate-400 pb-0">
-                    <span id="tab-all" onclick="switchCourseTab('all')" class="active-tab pb-2 cursor-pointer transition-all">ทั้งหมด</span>
-                    <span id="tab-learning" onclick="switchCourseTab('learning')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">กำลังเรียน</span>
-                    <span id="tab-notstarted" onclick="switchCourseTab('notstarted')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">ยังไม่เริ่มเรียน</span>
-                    <span id="tab-completed" onclick="switchCourseTab('completed')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">เรียนจบแล้ว</span>
+                <div id="section-courses" class="main-section space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30"><i class="ph-fill ph-graduation-cap"></i></div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">ติดตามความก้าวหน้าและเรียนรู้อย่างต่อเนื่องเพื่อเพิ่มประสิทธิภาพการทำงาน</p>
+                        </div>
+                    </div>
+
+                    <div class="border-b flex gap-6 text-sm font-medium text-slate-400 pb-0">
+                        <span id="tab-all" onclick="switchCourseTab('all')" class="active-tab pb-2 cursor-pointer transition-all">ทั้งหมด</span>
+                        <span id="tab-learning" onclick="switchCourseTab('learning')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">กำลังเรียน</span>
+                        <span id="tab-notstarted" onclick="switchCourseTab('notstarted')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">ยังไม่เริ่มเรียน</span>
+                        <span id="tab-completed" onclick="switchCourseTab('completed')" class="pb-2 cursor-pointer transition-all hover:text-slate-600">เรียนจบแล้ว</span>
+                    </div>
+
+                    <div id="coursesGrid" class="space-y-4">
+                        </div>
                 </div>
 
-                <div id="coursesGrid" class="space-y-4"></div>
+                <div id="section-learning-plan" class="main-section hidden space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-git-branch"></i></div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">แผนการเรียนรู้หลักสูตรบุคลากร</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">โรดแมปขั้นตอนการยกระดับทักษะงานสนับสนุน (Support Staff AI Pathway)</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 bg-white relative border border-slate-200">
+                        <div class="absolute left-9 top-10 bottom-10 w-0.5 bg-slate-200"></div>
+                        
+                        <div class="space-y-8 relative">
+                            <div class="flex gap-6 items-start">
+                                <div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold z-10"><i class="ph ph-check"></i></div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-semibold text-slate-800">เฟสที่ 1: Digital Mindset & Cloud Tools</h4>
+                                    <p class="text-xs text-slate-500 mt-1">มุ่งเน้นการใช้ระบบคลาวด์ทำงานร่วมกัน ลดการใช้กระดาษภายในสำนักงานคณะวิทยาศาสตร์</p>
+                                    <span class="inline-block bg-emerald-50 text-emerald-600 border border-emerald-200 text-[10px] px-2 py-0.5 rounded font-medium mt-2">ผ่านเกณฑ์แล้ว</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 items-start">
+                                <div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold z-10">2</div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-semibold text-indigo-600">เฟสที่ 2: AI For Official Administration</h4>
+                                    <p class="text-xs text-slate-500 mt-1">ประยุกต์ใช้ Generative AI (Gemini) ช่วยร่างหนังสือราชการ สรุปรายงานการประชุม คัดกรองข้อมูลคำร้องนิสิต</p>
+                                    <span class="inline-block bg-indigo-50 text-indigo-600 border border-indigo-200 text-[10px] px-2 py-0.5 rounded font-medium mt-2">กำลังดำเนินการ (เรียนคอร์ส AI Tools for Education)</span>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 items-start">
+                                <div class="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold z-10">3</div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-semibold text-slate-400">เฟสที่ 3: Information System & Automation Workflow</h4>
+                                    <p class="text-xs text-slate-400 mt-1">เรียนรู้สถาปัตยกรรมการเชื่อมโยงข้อมูล Low-code พัฒนาระบบติดตามงบประมาณ และระบบแจ้งเตือนอัตโนมัติ</p>
+                                    <span class="inline-block bg-slate-100 text-slate-400 text-[10px] px-2 py-0.5 rounded font-medium mt-2">🔒 รอกลุ่มงานปลดล็อก</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-certificates" class="main-section hidden space-y-6">
+                    <h2 class="text-xl font-bold text-slate-800">ใบประกาศนียบัตรของฉัน</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card p-6 bg-white text-center border-dashed border-2 flex flex-col items-center justify-center py-10 text-slate-400">
+                            <i class="ph ph-award text-4xl mb-2 text-indigo-300"></i>
+                            <h4 class="font-semibold text-sm text-slate-700">Digital Literacy Certificate</h4>
+                            <p class="text-[11px] mt-1">เรียนจบและผ่านการทดสอบวัดความรู้พื้นฐานสำเร็จ</p>
+                            <button class="mt-4 bg-indigo-600 text-white text-xs px-4 py-2 rounded-xl font-medium">ดาวน์โหลด PDF</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-history" class="main-section hidden space-y-6">
+                    <h2 class="text-xl font-bold text-slate-800">ประวัติล็อกอินและคะแนนสอบ</h2>
+                    <div class="glass-card overflow-hidden bg-white border">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 border-b text-slate-500 font-bold">
+                                <tr>
+                                    <th class="p-3">หัวข้อรายการ</th>
+                                    <th class="p-3">วัน-เวลา</th>
+                                    <th class="p-3">คะแนน Pre-test</th>
+                                    <th class="p-3">คะแนน Post-test</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-600 font-medium">
+                                <tr class="border-b">
+                                    <td class="p-3">คอร์ส AI Tools for Education</td>
+                                    <td class="p-3">27 May 2026 17:41</td>
+                                    <td class="p-3 text-red-500">0 / 5</td>
+                                    <td class="p-3 text-emerald-500">3 / 5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
             <div class="space-y-6">
@@ -96,33 +212,38 @@
                 </div>
 
                 <div class="glass-card p-5 bg-white text-xs">
-                    <div class="flex justify-between items-center mb-4"><span class="font-bold text-slate-800 text-sm">ปฏิทินการเรียน</span><span onclick="showToast('ปฏิทิน')" class="text-indigo-600 hover:underline cursor-pointer">ดูปฏิทินทั้งหมด</span></div>
+                    <div class="flex justify-between items-center mb-4"><span class="font-bold text-slate-800 text-sm">ปฏิทินการเรียน</span><span class="text-indigo-600 hover:underline cursor-pointer">ดูปฏิทินทั้งหมด</span></div>
                     <div class="text-center font-semibold text-slate-700 mb-3 bg-slate-50 py-1 rounded-lg">พฤษภาคม 2569</div>
                     <div class="grid grid-cols-7 gap-y-3 text-center text-slate-500 font-medium">
                         <span class="text-slate-400 font-bold">จ</span><span class="text-slate-400 font-bold">อ</span><span class="text-slate-400 font-bold">พ</span><span class="text-slate-400 font-bold">พฤ</span><span class="text-slate-400 font-bold">ศ</span><span class="text-slate-400 font-bold">ส</span><span class="text-slate-400 font-bold">อา</span>
                         <span class="text-slate-200">27</span><span class="text-slate-200">28</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                         <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                        <span>13</span><span>14</span><span>15</span><span class="bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center mx-auto shadow-sm font-bold">16</span><span>17</span><span>18</span><span>19</span>
+                        <span>13</span><span>14</span><span>15</span>
+                        <span class="bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center mx-auto shadow-sm font-bold">16</span>
+                        <span>17</span><span>18</span><span>19</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 bg-white">
+                    <h3 class="text-sm font-semibold mb-4 text-slate-800">ความสำเร็จของฉัน</h3>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="p-1">
+                            <div class="w-11 h-11 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-xl mx-auto shadow-sm mb-1"><i class="ph-fill ph-rocket"></i></div>
+                            <p class="text-[10px] text-slate-700">ผู้เรียนที่ดี</p>
+                        </div>
+                        <div class="p-1">
+                            <div class="w-11 h-11 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-xl mx-auto shadow-sm mb-1"><i class="ph-fill ph-fire"></i></div>
+                            <p class="text-[10px] text-slate-700">เรียนต่อเนื่อง</p>
+                        </div>
+                        <div class="p-1">
+                            <div class="w-11 h-11 bg-yellow-50 text-yellow-500 rounded-full flex items-center justify-center text-xl mx-auto shadow-sm mb-1"><i class="ph-fill ph-trophy"></i></div>
+                            <p class="text-[10px] text-slate-700">นักเรียนคุณภาพ</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <div id="lessonModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-xl p-6 shadow-2xl space-y-4">
-            <h3 id="modalCourseTitle" class="font-bold text-slate-800 text-base">ชื่อคอร์สเรียน</h3>
-            <div class="aspect-video w-full bg-slate-900 rounded-2xl flex items-center justify-center text-white relative shadow-inner"><i class="ph-fill ph-play-circle text-5xl text-indigo-500 cursor-pointer"></i></div>
-            <div class="flex gap-3 pt-2">
-                <button type="button" onclick="closeLessonModal()" class="flex-1 py-2 border rounded-xl text-xs font-medium">ปิดหน้าต่าง</button>
-                <button type="button" onclick="completeCourse()" class="flex-1 py-2 bg-indigo-600 text-white rounded-xl text-xs font-medium">จำลองเรียนจบวิชานี้</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i><span id="toastMessage">ข้อความแจ้งเตือน</span>
-    </div>
 
     <script>
         let coursesData = [
@@ -131,55 +252,121 @@
             { id: 'L-102', title: 'Presentation Skills for Support Staff', instructor: 'Admin User', bg: 'bg-[#047857]', tag: 'Soft Skills', status: 'notstarted', progress: 0, timeInfo: 'ยังไม่ได้เริ่มเรียน (ความยาว 2.5 ชม.)' },
             { id: 'L-304', title: 'Data Visualization and Reports', instructor: 'Nuttida P.', bg: 'bg-[#0369a1]', tag: 'Data Science', status: 'notstarted', progress: 0, timeInfo: 'ยังไม่ได้เริ่มเรียน (ความยาว 2 ชม.)' }
         ];
-        let currentCourseFilter = 'all'; let selectedCourseId = null;
+
+        let currentCourseFilter = 'all';
+
         window.onload = function() {
+            // ดึงข้อมูลผู้ใช้จริงจากการล็อกอิน
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
                 document.getElementById('userNameText').innerText = user.name;
                 document.getElementById('userDeptText').innerText = user.department;
                 document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+            } else {
+                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
             }
-            renderCourses(); calculateMetrics();
+            renderCourses();
+            calculateMetrics();
         };
+
+        // ฟังก์ชันระบบสลับหน้าจอใหญ่ฝั่ง Sidebar
+        function switchSection(sectionId, btnElement) {
+            // ซ่อนทุกหน้าจอหลักก่อน
+            document.querySelectorAll('.main-section').forEach(sec => sec.classList.add('hidden'));
+            // แสดงหน้าจอหลักที่เลือกคลิก
+            document.getElementById('section-' + sectionId).classList.remove('hidden');
+            
+            // รีเซ็ตแต่งสีปุ่มเมนูทั้งหมดให้เป็นสีเทาปกติ
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'font-medium', 'shadow-md');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800/50');
+            });
+            
+            // ปรับปุ่มเมนูที่กำลังคลิกให้ไฮไลท์เป็นสีม่วงแบบ Active
+            btnElement.classList.remove('text-slate-400', 'hover:bg-slate-800/50');
+            btnElement.classList.add('bg-indigo-600', 'text-white', 'font-medium', 'shadow-md');
+        }
+
+        // ฟังก์ชันคำนวณสถิติ
         function calculateMetrics() {
-            let total = coursesData.length; let completed = coursesData.filter(c => c.status === 'completed').length;
+            let total = coursesData.length;
+            let completed = coursesData.filter(c => c.status === 'completed').length;
             let sumProgress = coursesData.reduce((acc, curr) => acc + curr.progress, 0);
-            document.getElementById('totalProgressText').innerText = Math.round(sumProgress / total) + '%';
-            document.getElementById('totalProgressBar').style.width = Math.round(sumProgress / total) + '%';
+            let avgProgress = Math.round(sumProgress / total);
+
+            document.getElementById('totalProgressText').innerText = avgProgress + '%';
+            document.getElementById('totalProgressBar').style.width = avgProgress + '%';
             document.getElementById('completedCountText').innerText = completed;
         }
+
+        // ฟังก์ชันวาดการ์ดคอร์สเรียน
         function renderCourses() {
-            const grid = document.getElementById('coursesGrid'); const searchQuery = document.getElementById('courseSearch').value.toLowerCase().trim(); grid.innerHTML = '';
-            let filtered = coursesData.filter(c => currentCourseFilter === 'all' ? true : c.status === currentCourseFilter);
-            if (searchQuery !== '') { filtered = filtered.filter(c => c.title.toLowerCase().includes(searchQuery)); }
+            const grid = document.getElementById('coursesGrid');
+            const searchQuery = document.getElementById('courseSearch').value.toLowerCase().trim();
+            grid.innerHTML = '';
+
+            let filtered = coursesData.filter(c => {
+                if (currentCourseFilter === 'all') return true;
+                return c.status === currentCourseFilter;
+            });
+
+            if (searchQuery !== '') {
+                filtered = filtered.filter(c => c.title.toLowerCase().includes(searchQuery));
+            }
+
             filtered.forEach(c => {
-                let badgeColor = c.status === 'completed' ? 'bg-emerald-50 text-emerald-600 border-emerald-200' : 'bg-indigo-50 text-indigo-600 border-indigo-100';
+                let badgeColor = c.status === 'completed' ? 'bg-emerald-50 text-emerald-600' : 'bg-indigo-50 text-indigo-600';
                 let btnText = c.status === 'completed' ? 'ทบทวนเนื้อหา' : (c.status === 'learning' ? 'เรียนต่อ' : 'เริ่มเรียน');
-                grid.insertAdjacentHTML('beforeend', `
+
+                let cardHtml = `
                     <div class="glass-card p-4 flex flex-col sm:flex-row gap-4 items-center bg-white border border-slate-200">
-                        <div class="w-full sm:w-28 h-16 ${c.bg} text-white rounded-xl flex flex-col items-center justify-center font-bold text-center text-sm px-1 shrink-0">${c.tag.split(' ')[0]}<span class="text-[8px] font-normal opacity-70">${c.id}</span></div>
+                        <div class="w-full sm:w-28 h-16 ${c.bg} text-white rounded-xl flex flex-col items-center justify-center font-bold text-center text-sm px-1 shrink-0">
+                            ${c.tag.split(' ')[0]}
+                            <span class="text-[8px] font-normal opacity-70">${c.id}</span>
+                        </div>
                         <div class="flex-1 min-w-0 w-full">
                             <span class="${badgeColor} text-[10px] font-semibold px-2 py-0.5 rounded border">${c.status}</span>
                             <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">${c.title}</h4>
                             <p class="text-xs text-slate-400 mt-0.5">โดย ${c.instructor}</p>
-                            <div class="flex items-center gap-3 mt-2"><div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: ${c.progress}%"></div></div><span class="text-xs font-semibold text-slate-600">${c.progress}%</span></div>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: ${c.progress}%"></div></div>
+                                <span class="text-xs font-semibold text-slate-600">${c.progress}%</span>
+                            </div>
                         </div>
                         <div class="text-left sm:text-right shrink-0 w-full sm:w-auto">
                             <p class="text-xs text-slate-400 mb-2">${c.timeInfo}</p>
-                            <button onclick="openLessonModal('${c.id}')" class="border text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition shadow-sm">${btnText}</button>
+                            <button onclick="simulateLearn('${c.id}')" class="border text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition">${btnText}</button>
                         </div>
                     </div>
-                `);
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
-        function openLessonModal(courseId) { selectedCourseId = courseId; document.getElementById('modalCourseTitle').innerText = coursesData.find(c => c.id === courseId).title; document.getElementById('lessonModal').classList.remove('hidden'); }
-        function closeLessonModal() { document.getElementById('lessonModal').classList.add('hidden'); }
-        function completeCourse() { let course = coursesData.find(c => c.id === selectedCourseId); course.status = 'completed'; course.progress = 100; course.timeInfo = 'เรียนจบหลักสูตรแล้ว'; closeLessonModal(); renderCourses(); calculateMetrics(); showToast(`เรียนจบวิชา ${course.title} แล้ว`); }
-        function switchCourseTab(tabName) { document.querySelectorAll('.border-b span').forEach(el => el.classList.remove('active-tab')); document.getElementById('tab-' + tabName).classList.add('active-tab'); currentCourseFilter = tabName; renderCourses(); }
+
+        function switchCourseTab(tabName) {
+            document.querySelectorAll('.border-b span').forEach(el => el.classList.remove('active-tab'));
+            document.getElementById('tab-' + tabName).classList.add('active-tab');
+            currentCourseFilter = tabName;
+            renderCourses();
+        }
+
         function filterCourses() { renderCourses(); }
-        function showToast(message) { const toast = document.getElementById('toastBox'); document.getElementById('toastMessage').innerText = message; toast.classList.remove('translate-y-20', 'opacity-0'); setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500); }
-        function handleLogout() { localStorage.clear(); window.location.href = 'index.html'; }
+
+        function simulateLearn(courseId) {
+            let course = coursesData.find(c => c.id === courseId);
+            course.status = 'completed';
+            course.progress = 100;
+            course.timeInfo = 'เรียนจบสมบูรณ์แล้ว';
+            renderCourses();
+            calculateMetrics();
+            alert(`🎉 ยินดีด้วย! คุณเรียนจบหลักสูตร ${course.title} เรียบร้อยแล้ว ระบบบันทึกข้อมูลเรียบร้อย`);
+        }
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
