@@ -90,7 +90,10 @@
                         <p class="text-sm text-slate-500">จัดการคลังสื่อการเรียนรู้และเอกสารสำหรับผู้เรียน</p>
                     </div>
                 </div>
-                <button onclick="openUploadModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-upload-simple"></i> อัปโหลดสื่อใหม่</button>
+                <div class="flex items-center gap-2">
+                    <button onclick="seedPresetLesson()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-magic-wand"></i> เติมบทเรียนอัตโนมัติ</button>
+                    <button onclick="openUploadModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-upload-simple"></i> อัปโหลดสื่อใหม่</button>
+                </div>
             </div>
 
             <div id="loadingBox" class="text-center py-10 hidden">
@@ -297,7 +300,10 @@
         }
 
         // --- ระบบควบคุมหน้าต่าง Modal ---
-        function openUploadModal() { document.getElementById('uploadModal').classList.remove('hidden'); }
+        function openUploadModal() {
+            document.getElementById('uploadModal').classList.remove('hidden');
+            fillPresetToUploadForm();
+        }
         function closeUploadModal() { document.getElementById('uploadModal').classList.add('hidden'); }
 
         function switchModalTab(tabId) {
@@ -339,6 +345,87 @@
         }
 
         function triggerSubmit() { document.getElementById('realSubmitBtn').click(); }
+
+        function fillPresetToUploadForm() {
+            const preSet = [
+                {
+                    question: "คำว่า \"AI\" ย่อมาจากอะไร",
+                    choices: ["Automatic Information (ข้อมูลอัตโนมัติ)", "Applied Intelligence (ปัญญาประยุกต์)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Internet (อินเทอร์เน็ตขั้นสูง)"],
+                    answer: 3
+                },
+                {
+                    question: "AI มีลักษณะการทำงานที่ใกล้เคียงกับอะไรมากที่สุด",
+                    choices: ["เครื่องคิดเลขที่คำนวณสูตรทางคณิตศาสตร์ได้อย่างแม่นยำ", "สมองมนุษย์ที่สามารถคิด ตัดสินใจ และเรียนรู้จากข้อมูลได้", "วิทยุที่รับสัญญาณและกระจายเสียงได้ในระยะไกล", "หุ่นยนต์เหล็กกล้าในภาพยนตร์ไซไฟที่เคลื่อนไหวได้เหมือนคน"],
+                    answer: 2
+                },
+                {
+                    question: "ข้อใดคือตัวอย่างของเทคโนโลยีรอบตัวที่ใช้ AI ในการทำงาน",
+                    choices: ["นาฬิกาปลุกแบบไขลาน", "ระบบสแกนใบหน้า (Face ID) และระบบแนะนำคลิปวิดีโอ", "พัดลมตั้งโต๊ะแบบกดปุ่มปรับระดับความแรง", "กล้องถ่ายรูปที่ใช้ฟิล์ม"],
+                    answer: 2
+                },
+                {
+                    question: "หากต้องการให้คอมพิวเตอร์เรียนรู้ที่จะแยกแยะภาพของ \"สุนัข\" และ \"แมว\" ต้องใช้วิธีการใด",
+                    choices: ["เปลี่ยนหน้าจอคอมพิวเตอร์ให้มีความละเอียดและสีสันคมชัดขึ้น", "พิมพ์ข้อความบอกคอมพิวเตอร์ว่าสุนัขร้องโฮ่ง แมวร้องเหมียว", "ติดตั้งโปรแกรมต้านไวรัส (Anti-virus) เวอร์ชันใหม่ล่าสุด", "ป้อนข้อมูลรูปภาพสุนัขและแมวจำนวนมหาศาลเพื่อให้ระบบเรียนรู้และจดจำลักษณะเด่นด้วยตัวเอง"],
+                    answer: 4
+                },
+                {
+                    question: "เหตุใดในยุคปัจจุบันเราจึงจำเป็นต้องเรียนรู้เรื่อง AI",
+                    choices: ["เพื่อนำมาประยุกต์ใช้เป็นผู้ช่วยในการทำงานและเตรียมพร้อมรับมือกับความเปลี่ยนแปลงในอนาคต", "เพื่อให้เราสามารถประกอบหุ่นยนต์ไว้ใช้งานเองที่บ้านได้", "เพื่อเตรียมตัวหยุดทำงาน เนื่องจาก AI จะเข้ามาทำแทนมนุษย์ทุกอย่าง 100%", "เพื่อหาวิธีทำลายเทคโนโลยีนี้ก่อนที่มันจะฉลาดเกินไป"],
+                    answer: 1
+                }
+            ];
+
+            const postSet = [
+                {
+                    question: "ชื่อเต็มของ AI คืออะไร และแปลเป็นภาษาไทยว่าอย่างไร",
+                    choices: ["Automatic Intelligence (ปัญญาอัตโนมัติ)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Information (ข้อมูลขั้นสูง)", "Artificial Information (ข้อมูลสังเคราะห์)"],
+                    answer: 2
+                },
+                {
+                    question: "เป้าหมายหลักของการสร้าง AI คืออะไร",
+                    choices: ["เพื่อสร้างหุ่นยนต์ที่มีรูปร่างหน้าตาและการเคลื่อนไหวเหมือนมนุษย์", "เพื่อให้คอมพิวเตอร์หรือโปรแกรมสามารถคิด ตัดสินใจ และเรียนรู้ได้คล้ายสมองมนุษย์", "เพื่อเพิ่มความเร็วในการคำนวณตัวเลขและพิมพ์งานบนคอมพิวเตอร์", "เพื่อนำมาแทนที่การทำงานของมนุษย์ในทุกๆ อาชีพอย่างถาวร"],
+                    answer: 2
+                },
+                {
+                    question: "จากตัวอย่างในคลิป ข้อใด \"ไม่ใช่\" เทคโนโลยีที่ใช้ AI ในชีวิตประจำวัน",
+                    choices: ["ระบบสแกนใบหน้า (Face ID) เพื่อปลดล็อกหน้าจอ", "ระบบแนะนำวิดีโอใน YouTube หรือภาพยนตร์ใน Netflix", "การทำความสะอาดพื้นด้วยไม้กวาดและที่ตักขยะธรรมดา", "ระบบกรองอีเมลขยะ (Spam filter) ที่ช่วยคัดแยกอีเมลที่เราไม่ต้องการ"],
+                    answer: 3
+                },
+                {
+                    question: "AI ต้องอาศัยการเรียนรู้จากข้อมูลจำนวนมหาศาล เพื่อจุดประสงค์ใดเป็นหลัก",
+                    choices: ["เพื่อให้มันสามารถแยกแยะ ตัดสินใจ หรือทำงานบางอย่างได้ด้วยตัวเอง (เช่น แยกรูปสุนัขกับแมว)", "เพื่อเก็บข้อมูลส่วนตัวของผู้ใช้งานทุกคนเอาไว้ในระบบ", "เพื่อให้คอมพิวเตอร์มีขนาดเล็กลงและประหยัดพลังงานไฟฟ้ามากขึ้น", "เพื่อแปลงภาษาคอมพิวเตอร์ทั้งหมดให้กลายเป็นภาษามนุษย์"],
+                    answer: 1
+                },
+                {
+                    question: "ตามเนื้อหาในคลิป ข้อใดคือเหตุผลสำคัญที่สุดที่เราทุกคนควรเรียนรู้พื้นฐานเรื่อง AI",
+                    choices: ["เพื่อให้ทุกคนสามารถเขียนโปรแกรมและสร้าง AI ขึ้นมาใช้งานเองได้", "เพื่อเตรียมความพร้อมที่จะหยุดทำงานทุกอย่าง เนื่องจาก AI จะทำแทนทั้งหมด", "เพื่อนำมาใช้ประโยชน์ ช่วยให้ทำงานได้เร็วขึ้น ชีวิตง่ายขึ้น และรู้เท่าทันเทคโนโลยี", "เพื่อหาวิธีทำลายและป้องกันไม่ให้ AI มีความฉลาดมากเกินไป"],
+                    answer: 3
+                }
+            ];
+
+            document.getElementById("resTitle").value = "พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน";
+            document.getElementById("resType").value = "Video";
+            document.getElementById("resUrl").value = "https://youtu.be/Z55vxrVi-9c?si=-G2ZkyALT1J0re1o";
+            document.getElementById("resDesc").value = "บทเรียนแนะนำความหมาย หลักการทำงาน และการประยุกต์ใช้ AI ในงานจริงของบุคลากรสายสนับสนุน";
+
+            for (let i = 1; i <= 5; i++) {
+                const pre = preSet[i - 1];
+                const post = postSet[i - 1];
+                document.getElementById(`pre_q${i}`).value = pre.question;
+                document.getElementById(`pre_q${i}_o1`).value = pre.choices[0];
+                document.getElementById(`pre_q${i}_o2`).value = pre.choices[1];
+                document.getElementById(`pre_q${i}_o3`).value = pre.choices[2];
+                document.getElementById(`pre_q${i}_o4`).value = pre.choices[3];
+                document.getElementById(`pre_q${i}_ans`).value = String(pre.answer);
+
+                document.getElementById(`post_q${i}`).value = post.question;
+                document.getElementById(`post_q${i}_o1`).value = post.choices[0];
+                document.getElementById(`post_q${i}_o2`).value = post.choices[1];
+                document.getElementById(`post_q${i}_o3`).value = post.choices[2];
+                document.getElementById(`post_q${i}_o4`).value = post.choices[3];
+                document.getElementById(`post_q${i}_ans`).value = String(post.answer);
+            }
+        }
 
         // --- ระบบส่งข้อมูลกลับไปบันทึกที่ชีต (Save Data) ---
         async function handleUploadSubmit(e) {
@@ -406,6 +493,53 @@
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<i class="ph-bold ph-check"></i> บันทึกและอัปโหลดสื่อ';
+            }
+        }
+
+        async function seedPresetLesson() {
+            const payload = {
+                action: "saveLesson",
+                lesson: {
+                    type: "Video",
+                    title: "พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน",
+                    url: "https://youtu.be/Z55vxrVi-9c?si=-G2ZkyALT1J0re1o",
+                    description: "บทเรียนแนะนำความหมาย หลักการทำงาน และการประยุกต์ใช้ AI ในงานจริงของบุคลากรสายสนับสนุน",
+                    author: currentUser ? currentUser.name : "Admin",
+                    quizzes: {
+                        preTest: [
+                            { question: "คำว่า \"AI\" ย่อมาจากอะไร", choices: ["Automatic Information (ข้อมูลอัตโนมัติ)", "Applied Intelligence (ปัญญาประยุกต์)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Internet (อินเทอร์เน็ตขั้นสูง)"], answer: 2 },
+                            { question: "AI มีลักษณะการทำงานที่ใกล้เคียงกับอะไรมากที่สุด", choices: ["เครื่องคิดเลขที่คำนวณสูตรทางคณิตศาสตร์ได้อย่างแม่นยำ", "สมองมนุษย์ที่สามารถคิด ตัดสินใจ และเรียนรู้จากข้อมูลได้", "วิทยุที่รับสัญญาณและกระจายเสียงได้ในระยะไกล", "หุ่นยนต์เหล็กกล้าในภาพยนตร์ไซไฟที่เคลื่อนไหวได้เหมือนคน"], answer: 1 },
+                            { question: "ข้อใดคือตัวอย่างของเทคโนโลยีรอบตัวที่ใช้ AI ในการทำงาน", choices: ["นาฬิกาปลุกแบบไขลาน", "ระบบสแกนใบหน้า (Face ID) และระบบแนะนำคลิปวิดีโอ", "พัดลมตั้งโต๊ะแบบกดปุ่มปรับระดับความแรง", "กล้องถ่ายรูปที่ใช้ฟิล์ม"], answer: 1 },
+                            { question: "หากต้องการให้คอมพิวเตอร์เรียนรู้ที่จะแยกแยะภาพของ \"สุนัข\" และ \"แมว\" ต้องใช้วิธีการใด", choices: ["เปลี่ยนหน้าจอคอมพิวเตอร์ให้มีความละเอียดและสีสันคมชัดขึ้น", "พิมพ์ข้อความบอกคอมพิวเตอร์ว่าสุนัขร้องโฮ่ง แมวร้องเหมียว", "ติดตั้งโปรแกรมต้านไวรัส (Anti-virus) เวอร์ชันใหม่ล่าสุด", "ป้อนข้อมูลรูปภาพสุนัขและแมวจำนวนมหาศาลเพื่อให้ระบบเรียนรู้และจดจำลักษณะเด่นด้วยตัวเอง"], answer: 3 },
+                            { question: "เหตุใดในยุคปัจจุบันเราจึงจำเป็นต้องเรียนรู้เรื่อง AI", choices: ["เพื่อนำมาประยุกต์ใช้เป็นผู้ช่วยในการทำงานและเตรียมพร้อมรับมือกับความเปลี่ยนแปลงในอนาคต", "เพื่อให้เราสามารถประกอบหุ่นยนต์ไว้ใช้งานเองที่บ้านได้", "เพื่อเตรียมตัวหยุดทำงาน เนื่องจาก AI จะเข้ามาทำแทนมนุษย์ทุกอย่าง 100%", "เพื่อหาวิธีทำลายเทคโนโลยีนี้ก่อนที่มันจะฉลาดเกินไป"], answer: 0 }
+                        ],
+                        postTest: [
+                            { question: "ชื่อเต็มของ AI คืออะไร และแปลเป็นภาษาไทยว่าอย่างไร", choices: ["Automatic Intelligence (ปัญญาอัตโนมัติ)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Information (ข้อมูลขั้นสูง)", "Artificial Information (ข้อมูลสังเคราะห์)"], answer: 1 },
+                            { question: "เป้าหมายหลักของการสร้าง AI คืออะไร", choices: ["เพื่อสร้างหุ่นยนต์ที่มีรูปร่างหน้าตาและการเคลื่อนไหวเหมือนมนุษย์", "เพื่อให้คอมพิวเตอร์หรือโปรแกรมสามารถคิด ตัดสินใจ และเรียนรู้ได้คล้ายสมองมนุษย์", "เพื่อเพิ่มความเร็วในการคำนวณตัวเลขและพิมพ์งานบนคอมพิวเตอร์", "เพื่อนำมาแทนที่การทำงานของมนุษย์ในทุกๆ อาชีพอย่างถาวร"], answer: 1 },
+                            { question: "จากตัวอย่างในคลิป ข้อใด \"ไม่ใช่\" เทคโนโลยีที่ใช้ AI ในชีวิตประจำวัน", choices: ["ระบบสแกนใบหน้า (Face ID) เพื่อปลดล็อกหน้าจอ", "ระบบแนะนำวิดีโอใน YouTube หรือภาพยนตร์ใน Netflix", "การทำความสะอาดพื้นด้วยไม้กวาดและที่ตักขยะธรรมดา", "ระบบกรองอีเมลขยะ (Spam filter) ที่ช่วยคัดแยกอีเมลที่เราไม่ต้องการ"], answer: 2 },
+                            { question: "AI ต้องอาศัยการเรียนรู้จากข้อมูลจำนวนมหาศาล เพื่อจุดประสงค์ใดเป็นหลัก", choices: ["เพื่อให้มันสามารถแยกแยะ ตัดสินใจ หรือทำงานบางอย่างได้ด้วยตัวเอง (เช่น แยกรูปสุนัขกับแมว)", "เพื่อเก็บข้อมูลส่วนตัวของผู้ใช้งานทุกคนเอาไว้ในระบบ", "เพื่อให้คอมพิวเตอร์มีขนาดเล็กลงและประหยัดพลังงานไฟฟ้ามากขึ้น", "เพื่อแปลงภาษาคอมพิวเตอร์ทั้งหมดให้กลายเป็นภาษามนุษย์"], answer: 0 },
+                            { question: "ตามเนื้อหาในคลิป ข้อใดคือเหตุผลสำคัญที่สุดที่เราทุกคนควรเรียนรู้พื้นฐานเรื่อง AI", choices: ["เพื่อให้ทุกคนสามารถเขียนโปรแกรมและสร้าง AI ขึ้นมาใช้งานเองได้", "เพื่อเตรียมความพร้อมที่จะหยุดทำงานทุกอย่าง เนื่องจาก AI จะทำแทนทั้งหมด", "เพื่อนำมาใช้ประโยชน์ ช่วยให้ทำงานได้เร็วขึ้น ชีวิตง่ายขึ้น และรู้เท่าทันเทคโนโลยี", "เพื่อหาวิธีทำลายและป้องกันไม่ให้ AI มีความฉลาดมากเกินไป"], answer: 2 }
+                        ]
+                    }
+                }
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result.status === "success") {
+                    showToast("เติมบทเรียนอัตโนมัติสำเร็จ");
+                    fetchResources();
+                } else {
+                    alert(result.message || "บันทึกบทเรียนไม่สำเร็จ");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อ API");
             }
         }
 
