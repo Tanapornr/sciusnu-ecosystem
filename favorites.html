@@ -69,11 +69,11 @@
                 <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
                 </a>
-                <a href="#" onclick="showToast('ข้อความ')" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
                     <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
                 </a>
-                <a href="#" onclick="showToast('ตั้งค่า')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
                     <i class="ph ph-gear text-xl"></i> ตั้งค่า
                 </a>
             </nav>
@@ -90,11 +90,11 @@
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
             <div class="relative w-96">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" placeholder="ค้นหาในรายการโปรด..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none">
+                <input type="text" placeholder="ค้นหาในรายการโปรด..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 border border-transparent focus:border-slate-300 transition">
             </div>
             
             <div class="flex items-center gap-4">
-                <button onclick="showToast('ศูนย์แจ้งเตือน')" class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i></button>
+                <button onclick="showToast('ศูนย์แจ้งเตือน')" class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i></button>
                 <div class="flex items-center gap-3 border-l pl-4">
                     <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
                     <div class="text-sm">
@@ -114,38 +114,23 @@
                     </div>
                     <div>
                         <h2 class="text-xl font-bold text-slate-800">รายการโปรดของฉัน</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">คอร์สเรียนและเนื้อหาที่คุณบันทึกเก็บไว้ดูย้อนหลังเพื่อการเข้าถึงที่รวดเร็ว</p>
+                        <p class="text-xs text-slate-400 mt-0.5">คอร์สเรียนที่คุณบันทึกเก็บไว้เพื่อการเข้าถึงอย่างรวดเร็ว</p>
                     </div>
                 </div>
 
                 <div id="favoritesListContainer" class="space-y-4">
                     <div id="fav-card-1" class="glass-card p-4 flex flex-col sm:flex-row gap-4 items-center bg-white border border-slate-200 hover:shadow-md transition">
                         <div class="w-full sm:w-28 h-16 bg-[#1e1b4b] text-white rounded-xl flex flex-col items-center justify-center font-bold text-center text-sm shrink-0">
-                            AI<span class="text-[8px] font-normal opacity-70">L-866</span>
+                            AI<span class="text-[8px] font-normal opacity-70 mt-0.5">L-866</span>
                         </div>
                         <div class="flex-1 min-w-0 w-full">
-                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-semibold px-2 py-0.5 rounded border">กำลังเรียน</span>
+                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-semibold px-2 py-0.5 rounded border border-indigo-100/50">กำลังเรียน</span>
                             <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">AI Tools for Education</h4>
                             <p class="text-xs text-slate-400">โดย Admin User</p>
                         </div>
                         <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
-                            <a href="staff.html" class="border text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition shadow-sm">เข้าสู่บทเรียน</a>
-                            <button onclick="removeFavorite(1, 'AI Tools for Education')" class="text-rose-500 hover:text-slate-400 p-2 text-xl transition"><i class="ph-fill ph-heart"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="fav-card-2" class="glass-card p-4 flex flex-col sm:flex-row gap-4 items-center bg-white border border-slate-200 hover:shadow-md transition">
-                        <div class="w-full sm:w-28 h-16 bg-[#0369a1] text-white rounded-xl flex flex-col items-center justify-center font-bold text-center text-sm shrink-0">
-                            Data<span class="text-[8px] font-normal opacity-70">L-304</span>
-                        </div>
-                        <div class="flex-1 min-w-0 w-full">
-                            <span class="bg-slate-50 text-slate-500 text-[10px] font-semibold px-2 py-0.5 rounded border">ยังไม่เริ่มเรียน</span>
-                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">Data Visualization and Reports</h4>
-                            <p class="text-xs text-slate-400">โดย Nuttida P.</p>
-                        </div>
-                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
-                            <a href="staff.html" class="border text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition shadow-sm">เข้าสู่บทเรียน</a>
-                            <button onclick="removeFavorite(2, 'Data Visualization and Reports')" class="text-rose-500 hover:text-slate-400 p-2 text-xl transition"><i class="ph-fill ph-heart"></i></button>
+                            <a href="staff.html" class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition shadow-sm">เข้าเรียน</a>
+                            <button onclick="removeFavorite(1)" class="text-rose-500 text-xl transition hover:scale-110 hover:text-slate-400"><i class="ph-fill ph-heart"></i></button>
                         </div>
                     </div>
                 </div>
@@ -153,13 +138,16 @@
 
             <div class="space-y-6">
                 <div class="glass-card p-6 bg-white border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 text-sm border-b pb-3 mb-4 flex items-center gap-2">
-                        <i class="ph-bold ph-chart-pie text-rose-500"></i> สรุปพื้นที่รายการโปรด
+                    <h3 class="font-bold text-slate-800 text-sm border-b pb-3 flex items-center gap-2">
+                        <i class="ph-bold ph-chart-pie text-rose-500"></i> สรุปรายการ
                     </h3>
-                    <div class="p-3 bg-slate-50 rounded-xl border text-xs font-medium">
-                        <p class="text-slate-400">จำนวนคอร์สที่บันทึกไว้</p>
-                        <p class="text-xl font-bold text-slate-800 mt-1" id="favCountText">2 หลักสูตร</p>
+                    <div class="p-3 bg-slate-50 rounded-xl border text-xs font-medium text-center">
+                        <p class="text-slate-400">จำนวนหลักสูตรที่บันทึกไว้</p>
+                        <p class="text-xl font-bold text-slate-800 mt-1 text-rose-500" id="favCountText">1 หลักสูตร</p>
                     </div>
+                    <p class="text-xs text-slate-400 font-normal leading-relaxed text-center">
+                        สามารถกดไอคอนหัวใจเพื่อนำวิชาออกจากรายการได้ทุกเมื่อ
+                    </p>
                 </div>
             </div>
 
@@ -172,32 +160,46 @@
     </div>
 
     <script>
-        let totalFavCount = 2;
+        let totalFavCount = 1;
+
         window.onload = function() {
+            // ระบบตรวจสอบข้อมูลผู้ใช้จริงหลังล็อกอิน
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
                 document.getElementById('userNameText').innerText = user.name;
                 document.getElementById('userDeptText').innerText = user.department;
                 document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+            } else {
+                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
             }
         };
 
-        function removeFavorite(cardId, courseName) {
+        // ฟังก์ชันลบคอร์สโปรดแบบไดนามิกจริงคาตา
+        function removeFavorite(cardId) {
             const card = document.getElementById('fav-card-' + cardId);
             if (card) {
                 card.style.opacity = '0';
                 card.style.transform = 'scale(0.95)';
                 card.style.transition = 'all 0.3s ease';
+                
                 setTimeout(() => {
                     card.remove();
                     totalFavCount--;
                     document.getElementById('favCountText').innerText = `${totalFavCount} หลักสูตร`;
+                    
+                    // เคสลบจนหมดเกลี้ยง
                     if (totalFavCount === 0) {
-                        document.getElementById('favoritesListContainer').innerHTML = `<p class="text-slate-400 text-center py-10 text-xs">📭 ยังไม่มีรายการโปรดที่บันทึกไว้</p>`;
+                        document.getElementById('favoritesListContainer').innerHTML = `
+                            <div class="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                                <i class="ph ph-folder-open text-4xl text-slate-300 mb-2"></i>
+                                <p class="text-slate-400 text-xs font-medium">ยังไม่มีรายการโปรดที่บันทึกไว้ในขณะนี้</p>
+                            </div>
+                        `;
                     }
                 }, 300);
-                showToast(`💔 นำวิชา "${courseName}" ออกจากรายการโปรดแล้ว`);
+
+                showToast(`💔 นำออกจากรายการโปรดแล้ว`);
             }
         }
 
