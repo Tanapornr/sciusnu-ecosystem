@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachers - Learning Ecosystem</title>
+    <title>Staff Management - Learning Ecosystem</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
 
                 <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
                 <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
-<a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-graduation-cap text-xl"></i> Teachers</a>
+<a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-graduation-cap text-xl"></i> Staff</a>
                 <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
                 <a href="admin-community.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users-three text-xl"></i> Community</a>
                 <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-briefcase text-xl"></i> Workplace</a>
@@ -417,35 +417,42 @@
         document.getElementById('userDeptText').innerText = user.department;
 
         initStaffModals();
-        loadTeachersData();
+        applyStaffContextText();
+        loadStaffData();
     };
 
-    async function loadTeachersData() {
+    async function loadStaffData() {
         try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'getUsers' })
-            });
-            const result = await response.json();
-            const users = normalizeUsers(result);
+            const actions = ['getUsers', 'getStaffData', 'getTeachersData', 'listUsers'];
+            let users = [];
+
+            for (const action of actions) {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action })
+                });
+                const result = await response.json();
+                users = normalizeUsers(result);
+                if (users.length) break;
+            }
 
             if (!users.length) {
-                throw new Error(result?.message || 'No user data returned');
+                throw new Error('No user data returned');
             }
 
             renderStaffTable(users);
             renderDepartmentChart(users);
-            renderWorkloadTrend(users);
+            renderUsageTrend(users);
         } catch (error) {
-            console.error('Failed to load teacher data:', error);
+            console.error('Failed to load staff data:', error);
             const legend = document.getElementById('departmentLegend');
             if (legend) {
-                legend.innerHTML = '<p class="text-rose-500 text-xs">Unable to load live data. Please verify GAS action: getUsers</p>';
+                legend.innerHTML = '<p class="text-rose-500 text-xs">Unable to load live data. Please verify GAS action for users data.</p>';
             }
             const totalEl = document.getElementById('departmentTotalCount');
             if (totalEl) totalEl.innerText = '-';
-            renderWorkloadTrend([]);
+            renderUsageTrend([]);
         }
     }
 
@@ -477,7 +484,7 @@
                     email: u.email || '-',
                     subject: u.department || 'Unknown Department',
                     role: 'Staff',
-                    load: `${Math.max(1, Math.min(30, u.accessCount || 1))} hours/week`,
+                    load: `${Math.max(0, u.accessCount || 0)} accesses`,
                     status: 'Active'
                 })
             )
@@ -535,7 +542,7 @@
         });
     }
 
-    function renderWorkloadTrend(users) {
+    function renderUsageTrend(users) {
         const ctxLine = document.getElementById('lineChart')?.getContext('2d');
         if (!ctxLine) return;
 
@@ -554,7 +561,7 @@
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                 datasets: [
                     {
-                        label: 'hours/week',
+                        label: 'usage/month',
                         data: points,
                         borderColor: '#3b82f6',
                         backgroundColor: gradient,
@@ -586,6 +593,60 @@
                 }
             }
         });
+    }
+
+    function applyStaffContextText() {
+        const heading = document.querySelector('h2.text-2xl');
+        if (heading) heading.innerText = 'Staff';
+
+        const subtitle = heading?.parentElement?.querySelector('p');
+        if (subtitle) subtitle.innerText = 'Manage staff accounts, roles, and activity by department';
+
+        const menuActive = document.querySelector('a[href="admin-teachers.html"]');
+        if (menuActive) menuActive.innerHTML = '<i class="ph-fill ph-graduation-cap text-xl"></i> Staff';
+
+        const addBtn = document.getElementById('openAddStaffBtn');
+        if (addBtn) addBtn.innerHTML = '<i class="ph-bold ph-plus"></i> Add Staff';
+
+        const tabs = Array.from(document.querySelectorAll('.border-b span.pb-3'));
+        if (tabs.length >= 6) {
+            tabs[1].innerText = 'Staff Directory';
+            tabs[4].innerText = 'System Usage';
+        }
+
+        const headers = document.querySelectorAll('thead th');
+        if (headers.length >= 6) {
+            headers[1].innerText = 'Department';
+            headers[3].innerText = 'Usage';
+        }
+
+        const panelTitles = document.querySelectorAll('.glass-card h3.font-bold');
+        panelTitles.forEach((el) => {
+            const text = el.textContent || '';
+            if (text.includes('สัดส่วน') || text.toLowerCase().includes('group')) {
+                el.textContent = 'Staff Distribution by Department';
+            }
+            if (text.includes('ภาระงาน') || text.toLowerCase().includes('workload')) {
+                el.textContent = 'Average Usage Trend';
+            }
+        });
+
+        const addModalTitle = document.querySelector('#addStaffModal h3');
+        if (addModalTitle) addModalTitle.textContent = 'Add Staff';
+        const viewModalTitle = document.querySelector('#viewStaffModal h3');
+        if (viewModalTitle) viewModalTitle.textContent = 'View Staff Profile';
+
+        const addFormLabels = document.querySelectorAll('#addStaffForm label');
+        if (addFormLabels.length >= 6) {
+            addFormLabels[2].textContent = 'Department';
+            addFormLabels[4].textContent = 'Initial Access Count';
+        }
+
+        const viewLabels = document.querySelectorAll('#viewStaffModal p span.font-semibold');
+        if (viewLabels.length >= 6) {
+            viewLabels[2].textContent = 'Department:';
+            viewLabels[4].textContent = 'Usage:';
+        }
     }
 
     function initStaffModals() {
@@ -626,7 +687,7 @@
                 email: document.getElementById('addEmail').value.trim(),
                 subject: document.getElementById('addSubject').value.trim(),
                 role: document.getElementById('addRole').value,
-                load: `${document.getElementById('addLoad').value} hours/week`,
+                load: `${document.getElementById('addLoad').value} accesses`,
                 status: document.getElementById('addStatus').value
             };
 
@@ -660,9 +721,9 @@
     }
 
     function buildStaffRow(data) {
-        const roleClass = data.role === 'Head of Department'
+        const roleClass = data.role === 'Coordinator'
             ? 'bg-blue-50 text-blue-600 border-blue-100'
-            : data.role === 'Assistant'
+            : data.role === 'Support'
                 ? 'bg-purple-50 text-purple-600 border-purple-100'
                 : 'bg-emerald-50 text-emerald-600 border-emerald-100';
 

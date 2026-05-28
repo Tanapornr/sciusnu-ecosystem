@@ -82,7 +82,7 @@ function validatePayload(action, body) {
         return null;
     }
 
-    if (action === 'getUsers' || action === 'getTeachersData') {
+    if (action === 'getUsers' || action === 'getTeachersData' || action === 'getStaffData' || action === 'listUsers') {
         return null;
     }
 
