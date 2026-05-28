@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตั้งค่าระบบ - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { 
+                        sidebarBg: '#0f172a',
+                        primaryPurple: '#4f46e5',
+                        bgLight: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+            border-radius: 1.25rem;
+        }
+        /* ซ่อน Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div>
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                    <i class="ph-fill ph-book-open text-xl"></i>
+                </div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="#" onclick="showToast('หน้าหลัก')" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-house text-xl"></i> หน้าหลัก
+                </a>
+                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน
+                </a>
+                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้
+                </a>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
+                </a>
+                <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
+                </a>
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-heart text-xl"></i> รายการโปรด
+                </a>
+                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
+                </a>
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
+                    <i class="ph-fill ph-gear text-xl"></i> ตั้งค่า
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                <i class="ph ph-sign-out"></i> ออกจากระบบ
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                <i class="ph-fill ph-gear text-indigo-600 text-xl"></i> ตั้งค่าความเป็นส่วนตัวและระบบ
+            </h2>
+            
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 border-l pl-4">
+                    <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)] text-xs font-medium">
+            
+            <div class="lg:col-span-2 space-y-6">
+                
+                <div class="glass-card p-6 bg-white border border-slate-200 space-y-4">
+                    <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b pb-3">
+                        <i class="ph-bold ph-user-focus text-indigo-600 text-base"></i> ข้อมูลบัญชีบุคลากรคณะวิทยาศาสตร์
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-400 mb-1">รหัสประจำตัวบุคลากร (ID)</label>
+                            <input type="text" id="settingUserId" disabled class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">ชื่อผู้ใช้ระบบ (Username)</label>
+                            <input type="text" id="settingUsername" disabled class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 mb-1">ชื่อ-นามสกุลจริง</label>
+                            <input type="text" id="settingFullName" disabled class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 mb-1">ฝ่ายงาน / สังกัดกองงานภายใน</label>
+                            <input type="text" id="settingDept" disabled class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-400 cursor-not-allowed">
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-normal">💡 หมายเหตุ: ข้อมูลบัญชีหลักถูกล็อกและผูกไว้กับระบบฐานข้อมูลกลางของคณะวิทยาศาสตร์ มน. หากต้องการแก้ไขข้อมูลดังกล่าวกรุณาติดต่อแอดมินกองพัฒนาระบบ</p>
+                </div>
+
+                <div class="glass-card p-6 bg-white border border-slate-200 space-y-4">
+                    <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b pb-3">
+                        <i class="ph-bold ph-shield-check text-indigo-600 text-base"></i> ความปลอดภัยและรหัสผ่านเข้าสู่ระบบ
+                    </h3>
+                    <form onsubmit="savePasswordSimulation(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-slate-600 mb-1">รหัสผ่านปัจจุบัน</label>
+                                <input type="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 mb-1">รหัสผ่านใหม่</label>
+                                <input type="password" required placeholder="รหัสผ่านใหม่ขั้นต่ำ 4 ตัว" class="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 mb-1">ยืนยันรหัสผ่านใหม่อีกครั้ง</label>
+                                <input type="password" required placeholder="••••••••" class="w-full border border-slate-200 rounded-xl p-2.5 bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-700">
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2 rounded-xl shadow-md transition">อัปเดตรหัสผ่านใหม่</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass-card p-6 bg-white border border-slate-200 flex flex-col justify-between h-full">
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-bold text-slate-800 border-b pb-3 flex items-center gap-2">
+                            <i class="ph-bold ph-bell-ringing text-indigo-600 text-base"></i> ระบบแจ้งเตือนอัตโนมัติ
+                        </h3>
+                        
+                        <div class="space-y-4 pt-1">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-slate-800">แจ้งเตือนผ่านบราวเซอร์</p>
+                                    <p class="text-[10px] text-slate-400 font-normal mt-0.5">เปิดรับสัญลักษณ์แจ้งเตือนกล่องข้อความในแอป</p>
+                                </div>
+                                <input type="checkbox" checked class="w-9 h-5 bg-slate-200 rounded-full appearance-none checked:bg-indigo-600 relative before:w-5 before:h-5 before:bg-white before:rounded-full before:absolute checked:before:translate-x-4 before:transition-all cursor-pointer border shadow-inner">
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-slate-800">แจ้งเตือนผ่าน Email</p>
+                                    <p class="text-[10px] text-slate-400 font-normal mt-0.5">รับสรุปใบประกาศนียบัตรเมื่อเรียนจบผ่านอีเมล มน.</p>
+                                </div>
+                                <input type="checkbox" checked class="w-9 h-5 bg-slate-200 rounded-full appearance-none checked:bg-indigo-600 relative before:w-5 before:h-5 before:bg-white before:rounded-full before:absolute checked:before:translate-x-4 before:transition-all cursor-pointer border shadow-inner">
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-indigo-600">LINE Notify Automation</p>
+                                    <p class="text-[10px] text-slate-400 font-normal mt-0.5">รับข้อความแจ้งเตือนเด็งผ่านไลน์กลุ่มงานทันทีเมื่อมีกำหนดส่งการบ้าน</p>
+                                </div>
+                                <input type="checkbox" id="lineNotifyToggle" onchange="simulateLineToggle(this)" checked class="w-9 h-5 bg-slate-200 rounded-full appearance-none checked:bg-indigo-600 relative before:w-5 before:h-5 before:bg-white before:rounded-full before:absolute checked:before:translate-x-4 before:transition-all cursor-pointer border shadow-inner">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i>
+        <span id="toastMessage">ข้อความแจ้งเตือน</span>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // ดึงข้อมูลจริงของผู้ล็อกอินมาแมปกรอกลงฟิลด์อัตโนมัติ
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                
+                // กรอกฝั่ง Header
+                document.getElementById('userNameText').innerText = user.name;
+                document.getElementById('userDeptText').innerText = user.department;
+                document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+                
+                // กรอกฝั่งในฟอร์มช่องข้อมูลบัญชี
+                document.getElementById('settingUserId').value = user.id;
+                document.getElementById('settingUsername').value = user.username;
+                document.getElementById('settingFullName').value = user.name;
+                document.getElementById('settingDept').value = user.department;
+            } else {
+                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
+            }
+        };
+
+        // ฟังก์ชันจำลองการตั้งค่าเปลี่ยนรหัสผ่านความปลอดภัยสำเร็จ
+        function savePasswordSimulation(event) {
+            event.preventDefault();
+            showToast("🔒 ระบบทำการตรวจสอบรหัสเดิมและปรับแต่งอัปเดตรหัสผ่านใหม่ของท่านสำเร็จ!");
+            event.target.reset();
+        }
+
+        // ฟังก์ชันจำลองความเคลื่อนไหว LINE Automation Workflow 
+        function simulateLineToggle(checkbox) {
+            if (checkbox.checked) {
+                showToast("✅ เปิดใช้งานการผูกแจ้งเตือนฐานข้อมูลตรงเข้า LINE กลุ่มงานสำเร็จ!");
+            } else {
+                showToast("⚠️ ปิดระบบเชื่อมต่อแจ้งเตือนผ่านกลุ่ม LINE บัญชีนี้ชั่วคราว");
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 3000);
+        }
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
