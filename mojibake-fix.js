@@ -34,10 +34,11 @@
     });
   }
 
-  function run() {
+  function run(root) {
     try {
-      fixTextNodes(document.body);
-      fixAttrs(document);
+      fixTextNodes(root || document.body);
+      fixAttrs(root || document);
+      if (document.title) document.title = recover(document.title);
     } catch (_) {}
   }
 
@@ -46,6 +47,35 @@
   } else {
     run();
   }
+
+  try {
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === 'characterData' && m.target) {
+          const v = m.target.nodeValue;
+          const nv = recover(v);
+          if (nv !== v) m.target.nodeValue = nv;
+        }
+        if (m.addedNodes && m.addedNodes.length) {
+          m.addedNodes.forEach((n) => {
+            if (n.nodeType === 3) {
+              const v = n.nodeValue;
+              const nv = recover(v);
+              if (nv !== v) n.nodeValue = nv;
+            } else if (n.nodeType === 1) {
+              run(n);
+            }
+          });
+        }
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+  } catch (_) {}
+
+  setTimeout(run, 50);
+  setTimeout(run, 300);
+  setTimeout(run, 1000);
+  setInterval(run, 2500);
 
   window.__fixMojibake = run;
 })();
