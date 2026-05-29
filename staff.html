@@ -19,8 +19,8 @@
     }
   </script>
   <style>
-    body{font-family:'Prompt',sans-serif;background:#f8fafc}
-    .glass-card{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 4px 12px rgba(0,0,0,.03)}
+    body { font-family: 'Prompt', sans-serif; background: #f8fafc; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.03); }
   </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
@@ -38,10 +38,7 @@
         <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
         <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
         <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl">
-          <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
-          <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
-        </a>
+        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
         <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
       </nav>
     </div>
@@ -52,43 +49,70 @@
     <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
       <div class="relative w-96">
         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none">
+        <input id="searchInput" type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none">
       </div>
       <div class="flex items-center gap-4">
         <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
-        <div class="flex items-center gap-3 border-l pl-4">
-          <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div>
-          <div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div>
-        </div>
+        <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
+        <div class="flex items-center gap-3 border-l pl-4"><div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div><div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div></div>
       </div>
     </header>
 
-    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
-      <section class="lg:col-span-2 space-y-6">
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
-          <div>
-            <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
-            <p class="text-xs text-slate-400">ลำดับบทเรียนถูกล็อก: Pre-test (ครั้งเดียว) -> วิดีโอจบ -> Post-test</p>
+    <div class="p-6 max-w-[1500px] w-full mx-auto grid grid-cols-1 xl:grid-cols-4 gap-6 flex-1 overflow-y-auto">
+      <section class="xl:col-span-3 space-y-5">
+        <div class="card p-5 bg-gradient-to-r from-indigo-50 via-white to-indigo-50">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
+              <div>
+                <h2 class="text-4xl font-bold text-slate-900">คอร์สเรียนของฉัน</h2>
+                <p class="text-slate-500">ติดตามความก้าวหน้าและเรียนรู้ต่อเนื่อง</p>
+              </div>
+            </div>
+            <div class="hidden lg:block text-indigo-300 text-7xl"><i class="ph-fill ph-video-camera"></i></div>
+          </div>
+          <div class="mt-4 border-b flex gap-8 text-sm font-medium text-slate-500">
+            <button class="tab-btn text-indigo-600 border-b-2 border-indigo-600 pb-2" data-tab="all">ทั้งหมด</button>
+            <button class="tab-btn pb-2" data-tab="learning">กำลังเรียน</button>
+            <button class="tab-btn pb-2" data-tab="not-started">ยังไม่เริ่มเรียน</button>
+            <button class="tab-btn pb-2" data-tab="done">เรียนจบแล้ว</button>
           </div>
         </div>
-        <div class="border-b flex gap-6 text-sm font-medium text-slate-400"><span class="text-indigo-600 border-b-2 border-indigo-600 pb-2">ทั้งหมด</span></div>
-        <div id="lessonGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-        <div id="emptyState" class="hidden glass-card p-8 text-center text-slate-500">ยังไม่มีบทเรียนในระบบ</div>
+
+        <div class="card p-4">
+          <h3 class="font-semibold text-slate-800 mb-3">คอร์สที่กำลังเรียน</h3>
+          <div id="learningList" class="space-y-3"></div>
+          <div id="emptyLearning" class="hidden text-sm text-slate-500 py-6 text-center">ไม่มีคอร์สในหมวดนี้</div>
+        </div>
+
+        <div class="card p-4">
+          <div class="flex justify-between items-center mb-3"><h3 class="font-semibold text-slate-800">ยังไม่เริ่มเรียน</h3><span class="text-sm text-indigo-600">ดูทั้งหมด</span></div>
+          <div id="notStartedGrid" class="grid md:grid-cols-2 xl:grid-cols-4 gap-3"></div>
+        </div>
       </section>
 
-      <aside class="space-y-6">
-        <div class="glass-card p-5">
-          <div class="flex justify-between text-sm font-semibold mb-2"><span>ความคืบหน้ารวม</span><span id="statProgress" class="text-indigo-600">0%</span></div>
-          <div class="bg-slate-100 h-2 rounded-full w-full"><div id="progressBar" class="bg-indigo-600 h-2 rounded-full" style="width:0%"></div></div>
-          <p id="statLine" class="text-xs text-slate-400 mt-2">เรียนจบ 0 จาก 0 บท</p>
+      <aside class="space-y-5">
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-2"><h3 class="font-semibold">ความคืบหน้ารวม</h3></div>
+          <p id="statProgress" class="text-4xl font-bold text-slate-900">0%</p>
+          <div class="w-full bg-slate-100 h-2 rounded-full mt-3"><div id="progressBar" class="bg-indigo-600 h-2 rounded-full" style="width:0%"></div></div>
+          <p id="statLine" class="text-sm text-slate-500 mt-3">เรียนจบ 0 จาก 0 คอร์ส</p>
         </div>
-        <div class="glass-card p-5">
-          <h3 class="text-sm font-semibold mb-3">สถิติของฉัน</h3>
-          <div class="grid grid-cols-2 gap-3 text-center">
-            <div class="bg-slate-50 rounded-xl py-3"><div id="statTotal" class="text-xl font-bold">0</div><div class="text-xs text-slate-400">บทเรียนทั้งหมด</div></div>
-            <div class="bg-slate-50 rounded-xl py-3"><div id="statDone" class="text-xl font-bold text-emerald-600">0</div><div class="text-xs text-slate-400">จบแล้ว</div></div>
+
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-3"><h3 class="font-semibold">ปฏิทินการเรียน</h3></div>
+          <div class="text-sm text-slate-700 text-center mb-2">เดือนปัจจุบัน</div>
+          <div class="grid grid-cols-7 gap-2 text-xs text-center text-slate-500">
+            <span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span><span>อา</span>
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+            <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span>
+            <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
           </div>
+        </div>
+
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-3"><h3 class="font-semibold">กำหนดการถัดไป</h3></div>
+          <div id="nextSchedule" class="space-y-3 text-sm"></div>
         </div>
       </aside>
     </div>
@@ -108,8 +132,32 @@
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
-let currentUser=null, lessons=[], currentLesson=null, ytPlayer=null, lastWatched=0;
-window.onload = async function(){const s=localStorage.getItem('user'); if(!s) return location.href='index.html'; currentUser=JSON.parse(s); userNameText.innerText=currentUser.name||'-'; userDeptText.innerText=currentUser.department||'-'; avatarContainer.innerText=(currentUser.name||'U').substring(0,2); await loadLessons();};
+let currentUser=null, lessons=[], currentLesson=null, ytPlayer=null, lastWatched=0, activeTab='all';
+
+window.onload = async function(){
+  const s=localStorage.getItem('user');
+  if(!s) return location.href='index.html';
+  currentUser=JSON.parse(s);
+  userNameText.innerText=currentUser.name||'-';
+  userDeptText.innerText=currentUser.department||'-';
+  avatarContainer.innerText=(currentUser.name||'U').substring(0,2);
+  bindTabEvents();
+  bindSearch();
+  await loadLessons();
+}
+
+function bindTabEvents(){
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      activeTab=btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('text-indigo-600','border-b-2','border-indigo-600'));
+      btn.classList.add('text-indigo-600','border-b-2','border-indigo-600');
+      renderAll();
+    }
+  });
+}
+function bindSearch(){ document.getElementById('searchInput').addEventListener('input', renderAll); }
+
 function progressKey(){return `lessonProgress_${(currentUser?.username||'guest').toLowerCase()}`}
 function getProgress(){try{return JSON.parse(localStorage.getItem(progressKey())||'{}')}catch{return {}}}
 function setProgress(v){localStorage.setItem(progressKey(),JSON.stringify(v))}
@@ -118,26 +166,113 @@ function ord(t){let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=St
 function favoriteList(){ return JSON.parse(localStorage.getItem('favoriteLessons')||'[]'); }
 function isFavorite(lesson){ return favoriteList().some(x=>x.id===lesson.id); }
 function toggleFavorite(lesson){ const list=favoriteList(); const i=list.findIndex(x=>x.id===lesson.id); if(i>=0) list.splice(i,1); else list.unshift({id:lesson.id,title:lesson.title}); localStorage.setItem('favoriteLessons', JSON.stringify(list)); }
+function videoId(u){u=String(u||'');let m=u.match(/youtu\.be\/([^?&]+)/);if(m)return m[1];m=u.match(/[?&]v=([^&]+)/);if(m)return m[1];m=u.match(/youtube\.com\/embed\/([^?&]+)/);if(m)return m[1];return ''}
+function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
 async function loadLessons(){
-  lessonGrid.innerHTML='';
   const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'getLessons'})});
   const j=await r.json();
   lessons=(j.lessons||[]).map(norm).sort((a,b)=>ord(a.title)-ord(b.title));
-  if(!lessons.length){emptyState.classList.remove('hidden');return;} else emptyState.classList.add('hidden');
-  const p=getProgress(); let unlocked=0; while(unlocked<lessons.length && p[lessons[unlocked].id]?.postDone) unlocked++;
-  lessons.forEach((l,idx)=>{const st=p[l.id]||{};const locked=idx>unlocked;const done=!!st.postDone;const preDone=!!st.preDone;const liked=isFavorite(l);
-    const favHtml = done
-      ? `<button class="fav text-base ${liked?'text-rose-500':'text-slate-300'}" title="เพิ่มรายการโปรด">❤</button>`
-      : `<span class="text-[10px] text-slate-300" title="ต้องเรียนจบก่อนจึงเพิ่มรายการโปรดได้">❤</span>`;
-    const card=document.createElement('div'); card.className='glass-card p-4'; card.innerHTML=`<div class="flex justify-between items-center mb-2"><span class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded">Video</span><div class="flex items-center gap-2">${favHtml}${locked?'<span class="text-xs text-amber-600">🔒 ล็อก</span>':done?'<span class="text-xs text-emerald-600">✓ จบแล้ว</span>':'<span class="text-xs text-slate-500">กำลังเรียน</span>'}</div></div><h4 class="font-semibold text-slate-800 mb-1">${esc(l.title)}</h4><p class="text-xs text-slate-500 mb-3 line-clamp-2">${esc(l.description||'-')}</p><div class="text-[11px] text-slate-500 mb-3">Pre-test: ${preDone?'ทำแล้ว':'ยังไม่ทำ'} | Post-test: ${done?'ทำแล้ว':'ยังไม่ทำ'}</div><button class="start w-full ${locked?'bg-slate-300 cursor-not-allowed':'bg-indigo-600 hover:bg-indigo-700'} text-white py-2 rounded-lg text-sm" ${locked?'disabled':''}>${locked?'ยังล็อก':(done?'ดูวิดีโออีกครั้ง':'เริ่มเรียน')}</button>`;
-    const favBtn = card.querySelector('.fav');
-    if (favBtn) favBtn.onclick=(e)=>{e.stopPropagation();toggleFavorite(l);loadLessons();};
-    const b=card.querySelector('.start'); if(!locked) b.onclick=()=>openLesson(l);
-    lessonGrid.appendChild(card);
+  localStorage.setItem('lessonsCache', JSON.stringify(lessons));
+  renderAll();
+}
+
+function norm(l){
+  let q=l.quizData||l.quizzes||{};
+  if(typeof q==='string') try{q=JSON.parse(q)}catch{q={}};
+  return {id:l.id||l.title,title:l.title||'บทเรียน',description:l.description||'',url:l.url||'',author:l.author||'Admin User',preTest:normQ(q.preTest||q.pre||[]),postTest:normQ(q.postTest||q.post||[])};
+}
+function normQ(a){if(!Array.isArray(a))return[];return a.map(q=>q.choices?{question:q.question||'',choices:q.choices||[],answer:Number(q.answer||0)}:{question:q.q||'',choices:q.opts||[],answer:Math.max(0,Number(q.ans||1)-1)}).filter(x=>x.question&&x.choices.length>=2)}
+
+function lessonState(l, p){
+  const s=p[l.id]||{};
+  if(s.postDone) return 'done';
+  if(s.preDone || s.videoDone) return 'learning';
+  return 'not-started';
+}
+
+function canUnlock(idx,p){ let unlocked=0; while(unlocked<lessons.length && p[lessons[unlocked].id]?.postDone) unlocked++; return idx<=unlocked; }
+
+function renderAll(){
+  const p=getProgress();
+  const q=(searchInput.value||'').trim().toLowerCase();
+  const list=lessons.map((l,idx)=>({l,idx,state:lessonState(l,p),locked:!canUnlock(idx,p)})).filter(x=>!q||x.l.title.toLowerCase().includes(q)||x.l.description.toLowerCase().includes(q));
+
+  const total=lessons.length;
+  const done=lessons.filter(x=>p[x.id]?.postDone).length;
+  const started=lessons.filter(x=>p[x.id]?.preDone||p[x.id]?.videoDone||p[x.id]?.postDone).length;
+  const progress=total?Math.round(done*100/total):0;
+  statProgress.innerText=`${progress}%`;
+  progressBar.style.width=`${progress}%`;
+  statLine.innerText=`เรียนจบ ${done} จาก ${total} คอร์ส`;
+
+  const inProgress = list.filter(x=>x.state==='learning' && !x.locked);
+  const notStarted = list.filter(x=>x.state==='not-started' && !x.locked);
+
+  const filtered = list.filter(x=>{
+    if(activeTab==='all') return !x.locked;
+    if(activeTab==='learning') return x.state==='learning' && !x.locked;
+    if(activeTab==='done') return x.state==='done';
+    if(activeTab==='not-started') return x.state==='not-started' && !x.locked;
+    return true;
   });
-  const total=lessons.length, done=lessons.filter(x=>p[x.id]?.postDone).length, pc=total?Math.round(done*100/total):0;
-  statTotal.innerText=String(total); statDone.innerText=String(done); statProgress.innerText=`${pc}%`; progressBar.style.width=`${pc}%`; statLine.innerText=`เรียนจบ ${done} จาก ${total} บท`;
+
+  renderLearningList(filtered, p);
+  renderNotStartedGrid(notStarted, p);
+  renderSchedule();
+}
+
+function renderLearningList(items,p){
+  learningList.innerHTML='';
+  if(!items.length){ emptyLearning.classList.remove('hidden'); return; }
+  emptyLearning.classList.add('hidden');
+
+  items.forEach(({l,idx,state,locked})=>{
+    const s=p[l.id]||{};
+    const pct = s.postDone?100:(s.videoDone?80:(s.preDone?35:0));
+    const status = s.postDone ? '<span class="text-emerald-600 text-xs font-medium">เรียนจบแล้ว</span>' : (locked?'<span class="text-amber-600 text-xs">ยังล็อก</span>':'<span class="text-indigo-600 text-xs font-medium">กำลังเรียน</span>');
+    const like = s.postDone ? `<button class="fav text-lg ${isFavorite(l)?'text-rose-500':'text-slate-300'}">❤</button>` : '<span class="text-slate-300">❤</span>';
+    const cover = /^AI-/i.test(l.title) ? 'linear-gradient(135deg,#1e1b4b,#4338ca)' : /^5ส-/i.test(l.title) ? 'linear-gradient(135deg,#f59e0b,#f97316)' : 'linear-gradient(135deg,#475569,#334155)';
+
+    const row=document.createElement('div');
+    row.className='border rounded-xl p-3 flex flex-col lg:flex-row gap-4 lg:items-center';
+    row.innerHTML=`
+      <div class="w-full lg:w-44 h-24 rounded-lg text-white flex items-center justify-center font-bold text-xl" style="background:${cover}">${esc((l.title||'').slice(0,14))}</div>
+      <div class="flex-1 min-w-0">
+        <div class="flex justify-between gap-2"><p class="font-semibold text-2xl text-slate-800 truncate">${esc(l.title)}</p>${status}</div>
+        <p class="text-sm text-slate-500">โดย ${esc(l.author||'Admin User')}</p>
+        <div class="mt-2 flex items-center gap-3"><div class="flex-1 bg-slate-100 h-2 rounded-full"><div class="bg-indigo-600 h-2 rounded-full" style="width:${pct}%"></div></div><span class="text-sm font-semibold">${pct}%</span></div>
+      </div>
+      <div class="flex lg:flex-col items-center gap-3">
+        <button class="start px-4 py-2 border border-indigo-300 text-indigo-600 rounded-lg text-sm ${locked?'opacity-50 cursor-not-allowed':''}" ${locked?'disabled':''}>${s.postDone?'ดูอีกครั้ง':'เรียนต่อ'}</button>
+        ${like}
+      </div>
+    `;
+    const b=row.querySelector('.start');
+    if(!locked) b.onclick=()=>openLesson(l);
+    const fav=row.querySelector('.fav');
+    if(fav) fav.onclick=()=>{toggleFavorite(l); renderAll();};
+    learningList.appendChild(row);
+  });
+}
+
+function renderNotStartedGrid(items,p){
+  notStartedGrid.innerHTML='';
+  const list = items.slice(0,4);
+  if(!list.length){ notStartedGrid.innerHTML='<p class="text-sm text-slate-500">ไม่มีคอร์สที่ยังไม่เริ่ม</p>'; return; }
+  list.forEach(({l,locked})=>{
+    const cover = /^AI-/i.test(l.title) ? 'linear-gradient(135deg,#1e1b4b,#4338ca)' : /^5ส-/i.test(l.title) ? 'linear-gradient(135deg,#f59e0b,#f97316)' : 'linear-gradient(135deg,#475569,#334155)';
+    const card=document.createElement('div');
+    card.className='border rounded-xl p-3';
+    card.innerHTML=`<div class="h-24 rounded-lg mb-3" style="background:${cover}"></div><p class="font-semibold text-sm line-clamp-2">${esc(l.title)}</p><p class="text-xs text-slate-500 mt-1 line-clamp-2">${esc(l.description||'-')}</p><button class="start mt-3 w-full border rounded-lg py-1.5 text-sm ${locked?'opacity-50 cursor-not-allowed':''}" ${locked?'disabled':''}>เริ่มเรียน</button>`;
+    const b=card.querySelector('.start'); if(!locked) b.onclick=()=>openLesson(l);
+    notStartedGrid.appendChild(card);
+  });
+}
+
+function renderSchedule(){
+  const logs = JSON.parse(localStorage.getItem(`activityLog_${(currentUser?.username||'guest').toLowerCase()}`)||'[]').slice(0,3);
+  nextSchedule.innerHTML = (logs.length?logs:[{action:'เข้าสู่ระบบ',lessonTitle:'Learning Ecosystem',time:new Date().toISOString()}]).map(x=>`<div class="border rounded-xl p-3"><p class="font-medium text-slate-800">${esc(x.action||'-')}</p><p class="text-xs text-slate-500">${esc(x.lessonTitle||'-')}</p><p class="text-xs text-slate-400">${new Date(x.time).toLocaleString('th-TH')}</p></div>`).join('');
 }
 
 function openLesson(l){currentLesson=l; modalTitle.innerText=l.title; learnModal.classList.remove('hidden'); learnModal.classList.add('flex'); renderStep();}
@@ -145,19 +280,13 @@ function closeLearnModal(){learnModal.classList.add('hidden');learnModal.classLi
 function showTab(k){tabPre.classList.add('hidden');tabVideo.classList.add('hidden');tabPost.classList.add('hidden'); if(k==='pre')tabPre.classList.remove('hidden'); if(k==='video')tabVideo.classList.remove('hidden'); if(k==='post')tabPost.classList.remove('hidden');}
 
 function renderStep(){const p=getProgress();const s=p[currentLesson.id]||{preDone:false,videoDone:false,postDone:false};
-  if(s.postDone){
-    modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)';
-    showTab('video');
-    renderVideo(false);
-    return;
-  }
-  if(!s.preDone){modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)';showTab('pre');renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();});return;}
-  if(!s.videoDone){modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)';showTab('video');renderVideo(true);return;}
-  if(!s.postDone){modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test';showTab('post');renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});alert(`คะแนน Post-test: ${sc}/${tt}`);closeLearnModal();loadLessons();});return;}
-  closeLearnModal();
+  if(s.postDone){ modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)'; showTab('video'); renderVideo(false); return; }
+  if(!s.preDone){ modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)'; showTab('pre'); renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();}); return; }
+  if(!s.videoDone){ modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)'; showTab('video'); renderVideo(true); return; }
+  if(!s.postDone){ modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test'; showTab('post'); renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});alert(`คะแนน Post-test: ${sc}/${tt}`);closeLearnModal();renderAll();}); return; }
 }
 
-function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='glass-card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});alert(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`);done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
+function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});alert(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`);done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
 
 function renderVideo(enforceNoSeek){
   const id=videoId(currentLesson.url);
@@ -168,11 +297,7 @@ function renderVideo(enforceNoSeek){
   ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});alert('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test');renderStep();}},1000);}}});
 }
 
-function norm(l){let q=l.quizData||l.quizzes||{}; if(typeof q==='string')try{q=JSON.parse(q)}catch{q={}}; return {id:l.id||l.title,title:l.title||'บทเรียน',description:l.description||'',url:l.url||'',preTest:normQ(q.preTest||q.pre||[]),postTest:normQ(q.postTest||q.post||[])};}
-function normQ(a){if(!Array.isArray(a))return[];return a.map(q=>q.choices?{question:q.question||'',choices:q.choices||[],answer:Number(q.answer||0)}:{question:q.q||'',choices:q.opts||[],answer:Math.max(0,Number(q.ans||1)-1)}).filter(x=>x.question&&x.choices.length>=2)}
-function videoId(u){u=String(u||'');let m=u.match(/youtu\.be\/([^?&]+)/);if(m)return m[1];m=u.match(/[?&]v=([^&]+)/);if(m)return m[1];m=u.match(/youtube\.com\/embed\/([^?&]+)/);if(m)return m[1];return ''}
-function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-function handleLogout(){localStorage.clear();location.href='index.html'}
+function handleLogout(){ localStorage.clear(); location.href='index.html'; }
 </script>
 </body>
 </html>
