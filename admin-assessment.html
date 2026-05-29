@@ -37,9 +37,9 @@
             </div>
             
             <nav class="px-4 space-y-1 text-sm">
-                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> à¸«à¸™à¹‰à¸²à¸«à¸¥à¸±à¸</a>
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
 
-                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">à¸­à¸‡à¸„à¹Œà¸›à¸£à¸°à¸à¸­à¸š</div>
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
                 <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
 <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> Teachers</a>
                 <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
@@ -49,13 +49,13 @@
                 <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-clipboard-text text-xl"></i> Assessment</a>
                 <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-brain text-xl"></i> AI Integration</a>
 
-                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">à¸à¸²à¸£à¸ˆà¸±à¸”à¸à¸²à¸£</div>
-                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> à¸£à¸²à¸¢à¸‡à¸²à¸™à¹à¸¥à¸°à¸§à¸´à¹€à¸„à¸£à¸²à¸°à¸«à¹Œ</a>
-                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> à¸à¸²à¸£à¸•à¸±à¹‰à¸‡à¸„à¹ˆà¸²</a>
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์</a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> การตั้งค่า</a>
             </nav>
         </div>
         <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> à¸­à¸­à¸à¸ˆà¸²à¸à¸£à¸°à¸šà¸š</button>
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
         </div>
     </aside>
 
@@ -63,7 +63,7 @@
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
             <div class="relative w-96">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" placeholder="à¸„à¹‰à¸™à¸«à¸²à¹à¸šà¸šà¸—à¸”à¸ªà¸­à¸š, à¸Šà¸·à¹ˆà¸­à¸œà¸¹à¹‰à¸›à¸£à¸°à¹€à¸¡à¸´à¸™..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-500/20 border border-transparent focus:border-slate-300 transition">
+                <input type="text" placeholder="ค้นหาแบบทดสอบ, ชื่อผู้ประเมิน..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-rose-500/20 border border-transparent focus:border-slate-300 transition">
             </div>
             <div class="flex items-center gap-4">
                 <button class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i></button>
@@ -71,7 +71,7 @@
                     <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" class="w-9 h-9 rounded-full object-cover">
                     <div class="text-sm">
                         <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
-                        <p id="userDeptText" class="text-xs text-slate-400">à¸œà¸¹à¹‰à¸”à¸¹à¹à¸¥à¸£à¸°à¸šà¸š</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
                     </div>
                 </div>
             </div>
@@ -83,61 +83,61 @@
                     <div class="w-14 h-14 bg-rose-500 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md shadow-rose-500/20"><i class="ph-fill ph-clipboard-text"></i></div>
                     <div>
                         <h2 class="text-2xl font-bold text-slate-800">Assessment & Evaluation</h2>
-                        <p class="text-sm text-slate-500">à¸ˆà¸±à¸”à¸à¸²à¸£à¹à¸šà¸šà¸—à¸”à¸ªà¸­à¸š à¹à¸¥à¸°à¸£à¸°à¸šà¸šà¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸œà¸¥à¸„à¸§à¸²à¸¡à¸à¹‰à¸²à¸§à¸«à¸™à¹‰à¸²à¸œà¸¹à¹‰à¹€à¸£à¸µà¸¢à¸™</p>
+                        <p class="text-sm text-slate-500">จัดการแบบทดสอบ และระบบประเมินผลความก้าวหน้าผู้เรียน</p>
                     </div>
                 </div>
-                <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> à¸ªà¸£à¹‰à¸²à¸‡à¹à¸šà¸šà¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¹ƒà¸«à¸¡à¹ˆ</button>
+                <button class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> สร้างแบบประเมินใหม่</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div class="glass-card p-5">
-                    <p class="text-xs text-slate-500 font-medium mb-1">à¹à¸šà¸šà¸—à¸”à¸ªà¸­à¸šà¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</p>
-                    <p class="text-2xl font-bold text-slate-800">24 <span class="text-sm font-medium text-slate-400">à¸Šà¸¸à¸”</span></p>
+                    <p class="text-xs text-slate-500 font-medium mb-1">แบบทดสอบทั้งหมด</p>
+                    <p class="text-2xl font-bold text-slate-800">24 <span class="text-sm font-medium text-slate-400">ชุด</span></p>
                 </div>
                 <div class="glass-card p-5">
-                    <p class="text-xs text-slate-500 font-medium mb-1">à¸œà¸¹à¹‰à¸ªà¹ˆà¸‡à¸œà¸¥à¸ªà¸­à¸šà¸ªà¸±à¸›à¸”à¸²à¸«à¹Œà¸™à¸µà¹‰</p>
-                    <p class="text-2xl font-bold text-emerald-500">45 <span class="text-sm font-medium text-emerald-400">à¸„à¸™</span></p>
+                    <p class="text-xs text-slate-500 font-medium mb-1">ผู้ส่งผลสอบสัปดาห์นี้</p>
+                    <p class="text-2xl font-bold text-emerald-500">45 <span class="text-sm font-medium text-emerald-400">คน</span></p>
                 </div>
                 <div class="glass-card p-5">
-                    <p class="text-xs text-slate-500 font-medium mb-1">à¸„à¸°à¹à¸™à¸™ Post-test à¹€à¸‰à¸¥à¸µà¹ˆà¸¢</p>
+                    <p class="text-xs text-slate-500 font-medium mb-1">คะแนน Post-test เฉลี่ย</p>
                     <p class="text-2xl font-bold text-slate-800">85%</p>
                 </div>
                 <div class="glass-card p-5">
-                    <p class="text-xs text-slate-500 font-medium mb-1">à¹ƒà¸šà¸›à¸£à¸°à¸à¸²à¸¨à¸—à¸µà¹ˆà¸­à¸™à¸¸à¸¡à¸±à¸•à¸´à¹à¸¥à¹‰à¸§</p>
-                    <p class="text-2xl font-bold text-rose-500">12 <span class="text-sm font-medium text-slate-400">à¹ƒà¸š</span></p>
+                    <p class="text-xs text-slate-500 font-medium mb-1">ใบประกาศที่อนุมัติแล้ว</p>
+                    <p class="text-2xl font-bold text-rose-500">12 <span class="text-sm font-medium text-slate-400">ใบ</span></p>
                 </div>
             </div>
 
             <div class="glass-card bg-white p-6">
-                <h3 class="font-bold text-slate-800 border-b border-slate-100 pb-4 mb-4">à¸£à¸²à¸¢à¸à¸²à¸£à¸ªà¹ˆà¸‡à¸„à¸°à¹à¸™à¸™à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸¥à¹ˆà¸²à¸ªà¸¸à¸”</h3>
+                <h3 class="font-bold text-slate-800 border-b border-slate-100 pb-4 mb-4">รายการส่งคะแนนประเมินล่าสุด</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs">
                         <thead class="bg-slate-50 border-b border-slate-100 text-slate-500">
                             <tr>
-                                <th class="p-3 font-semibold">à¸œà¸¹à¹‰à¸£à¸±à¸šà¸à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™</th>
-                                <th class="p-3 font-semibold">à¸Šà¸·à¹ˆà¸­à¹à¸šà¸šà¸—à¸”à¸ªà¸­à¸š</th>
-                                <th class="p-3 font-semibold text-center">à¸„à¸°à¹à¸™à¸™ Pre-test</th>
-                                <th class="p-3 font-semibold text-center">à¸„à¸°à¹à¸™à¸™ Post-test</th>
-                                <th class="p-3 font-semibold text-center">à¸ªà¸–à¸²à¸™à¸°à¸à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™</th>
-                                <th class="p-3 font-semibold text-right">à¸”à¸³à¹€à¸™à¸´à¸™à¸à¸²à¸£</th>
+                                <th class="p-3 font-semibold">ผู้รับการประเมิน</th>
+                                <th class="p-3 font-semibold">ชื่อแบบทดสอบ</th>
+                                <th class="p-3 font-semibold text-center">คะแนน Pre-test</th>
+                                <th class="p-3 font-semibold text-center">คะแนน Post-test</th>
+                                <th class="p-3 font-semibold text-center">สถานะการประเมิน</th>
+                                <th class="p-3 font-semibold text-right">ดำเนินการ</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 text-slate-600">
                             <tr class="hover:bg-slate-50 transition">
-                                <td class="p-3 font-bold text-slate-800">à¸™à¸²à¸‡à¸ªà¸²à¸§à¸ªà¸¡à¸«à¸à¸´à¸‡ à¸£à¸±à¸à¸‡à¸²à¸™</td>
+                                <td class="p-3 font-bold text-slate-800">นางสาวสมหญิง รักงาน</td>
                                 <td class="p-3 text-slate-500">AI Tools for Education (L-866)</td>
                                 <td class="p-3 text-center text-rose-500 font-semibold">0 / 5</td>
                                 <td class="p-3 text-center text-emerald-500 font-bold">3 / 5</td>
-                                <td class="p-3 text-center"><span class="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded font-semibold text-[10px]">à¸œà¹ˆà¸²à¸™à¹€à¸à¸“à¸‘à¹Œ</span></td>
-                                <td class="p-3 text-right"><button class="text-blue-500 hover:underline">à¸”à¸¹à¸„à¸³à¸•à¸­à¸š</button></td>
+                                <td class="p-3 text-center"><span class="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded font-semibold text-[10px]">ผ่านเกณฑ์</span></td>
+                                <td class="p-3 text-right"><button class="text-blue-500 hover:underline">ดูคำตอบ</button></td>
                             </tr>
                             <tr class="hover:bg-slate-50 transition">
-                                <td class="p-3 font-bold text-slate-800">à¸™à¸²à¸¢à¸žà¸‡à¸©à¹Œà¹€à¸”à¸Š à¸‚à¸¢à¸±à¸™à¸”à¸µ</td>
+                                <td class="p-3 font-bold text-slate-800">นายพงษ์เดช ขยันดี</td>
                                 <td class="p-3 text-slate-500">Data Visualization (L-304)</td>
                                 <td class="p-3 text-center text-slate-400 font-semibold">2 / 5</td>
                                 <td class="p-3 text-center text-emerald-500 font-bold">5 / 5</td>
-                                <td class="p-3 text-center"><span class="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded font-semibold text-[10px]">à¸œà¹ˆà¸²à¸™à¹€à¸à¸“à¸‘à¹Œ (à¸£à¸±à¸šà¹ƒà¸šà¸›à¸£à¸°à¸à¸²à¸¨)</span></td>
-                                <td class="p-3 text-right"><button class="text-blue-500 hover:underline">à¸”à¸¹à¸„à¸³à¸•à¸­à¸š</button></td>
+                                <td class="p-3 text-center"><span class="bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded font-semibold text-[10px]">ผ่านเกณฑ์ (รับใบประกาศ)</span></td>
+                                <td class="p-3 text-right"><button class="text-blue-500 hover:underline">ดูคำตอบ</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -155,7 +155,7 @@
             if (storedUser) {
                 user = JSON.parse(storedUser);
             } else {
-                user = { id: "NU-998", username: "admin01", name: "Admin User", department: "à¸œà¸¹à¹‰à¸”à¸¹à¹à¸¥à¸£à¸°à¸šà¸š", role: "admin" };
+                user = { id: "NU-998", username: "admin01", name: "Admin User", department: "ผู้ดูแลระบบ", role: "admin" };
                 localStorage.setItem('user', JSON.stringify(user));
             }
 
@@ -175,6 +175,7 @@
     </script>
 </body>
 </html>
+
 
 
 

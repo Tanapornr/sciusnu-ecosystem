@@ -38,9 +38,9 @@
             </div>
             
             <nav class="px-4 space-y-1 text-sm">
-                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> à¸«à¸™à¹‰à¸²à¸«à¸¥à¸±à¸</a>
+                <a href="admin.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
 
-                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">à¸­à¸‡à¸„à¹Œà¸›à¸£à¸°à¸à¸­à¸š</div>
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
                 <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-users text-xl"></i> Learners</a>
                 <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md transition"><i class="ph-fill ph-identification-badge text-xl"></i> Personnel</a>
                 <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-desktop text-xl"></i> Technology</a>
@@ -50,13 +50,13 @@
                 <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-clipboard-text text-xl"></i> Assessment</a>
                 <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-brain text-xl"></i> AI Integration</a>
 
-                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">à¸à¸²à¸£à¸ˆà¸±à¸”à¸à¸²à¸£</div>
-                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> à¸£à¸²à¸¢à¸‡à¸²à¸™à¹à¸¥à¸°à¸§à¸´à¹€à¸„à¸£à¸²à¸°à¸«à¹Œ</a>
-                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> à¸à¸²à¸£à¸•à¸±à¹‰à¸‡à¸„à¹ˆà¸²</a>
+                <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
+                <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-chart-line-up text-xl"></i> รายงานและวิเคราะห์</a>
+                <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 rounded-xl transition"><i class="ph ph-gear text-xl"></i> การตั้งค่า</a>
             </nav>
         </div>
         <div class="p-4 border-t border-slate-800 bg-sidebarBg shrink-0">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> à¸­à¸­à¸à¸ˆà¸²à¸à¸£à¸°à¸šà¸š</button>
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2 border border-slate-700/50"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
         </div>
     </aside>
 
@@ -65,7 +65,7 @@
         <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
             <div class="relative w-96">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" placeholder="à¸„à¹‰à¸™à¸«à¸²à¹ƒà¸™à¸£à¸°à¸šà¸š..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 border border-transparent focus:border-slate-300 transition">
+                <input type="text" placeholder="ค้นหาในระบบ..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 border border-transparent focus:border-slate-300 transition">
             </div>
             <div class="flex items-center gap-4">
                 <button class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span></button>
@@ -74,7 +74,7 @@
                     <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e293b&color=fff" class="w-9 h-9 rounded-full object-cover">
                     <div class="text-sm">
                         <p id="userNameText" class="font-semibold text-slate-800 leading-tight">Admin User</p>
-                        <p id="userDeptText" class="text-xs text-slate-400">à¸œà¸¹à¹‰à¸”à¸¹à¹à¸¥à¸£à¸°à¸šà¸š</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">ผู้ดูแลระบบ</p>
                     </div>
                 </div>
             </div>
@@ -87,45 +87,45 @@
                     <div class="w-14 h-14 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-3xl shadow-md shadow-emerald-500/20"><i class="ph-fill ph-identification-badge"></i></div>
                     <div>
                         <h2 class="text-2xl font-bold text-slate-800">Personnel</h2>
-                        <p class="text-sm text-slate-500">à¸à¸³à¸«à¸™à¸”à¸šà¸—à¸šà¸²à¸—à¸‚à¸­à¸‡à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™</p>
+                        <p class="text-sm text-slate-500">กำหนดบทบาทของบุคลากรสายสนับสนุน</p>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button id="openAddPersonnelBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> à¹€à¸žà¸´à¹ˆà¸¡à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</button>
+                    <button id="openAddPersonnelBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-plus"></i> เพิ่มบุคลากร</button>
                     <button class="border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 px-3 py-2.5 rounded-lg transition"><i class="ph-bold ph-dots-three-vertical"></i></button>
                 </div>
             </div>
 
             <div class="flex gap-8 text-sm font-medium text-slate-500 border-b border-slate-200 mb-6">
-                <span id="tabBtn-overview" onclick="switchPersonnelTab('overview')" class="pb-3 cursor-pointer hover:text-slate-800">à¸ à¸²à¸žà¸£à¸§à¸¡</span>
-                <span id="tabBtn-list" onclick="switchPersonnelTab('list')" class="pb-3 cursor-pointer active-tab text-emerald-600">à¸£à¸²à¸¢à¸Šà¸·à¹ˆà¸­à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</span>
-                <span id="tabBtn-roles" onclick="switchPersonnelTab('roles')" class="pb-3 cursor-pointer hover:text-slate-800">à¸šà¸—à¸šà¸²à¸—à¹à¸¥à¸°à¸ªà¸´à¸—à¸˜à¸´à¹Œ</span>
-                <span id="tabBtn-dev" onclick="switchPersonnelTab('dev')" class="pb-3 cursor-pointer hover:text-slate-800">à¸à¸²à¸£à¸žà¸±à¸’à¸™à¸²</span>
+                <span id="tabBtn-overview" onclick="switchPersonnelTab('overview')" class="pb-3 cursor-pointer hover:text-slate-800">ภาพรวม</span>
+                <span id="tabBtn-list" onclick="switchPersonnelTab('list')" class="pb-3 cursor-pointer active-tab text-emerald-600">รายชื่อบุคลากร</span>
+                <span id="tabBtn-roles" onclick="switchPersonnelTab('roles')" class="pb-3 cursor-pointer hover:text-slate-800">บทบาทและสิทธิ์</span>
+                <span id="tabBtn-dev" onclick="switchPersonnelTab('dev')" class="pb-3 cursor-pointer hover:text-slate-800">การพัฒนา</span>
                 <span id="tabBtn-usage" onclick="switchPersonnelTab('usage')" class="pb-3 cursor-pointer hover:text-slate-800">System Usage</span>
-                <span id="tabBtn-reports" onclick="switchPersonnelTab('reports')" class="pb-3 cursor-pointer hover:text-slate-800">à¸£à¸²à¸¢à¸‡à¸²à¸™</span>
+                <span id="tabBtn-reports" onclick="switchPersonnelTab('reports')" class="pb-3 cursor-pointer hover:text-slate-800">รายงาน</span>
             </div>
 
             <div id="content-overview" class="tab-content hidden">
                 <div class="glass-card p-10 text-center text-slate-500 bg-white">
                     <i class="ph-fill ph-chart-pie-slice text-5xl text-emerald-300 mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-700">à¸«à¸™à¹‰à¸²à¸•à¹ˆà¸²à¸‡à¸ à¸²à¸žà¸£à¸§à¸¡à¸£à¸°à¸šà¸šà¸šà¸¸à¸„à¸¥à¸²à¸à¸£</h3>
-                    <p class="text-sm mt-2">à¸ªà¹ˆà¸§à¸™à¸™à¸µà¹‰à¹€à¸•à¸£à¸µà¸¢à¸¡à¹„à¸§à¹‰à¸ªà¸³à¸«à¸£à¸±à¸šà¹à¸ªà¸”à¸‡à¸à¸£à¸²à¸Ÿà¸ªà¸£à¸¸à¸›à¸ à¸²à¸žà¸£à¸§à¸¡à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”à¸‚à¸­à¸‡à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™</p>
+                    <h3 class="text-lg font-bold text-slate-700">หน้าต่างภาพรวมระบบบุคลากร</h3>
+                    <p class="text-sm mt-2">ส่วนนี้เตรียมไว้สำหรับแสดงกราฟสรุปภาพรวมทั้งหมดของหน่วยงาน</p>
                 </div>
             </div>
 
             <div id="content-roles" class="tab-content hidden">
                 <div class="glass-card p-10 text-center text-slate-500 bg-white">
                     <i class="ph-fill ph-shield-check text-5xl text-blue-300 mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-700">à¸à¸²à¸£à¸à¸³à¸«à¸™à¸”à¸šà¸—à¸šà¸²à¸—à¹à¸¥à¸°à¸ªà¸´à¸—à¸˜à¸´à¹Œ</h3>
-                    <p class="text-sm mt-2">à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸ªà¸³à¸«à¸£à¸±à¸šà¸à¸³à¸«à¸™à¸”à¸ªà¸´à¸—à¸˜à¸´à¹Œà¹€à¸‚à¹‰à¸²à¸–à¸¶à¸‡à¸£à¸°à¸šà¸šà¸‚à¸­à¸‡à¹à¸•à¹ˆà¸¥à¸°à¸à¸¥à¸¸à¹ˆà¸¡à¸‡à¸²à¸™</p>
+                    <h3 class="text-lg font-bold text-slate-700">การกำหนดบทบาทและสิทธิ์</h3>
+                    <p class="text-sm mt-2">พื้นที่สำหรับกำหนดสิทธิ์เข้าถึงระบบของแต่ละกลุ่มงาน</p>
                 </div>
             </div>
 
             <div id="content-dev" class="tab-content hidden">
                 <div class="glass-card p-10 text-center text-slate-500 bg-white">
                     <i class="ph-fill ph-trend-up text-5xl text-purple-300 mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-700">à¹à¸œà¸™à¸à¸²à¸£à¸žà¸±à¸’à¸™à¸²à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸£à¸²à¸¢à¸šà¸¸à¸„à¸„à¸¥ (IDP)</h3>
-                    <p class="text-sm mt-2">à¸žà¸·à¹‰à¸™à¸—à¸µà¹ˆà¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸›à¸£à¸°à¸§à¸±à¸•à¸´à¸à¸²à¸£à¸­à¸šà¸£à¸¡à¹à¸¥à¸°à¸žà¸±à¸’à¸™à¸²à¸—à¸±à¸à¸©à¸°à¹€à¸‰à¸žà¸²à¸°à¸šà¸¸à¸„à¸„à¸¥</p>
+                    <h3 class="text-lg font-bold text-slate-700">แผนการพัฒนาบุคลากรรายบุคคล (IDP)</h3>
+                    <p class="text-sm mt-2">พื้นที่ตรวจสอบประวัติการอบรมและพัฒนาทักษะเฉพาะบุคคล</p>
                 </div>
             </div>
 
@@ -133,15 +133,15 @@
                 <div class="glass-card p-10 text-center text-slate-500 bg-white">
                     <i class="ph-fill ph-desktop text-5xl text-amber-300 mb-3"></i>
                     <h3 class="text-lg font-bold text-slate-700">System Usage & Analytics</h3>
-                    <p class="text-sm mt-2">à¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸žà¸¤à¸•à¸´à¸à¸£à¸£à¸¡à¸à¸²à¸£à¸¥à¹‡à¸­à¸à¸­à¸´à¸™à¹à¸¥à¸°à¸à¸²à¸£à¹ƒà¸Šà¹‰à¸£à¸°à¸šà¸šà¹€à¸Šà¸´à¸‡à¸¥à¸¶à¸</p>
+                    <p class="text-sm mt-2">ตรวจสอบพฤติกรรมการล็อกอินและการใช้ระบบเชิงลึก</p>
                 </div>
             </div>
 
             <div id="content-reports" class="tab-content hidden">
                 <div class="glass-card p-10 text-center text-slate-500 bg-white">
                     <i class="ph-fill ph-file-pdf text-5xl text-rose-300 mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-700">à¸£à¸°à¸šà¸šà¸ªà¸£à¹‰à¸²à¸‡à¹à¸¥à¸°à¸ªà¹ˆà¸‡à¸­à¸­à¸à¸£à¸²à¸¢à¸‡à¸²à¸™</h3>
-                    <p class="text-sm mt-2">à¸ªà¸£à¹‰à¸²à¸‡à¸£à¸²à¸¢à¸‡à¸²à¸™à¸ªà¸£à¸¸à¸›à¸œà¸¥à¸à¸²à¸£à¸›à¸£à¸°à¹€à¸¡à¸´à¸™à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¹€à¸›à¹‡à¸™à¹„à¸Ÿà¸¥à¹Œ PDF/Excel</p>
+                    <h3 class="text-lg font-bold text-slate-700">ระบบสร้างและส่งออกรายงาน</h3>
+                    <p class="text-sm mt-2">สร้างรายงานสรุปผลการประเมินบุคลากรเป็นไฟล์ PDF/Excel</p>
                 </div>
             </div>
 
@@ -150,33 +150,33 @@
                     <div class="glass-card p-5 flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-users"></i></div>
                         <div>
-                            <p class="text-[11px] text-slate-500 font-medium">à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</p>
-                            <p class="text-2xl font-bold text-slate-800 leading-tight">80 <span class="text-xs font-medium text-slate-500">à¸„à¸™</span></p>
-                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">â†‘ 5 à¸„à¸™ <span class="text-slate-400 font-normal">à¸ˆà¸²à¸à¹€à¸”à¸·à¸­à¸™à¸—à¸µà¹ˆà¹à¸¥à¹‰à¸§</span></p>
+                            <p class="text-[11px] text-slate-500 font-medium">บุคลากรทั้งหมด</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight">80 <span class="text-xs font-medium text-slate-500">คน</span></p>
+                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">↑ 5 คน <span class="text-slate-400 font-normal">จากเดือนที่แล้ว</span></p>
                         </div>
                     </div>
                     <div class="glass-card p-5 flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-user-check"></i></div>
                         <div>
-                            <p class="text-[11px] text-slate-500 font-medium">à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™</p>
-                            <p class="text-2xl font-bold text-slate-800 leading-tight">75 <span class="text-xs font-medium text-slate-500">à¸„à¸™</span></p>
-                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">93.7% <span class="text-slate-400 font-normal">à¸‚à¸­à¸‡à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</span></p>
+                            <p class="text-[11px] text-slate-500 font-medium">บุคลากรสายสนับสนุน</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight">75 <span class="text-xs font-medium text-slate-500">คน</span></p>
+                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">93.7% <span class="text-slate-400 font-normal">ของทั้งหมด</span></p>
                         </div>
                     </div>
                     <div class="glass-card p-5 flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-star"></i></div>
                         <div>
-                            <p class="text-[11px] text-slate-500 font-medium">à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸”à¸µà¹€à¸”à¹ˆà¸™</p>
-                            <p class="text-2xl font-bold text-slate-800 leading-tight">12 <span class="text-xs font-medium text-slate-500">à¸„à¸™</span></p>
-                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">15.0% <span class="text-slate-400 font-normal">à¸‚à¸­à¸‡à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</span></p>
+                            <p class="text-[11px] text-slate-500 font-medium">บุคลากรดีเด่น</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight">12 <span class="text-xs font-medium text-slate-500">คน</span></p>
+                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">15.0% <span class="text-slate-400 font-normal">ของทั้งหมด</span></p>
                         </div>
                     </div>
                     <div class="glass-card p-5 flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-trend-up"></i></div>
                         <div>
-                            <p class="text-[11px] text-slate-500 font-medium">à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸­à¸šà¸£à¸¡à¸£à¸§à¸¡ (à¹€à¸”à¸·à¸­à¸™à¸™à¸µà¹‰)</p>
-                            <p class="text-2xl font-bold text-slate-800 leading-tight">950 <span class="text-xs font-medium text-slate-500">à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</span></p>
-                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">â†‘ 8.2% <span class="text-slate-400 font-normal">à¸ˆà¸²à¸à¹€à¸”à¸·à¸­à¸™à¸—à¸µà¹ˆà¹à¸¥à¹‰à¸§</span></p>
+                            <p class="text-[11px] text-slate-500 font-medium">ชั่วโมงอบรมรวม (เดือนนี้)</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight">950 <span class="text-xs font-medium text-slate-500">ชั่วโมง</span></p>
+                            <p class="text-[10px] text-emerald-600 font-semibold mt-1">↑ 8.2% <span class="text-slate-400 font-normal">จากเดือนที่แล้ว</span></p>
                         </div>
                     </div>
                 </div>
@@ -184,12 +184,12 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2 glass-card bg-white flex flex-col">
                         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-                            <h3 class="font-bold text-slate-800">à¸£à¸²à¸¢à¸Šà¸·à¹ˆà¸­à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</h3>
+                            <h3 class="font-bold text-slate-800">รายชื่อบุคลากร</h3>
                             <div class="flex gap-2">
-                                <select class="border border-slate-200 text-xs px-3 py-2 rounded-lg bg-slate-50 text-slate-600 outline-none"><option>à¸—à¸¸à¸à¸à¹ˆà¸²à¸¢à¸‡à¸²à¸™</option></select>
+                                <select class="border border-slate-200 text-xs px-3 py-2 rounded-lg bg-slate-50 text-slate-600 outline-none"><option>ทุกฝ่ายงาน</option></select>
                                 <div class="relative">
                                     <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
-                                    <input type="text" placeholder="à¸„à¹‰à¸™à¸«à¸²à¸šà¸¸à¸„à¸¥à¸²à¸à¸£..." class="border border-slate-200 text-xs pl-8 pr-3 py-2 rounded-lg w-40 outline-none focus:border-emerald-500">
+                                    <input type="text" placeholder="ค้นหาบุคลากร..." class="border border-slate-200 text-xs pl-8 pr-3 py-2 rounded-lg w-40 outline-none focus:border-emerald-500">
                                 </div>
                                 <button class="border border-slate-200 px-3 py-2 rounded-lg text-slate-500 hover:bg-slate-50"><i class="ph ph-funnel"></i></button>
                             </div>
@@ -199,24 +199,24 @@
                             <table class="w-full text-left text-xs">
                                 <thead class="bg-slate-50/50 text-slate-500 border-b border-slate-100">
                                     <tr>
-                                        <th class="p-4 font-semibold w-1/3">à¸Šà¸·à¹ˆà¸­ - à¸™à¸²à¸¡à¸ªà¸à¸¸à¸¥</th>
-                                        <th class="p-4 font-semibold">à¸ªà¸±à¸‡à¸à¸±à¸”à¸à¹ˆà¸²à¸¢à¸‡à¸²à¸™</th>
-                                        <th class="p-4 font-semibold text-center">à¸šà¸—à¸šà¸²à¸—</th>
-                                        <th class="p-4 font-semibold text-center">à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸­à¸šà¸£à¸¡</th>
-                                        <th class="p-4 font-semibold">à¸ªà¸–à¸²à¸™à¸°</th>
-                                        <th class="p-4 font-semibold text-right">à¸à¸²à¸£à¸”à¸³à¹€à¸™à¸´à¸™à¸à¸²à¸£</th>
+                                        <th class="p-4 font-semibold w-1/3">ชื่อ - นามสกุล</th>
+                                        <th class="p-4 font-semibold">สังกัดฝ่ายงาน</th>
+                                        <th class="p-4 font-semibold text-center">บทบาท</th>
+                                        <th class="p-4 font-semibold text-center">ชั่วโมงอบรม</th>
+                                        <th class="p-4 font-semibold">สถานะ</th>
+                                        <th class="p-4 font-semibold text-right">การดำเนินการ</th>
                                     </tr>
                                 </thead>
                                 <tbody id="personnelTableBody" class="divide-y divide-slate-100 text-slate-600">
                                     <tr class="hover:bg-slate-50 transition">
                                         <td class="p-4 flex items-center gap-3">
                                             <img src="https://ui-avatars.com/api/?name=Somying+R&background=334155&color=fff" class="w-8 h-8 rounded-full">
-                                            <div><p class="font-bold text-slate-800">à¸™à¸²à¸‡à¸ªà¸²à¸§à¸ªà¸¡à¸«à¸à¸´à¸‡ à¸£à¸±à¸à¸‡à¸²à¸™</p><p class="text-[10px] text-slate-400">somying.r@nu.ac.th</p></div>
+                                            <div><p class="font-bold text-slate-800">นางสาวสมหญิง รักงาน</p><p class="text-[10px] text-slate-400">somying.r@nu.ac.th</p></div>
                                         </td>
-                                        <td class="p-4 font-medium">à¸‡à¸²à¸™à¸˜à¸¸à¸£à¸à¸²à¸£</td>
-                                        <td class="p-4 text-center"><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-md text-[10px] font-semibold border border-emerald-100">à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™</span></td>
-                                        <td class="p-4 text-center font-medium">18 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</td>
-                                        <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™</span></td>
+                                        <td class="p-4 font-medium">งานธุรการ</td>
+                                        <td class="p-4 text-center"><span class="bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-md text-[10px] font-semibold border border-emerald-100">สายสนับสนุน</span></td>
+                                        <td class="p-4 text-center font-medium">18 ชั่วโมง</td>
+                                        <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                         <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
                                             <button class="p-1.5 hover:text-indigo-600 transition js-view-personnel"><i class="ph-bold ph-eye"></i></button>
                                             <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
@@ -226,12 +226,12 @@
                                     <tr class="hover:bg-slate-50 transition">
                                         <td class="p-4 flex items-center gap-3">
                                             <img src="https://ui-avatars.com/api/?name=Pongdej+K&background=334155&color=fff" class="w-8 h-8 rounded-full">
-                                            <div><p class="font-bold text-slate-800">à¸™à¸²à¸¢à¸žà¸‡à¸©à¹Œà¹€à¸”à¸Š à¸‚à¸¢à¸±à¸™à¸”à¸µ</p><p class="text-[10px] text-slate-400">pongdej.k@nu.ac.th</p></div>
+                                            <div><p class="font-bold text-slate-800">นายพงษ์เดช ขยันดี</p><p class="text-[10px] text-slate-400">pongdej.k@nu.ac.th</p></div>
                                         </td>
-                                        <td class="p-4 font-medium">à¸‡à¸²à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™à¹à¸¥à¸°à¸žà¸±à¸ªà¸”à¸¸</td>
-                                        <td class="p-4 text-center"><span class="bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md text-[10px] font-semibold border border-blue-100">à¸«à¸±à¸§à¸«à¸™à¹‰à¸²à¸‡à¸²à¸™</span></td>
-                                        <td class="p-4 text-center font-medium">24 à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡</td>
-                                        <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™</span></td>
+                                        <td class="p-4 font-medium">งานการเงินและพัสดุ</td>
+                                        <td class="p-4 text-center"><span class="bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md text-[10px] font-semibold border border-blue-100">หัวหน้างาน</span></td>
+                                        <td class="p-4 text-center font-medium">24 ชั่วโมง</td>
+                                        <td class="p-4"><span class="flex items-center gap-1.5 text-emerald-600 font-semibold text-[10px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> ปฏิบัติงาน</span></td>
                                         <td class="p-4 text-right flex gap-1 justify-end text-slate-400">
                                             <button class="p-1.5 hover:text-indigo-600 transition js-view-personnel"><i class="ph-bold ph-eye"></i></button>
                                             <button class="p-1.5 hover:text-emerald-600 transition"><i class="ph-bold ph-pencil-simple"></i></button>
@@ -244,11 +244,11 @@
                         
                         <div class="p-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
                             <div class="flex items-center gap-2">
-                                <span>à¹à¸ªà¸”à¸‡</span>
+                                <span>แสดง</span>
                                 <select class="border rounded px-2 py-1 outline-none"><option>10</option></select>
-                                <span>à¸£à¸²à¸¢à¸à¸²à¸£</span>
+                                <span>รายการ</span>
                             </div>
-                            <div>1-10 à¸ˆà¸²à¸ 80 à¸£à¸²à¸¢à¸à¸²à¸£</div>
+                            <div>1-10 จาก 80 รายการ</div>
                             <div class="flex gap-1">
                                 <button class="w-7 h-7 rounded border flex items-center justify-center hover:bg-slate-50"><i class="ph-bold ph-caret-left"></i></button>
                                 <button class="w-7 h-7 rounded border border-emerald-500 bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center">1</button>
@@ -265,23 +265,23 @@
                         <div class="glass-card p-5 bg-white">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-bold text-slate-800 text-sm">Personnel Distribution</h3>
-                                <select class="border border-slate-200 text-[10px] px-2 py-1 rounded-md text-slate-500 outline-none"><option>à¸›à¸£à¸°à¸ˆà¸³à¸›à¸µà¸‡à¸šà¸›à¸£à¸°à¸¡à¸²à¸“ 2569</option></select>
+                                <select class="border border-slate-200 text-[10px] px-2 py-1 rounded-md text-slate-500 outline-none"><option>ประจำปีงบประมาณ 2569</option></select>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="w-28 h-28 relative">
                                     <canvas id="donutChart"></canvas>
                                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                        <span class="text-[10px] text-slate-500 font-medium">à¸£à¸§à¸¡</span>
+                                        <span class="text-[10px] text-slate-500 font-medium">รวม</span>
                                         <span id="departmentTotalCount" class="text-xl font-bold text-slate-800 leading-tight">80</span>
-                                        <span class="text-[9px] text-slate-400">à¸„à¸™</span>
+                                        <span class="text-[9px] text-slate-400">คน</span>
                                     </div>
                                 </div>
                                 <div id="departmentLegend" class="flex-1 text-[10px] space-y-1.5 font-medium">
-                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>à¸‡à¸²à¸™à¸˜à¸¸à¸£à¸à¸²à¸£</span><span class="text-slate-500">30% (24)</span></div>
-                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981]"></span>à¸‡à¸²à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™à¸¯</span><span class="text-slate-500">25% (20)</span></div>
-                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>à¸‡à¸²à¸™à¸™à¹‚à¸¢à¸šà¸²à¸¢à¸¯</span><span class="text-slate-500">20% (16)</span></div>
-                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#6366f1]"></span>à¹‚à¸„à¸£à¸‡à¸à¸²à¸£ à¸§à¸¡à¸§.</span><span class="text-slate-500">15% (12)</span></div>
-                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>à¸­à¸·à¹ˆà¸™à¹†</span><span class="text-slate-500">10% (8)</span></div>
+                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>งานธุรการ</span><span class="text-slate-500">30% (24)</span></div>
+                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#10b981]"></span>งานการเงินฯ</span><span class="text-slate-500">25% (20)</span></div>
+                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>งานนโยบายฯ</span><span class="text-slate-500">20% (16)</span></div>
+                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#6366f1]"></span>โครงการ วมว.</span><span class="text-slate-500">15% (12)</span></div>
+                                    <div class="flex justify-between"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#8b5cf6]"></span>อื่นๆ</span><span class="text-slate-500">10% (8)</span></div>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +289,7 @@
                         <div class="glass-card p-5 bg-white">
                             <div class="flex justify-between items-center mb-4">
                                 <h3 class="font-bold text-slate-800 text-sm">Average Usage Trend</h3>
-                                <select class="border border-slate-200 text-[10px] px-2 py-1 rounded-md text-slate-500 outline-none"><option>6 à¹€à¸”à¸·à¸­à¸™à¸¥à¹ˆà¸²à¸ªà¸¸à¸”</option></select>
+                                <select class="border border-slate-200 text-[10px] px-2 py-1 rounded-md text-slate-500 outline-none"><option>6 เดือนล่าสุด</option></select>
                             </div>
                             <div class="w-full h-32 relative">
                                 <canvas id="lineChart"></canvas>
@@ -297,16 +297,16 @@
                         </div>
 
                         <div class="glass-card p-5 bg-white">
-                            <h3 class="font-bold text-slate-800 text-sm mb-4">à¸à¸²à¸£à¸žà¸±à¸’à¸™à¸²à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</h3>
+                            <h3 class="font-bold text-slate-800 text-sm mb-4">การพัฒนาบุคลากร</h3>
                             <div class="flex items-center gap-4">
                                 <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shrink-0"><i class="ph-fill ph-trend-up"></i></div>
                                 <div class="flex-1">
                                     <div class="flex justify-between items-end mb-1">
-                                        <p class="text-xs font-semibold text-slate-700">à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¹€à¸‚à¹‰à¸²à¸£à¹ˆà¸§à¸¡à¸à¸²à¸£à¸­à¸šà¸£à¸¡/à¸žà¸±à¸’à¸™à¸²</p>
+                                        <p class="text-xs font-semibold text-slate-700">บุคลากรเข้าร่วมการอบรม/พัฒนา</p>
                                         <span class="text-sm font-bold text-slate-800">93%</span>
                                     </div>
                                     <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1"><div class="bg-blue-600 h-1.5 rounded-full" style="width: 93%"></div></div>
-                                    <p class="text-[10px] text-slate-400">75 à¸ˆà¸²à¸ 80 à¸„à¸™</p>
+                                    <p class="text-[10px] text-slate-400">75 จาก 80 คน</p>
                                 </div>
                             </div>
                         </div>
@@ -318,43 +318,43 @@
     <div id="addPersonnelModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-slate-100">
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-                <h3 class="text-lg font-bold text-slate-800">à¹€à¸žà¸´à¹ˆà¸¡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</h3>
+                <h3 class="text-lg font-bold text-slate-800">เพิ่มข้อมูลบุคลากร</h3>
                 <button id="closeAddPersonnelModalBtn" class="text-slate-400 hover:text-slate-700"><i class="ph-bold ph-x text-xl"></i></button>
             </div>
             <form id="addPersonnelForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸Šà¸·à¹ˆà¸­ - à¸™à¸²à¸¡à¸ªà¸à¸¸à¸¥</label>
+                    <label class="text-xs font-semibold text-slate-600">ชื่อ - นามสกุล</label>
                     <input id="addName" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸­à¸µà¹€à¸¡à¸¥</label>
+                    <label class="text-xs font-semibold text-slate-600">อีเมล</label>
                     <input id="addEmail" type="email" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸ªà¸±à¸‡à¸à¸±à¸”à¸à¹ˆà¸²à¸¢à¸‡à¸²à¸™</label>
+                    <label class="text-xs font-semibold text-slate-600">สังกัดฝ่ายงาน</label>
                     <input id="addSubject" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸šà¸—à¸šà¸²à¸—</label>
+                    <label class="text-xs font-semibold text-slate-600">บทบาท</label>
                     <select id="addRole" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
-                        <option>à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™</option>
-                        <option>à¸«à¸±à¸§à¸«à¸™à¹‰à¸²à¸‡à¸²à¸™</option>
+                        <option>สายสนับสนุน</option>
+                        <option>หัวหน้างาน</option>
                     </select>
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸­à¸šà¸£à¸¡à¹€à¸£à¸´à¹ˆà¸¡à¸•à¹‰à¸™</label>
+                    <label class="text-xs font-semibold text-slate-600">ชั่วโมงอบรมเริ่มต้น</label>
                     <input id="addLoad" type="number" min="0" value="0" required class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="text-xs font-semibold text-slate-600">à¸ªà¸–à¸²à¸™à¸°</label>
+                    <label class="text-xs font-semibold text-slate-600">สถานะ</label>
                     <select id="addStatus" class="mt-1 w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-emerald-500">
-                        <option>à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™</option>
-                        <option>à¸¥à¸²à¸¨à¸¶à¸à¸©à¸²à¸•à¹ˆà¸­</option>
+                        <option>ปฏิบัติงาน</option>
+                        <option>ลาศึกษาต่อ</option>
                     </select>
                 </div>
                 <div class="md:col-span-2 flex justify-end gap-2 pt-2">
-                    <button type="button" id="cancelAddPersonnelBtn" class="px-4 py-2 text-sm rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">à¸¢à¸à¹€à¸¥à¸´à¸</button>
-                    <button type="submit" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">à¸šà¸±à¸™à¸—à¸¶à¸à¸‚à¹‰à¸­à¸¡à¸¹à¸¥</button>
+                    <button type="button" id="cancelAddPersonnelBtn" class="px-4 py-2 text-sm rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 text-sm rounded-lg bg-emerald-600 text-white hover:bg-emerald-700">บันทึกข้อมูล</button>
                 </div>
             </form>
         </div>
@@ -363,16 +363,16 @@
     <div id="viewPersonnelModal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl border border-slate-100">
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-                <h3 class="text-lg font-bold text-slate-800">à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ªà¹ˆà¸§à¸™à¸•à¸±à¸§à¸šà¸¸à¸„à¸¥à¸²à¸à¸£</h3>
+                <h3 class="text-lg font-bold text-slate-800">ข้อมูลส่วนตัวบุคลากร</h3>
                 <button id="closeViewPersonnelModalBtn" class="text-slate-400 hover:text-slate-700"><i class="ph-bold ph-x text-xl"></i></button>
             </div>
             <div class="p-6 space-y-3 text-sm">
-                <p><span class="font-semibold text-slate-700">à¸Šà¸·à¹ˆà¸­:</span> <span id="viewName"></span></p>
-                <p><span class="font-semibold text-slate-700">à¸­à¸µà¹€à¸¡à¸¥:</span> <span id="viewEmail"></span></p>
-                <p><span class="font-semibold text-slate-700">à¸ªà¸±à¸‡à¸à¸±à¸”à¸à¹ˆà¸²à¸¢à¸‡à¸²à¸™:</span> <span id="viewSubject"></span></p>
-                <p><span class="font-semibold text-slate-700">à¸šà¸—à¸šà¸²à¸—:</span> <span id="viewRole"></span></p>
-                <p><span class="font-semibold text-slate-700">à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸­à¸šà¸£à¸¡à¸£à¸§à¸¡:</span> <span id="viewLoad"></span></p>
-                <p><span class="font-semibold text-slate-700">à¸ªà¸–à¸²à¸™à¸°:</span> <span id="viewStatus"></span></p>
+                <p><span class="font-semibold text-slate-700">ชื่อ:</span> <span id="viewName"></span></p>
+                <p><span class="font-semibold text-slate-700">อีเมล:</span> <span id="viewEmail"></span></p>
+                <p><span class="font-semibold text-slate-700">สังกัดฝ่ายงาน:</span> <span id="viewSubject"></span></p>
+                <p><span class="font-semibold text-slate-700">บทบาท:</span> <span id="viewRole"></span></p>
+                <p><span class="font-semibold text-slate-700">ชั่วโมงอบรมรวม:</span> <span id="viewLoad"></span></p>
+                <p><span class="font-semibold text-slate-700">สถานะ:</span> <span id="viewStatus"></span></p>
             </div>
         </div>
     </div>
@@ -403,23 +403,23 @@
         initPersonnelModals();
         loadPersonnelData();
         
-        // à¸§à¸²à¸”à¸à¸£à¸²à¸Ÿà¸•à¸±à¹‰à¸‡à¸•à¹‰à¸™à¸«à¸²à¸ API à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¸•à¸­à¸šà¸à¸¥à¸±à¸šà¸—à¸±à¸™à¸—à¸µ
+        // วาดกราฟตั้งต้นหาก API ยังไม่ตอบกลับทันที
         drawInitialCharts();
     };
 
     function switchPersonnelTab(tabId) {
-        // à¸¥à¹‰à¸²à¸‡à¸ªà¸–à¸²à¸™à¸° active à¸—à¸¸à¸à¸›à¸¸à¹ˆà¸¡à¹€à¸¡à¸™à¸¹
+        // ล้างสถานะ active ทุกปุ่มเมนู
         const tabBtns = document.querySelectorAll('.border-b span.cursor-pointer');
         tabBtns.forEach(btn => btn.classList.remove('active-tab', 'text-emerald-600'));
         
-        // à¸‹à¹ˆà¸­à¸™à¹€à¸™à¸·à¹‰à¸­à¸«à¸²à¸‚à¸­à¸‡à¸—à¸¸à¸ Tab
+        // ซ่อนเนื้อหาของทุก Tab
         const contents = document.querySelectorAll('.tab-content');
         contents.forEach(content => {
             content.classList.add('hidden');
             content.classList.remove('block');
         });
 
-        // à¸—à¸³à¹ƒà¸«à¹‰à¸›à¸¸à¹ˆà¸¡à¸—à¸µà¹ˆà¸–à¸¹à¸à¸„à¸¥à¸´à¸à¹à¸ªà¸”à¸‡à¸œà¸¥à¹€à¸›à¹‡à¸™ active à¹à¸¥à¸°à¹€à¸›à¸´à¸” content à¸™à¸±à¹‰à¸™à¸‚à¸¶à¹‰à¸™à¸¡à¸²
+        // ทำให้ปุ่มที่ถูกคลิกแสดงผลเป็น active และเปิด content นั้นขึ้นมา
         document.getElementById('tabBtn-' + tabId).classList.add('active-tab', 'text-emerald-600');
         document.getElementById('content-' + tabId).classList.remove('hidden');
         document.getElementById('content-' + tabId).classList.add('block');
@@ -470,10 +470,10 @@
                 buildPersonnelRow({
                     name: u.name,
                     email: u.email || '-',
-                    subject: u.department || 'à¹„à¸¡à¹ˆà¸£à¸°à¸šà¸¸à¸ªà¸±à¸‡à¸à¸±à¸”',
-                    role: 'à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™',
-                    load: `${Math.max(0, u.accessCount || 0)} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡`,
-                    status: 'à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™'
+                    subject: u.department || 'ไม่ระบุสังกัด',
+                    role: 'สายสนับสนุน',
+                    load: `${Math.max(0, u.accessCount || 0)} ชั่วโมง`,
+                    status: 'ปฏิบัติงาน'
                 })
             )
             .join('');
@@ -572,13 +572,13 @@
     }
 
     function drawInitialCharts() {
-        // à¹ƒà¸Šà¹‰à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸ˆà¸³à¸¥à¸­à¸‡à¸Šà¸±à¹ˆà¸§à¸„à¸£à¸²à¸§à¸£à¸°à¸«à¸§à¹ˆà¸²à¸‡à¸£à¸­ API
+        // ใช้ข้อมูลจำลองชั่วคราวระหว่างรอ API
         const ctxDonut = document.getElementById('donutChart')?.getContext('2d');
         if(ctxDonut && !donutChartInstance) {
             donutChartInstance = new Chart(ctxDonut, {
                 type: 'doughnut',
                 data: {
-                    labels: ['à¸‡à¸²à¸™à¸˜à¸¸à¸£à¸à¸²à¸£', 'à¸‡à¸²à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™', 'à¸‡à¸²à¸™à¸™à¹‚à¸¢à¸šà¸²à¸¢', 'à¹‚à¸„à¸£à¸‡à¸à¸²à¸£ à¸§à¸¡à¸§.', 'à¸­à¸·à¹ˆà¸™à¹†'],
+                    labels: ['งานธุรการ', 'งานการเงิน', 'งานนโยบาย', 'โครงการ วมว.', 'อื่นๆ'],
                     datasets: [{ data: [24, 20, 16, 12, 8], backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#6366f1', '#8b5cf6'], borderWidth: 0 }]
                 },
                 options: { cutout: '75%', plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }
@@ -592,7 +592,7 @@
             lineChartInstance = new Chart(ctxLine, {
                 type: 'line',
                 data: {
-                    labels: ['à¸˜.à¸„. 65', 'à¸¡.à¸„. 66', 'à¸.à¸ž. 66', 'à¸¡à¸µ.à¸„. 66', 'à¹€à¸¡.à¸¢. 66', 'à¸ž.à¸„. 66'],
+                    labels: ['ธ.ค. 65', 'ม.ค. 66', 'ก.พ. 66', 'มี.ค. 66', 'เม.ย. 66', 'พ.ค. 66'],
                     datasets: [{ data: [14, 16, 15, 18, 22, 25], borderColor: '#3b82f6', backgroundColor: gradient, borderWidth: 2, fill: true, tension: 0.4 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { border: { display: false } }, x: { border: { display: false }, grid: { display: false } } } }
@@ -628,7 +628,7 @@
                 email: document.getElementById('addEmail').value.trim(),
                 subject: document.getElementById('addSubject').value.trim(),
                 role: document.getElementById('addRole').value,
-                load: `${document.getElementById('addLoad').value} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡`,
+                load: `${document.getElementById('addLoad').value} ชั่วโมง`,
                 status: document.getElementById('addStatus').value
             };
 
@@ -662,11 +662,11 @@
     }
 
     function buildPersonnelRow(data) {
-        const roleClass = data.role === 'à¸«à¸±à¸§à¸«à¸™à¹‰à¸²à¸‡à¸²à¸™'
+        const roleClass = data.role === 'หัวหน้างาน'
             ? 'bg-blue-50 text-blue-600 border-blue-100'
             : 'bg-emerald-50 text-emerald-600 border-emerald-100';
 
-        const statusTone = data.status === 'à¸›à¸à¸´à¸šà¸±à¸•à¸´à¸‡à¸²à¸™'
+        const statusTone = data.status === 'ปฏิบัติงาน'
             ? { text: 'text-emerald-600', dot: 'bg-emerald-500' }
             : { text: 'text-amber-500', dot: 'bg-amber-400' };
 
@@ -695,6 +695,7 @@
 </script>
 </body>
 </html>
+
 
 
 
