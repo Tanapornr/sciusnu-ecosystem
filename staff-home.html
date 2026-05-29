@@ -38,10 +38,6 @@
         <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
         <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
         <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl">
-          <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
-          <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
-        </a>
         <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
       </nav>
     </div>
@@ -80,7 +76,7 @@
       <section class="xl:col-span-3 space-y-5">
         <div class="card p-4 md:p-6 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 flex items-center justify-between gap-4">
           <div>
-            <p class="text-2xl md:text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></p>
+            <p id="welcomeGreeting" class="text-2xl md:text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></p>
             <p id="welcomeName" class="text-2xl md:text-4xl font-bold text-slate-900 mt-1">-</p>
             <p class="text-slate-500 mt-2">พร้อมเรียนรู้สิ่งใหม่ ๆ แล้วหรือยัง? มุ่งสู่เป้าหมายของคุณไปด้วยกัน!</p>
           </div>
@@ -319,10 +315,26 @@ function handleLogout(){
 }
 function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
 
+function getThaiGreetingByHour(hour){
+  if (hour >= 5 && hour < 11) return { text: "สวัสดีตอนเช้า", icon: "☀️" };
+  if (hour >= 11 && hour < 16) return { text: "สวัสดีตอนบ่าย", icon: "🌤️" };
+  if (hour >= 16 && hour < 19) return { text: "สวัสดีตอนเย็น", icon: "🌇" };
+  return { text: "สวัสดีตอนค่ำ", icon: "🌙" };
+}
+
+function applyGreetingByLocalTime(){
+  const el = document.getElementById("welcomeGreeting");
+  if (!el) return;
+  const now = new Date();
+  const g = getThaiGreetingByHour(now.getHours());
+  el.innerHTML = `${g.text} <span>${g.icon}</span>`;
+}
+
 window.onload = async function(){
   const s = localStorage.getItem("user");
   if (!s) return location.href = "index.html";
   user = JSON.parse(s);
+  applyGreetingByLocalTime();
   await LearnerState.init(user);
   document.getElementById("userNameText").innerText = user.name || "-";
   document.getElementById("userDeptText").innerText = user.department || "-";
@@ -357,7 +369,6 @@ window.onload = async function(){
         <a href="history.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ประวัติการเรียน</a>
         <a href="favorites.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">รายการโปรด</a>
         <a href="activity.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">กิจกรรมของฉัน</a>
-        <a href="messages.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ข้อความ</a>
         <a href="settings.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ตั้งค่า</a>
       </nav>
     </div>

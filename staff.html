@@ -41,7 +41,6 @@
         <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
         <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
         <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
         <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
       </nav>
     </div>
@@ -310,13 +309,13 @@ function renderAll(){
   statLine.innerText=`เรียนจบ ${done} จาก ${total} คอร์ส`;
 
   const inProgress = list.filter(x=>x.state==='learning' && !x.locked);
-  const notStarted = list.filter(x=>x.state==='not-started' && !x.locked);
+  const notStarted = list.filter(x=>x.state==='not-started');
 
   const filtered = list.filter(x=>{
     if(activeTab==='all') return !x.locked;
     if(activeTab==='learning') return x.state==='learning' && !x.locked;
     if(activeTab==='done') return x.state==='done';
-    if(activeTab==='not-started') return x.state==='not-started' && !x.locked;
+    if(activeTab==='not-started') return x.state==='not-started';
     return true;
   });
 
@@ -368,7 +367,7 @@ function renderNotStartedGrid(items,p){
     const cover = /^AI-/i.test(l.title) ? 'linear-gradient(135deg,#1e1b4b,#4338ca)' : /^5ส-/i.test(l.title) ? 'linear-gradient(135deg,#f59e0b,#f97316)' : 'linear-gradient(135deg,#475569,#334155)';
     const card=document.createElement('div');
     card.className='border rounded-xl p-3';
-    card.innerHTML=`<div class="h-24 rounded-lg mb-3" style="background:${cover}"></div><p class="font-semibold text-sm line-clamp-2">${esc(l.title)}</p><p class="text-xs text-slate-500 mt-1 line-clamp-2">${esc(l.description||'-')}</p><button class="start mt-3 w-full border rounded-lg py-1.5 text-sm ${locked?'opacity-50 cursor-not-allowed':''}" ${locked?'disabled':''}>เริ่มเรียน</button>`;
+    card.innerHTML=`<div class="relative h-24 rounded-lg mb-3" style="background:${cover}">${locked?'<span class="absolute top-2 right-2 inline-flex items-center gap-1 text-[11px] bg-slate-900/75 text-white px-2 py-1 rounded-full"><i class="ph-fill ph-lock"></i> ล็อก</span>':''}</div><p class="font-semibold text-sm line-clamp-2">${esc(l.title)}</p><p class="text-xs text-slate-500 mt-1 line-clamp-2">${esc(l.description||'-')}</p><button class="start mt-3 w-full border rounded-lg py-1.5 text-sm ${locked?'opacity-50 cursor-not-allowed':''}" ${locked?'disabled':''}>${locked?'ยังไม่ปลดล็อก':'เริ่มเรียน'}</button>`;
     const b=card.querySelector('.start'); if(!locked) b.onclick=()=>openLesson(l);
     notStartedGrid.appendChild(card);
   });
@@ -420,7 +419,6 @@ function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.tog
         <a href="history.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ประวัติการเรียน</a>
         <a href="favorites.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">รายการโปรด</a>
         <a href="activity.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">กิจกรรมของฉัน</a>
-        <a href="messages.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ข้อความ</a>
         <a href="settings.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ตั้งค่า</a>
       </nav>
     </div>
