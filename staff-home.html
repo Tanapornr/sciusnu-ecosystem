@@ -7,78 +7,309 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>body{font-family:'Prompt',sans-serif;background:#f8fafc}</style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Prompt', 'sans-serif'] },
+          colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Prompt', sans-serif; background: #f8fafc; }
+    .card { background: white; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.02); }
+  </style>
 </head>
-<body class="flex h-screen overflow-hidden text-slate-700">
-  <aside class="w-64 bg-slate-950 text-white flex flex-col justify-between hidden md:flex z-20">
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+  <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
     <div>
       <div class="p-6 flex items-center gap-3">
         <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div>
-        <h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1>
+        <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
       </div>
       <nav class="px-4 space-y-1 text-sm">
         <a href="staff-home.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-house text-xl"></i> หน้าหลัก</a>
-        <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
-        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
-        <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
-        <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
-        <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
-        <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
-        <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-300 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+        <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+        <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+        <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+        <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl">
+          <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+          <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
       </nav>
     </div>
-    <div class="p-4 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl">ออกจากระบบ</button></div>
+    <div class="p-4 border-t border-slate-800">
+      <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl">ออกจากระบบ</button>
+    </div>
   </aside>
 
-  <main class="flex-1 overflow-y-auto">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
-      <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i><input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none"></div>
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+      <div class="relative w-96">
+        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none">
+      </div>
       <div class="flex items-center gap-4">
         <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
         <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
-        <div class="flex items-center gap-3 border-l pl-4"><div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div><div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div></div>
+        <div class="flex items-center gap-3 border-l pl-4">
+          <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div>
+          <div class="text-sm">
+            <p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p>
+            <p id="userDeptText" class="text-xs text-slate-400">-</p>
+          </div>
+        </div>
       </div>
     </header>
-    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 space-y-6">
-        <div class="bg-white border rounded-2xl p-6 flex items-center justify-between">
+
+    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 xl:grid-cols-4 gap-6 flex-1 overflow-y-auto">
+      <section class="xl:col-span-3 space-y-5">
+        <div class="card p-6 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 flex items-center justify-between gap-4">
           <div>
-            <h2 class="text-3xl font-bold text-slate-900">สวัสดีตอนเช้า</h2>
-            <p class="text-slate-500 mt-2">พร้อมเรียนรู้บทใหม่และอัปเดตทักษะงานสนับสนุนของคุณ</p>
+            <p class="text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></p>
+            <p id="welcomeName" class="text-4xl font-bold text-slate-900 mt-1">-</p>
+            <p class="text-slate-500 mt-2">พร้อมเรียนรู้สิ่งใหม่ ๆ แล้วหรือยัง? มุ่งสู่เป้าหมายของคุณไปด้วยกัน!</p>
           </div>
-          <a href="staff.html" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm">ไปที่คอร์สเรียน</a>
+          <div class="hidden lg:block text-indigo-300 text-8xl"><i class="ph-fill ph-notebook"></i></div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">คอร์สทั้งหมด</p><p id="totalCourses" class="text-2xl font-bold mt-1">0</p></div>
-          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">เรียนแล้ว</p><p id="doneCourses" class="text-2xl font-bold mt-1">0</p></div>
-          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">กำลังเรียน</p><p id="activeCourses" class="text-2xl font-bold mt-1">0</p></div>
-          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">คะแนนเฉลี่ย</p><p id="avgScore" class="text-2xl font-bold mt-1">0%</p></div>
+
+        <div class="card p-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="rounded-xl border p-3">
+            <p class="text-xs text-slate-400">คอร์สที่กำลังเรียน</p>
+            <p id="kpiLearning" class="text-3xl font-bold mt-1">0</p>
+            <p class="text-xs text-slate-500">คอร์ส</p>
+          </div>
+          <div class="rounded-xl border p-3">
+            <p class="text-xs text-slate-400">เรียนจบแล้ว</p>
+            <p id="kpiDone" class="text-3xl font-bold mt-1 text-emerald-600">0</p>
+            <p class="text-xs text-slate-500">คอร์ส</p>
+          </div>
+          <div class="rounded-xl border p-3">
+            <p class="text-xs text-slate-400">เวลาเรียนทั้งหมด</p>
+            <p id="kpiHours" class="text-3xl font-bold mt-1">0 ชม.</p>
+            <p class="text-xs text-slate-500">สะสม</p>
+          </div>
+          <div class="rounded-xl border p-3">
+            <p class="text-xs text-slate-400">สถิติเรียนต่อเนื่อง</p>
+            <p id="kpiStreak" class="text-3xl font-bold mt-1 text-orange-500">0 วัน</p>
+            <p class="text-xs text-slate-500">ล่าสุด</p>
+          </div>
         </div>
-      </div>
-      <div class="space-y-6">
-        <div class="bg-white border rounded-2xl p-5"><h3 class="font-semibold mb-3">กิจกรรมล่าสุด</h3><div id="latestActivity" class="space-y-3 text-sm"></div></div>
-      </div>
+
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-slate-800">เรียนต่อจากครั้งล่าสุด</h3>
+            <a href="staff.html" class="text-indigo-600 text-sm">ดูทั้งหมด</a>
+          </div>
+          <div id="continueCards" class="grid md:grid-cols-2 xl:grid-cols-4 gap-4"></div>
+        </div>
+
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-slate-800">คอร์สแนะนำสำหรับคุณ</h3>
+          </div>
+          <div id="suggestCards" class="grid md:grid-cols-2 xl:grid-cols-5 gap-4"></div>
+        </div>
+      </section>
+
+      <aside class="space-y-5">
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-2"><h3 class="font-semibold">ความคืบหน้าการเรียน</h3><a href="history.html" class="text-indigo-600 text-sm">ดูรายงานทั้งหมด</a></div>
+          <div class="flex items-center gap-4">
+            <div class="w-24 h-24 rounded-full border-[8px] border-indigo-600/20 flex items-center justify-center text-indigo-700 font-bold text-xl" id="overallPercent">0%</div>
+            <div class="text-sm space-y-1">
+              <p><span class="text-emerald-600">●</span> เรียนจบแล้ว <span id="sideDone" class="font-semibold">0</span> คอร์ส</p>
+              <p><span class="text-indigo-600">●</span> กำลังเรียน <span id="sideLearning" class="font-semibold">0</span> คอร์ส</p>
+              <p><span class="text-slate-400">●</span> ยังไม่เริ่ม <span id="sideNotStart" class="font-semibold">0</span> คอร์ส</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-5">
+          <div class="flex justify-between items-center mb-3"><h3 class="font-semibold">กำหนดการถัดไป</h3><a href="activity.html" class="text-indigo-600 text-sm">ดูทั้งหมด</a></div>
+          <div id="nextSchedule" class="space-y-3 text-sm"></div>
+        </div>
+      </aside>
     </div>
   </main>
-  <script>
-    function handleLogout(){localStorage.clear();window.location.href='index.html';}
-    const user = JSON.parse(localStorage.getItem('user')||'{}');
-    document.getElementById('userNameText').innerText = user.name || 'ผู้เรียน';
-    document.getElementById('userDeptText').innerText = user.department || 'บุคลากรสายสนับสนุน';
-    document.getElementById('avatarContainer').innerText = (user.name||'US').slice(0,2);
-    const lessons = JSON.parse(localStorage.getItem('lessonsCache')||'[]');
-    const total = lessons.length || 9;
-    const done = Number(user.postScore||0)>0 ? 1 : 0;
-    const active = Math.max(0,total-done);
-    const avg = Number(user.postScore||0)>0 ? Math.round((Number(user.postScore||0)/5)*100) : 0;
-    document.getElementById('totalCourses').innerText = total;
-    document.getElementById('doneCourses').innerText = done;
-    document.getElementById('activeCourses').innerText = active;
-    document.getElementById('avgScore').innerText = avg + '%';
-    const key = `activityLog_${(user.username||'guest').toLowerCase()}`;
-    const logs = JSON.parse(localStorage.getItem(key)||'[]').slice(-5).reverse();
-    document.getElementById('latestActivity').innerHTML = (logs.length?logs:[{action:'เข้าสู่ระบบ',time:new Date().toISOString()}]).map(x=>`<div class="border rounded-xl p-3"><p class="font-medium">${x.action||'-'}</p><p class="text-xs text-slate-400">${new Date(x.time).toLocaleString('th-TH')}</p></div>`).join('');
-  </script>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
+let user = null;
+let lessons = [];
+let progress = {};
+
+function ord(title){
+  let m = String(title || "").match(/^AI-(\d+)/i);
+  if (m) return Number(m[1]);
+  m = String(title || "").match(/^5ส-(\d+)/i);
+  if (m) return 100 + Number(m[1]);
+  return 999;
+}
+
+function progressKey(){
+  return `lessonProgress_${(user?.username || "guest").toLowerCase()}`;
+}
+
+function getProgress(){
+  try { return JSON.parse(localStorage.getItem(progressKey()) || "{}"); }
+  catch { return {}; }
+}
+
+function getActivityLog(){
+  try {
+    const key = `activityLog_${(user?.username || "guest").toLowerCase()}`;
+    return JSON.parse(localStorage.getItem(key) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function calcStreak(logs){
+  const dates = new Set(logs.map(x => new Date(x.time).toDateString()));
+  let streak = 0;
+  let d = new Date();
+  while (dates.has(d.toDateString())) {
+    streak++;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+
+function formatHours(mins){
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return `${h} ชม. ${m} น.`;
+}
+
+function coverByTitle(title){
+  if (/^AI-/i.test(title || "")) return "linear-gradient(135deg,#1e1b4b,#4338ca)";
+  if (/^5ส-/i.test(title || "")) return "linear-gradient(135deg,#f59e0b,#f97316)";
+  return "linear-gradient(135deg,#475569,#334155)";
+}
+
+async function loadData(){
+  const r = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ action: "getLessons" })
+  });
+  const j = await r.json();
+  lessons = (j.lessons || []).sort((a,b) => ord(a.title) - ord(b.title));
+  localStorage.setItem("lessonsCache", JSON.stringify(lessons));
+}
+
+function renderSummary(){
+  progress = getProgress();
+  const total = lessons.length;
+  const done = lessons.filter(l => progress[l.id]?.postDone).length;
+  const started = lessons.filter(l => progress[l.id]?.preDone || progress[l.id]?.videoDone || progress[l.id]?.postDone).length;
+  const learning = Math.max(0, started - done);
+  const notStart = Math.max(0, total - started);
+  const percent = total ? Math.round((done * 100) / total) : 0;
+
+  const logs = getActivityLog();
+  const studyMinutes = lessons.reduce((sum, l) => sum + (progress[l.id]?.videoDone ? 30 : 0), 0);
+  const streak = calcStreak(logs);
+
+  document.getElementById("kpiLearning").innerText = learning;
+  document.getElementById("kpiDone").innerText = done;
+  document.getElementById("kpiHours").innerText = formatHours(studyMinutes);
+  document.getElementById("kpiStreak").innerText = `${streak} วัน`;
+  document.getElementById("overallPercent").innerText = `${percent}%`;
+  document.getElementById("sideDone").innerText = done;
+  document.getElementById("sideLearning").innerText = learning;
+  document.getElementById("sideNotStart").innerText = notStart;
+}
+
+function renderContinueCards(){
+  const holder = document.getElementById("continueCards");
+  const cards = lessons
+    .filter(l => progress[l.id]?.preDone || progress[l.id]?.videoDone || progress[l.id]?.postDone)
+    .slice(0, 4);
+
+  if (!cards.length) {
+    holder.innerHTML = `<p class="text-sm text-slate-500">ยังไม่มีรายการที่เริ่มเรียน กดเริ่มได้จากหน้า "คอร์สเรียนของฉัน"</p>`;
+    return;
+  }
+
+  holder.innerHTML = cards.map(l => {
+    const s = progress[l.id] || {};
+    const pct = s.postDone ? 100 : s.videoDone ? 80 : s.preDone ? 35 : 0;
+    return `
+      <div class="rounded-xl border p-3">
+        <div class="h-28 rounded-lg mb-3 flex items-center justify-center text-white font-bold" style="background:${coverByTitle(l.title)}">${(l.title||"Course").slice(0,20)}</div>
+        <p class="font-semibold text-sm line-clamp-2">${l.title || "-"}</p>
+        <p class="text-xs text-slate-500 mt-1">${pct}%</p>
+        <div class="w-full bg-slate-100 h-1.5 rounded-full mt-2"><div class="bg-indigo-600 h-1.5 rounded-full" style="width:${pct}%"></div></div>
+        <a href="staff.html" class="mt-3 inline-flex justify-center w-full text-sm border rounded-lg py-1.5 hover:bg-slate-50">เรียนต่อ</a>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderSuggestCards(){
+  const holder = document.getElementById("suggestCards");
+  const cards = lessons.filter(l => !progress[l.id]?.postDone).slice(0, 5);
+  if (!cards.length) {
+    holder.innerHTML = `<p class="text-sm text-slate-500">ยอดเยี่ยม! คุณเรียนครบทุกบทแล้ว</p>`;
+    return;
+  }
+  holder.innerHTML = cards.map(l => `
+    <a href="staff.html" class="rounded-xl border p-3 block hover:bg-slate-50">
+      <div class="h-24 rounded-lg mb-3" style="background:${coverByTitle(l.title)}"></div>
+      <p class="font-semibold text-sm line-clamp-2">${l.title || "-"}</p>
+      <p class="text-xs text-slate-500 mt-1">${l.description || "บทเรียนสำหรับบุคลากรสายสนับสนุน"}</p>
+    </a>
+  `).join("");
+}
+
+function renderSchedule(){
+  const holder = document.getElementById("nextSchedule");
+  const logs = getActivityLog().slice(0, 3);
+  if (!logs.length) {
+    holder.innerHTML = `<p class="text-sm text-slate-500">ยังไม่มีรายการกิจกรรมล่าสุด</p>`;
+    return;
+  }
+  holder.innerHTML = logs.map(x => `
+    <div class="rounded-xl border p-3">
+      <p class="font-medium">${x.action || "-"}</p>
+      <p class="text-xs text-slate-500 mt-1">${x.lessonTitle || "-"}</p>
+      <p class="text-xs text-slate-400 mt-1">${new Date(x.time).toLocaleString('th-TH')}</p>
+    </div>
+  `).join("");
+}
+
+function handleLogout(){
+  localStorage.clear();
+  location.href = "index.html";
+}
+
+window.onload = async function(){
+  const s = localStorage.getItem("user");
+  if (!s) return location.href = "index.html";
+  user = JSON.parse(s);
+  document.getElementById("userNameText").innerText = user.name || "-";
+  document.getElementById("userDeptText").innerText = user.department || "-";
+  document.getElementById("welcomeName").innerText = user.name || "-";
+  document.getElementById("avatarContainer").innerText = (user.name || "U").substring(0,2);
+
+  try {
+    await loadData();
+  } catch (e) {
+    lessons = JSON.parse(localStorage.getItem("lessonsCache") || "[]");
+  }
+  renderSummary();
+  renderContinueCards();
+  renderSuggestCards();
+  renderSchedule();
+};
+</script>
 </body>
 </html>
