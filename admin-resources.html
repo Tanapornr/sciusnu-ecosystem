@@ -242,9 +242,7 @@
             }
 
             let html = '';
-            const filteredLessons = (lessons || []).filter(l => !isAutoProgramLesson(l));
-
-            filteredLessons.forEach(l => {
+            (lessons || []).forEach(l => {
                 const isVid = l.type === 'Video';
                 const bgClass = isVid ? 'bg-slate-800' : 'bg-indigo-50';
                 const icon = isVid ? '<i class="ph-fill ph-play-circle text-5xl text-white/50 group-hover:text-white transition"></i>' : '<i class="ph-fill ph-file-pdf text-5xl text-indigo-400"></i>';
@@ -271,11 +269,6 @@
                 </div>`;
             });
             grid.innerHTML = html;
-        }
-
-        function isAutoProgramLesson(lesson) {
-            const title = String(lesson?.title || '').trim();
-            return /^(AI-\d{2}|5ส-\d{2})\b/.test(title);
         }
 
         // --- ระบบวาดฟอร์มข้อสอบอัตโนมัติ 5 ข้อ ---
