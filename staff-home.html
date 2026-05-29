@@ -328,7 +328,7 @@ function renderSchedule(){
 }
 
 function handleLogout(){
-  localStorage.clear();
+  localStorage.removeItem('user');
   location.href = "index.html";
 }
 function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }

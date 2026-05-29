@@ -384,7 +384,7 @@ function renderVideo(enforceNoSeek){
   ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});showPopup('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test','success');renderStep();}},1000);}}});
 }
 
-function handleLogout(){ localStorage.clear(); location.href='index.html'; }
+function handleLogout(){ localStorage.removeItem('user'); location.href='index.html'; }
 function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
 </script>
 

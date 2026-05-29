@@ -107,7 +107,7 @@ function removeFavorite(i){
   renderFavorites();
 }
 
-function handleLogout(){ localStorage.clear(); location.href='index.html'; }
+function handleLogout(){ localStorage.removeItem('user'); location.href='index.html'; }
 </script>
 </body>
 </html>

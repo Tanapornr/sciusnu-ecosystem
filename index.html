@@ -148,6 +148,21 @@
                 if (result.status === "success") {
                     // หากสำเร็จ ให้บันทึกข้อมูลผู้ใช้ลงในบราวเซอร์
                     localStorage.setItem('user', JSON.stringify(result.user));
+                    try {
+                        // กู้คืนความคืบหน้าการเรียนจากฐานข้อมูล (ถ้ามี) เพื่อกันข้อมูลหายหลังออก/เข้าใหม่
+                        const usernameKey = `lessonProgress_${(result.user.username || 'guest').toLowerCase()}`;
+                        const serverProgress = result.user.lessonProgress;
+                        if (serverProgress && typeof serverProgress === 'string') {
+                            const parsed = JSON.parse(serverProgress);
+                            if (parsed && typeof parsed === 'object') {
+                                localStorage.setItem(usernameKey, JSON.stringify(parsed));
+                            }
+                        } else if (serverProgress && typeof serverProgress === 'object') {
+                            localStorage.setItem(usernameKey, JSON.stringify(serverProgress));
+                        }
+                    } catch (e) {
+                        // ถ้าข้อมูลจากเซิร์ฟเวอร์ไม่ใช่ JSON ที่ถูกต้อง ให้ข้ามอย่างปลอดภัย
+                    }
                     
                     // อัปเดตข้อมูลบนหน้าต่างต้อนรับ
                     document.getElementById('welcomeName').innerText = result.user.name;

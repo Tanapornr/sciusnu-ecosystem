@@ -54,7 +54,7 @@
   </main>
 
   <script>
-    function handleLogout(){localStorage.clear();window.location.href='index.html';}
+    function handleLogout(){localStorage.removeItem('user');window.location.href='index.html';}
     const user = JSON.parse(localStorage.getItem('user')||'{}');
     document.getElementById('userNameText').innerText = user.name || 'ผู้เรียน';
     document.getElementById('userDeptText').innerText = user.department || 'บุคลากรสายสนับสนุน';

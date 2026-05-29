@@ -80,7 +80,7 @@ window.onload = async function(){
   await renderCertificates();
 }
 
-function handleLogout(){ localStorage.clear(); location.href='index.html'; }
+function handleLogout(){ localStorage.removeItem('user'); location.href='index.html'; }
 function ord(t){ let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=String(t||'').match(/^5ส-(\d+)/i); if(m)return 100+ +m[1]; return 999; }
 function progressKey(){ return `lessonProgress_${(user.username||'guest').toLowerCase()}`; }
 function getProgress(){ try { return JSON.parse(localStorage.getItem(progressKey())||'{}'); } catch { return {}; } }
