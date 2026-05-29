@@ -12,6 +12,8 @@
     body { font-family: 'Prompt', sans-serif; background:#f4f7fb; }
     .glass { background: rgba(255,255,255,.96); border:1px solid #e6ebf2; border-radius: 16px; }
     .menu-active { background: linear-gradient(90deg,#3b5bfd,#5a4cf0); color:#fff; }
+    .tab-btn { color:#64748b; padding-bottom:12px; border-bottom:2px solid transparent; font-weight:500; }
+    .tab-btn.active { color:#4f46e5; border-bottom-color:#4f46e5; }
   </style>
   <script src="mojibake-fix.js"></script>
 </head>
@@ -64,7 +66,7 @@
         <div class="flex items-center gap-4">
           <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white"><i class="ph-fill ph-users text-3xl"></i></div>
           <div>
-            <h2 class="text-5 font-semibold text-slate-900">Learners</h2>
+            <h2 class="text-4xl font-bold text-slate-900">Learners</h2>
             <p class="text-slate-500">กำหนดกลุ่มผู้เรียนและความต้องการในการเรียนรู้</p>
           </div>
         </div>
@@ -72,35 +74,91 @@
       </div>
 
       <div class="border-b border-slate-200 flex gap-8 text-lg">
-        <button class="text-indigo-600 border-b-2 border-indigo-600 pb-3 font-semibold">ภาพรวม</button>
-        <button class="text-slate-500 pb-3">กลุ่มผู้เรียน</button>
-        <button class="text-slate-500 pb-3">ความต้องการเรียนรู้</button>
-        <button class="text-slate-500 pb-3">ความก้าวหน้า</button>
-        <button class="text-slate-500 pb-3">พฤติกรรมการเรียนรู้</button>
-        <button class="text-slate-500 pb-3">รายงาน</button>
+        <button class="tab-btn active" data-tab="overview">ภาพรวม</button>
+        <button class="tab-btn" data-tab="groups">กลุ่มผู้เรียน</button>
+        <button class="tab-btn" data-tab="needs">ความต้องการเรียนรู้</button>
+        <button class="tab-btn" data-tab="progress">ความก้าวหน้า</button>
+        <button class="tab-btn" data-tab="behavior">พฤติกรรมการเรียนรู้</button>
+        <button class="tab-btn" data-tab="reports">รายงาน</button>
       </div>
 
-      <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
-        <div class="glass p-5"><p class="text-slate-500">ผู้เรียนทั้งหมด</p><p id="kpiUsers" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-        <div class="glass p-5"><p class="text-slate-500">กลุ่มผู้เรียน</p><p id="kpiGroups" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-        <div class="glass p-5"><p class="text-slate-500">หลักสูตรที่มีในระบบ</p><p id="kpiLessons" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-        <div class="glass p-5"><p class="text-slate-500">ความก้าวหน้าเฉลี่ย</p><p id="kpiAvg" class="text-4xl font-bold text-slate-900 mt-1">0%</p></div>
-      </div>
-
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <div class="glass p-5">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-2xl text-slate-900">กลุ่มผู้เรียนล่าสุด</h3>
-            <span class="text-indigo-600">ดูทั้งหมด</span>
-          </div>
-          <div id="groupList" class="space-y-3"></div>
+      <div id="tab-overview" class="tab-panel space-y-4">
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
+          <div class="glass p-5"><p class="text-slate-500">ผู้เรียนทั้งหมด</p><p id="kpiUsers" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">กลุ่มผู้เรียน</p><p id="kpiGroups" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">หลักสูตรที่มีในระบบ</p><p id="kpiLessons" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">ความก้าวหน้าเฉลี่ย</p><p id="kpiAvg" class="text-4xl font-bold text-slate-900 mt-1">0%</p></div>
         </div>
-        <div class="glass p-5">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold text-2xl text-slate-900">แนวโน้มการเรียนรู้</h3>
-            <span class="text-slate-500">6 เดือนล่าสุด</span>
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div class="glass p-5">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-2xl text-slate-900">กลุ่มผู้เรียนล่าสุด</h3>
+              <span class="text-indigo-600">ดูทั้งหมด</span>
+            </div>
+            <div id="groupList" class="space-y-3"></div>
           </div>
-          <canvas id="trendChart" height="190"></canvas>
+          <div class="glass p-5">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-2xl text-slate-900">แนวโน้มการเรียนรู้</h3>
+              <span class="text-slate-500">6 เดือนล่าสุด</span>
+            </div>
+            <canvas id="trendChart" height="190"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-groups" class="tab-panel hidden">
+        <div class="glass p-5">
+          <h3 class="text-2xl text-slate-900 mb-4">ข้อมูลกลุ่มผู้เรียนตามหน่วยงาน</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-slate-500 border-b"><th class="text-left py-2">หน่วยงาน</th><th class="text-right py-2">จำนวนผู้เรียน</th><th class="text-right py-2">ความก้าวหน้าเฉลี่ย</th></tr></thead>
+              <tbody id="groupsTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-needs" class="tab-panel hidden">
+        <div class="glass p-5">
+          <h3 class="text-2xl text-slate-900 mb-4">ความต้องการเรียนรู้ (จากช่องว่างทักษะ)</h3>
+          <div id="needsList" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div id="tab-progress" class="tab-panel hidden">
+        <div class="glass p-5">
+          <h3 class="text-2xl text-slate-900 mb-4">ความก้าวหน้ารายบุคคล</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-slate-500 border-b"><th class="text-left py-2">ชื่อ</th><th class="text-left py-2">หน่วยงาน</th><th class="text-right py-2">Pre</th><th class="text-right py-2">Post</th><th class="text-right py-2">Progress</th></tr></thead>
+              <tbody id="progressTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-behavior" class="tab-panel hidden">
+        <div class="glass p-5">
+          <h3 class="text-2xl text-slate-900 mb-4">พฤติกรรมการเรียนรู้</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานวันนี้</p><p id="behaviorToday" class="text-3xl font-bold">0</p></div>
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">ไม่เคยเข้าใช้งาน</p><p id="behaviorNever" class="text-3xl font-bold">0</p></div>
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานรวม</p><p id="behaviorTotalAccess" class="text-3xl font-bold">0</p></div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="text-slate-500 border-b"><th class="text-left py-2">ชื่อ</th><th class="text-left py-2">Last Login</th><th class="text-right py-2">ครั้งที่เข้าใช้งาน</th></tr></thead>
+              <tbody id="behaviorTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-reports" class="tab-panel hidden">
+        <div class="glass p-5">
+          <h3 class="text-2xl text-slate-900 mb-4">รายงานสรุป</h3>
+          <div id="reportSummary" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
       </div>
     </section>
@@ -109,6 +167,8 @@
 <script>
 const API_URL = '/api/submit';
 let trendChart;
+let allUsers = [];
+let allLessons = [];
 
 function handleLogout(){ localStorage.clear(); location.href='index.html'; }
 
@@ -200,6 +260,90 @@ function buildTrend(users){
   });
 }
 
+function getDeptStats(users){
+  const byDept = new Map();
+  users.forEach(u=>{
+    const dept = (u.department || 'ไม่ระบุหน่วยงาน').trim();
+    const item = byDept.get(dept) || { dept, count:0, sum:0 };
+    item.count += 1;
+    item.sum += progressNum(u.progress);
+    byDept.set(dept, item);
+  });
+  return [...byDept.values()].map(x=>({ ...x, avg: x.count ? Math.round(x.sum / x.count) : 0 })).sort((a,b)=>b.count-a.count);
+}
+
+function renderTabGroups(users){
+  const rows = getDeptStats(users);
+  document.getElementById('groupsTable').innerHTML = rows.map(r =>
+    `<tr class="border-b"><td class="py-2">${r.dept}</td><td class="py-2 text-right">${r.count}</td><td class="py-2 text-right">${r.avg}%</td></tr>`
+  ).join('') || '<tr><td colspan="3" class="py-3 text-center text-slate-400">ไม่พบข้อมูล</td></tr>';
+}
+
+function renderTabNeeds(users, lessons){
+  const notStarted = users.filter(u => progressNum(u.progress) === 0).length;
+  const needs = [
+    { title: 'กลุ่มที่ยังไม่เริ่มเรียน', detail: `${notStarted} คน (${users.length ? Math.round((notStarted / users.length) * 100) : 0}%)` },
+    { title: 'หลักสูตรในระบบที่ควรจัดเสริม', detail: `${lessons.length} หลักสูตร` },
+    { title: 'แนะนำเร่งติดตามกลุ่มเสี่ยง', detail: 'ผู้เรียนที่ไม่เคยเข้าใช้งานหรือยังไม่เริ่มเรียน' }
+  ];
+  document.getElementById('needsList').innerHTML = needs.map(n =>
+    `<div class="border rounded-xl p-4 bg-slate-50"><p class="text-slate-900">${n.title}</p><p class="text-slate-500 text-sm mt-1">${n.detail}</p></div>`
+  ).join('');
+}
+
+function renderTabProgress(users){
+  const rows = [...users].sort((a,b)=>progressNum(b.progress)-progressNum(a.progress)).slice(0,50);
+  document.getElementById('progressTable').innerHTML = rows.map(u =>
+    `<tr class="border-b"><td class="py-2">${u.name || '-'}</td><td class="py-2">${u.department || '-'}</td><td class="py-2 text-right">${Number(u.preScore || 0)}</td><td class="py-2 text-right">${Number(u.postScore || 0)}</td><td class="py-2 text-right">${Math.round(progressNum(u.progress))}%</td></tr>`
+  ).join('') || '<tr><td colspan="5" class="py-3 text-center text-slate-400">ไม่พบข้อมูล</td></tr>';
+}
+
+function renderTabBehavior(users){
+  const now = new Date();
+  const todayCount = users.filter(u => {
+    const d = new Date(u.lastLogin || '');
+    return !isNaN(d.getTime()) && d.toDateString() === now.toDateString();
+  }).length;
+  const never = users.filter(u => !u.lastLogin).length;
+  const totalAccess = users.reduce((s,u)=>s + Number(u.accessCount || 0),0);
+  document.getElementById('behaviorToday').innerText = todayCount;
+  document.getElementById('behaviorNever').innerText = never;
+  document.getElementById('behaviorTotalAccess').innerText = totalAccess;
+
+  const recent = [...users].sort((a,b)=>new Date(b.lastLogin || 0)-new Date(a.lastLogin || 0)).slice(0,30);
+  document.getElementById('behaviorTable').innerHTML = recent.map(u =>
+    `<tr class="border-b"><td class="py-2">${u.name || '-'}</td><td class="py-2">${u.lastLogin || '-'}</td><td class="py-2 text-right">${Number(u.accessCount || 0)}</td></tr>`
+  ).join('') || '<tr><td colspan="3" class="py-3 text-center text-slate-400">ไม่พบข้อมูล</td></tr>';
+}
+
+function renderTabReports(users, lessons){
+  const avg = users.length ? Math.round(users.reduce((s,u)=>s+progressNum(u.progress),0)/users.length) : 0;
+  const summary = [
+    { k: 'จำนวนผู้เรียนทั้งหมด', v: `${users.length.toLocaleString('th-TH')} คน` },
+    { k: 'จำนวนหลักสูตรทั้งหมด', v: `${lessons.length.toLocaleString('th-TH')} หลักสูตร` },
+    { k: 'ความก้าวหน้าเฉลี่ย', v: `${avg}%` },
+    { k: 'ผู้เรียนยังไม่เริ่ม', v: `${users.filter(u=>progressNum(u.progress)===0).length.toLocaleString('th-TH')} คน` }
+  ];
+  document.getElementById('reportSummary').innerHTML = summary.map(s =>
+    `<div class="border rounded-xl p-4 bg-slate-50"><p class="text-slate-500">${s.k}</p><p class="text-2xl font-bold text-slate-900 mt-1">${s.v}</p></div>`
+  ).join('');
+}
+
+function renderAllTabs(users, lessons){
+  renderTabGroups(users);
+  renderTabNeeds(users, lessons);
+  renderTabProgress(users);
+  renderTabBehavior(users);
+  renderTabReports(users, lessons);
+}
+
+function activateTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+  document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+  const target = document.getElementById(`tab-${tab}`);
+  if (target) target.classList.remove('hidden');
+}
+
 async function boot(){
   const auth = JSON.parse(localStorage.getItem('user') || 'null');
   if(!auth) return location.href='index.html';
@@ -210,6 +354,8 @@ async function boot(){
   const [uRes, lRes] = await Promise.all([post({action:'getUsers'}), post({action:'getLessons'})]);
   const users = Array.isArray(uRes.users) ? uRes.users : [];
   const lessons = Array.isArray(lRes.lessons) ? lRes.lessons : [];
+  allUsers = users;
+  allLessons = lessons;
 
   document.getElementById('kpiUsers').innerText = users.length.toLocaleString('th-TH');
   document.getElementById('kpiLessons').innerText = lessons.length.toLocaleString('th-TH');
@@ -218,6 +364,11 @@ async function boot(){
 
   renderGroups(users);
   buildTrend(users);
+  renderAllTabs(users, lessons);
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
 
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('input', ()=>{
@@ -225,6 +376,7 @@ async function boot(){
     const filtered = !q ? users : users.filter(u => String(u.name||'').toLowerCase().includes(q) || String(u.department||'').toLowerCase().includes(q) || String(u.username||'').toLowerCase().includes(q));
     renderGroups(filtered);
     buildTrend(filtered);
+    renderAllTabs(filtered, lessons);
     document.getElementById('kpiUsers').innerText = filtered.length.toLocaleString('th-TH');
     const favg = filtered.length ? Math.round(filtered.reduce((s,u)=>s+progressNum(u.progress),0)/filtered.length) : 0;
     document.getElementById('kpiAvg').innerText = `${favg}%`;
