@@ -202,6 +202,58 @@ flowchart LR
 
 ต้นแบบนี้แสดงให้เห็นการเรียนรู้แบบเป็นลำดับ ได้แก่ ทำ Pre-test ดูวิดีโอ ทำ Post-test ติดตามความก้าวหน้า และรับเกียรติบัตรตามเกณฑ์ คะแนน Post-test รวมตั้งแต่ 80% ขึ้นไปจึงสามารถรับเกียรติบัตรได้
 
+### ภาพต้นแบบ / Screenshot / Wireframe
+
+ภาพต้นแบบต่อไปนี้เป็นหน้าจอจริงจากระบบ Learning Ecosystem ที่ออกแบบสำหรับเจ้าหน้าที่คณะวิทยาศาสตร์ โดยแสดงทั้งมุมมองผู้เรียนและมุมมองผู้ดูแลระบบ
+
+| หน้าจอ | บทบาทของหน้าในระบบ |
+|---|---|
+| Login | ตรวจสอบตัวตนของเจ้าหน้าที่ก่อนเข้าสู่ระบบ |
+| Home ผู้เรียน | สรุปภาพรวมการเรียน คอร์สล่าสุด และสถิติการเรียนรู้ |
+| My Courses | แสดงบทเรียนทั้งหมด สถานะกำลังเรียน ยังไม่เริ่ม และเรียนจบแล้ว |
+| Learning Plan | แสดง Roadmap และสมรรถนะย่อยที่เชื่อมกับบทเรียน |
+| Certificates | แสดงสิทธิ์รับเกียรติบัตรตามหมวด AI และ 5ส |
+| History | แสดงประวัติการเรียน คะแนน Pre-test/Post-test และสถานะบทเรียน |
+| Favorites | เก็บบทเรียนที่เรียนจบแล้วและต้องการกลับมาทบทวน |
+| Activities | แสดงกิจกรรมล่าสุด เช่น เข้าสู่ระบบ ทำแบบทดสอบ และเรียนจบ |
+| Admin Dashboard | แสดงข้อมูลภาพรวมสำหรับผู้ดูแล เช่น จำนวนผู้เรียน ความก้าวหน้า และกิจกรรมล่าสุด |
+
+#### หน้า Login
+
+![หน้า Login](screenshots/00-login.png)
+
+#### หน้า Home ผู้เรียน
+
+![หน้า Home ผู้เรียน](screenshots/01-staff-home.png)
+
+#### หน้า My Courses
+
+![หน้า My Courses](screenshots/02-my-courses.png)
+
+#### หน้า Learning Plan
+
+![หน้า Learning Plan](screenshots/03-learning-plan.png)
+
+#### หน้า Certificates
+
+![หน้า Certificates](screenshots/04-certificates.png)
+
+#### หน้า History
+
+![หน้า History](screenshots/05-history.png)
+
+#### หน้า Favorites
+
+![หน้า Favorites](screenshots/06-favorites.png)
+
+#### หน้า Activities
+
+![หน้า Activities](screenshots/07-activity.png)
+
+#### หน้า Admin Dashboard
+
+![หน้า Admin Dashboard](screenshots/08-admin-dashboard.png)
+
 ---
 
 ## 11. การวิเคราะห์เชิงจริยธรรมและผลกระทบ
