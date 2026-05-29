@@ -130,6 +130,30 @@ async function renderCertificates(){
   const grid = document.getElementById('certGrid');
   grid.innerHTML = '<div class="text-slate-400 text-sm">กำลังโหลดข้อมูล...</div>';
   try {
+    // 1) Ask backend to evaluate certificate eligibility from stored server state
+    await fetch(API_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'evaluateCertificates', username:user.username})
+    });
+
+    // 2) Read eligibility directly from Google Sheet (Certificates tab)
+    const certRes = await fetch(API_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'getCertificates', username:user.username})
+    });
+    const certJson = await certRes.json();
+    if (certJson && certJson.status === 'success' && certJson.certificates) {
+      const ai = certJson.certificates.AI || {required:6, done:0, avg:0, unlocked:false};
+      const fs = certJson.certificates["5S"] || certJson.certificates.FIVE_S || {required:3, done:0, avg:0, unlocked:false};
+      grid.innerHTML =
+        certCard('CERT-GROUP-5S', 'เกียรติบัตรกลุ่ม 5ส (ครบ 3 บท)', fs) +
+        certCard('CERT-GROUP-AI', 'เกียรติบัตรกลุ่ม AI (ครบ 6 บท)', ai);
+      return;
+    }
+
+    // 3) Fallback: local calculation
     const r = await fetch(API_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'getLessons'}) });
     const j = await r.json();
     const lessons = (j.lessons||[]).sort((a,b)=>ord(a.title)-ord(b.title));

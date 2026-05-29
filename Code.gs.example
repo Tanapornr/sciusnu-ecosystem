@@ -1,0 +1,274 @@
+/**
+ * Learning Ecosystem - Google Apps Script Backend (Full)
+ * ใช้ไฟล์นี้แทน Code.gs เดิมได้เลย
+ */
+
+function doGet(e) {
+  return jsonOut({ status: "ok", message: "API is running", time: new Date().toISOString() });
+}
+
+function doPost(e) {
+  try {
+    const data = JSON.parse((e && e.postData && e.postData.contents) || "{}");
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const action = String(data.action || "").trim();
+
+    if (action === "login" || (data.username && data.password && !action)) {
+      return handleLogin(ss, data.username, data.password);
+    }
+
+    if (action === "getUsers" || action === "listUsers" || action === "getStaffData" || action === "getTeachersData") {
+      return handleGetUsers(ss);
+    }
+
+    if (action === "getLessons") return handleGetLessons(ss);
+    if (action === "saveLesson") return handleSaveLesson(ss, data.lesson);
+
+    if (action === "getUserState") return handleGetUserState(ss, data.username);
+    if (action === "saveUserState") return handleSaveUserState(ss, data.username, data.state);
+
+    if (action === "recordQuizAttempt") return handleRecordQuizAttempt(ss, data);
+
+    if (action === "getCertificates") return handleGetCertificates(ss, data.username);
+    if (action === "evaluateCertificates") return handleEvaluateCertificates(ss, data.username);
+
+    return jsonOut({ status: "fail", message: "unknown action" });
+  } catch (err) {
+    return jsonOut({ status: "error", message: err.message });
+  }
+}
+
+function jsonOut(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function getOrCreateSheet(ss, name, headers) {
+  let sh = ss.getSheetByName(name);
+  if (!sh) sh = ss.insertSheet(name);
+  if (sh.getLastRow() === 0) sh.appendRow(headers);
+  return sh;
+}
+
+function getHeaderMap(sh) {
+  const h = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+  const map = {};
+  h.forEach((x, i) => map[String(x).trim()] = i);
+  return map;
+}
+
+function rowObj(row, headers) {
+  const o = {};
+  headers.forEach((h, i) => o[h] = row[i]);
+  return o;
+}
+
+function handleLogin(ss, username, password) {
+  const sh = getOrCreateSheet(ss, "Users", [
+    "id","username","password","name","department","role",
+    "preScore","postScore","progress","accessCount","lastLogin",
+    "lessonProgress","reflection","reflectionUpdatedAt"
+  ]);
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0];
+  const hm = getHeaderMap(sh);
+  const u = String(username || "").trim().toLowerCase();
+  const p = String(password || "").trim();
+
+  for (let i = 1; i < rows.length; i++) {
+    const ru = String(rows[i][hm.username] || "").trim().toLowerCase();
+    const rp = String(rows[i][hm.password] || "").trim();
+    if (ru === u && rp === p) {
+      const access = Number(rows[i][hm.accessCount] || 0) + 1;
+      sh.getRange(i + 1, hm.accessCount + 1).setValue(access);
+      sh.getRange(i + 1, hm.lastLogin + 1).setValue(Utilities.formatDate(new Date(), "Asia/Bangkok", "dd MMM yyyy HH:mm"));
+      return jsonOut({
+        status: "success",
+        user: {
+          id: rows[i][hm.id], username: rows[i][hm.username], name: rows[i][hm.name],
+          department: rows[i][hm.department], role: rows[i][hm.role]
+        }
+      });
+    }
+  }
+  return jsonOut({ status: "fail", message: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง" });
+}
+
+function handleGetUsers(ss) {
+  const sh = getOrCreateSheet(ss, "Users", [
+    "id","username","password","name","department","role",
+    "preScore","postScore","progress","accessCount","lastLogin",
+    "lessonProgress","reflection","reflectionUpdatedAt"
+  ]);
+  const rows = sh.getDataRange().getValues();
+  if (rows.length <= 1) return jsonOut({ status: "success", users: [] });
+  const headers = rows[0].map(String);
+  const users = rows.slice(1).map(r => rowObj(r, headers)).filter(u => String(u.role || "").toLowerCase() !== "admin");
+  return jsonOut({ status: "success", users: users });
+}
+
+function handleGetLessons(ss) {
+  const sh = getOrCreateSheet(ss, "Lessons", ["id","type","title","url","description","author","quizData","createdAt"]);
+  const rows = sh.getDataRange().getValues();
+  if (rows.length <= 1) return jsonOut({ status: "success", lessons: [] });
+  const headers = rows[0].map(String);
+  const lessons = rows.slice(1).map(r => {
+    const o = rowObj(r, headers);
+    if (o.quizData && typeof o.quizData === "string") {
+      try { o.quizData = JSON.parse(o.quizData); } catch (_) {}
+    }
+    return o;
+  }).reverse();
+  return jsonOut({ status: "success", lessons: lessons });
+}
+
+function handleSaveLesson(ss, lesson) {
+  const sh = getOrCreateSheet(ss, "Lessons", ["id","type","title","url","description","author","quizData","createdAt"]);
+  const id = "L-" + Math.floor(1000 + Math.random() * 9000);
+  sh.appendRow([
+    id,
+    lesson && lesson.type ? lesson.type : "Video",
+    lesson && lesson.title ? lesson.title : "",
+    lesson && lesson.url ? lesson.url : "",
+    lesson && lesson.description ? lesson.description : "",
+    lesson && lesson.author ? lesson.author : "Admin",
+    JSON.stringify((lesson && lesson.quizzes) || {}),
+    Utilities.formatDate(new Date(), "Asia/Bangkok", "yyyy-MM-dd'T'HH:mm:ssXXX")
+  ]);
+  return jsonOut({ status: "success", id: id });
+}
+
+function handleGetUserState(ss, username) {
+  const sh = getOrCreateSheet(ss, "UserState", ["username","progressJson","favoritesJson","activitiesJson","updatedAt"]);
+  const rows = sh.getDataRange().getValues();
+  const u = String(username || "").trim().toLowerCase();
+  for (let i = 1; i < rows.length; i++) {
+    if (String(rows[i][0] || "").trim().toLowerCase() === u) {
+      return jsonOut({
+        status: "success",
+        state: {
+          progress: safeParse(rows[i][1], {}),
+          favorites: safeParse(rows[i][2], []),
+          activities: safeParse(rows[i][3], [])
+        }
+      });
+    }
+  }
+  return jsonOut({ status: "success", state: { progress: {}, favorites: [], activities: [] } });
+}
+
+function handleSaveUserState(ss, username, state) {
+  const sh = getOrCreateSheet(ss, "UserState", ["username","progressJson","favoritesJson","activitiesJson","updatedAt"]);
+  const rows = sh.getDataRange().getValues();
+  const u = String(username || "").trim().toLowerCase();
+  const progress = JSON.stringify((state && state.progress) || {});
+  const favorites = JSON.stringify((state && state.favorites) || []);
+  const activities = JSON.stringify((state && state.activities) || []);
+  const now = Utilities.formatDate(new Date(), "Asia/Bangkok", "yyyy-MM-dd'T'HH:mm:ssXXX");
+
+  for (let i = 1; i < rows.length; i++) {
+    if (String(rows[i][0] || "").trim().toLowerCase() === u) {
+      sh.getRange(i + 1, 2, 1, 4).setValues([[progress, favorites, activities, now]]);
+      return jsonOut({ status: "success" });
+    }
+  }
+  sh.appendRow([u, progress, favorites, activities, now]);
+  return jsonOut({ status: "success" });
+}
+
+function handleRecordQuizAttempt(ss, data) {
+  const sh = getOrCreateSheet(ss, "QuizAttempts", ["timestamp","username","lessonId","quizType","score","total","percent","passed80"]);
+  const score = Number(data.score || 0), total = Number(data.total || 0);
+  const percent = total > 0 ? Math.round((score * 100) / total) : 0;
+  sh.appendRow([
+    Utilities.formatDate(new Date(), "Asia/Bangkok", "yyyy-MM-dd'T'HH:mm:ssXXX"),
+    String(data.username || "").trim().toLowerCase(),
+    String(data.lessonId || ""),
+    String(data.quizType || ""),
+    score, total, percent, percent >= 80 ? 1 : 0
+  ]);
+  return jsonOut({ status: "success", percent: percent, passed80: percent >= 80 });
+}
+
+function handleEvaluateCertificates(ss, username) {
+  const lessons = getLessonsForCert(ss);
+  const state = getStateByUsername(ss, username);
+  const p = state.progress || {};
+  const ai = lessons.filter(l => /^AI-/i.test(String(l.title || ""))).slice(0, 6);
+  const fiveS = lessons.filter(l => /^5ส-/i.test(String(l.title || ""))).slice(0, 3);
+  const aiStatus = calcCert(ai, p);
+  const fiveSStatus = calcCert(fiveS, p);
+  upsertCertificate(ss, username, "AI", aiStatus);
+  upsertCertificate(ss, username, "5S", fiveSStatus);
+  return jsonOut({ status: "success", certificates: { AI: aiStatus, FIVE_S: fiveSStatus } });
+}
+
+function handleGetCertificates(ss, username) {
+  const cert = getOrCreateSheet(ss, "Certificates", ["username","group","required","done","avgPost","eligible","updatedAt"]);
+  const rows = cert.getDataRange().getValues();
+  const u = String(username || "").trim().toLowerCase();
+  const out = {};
+  for (let i = 1; i < rows.length; i++) {
+    if (String(rows[i][0] || "").trim().toLowerCase() !== u) continue;
+    out[String(rows[i][1])] = {
+      required: Number(rows[i][2] || 0),
+      done: Number(rows[i][3] || 0),
+      avg: Number(rows[i][4] || 0),
+      unlocked: Number(rows[i][5] || 0) === 1
+    };
+  }
+  return jsonOut({ status: "success", certificates: out });
+}
+
+function getLessonsForCert(ss) {
+  const sh = getOrCreateSheet(ss, "Lessons", ["id","type","title","url","description","author","quizData","createdAt"]);
+  const rows = sh.getDataRange().getValues();
+  if (rows.length <= 1) return [];
+  const h = rows[0].map(String);
+  return rows.slice(1).map(r => rowObj(r, h));
+}
+
+function getStateByUsername(ss, username) {
+  const sh = getOrCreateSheet(ss, "UserState", ["username","progressJson","favoritesJson","activitiesJson","updatedAt"]);
+  const rows = sh.getDataRange().getValues();
+  const u = String(username || "").trim().toLowerCase();
+  for (let i = 1; i < rows.length; i++) {
+    if (String(rows[i][0] || "").trim().toLowerCase() === u) {
+      return { progress: safeParse(rows[i][1], {}) };
+    }
+  }
+  return { progress: {} };
+}
+
+function calcCert(groupLessons, progress) {
+  const required = groupLessons.length;
+  const doneLessons = groupLessons.filter(l => progress[l.id] && progress[l.id].postDone);
+  const done = doneLessons.length;
+  let sum = 0;
+  doneLessons.forEach(l => {
+    const s = progress[l.id] || {};
+    const pct = (typeof s.postPercent === "number") ? s.postPercent : (Number(s.postTotal || 0) > 0 ? Math.round((Number(s.postScore || 0) * 100) / Number(s.postTotal || 1)) : 0);
+    sum += pct;
+  });
+  const avg = done > 0 ? Math.round(sum / done) : 0;
+  const unlocked = required > 0 && done === required && avg >= 80;
+  return { required: required, done: done, avg: avg, unlocked: unlocked };
+}
+
+function upsertCertificate(ss, username, group, st) {
+  const sh = getOrCreateSheet(ss, "Certificates", ["username","group","required","done","avgPost","eligible","updatedAt"]);
+  const rows = sh.getDataRange().getValues();
+  const u = String(username || "").trim().toLowerCase();
+  const now = Utilities.formatDate(new Date(), "Asia/Bangkok", "yyyy-MM-dd'T'HH:mm:ssXXX");
+  for (let i = 1; i < rows.length; i++) {
+    if (String(rows[i][0] || "").trim().toLowerCase() === u && String(rows[i][1] || "") === group) {
+      sh.getRange(i + 1, 3, 1, 5).setValues([[st.required, st.done, st.avg, st.unlocked ? 1 : 0, now]]);
+      return;
+    }
+  }
+  sh.appendRow([u, group, st.required, st.done, st.avg, st.unlocked ? 1 : 0, now]);
+}
+
+function safeParse(s, fb) {
+  try { return JSON.parse(s); } catch (_) { return fb; }
+}
+

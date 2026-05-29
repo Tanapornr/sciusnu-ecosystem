@@ -255,6 +255,22 @@ function isFavorite(lesson){ return favoriteList().some(x=>x.id===lesson.id); }
 function toggleFavorite(lesson){ const list=favoriteList(); const i=list.findIndex(x=>x.id===lesson.id); if(i>=0) list.splice(i,1); else list.unshift({id:lesson.id,title:lesson.title}); LearnerState.setFavorites(list); }
 function videoId(u){u=String(u||'');let m=u.match(/youtu\.be\/([^?&]+)/);if(m)return m[1];m=u.match(/[?&]v=([^&]+)/);if(m)return m[1];m=u.match(/youtube\.com\/embed\/([^?&]+)/);if(m)return m[1];return ''}
 function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+async function recordAttempt(quizType, lessonId, score, total){
+  try{
+    await fetch(API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({
+        action:'recordQuizAttempt',
+        username: currentUser?.username || '',
+        lessonId,
+        quizType,
+        score,
+        total
+      })
+    });
+  }catch(_){}
+}
 
 async function loadLessons(){
   const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'getLessons'})});
@@ -369,9 +385,9 @@ function showTab(k){tabPre.classList.add('hidden');tabVideo.classList.add('hidde
 
 function renderStep(){const p=getProgress();const s=p[currentLesson.id]||{preDone:false,videoDone:false,postDone:false};
   if(s.postDone){ modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)'; showTab('video'); renderVideo(false); return; }
-  if(!s.preDone){ modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)'; showTab('pre'); renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();}); return; }
+  if(!s.preDone){ modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)'; showTab('pre'); renderQuiz('pre',currentLesson.preTest,async (sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);await recordAttempt('pre', currentLesson.id, sc, tt);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();}); return; }
   if(!s.videoDone){ modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)'; showTab('video'); renderVideo(true); return; }
-  if(!s.postDone){ modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test'; showTab('post'); renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});showPopup(`คะแนน Post-test: ${sc}/${tt}`,'success');closeLearnModal();renderAll();}); return; }
+  if(!s.postDone){ modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test'; showTab('post'); renderQuiz('post',currentLesson.postTest,async (sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);await recordAttempt('post', currentLesson.id, sc, tt);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});showPopup(`คะแนน Post-test: ${sc}/${tt}`,'success');closeLearnModal();renderAll();}); return; }
 }
 
 function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});showPopup(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`,'info');done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
