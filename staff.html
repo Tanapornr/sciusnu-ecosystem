@@ -21,6 +21,8 @@
   <style>
     body { font-family: 'Prompt', sans-serif; background: #f8fafc; }
     .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.03); }
+    .popup-enter { transform: translateY(16px); opacity: 0; }
+    .popup-show { transform: translateY(0); opacity: 1; }
   </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
@@ -118,6 +120,16 @@
     </div>
   </main>
 
+  <div id="popupToast" class="fixed bottom-6 right-6 z-[70] hidden transition-all duration-300 popup-enter">
+    <div id="popupToastInner" class="px-4 py-3 rounded-2xl shadow-2xl border bg-white flex items-center gap-3 min-w-[280px]">
+      <i id="popupToastIcon" class="ph-fill ph-info text-lg text-indigo-600"></i>
+      <div>
+        <p id="popupToastTitle" class="text-sm font-semibold text-slate-800">แจ้งเตือน</p>
+        <p id="popupToastMessage" class="text-xs text-slate-500">ข้อความ</p>
+      </div>
+    </div>
+  </div>
+
   <div id="learnModal" class="fixed inset-0 hidden bg-black/50 z-50 items-center justify-center p-4">
     <div class="bg-white w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl border">
       <div class="px-5 py-4 border-b flex items-center justify-between"><h3 id="modalTitle" class="font-bold text-lg"></h3><button onclick="closeLearnModal()"><i class="ph ph-x text-xl"></i></button></div>
@@ -133,6 +145,7 @@
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
 let currentUser=null, lessons=[], currentLesson=null, ytPlayer=null, lastWatched=0, activeTab='all';
+let popupTimer = null;
 
 window.onload = async function(){
   const s=localStorage.getItem('user');
@@ -157,6 +170,37 @@ function bindTabEvents(){
   });
 }
 function bindSearch(){ document.getElementById('searchInput').addEventListener('input', renderAll); }
+function showPopup(message, type='info'){
+  const toast = document.getElementById('popupToast');
+  const inner = document.getElementById('popupToastInner');
+  const icon = document.getElementById('popupToastIcon');
+  const title = document.getElementById('popupToastTitle');
+  const text = document.getElementById('popupToastMessage');
+
+  const theme = {
+    success: { icon: 'ph-fill ph-check-circle', title: 'สำเร็จ', cls: 'border-emerald-200 bg-emerald-50', iconCls: 'text-emerald-600' },
+    warning: { icon: 'ph-fill ph-warning-circle', title: 'แจ้งเตือน', cls: 'border-amber-200 bg-amber-50', iconCls: 'text-amber-600' },
+    error: { icon: 'ph-fill ph-x-circle', title: 'ผิดพลาด', cls: 'border-rose-200 bg-rose-50', iconCls: 'text-rose-600' },
+    info: { icon: 'ph-fill ph-info', title: 'ข้อมูล', cls: 'border-indigo-200 bg-indigo-50', iconCls: 'text-indigo-600' }
+  }[type] || { icon: 'ph-fill ph-info', title: 'ข้อมูล', cls: 'border-indigo-200 bg-indigo-50', iconCls: 'text-indigo-600' };
+
+  inner.className = `px-4 py-3 rounded-2xl shadow-2xl border flex items-center gap-3 min-w-[280px] ${theme.cls}`;
+  icon.className = `${theme.icon} text-lg ${theme.iconCls}`;
+  title.innerText = theme.title;
+  text.innerText = message;
+
+  if (popupTimer) clearTimeout(popupTimer);
+  toast.classList.remove('hidden');
+  requestAnimationFrame(() => {
+    toast.classList.remove('popup-enter');
+    toast.classList.add('popup-show');
+  });
+  popupTimer = setTimeout(() => {
+    toast.classList.remove('popup-show');
+    toast.classList.add('popup-enter');
+    setTimeout(() => toast.classList.add('hidden'), 250);
+  }, 2600);
+}
 
 function progressKey(){return `lessonProgress_${(currentUser?.username||'guest').toLowerCase()}`}
 function getProgress(){try{return JSON.parse(localStorage.getItem(progressKey())||'{}')}catch{return {}}}
@@ -283,10 +327,10 @@ function renderStep(){const p=getProgress();const s=p[currentLesson.id]||{preDon
   if(s.postDone){ modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)'; showTab('video'); renderVideo(false); return; }
   if(!s.preDone){ modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)'; showTab('pre'); renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();}); return; }
   if(!s.videoDone){ modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)'; showTab('video'); renderVideo(true); return; }
-  if(!s.postDone){ modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test'; showTab('post'); renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});alert(`คะแนน Post-test: ${sc}/${tt}`);closeLearnModal();renderAll();}); return; }
+  if(!s.postDone){ modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test'; showTab('post'); renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});showPopup(`คะแนน Post-test: ${sc}/${tt}`,'success');closeLearnModal();renderAll();}); return; }
 }
 
-function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});alert(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`);done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
+function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});showPopup(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`,'info');done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
 
 function renderVideo(enforceNoSeek){
   const id=videoId(currentLesson.url);
@@ -294,7 +338,7 @@ function renderVideo(enforceNoSeek){
   videoContainer.innerHTML='<div id="ytPlayer" class="w-full h-full"></div>';
   lastWatched=0;
   if(ytPlayer&&ytPlayer.destroy)try{ytPlayer.destroy()}catch{};
-  ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});alert('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test');renderStep();}},1000);}}});
+  ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});showPopup('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test','success');renderStep();}},1000);}}});
 }
 
 function handleLogout(){ localStorage.clear(); location.href='index.html'; }
