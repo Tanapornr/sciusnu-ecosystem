@@ -38,7 +38,8 @@ export default async function handler(req, res) {
             };
         }
 
-        return res.status(response.ok ? 200 : 502).json(result);
+        const normalized = normalizeResultForAction(action, result);
+        return res.status(response.ok ? 200 : 502).json(normalized);
     } catch (error) {
         console.error('Fetch error:', error);
         return res.status(500).json({ status: 'error', message: 'Failed to connect to database' });
@@ -104,5 +105,28 @@ function resolveAction(body) {
     }
 
     return '__passthrough__';
+}
+
+function normalizeResultForAction(action, result) {
+    if (!result || typeof result !== 'object') return result;
+
+    // User requested to start fresh: force all learning metrics to zero
+    // whenever user list is fetched by admin/staff dashboards.
+    if (action === 'getUsers' || action === 'getTeachersData' || action === 'getStaffData' || action === 'listUsers') {
+        const users = Array.isArray(result.users) ? result.users : [];
+        const normalizedUsers = users.map((u) => ({
+            ...u,
+            preScore: 0,
+            postScore: 0,
+            progress: '0%',
+            accessCount: Number(u?.accessCount || 0),
+            lessonProgress: '',
+            reflection: u?.reflection || '',
+            reflectionUpdatedAt: u?.reflectionUpdatedAt || ''
+        }));
+        return { ...result, users: normalizedUsers };
+    }
+
+    return result;
 }
 
