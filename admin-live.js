@@ -5,6 +5,14 @@
     const n = Number(String(v ?? '').replace('%', '').replace(/,/g, '').trim());
     return Number.isFinite(n) ? n : fallback;
   }
+  function toProgressNum(v) {
+    const raw = String(v ?? '').trim();
+    if (!raw) return 0;
+    const hasPercent = raw.includes('%');
+    const n = toNum(raw, 0);
+    if (hasPercent) return n;
+    return n > 0 && n <= 1 ? n * 100 : n;
+  }
 
   function parseDate(v) {
     const d = new Date(v || '');
@@ -88,7 +96,7 @@
       const dept = u.department || '-';
       const pre = toNum(u.preScore);
       const post = toNum(u.postScore);
-      const prog = String(toNum(u.progress)) + '%';
+      const prog = String(Math.round(toProgressNum(u.progress))) + '%';
       const login = u.lastLogin || '-';
 
       if (cols >= 6) {
@@ -112,7 +120,7 @@
 
       const totalUsers = users.length;
       const totalLessons = lessons.length;
-      const avgProgress = totalUsers ? Math.round(users.reduce((s, u) => s + toNum(u.progress), 0) / totalUsers) : 0;
+      const avgProgress = totalUsers ? Math.round(users.reduce((s, u) => s + toProgressNum(u.progress), 0) / totalUsers) : 0;
       const avgPre = totalUsers ? Math.round((users.reduce((s, u) => s + toNum(u.preScore), 0) / (totalUsers * 5)) * 100) : 0;
       const avgPost = totalUsers ? Math.round((users.reduce((s, u) => s + toNum(u.postScore), 0) / (totalUsers * 5)) * 100) : 0;
       const now = new Date();
