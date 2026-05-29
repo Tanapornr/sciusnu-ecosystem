@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup - Digital Learning Ecosystem for Faculty of Science Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f1f35;
+      --muted: #65758b;
+      --line: #dfe7f1;
+      --panel: #ffffff;
+      --canvas: #f4f7fb;
+      --blue: #2563eb;
+      --green: #059669;
+      --orange: #f59e0b;
+      --rose: #e11d48;
+      --nav: #0b1426;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: "Noto Sans Thai", sans-serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 270px 1fr;
+    }
+
+    .sidebar {
+      background: var(--nav);
+      color: #dbeafe;
+      padding: 28px 22px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 42px;
+    }
+
+    .brand-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #16a34a, #2563eb);
+      font-size: 28px;
+    }
+
+    .nav-label {
+      margin: 28px 0 10px;
+      color: #8aa0bd;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 12px;
+      color: #bfd2ee;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .nav-item.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    .main {
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px;
+      background: white;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .search {
+      width: min(520px, 52vw);
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      color: #93a4b8;
+      background: #f8fafc;
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--blue);
+      font-weight: 800;
+    }
+
+    .content {
+      padding: 32px 36px 48px;
+      display: grid;
+      gap: 26px;
+    }
+
+    .hero {
+      background: #eef4ff;
+      border: 1px solid #d7e2f5;
+      border-radius: 8px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 36px; line-height: 1.18; margin-bottom: 10px; }
+    h2 { font-size: 24px; margin-bottom: 16px; }
+    h3 { font-size: 18px; margin-bottom: 8px; }
+    p { color: var(--muted); line-height: 1.7; }
+
+    .hero-art {
+      height: 170px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.12), rgba(5,150,105,.18)),
+        radial-gradient(circle at 25% 25%, rgba(245,158,11,.35), transparent 28%),
+        #fff;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 66px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .metric {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .metric-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: #eef6ff;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.55fr .9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .course-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .course {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .thumb {
+      height: 76px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      position: relative;
+    }
+
+    .lock {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(15,31,53,.82);
+      color: white;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #edf2f7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .bar { height: 100%; border-radius: 999px; background: var(--blue); }
+    .bar.green { background: var(--green); }
+    .bar.orange { background: var(--orange); }
+
+    .btn {
+      border: 0;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn.secondary {
+      background: #eef2ff;
+      color: var(--blue);
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #e8f2ff;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .mockup-section {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .phone {
+      border: 10px solid #0f1f35;
+      border-radius: 26px;
+      height: 470px;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(15,31,53,.14);
+    }
+
+    .phone-head {
+      background: #f8fafc;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .phone-body {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    @media (max-width: 1100px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .stats, .grid, .mockup-section, .hero { grid-template-columns: 1fr; }
+      .course { grid-template-columns: 1fr; }
+      .topbar { padding: 0 18px; }
+      .content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">▣</div><div>Learning<br>Ecosystem</div></div>
+      <div class="nav-item active">หน้าแดชบอร์ด</div>
+      <div class="nav-item">คอร์สเรียนของฉัน</div>
+      <div class="nav-item">แผนการเรียนรู้</div>
+      <div class="nav-item">เกียรติบัตร</div>
+      <div class="nav-item">ประวัติการเรียน</div>
+      <div class="nav-label">ผู้ดูแลระบบ</div>
+      <div class="nav-item">บุคลากร</div>
+      <div class="nav-item">บทเรียน</div>
+      <div class="nav-item">รายงาน</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="search">ค้นหาคอร์ส ทักษะ หรือเนื้อหา...</div>
+        <div class="user">
+          <div><div>เจ้าหน้าที่คณะวิทยาศาสตร์</div><p>งานธุรการ</p></div>
+          <div class="avatar">ST</div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Digital Learning Ecosystem Prototype</div>
+            <h1>ระบบพัฒนาสมรรถนะดิจิทัลและ AI สำหรับเจ้าหน้าที่คณะวิทยาศาสตร์</h1>
+            <p>ต้นแบบระบบเรียนรู้ออนไลน์ที่เชื่อมบทเรียน วิดีโอ แบบทดสอบ คะแนน ความก้าวหน้า และเกียรติบัตรไว้ในฐานข้อมูลเดียว เพื่อสนับสนุนการเรียนรู้ต่อเนื่องของเจ้าหน้าที่สายสนับสนุน</p>
+          </div>
+          <div class="hero-art">AI</div>
+        </div>
+
+        <div class="stats">
+          <div class="card metric"><div class="metric-icon">👥</div><div><p>เจ้าหน้าที่ทั้งหมด</p><strong>80</strong></div></div>
+          <div class="card metric"><div class="metric-icon">▶</div><div><p>บทเรียนในระบบ</p><strong>9</strong></div></div>
+          <div class="card metric"><div class="metric-icon">✓</div><div><p>ผ่านเกณฑ์เกียรติบัตร</p><strong>5</strong></div></div>
+          <div class="card metric"><div class="metric-icon">📊</div><div><p>คะแนนผ่านเกณฑ์</p><strong>80%</strong></div></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="panel-title"><h2>คอร์สเรียนของฉัน</h2><button class="btn secondary">ดูทั้งหมด</button></div>
+            <div class="course-list">
+              <div class="course">
+                <div class="thumb">AI-01</div>
+                <div>
+                  <h3>พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน</h3>
+                  <p>Pre-test → Video → Post-test บันทึกคะแนนลง Google Sheet</p>
+                  <div class="progress"><div class="bar green" style="width:100%"></div></div>
+                </div>
+                <button class="btn">ทบทวน</button>
+              </div>
+              <div class="course">
+                <div class="thumb" style="background:linear-gradient(135deg,#059669,#10b981)">5ส-01</div>
+                <div>
+                  <h3>บทนำ 5ส สำหรับหน่วยงานสนับสนุน</h3>
+                  <p>เรียนจบแล้ว สามารถเพิ่มเป็นรายการโปรดและดูซ้ำได้</p>
+                  <div class="progress"><div class="bar green" style="width:100%"></div></div>
+                </div>
+                <button class="btn">ทบทวน</button>
+              </div>
+              <div class="course">
+                <div class="thumb" style="background:linear-gradient(135deg,#f59e0b,#f97316)">AI-02<span class="lock">ล็อก</span></div>
+                <div>
+                  <h3>OCR และงานเอกสารอัตโนมัติด้วย AI</h3>
+                  <p>ปลดล็อกเมื่อเรียนบทก่อนหน้าและทำ Post-test สำเร็จ</p>
+                  <div class="progress"><div class="bar orange" style="width:0%"></div></div>
+                </div>
+                <button class="btn secondary">ยังไม่ปลดล็อก</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Learning Journey</h2>
+            <div class="steps">
+              <div class="step"><div class="step-num">1</div><div><h3>ก่อนเรียน</h3><p>ทำ Pre-test เพื่อวัดพื้นฐาน และบันทึกคะแนนลงระบบ</p></div></div>
+              <div class="step"><div class="step-num">2</div><div><h3>ระหว่างเรียน</h3><p>ดูวิดีโอจนจบ ระบบป้องกันการเลื่อนข้าม</p></div></div>
+              <div class="step"><div class="step-num">3</div><div><h3>หลังเรียน</h3><p>ทำ Post-test หากคะแนนเฉลี่ยผ่าน 80% จึงรับเกียรติบัตรได้</p></div></div>
+              <div class="step"><div class="step-num">4</div><div><h3>ต่อยอด</h3><p>ดูประวัติการเรียน รายการโปรด และเรียนบทถัดไป</p></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="panel-title"><h2>ภาพต้นแบบสำหรับแนบรายงาน</h2><p>Prototype / Screenshot / Wireframe</p></div>
+          <div class="mockup-section">
+            <div class="phone">
+              <div class="phone-head">หน้า Home ผู้เรียน</div>
+              <div class="phone-body">
+                <div class="mini-card"><h3>สวัสดีตอนบ่าย</h3><p>เจ้าหน้าที่คณะวิทยาศาสตร์</p></div>
+                <div class="mini-card"><strong>0%</strong><p>ความคืบหน้ารวม</p></div>
+                <div class="mini-card"><h3>เรียนต่อจากครั้งล่าสุด</h3><p>AI-01 พื้นฐาน AI</p></div>
+                <div class="mini-card"><h3>กำหนดการถัดไป</h3><p>ทำ Post-test หลังเรียน</p></div>
+              </div>
+            </div>
+            <div class="phone">
+              <div class="phone-head">หน้าบทเรียน</div>
+              <div class="phone-body">
+                <div class="mini-card"><h3>Pre-test</h3><p>ทำได้ครั้งเดียว</p></div>
+                <div class="mini-card"><h3>Video</h3><p>ดูวิดีโอให้จบก่อนปลดล็อก Post-test</p></div>
+                <div class="mini-card"><h3>Post-test</h3><p>บันทึกคะแนนและสถานะเรียนจบ</p></div>
+                <button class="btn">เริ่มเรียน</button>
+              </div>
+            </div>
+            <div class="phone">
+              <div class="phone-head">หน้า Admin</div>
+              <div class="phone-body">
+                <div class="mini-card"><strong>80 คน</strong><p>เจ้าหน้าที่ทั้งหมด</p></div>
+                <div class="mini-card"><strong>5 คน</strong><p>ได้รับเกียรติบัตร</p></div>
+                <div class="mini-card"><h3>สัดส่วนตามหน่วยงาน</h3><p>กราฟและรายงานจาก Google Sheet</p></div>
+                <div class="mini-card"><h3>กิจกรรมล่าสุด</h3><p>Login, Pre-test, Post-test</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
