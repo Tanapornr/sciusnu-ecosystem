@@ -89,8 +89,6 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="seedPresetLesson()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-magic-wand"></i> เติมบทเรียนอัตโนมัติ</button>
-                    <button onclick="seedProgramLessons()" class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-stack"></i> อัปโหลด 9 บท</button>
                     <button onclick="openUploadModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-upload-simple"></i> อัปโหลดสื่อใหม่</button>
                 </div>
             </div>
@@ -181,6 +179,7 @@
         
         let currentUser = null;
         let currentModalTab = 'info';
+        let editingLesson = null;
 
         window.onload = function() {
             const storedUser = localStorage.getItem('user');
@@ -243,29 +242,40 @@
             }
 
             let html = '';
-            lessons.forEach(l => {
+            const filteredLessons = (lessons || []).filter(l => !isAutoProgramLesson(l));
+
+            filteredLessons.forEach(l => {
                 const isVid = l.type === 'Video';
                 const bgClass = isVid ? 'bg-slate-800' : 'bg-indigo-50';
                 const icon = isVid ? '<i class="ph-fill ph-play-circle text-5xl text-white/50 group-hover:text-white transition"></i>' : '<i class="ph-fill ph-file-pdf text-5xl text-indigo-400"></i>';
                 const badgeClass = isVid ? 'bg-purple-100 text-purple-600' : 'bg-rose-100 text-rose-600';
+                const lessonSafe = encodeURIComponent(JSON.stringify(l));
 
                 html += `
-                <a href="${l.url}" target="_blank" class="glass-card overflow-hidden block group">
+                <div class="glass-card overflow-hidden block group">
                     <div class="aspect-video ${bgClass} relative flex items-center justify-center">
                         ${icon}
                     </div>
                     <div class="p-4 bg-white">
-                        <div class="flex justify-between items-start mb-2">
+                        <div class="flex justify-between items-start mb-2 gap-2">
                             <span class="${badgeClass} text-[10px] font-bold px-2 py-0.5 rounded">${l.type}</span>
-                            <span class="text-[10px] text-slate-400"><i class="ph-fill ph-brain"></i> มีข้อสอบแนบ</span>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="startEditLesson('${lessonSafe}')" class="text-[10px] px-2 py-1 rounded bg-amber-50 text-amber-700 border border-amber-100 hover:bg-amber-100">แก้ไข</button>
+                                <span class="text-[10px] text-slate-400"><i class="ph-fill ph-brain"></i> มีข้อสอบแนบ</span>
+                            </div>
                         </div>
-                        <h4 class="font-bold text-sm text-slate-800 mb-1 truncate">${l.title}</h4>
+                        <h4 class="font-bold text-sm text-slate-800 mb-1 truncate"><a href="${l.url}" target="_blank" class="hover:text-blue-600">${l.title}</a></h4>
                         <p class="text-xs text-slate-500 mb-2 truncate">${l.description || 'ไม่มีคำอธิบาย'}</p>
                         <p class="text-[10px] text-slate-400 pt-3 border-t border-slate-100">เพิ่มโดย ${l.author || 'Admin'} • ${l.createdAt || '-'}</p>
                     </div>
-                </a>`;
+                </div>`;
             });
             grid.innerHTML = html;
+        }
+
+        function isAutoProgramLesson(lesson) {
+            const title = String(lesson?.title || '').trim();
+            return /^(AI-\d{2}|5ส-\d{2})\b/.test(title);
         }
 
         // --- ระบบวาดฟอร์มข้อสอบอัตโนมัติ 5 ข้อ ---
@@ -301,7 +311,9 @@
         // --- ระบบควบคุมหน้าต่าง Modal ---
         function openUploadModal() {
             document.getElementById('uploadModal').classList.remove('hidden');
-            fillPresetToUploadForm();
+            if (!editingLesson) {
+                clearUploadForm();
+            }
         }
         function closeUploadModal() { document.getElementById('uploadModal').classList.add('hidden'); }
 
@@ -345,19 +357,39 @@
 
         function triggerSubmit() { document.getElementById('realSubmitBtn').click(); }
 
+        function clearUploadForm() {
+            document.getElementById('uploadForm').reset();
+            switchModalTab('info');
+            editingLesson = null;
+        }
+
+        function startEditLesson(encodedLesson) {
+            try {
+                const lesson = JSON.parse(decodeURIComponent(encodedLesson));
+                editingLesson = lesson;
+                document.getElementById('resTitle').value = lesson.title || '';
+                document.getElementById('resType').value = lesson.type || 'Video';
+                document.getElementById('resUrl').value = lesson.url || '';
+                document.getElementById('resDesc').value = lesson.description || '';
+                switchModalTab('info');
+                document.getElementById('uploadModal').classList.remove('hidden');
+            } catch (e) {
+                console.error(e);
+                showToast('เปิดข้อมูลแก้ไขไม่สำเร็จ');
+            }
+        }
+
+        /* removed auto-fill preset content by request */
         function fillPresetToUploadForm() {
-            const preSet = [
-                {
-                    question: "คำว่า \"AI\" ย่อมาจากอะไร",
-                    choices: ["Automatic Information (ข้อมูลอัตโนมัติ)", "Applied Intelligence (ปัญญาประยุกต์)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Internet (อินเทอร์เน็ตขั้นสูง)"],
-                    answer: 3
-                },
-                {
-                    question: "AI มีลักษณะการทำงานที่ใกล้เคียงกับอะไรมากที่สุด",
-                    choices: ["เครื่องคิดเลขที่คำนวณสูตรทางคณิตศาสตร์ได้อย่างแม่นยำ", "สมองมนุษย์ที่สามารถคิด ตัดสินใจ และเรียนรู้จากข้อมูลได้", "วิทยุที่รับสัญญาณและกระจายเสียงได้ในระยะไกล", "หุ่นยนต์เหล็กกล้าในภาพยนตร์ไซไฟที่เคลื่อนไหวได้เหมือนคน"],
-                    answer: 2
-                },
-                {
+            return;
+        }
+
+        function noop() {
+            return;
+        }
+
+        async function seedPresetLesson() { noop(); }
+        async function seedProgramLessons() { noop(); }
                     question: "ข้อใดคือตัวอย่างของเทคโนโลยีรอบตัวที่ใช้ AI ในการทำงาน",
                     choices: ["นาฬิกาปลุกแบบไขลาน", "ระบบสแกนใบหน้า (Face ID) และระบบแนะนำคลิปวิดีโอ", "พัดลมตั้งโต๊ะแบบกดปุ่มปรับระดับความแรง", "กล้องถ่ายรูปที่ใช้ฟิล์ม"],
                     answer: 2
@@ -493,120 +525,6 @@
                 btn.disabled = false;
                 btn.innerHTML = '<i class="ph-bold ph-check"></i> บันทึกและอัปโหลดสื่อ';
             }
-        }
-
-        async function seedPresetLesson() {
-            const payload = {
-                action: "saveLesson",
-                lesson: {
-                    type: "Video",
-                    title: "พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน",
-                    url: "https://youtu.be/Z55vxrVi-9c?si=-G2ZkyALT1J0re1o",
-                    description: "บทเรียนแนะนำความหมาย หลักการทำงาน และการประยุกต์ใช้ AI ในงานจริงของบุคลากรสายสนับสนุน",
-                    author: currentUser ? currentUser.name : "Admin",
-                    quizzes: {
-                        preTest: [
-                            { question: "คำว่า \"AI\" ย่อมาจากอะไร", choices: ["Automatic Information (ข้อมูลอัตโนมัติ)", "Applied Intelligence (ปัญญาประยุกต์)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Internet (อินเทอร์เน็ตขั้นสูง)"], answer: 2 },
-                            { question: "AI มีลักษณะการทำงานที่ใกล้เคียงกับอะไรมากที่สุด", choices: ["เครื่องคิดเลขที่คำนวณสูตรทางคณิตศาสตร์ได้อย่างแม่นยำ", "สมองมนุษย์ที่สามารถคิด ตัดสินใจ และเรียนรู้จากข้อมูลได้", "วิทยุที่รับสัญญาณและกระจายเสียงได้ในระยะไกล", "หุ่นยนต์เหล็กกล้าในภาพยนตร์ไซไฟที่เคลื่อนไหวได้เหมือนคน"], answer: 1 },
-                            { question: "ข้อใดคือตัวอย่างของเทคโนโลยีรอบตัวที่ใช้ AI ในการทำงาน", choices: ["นาฬิกาปลุกแบบไขลาน", "ระบบสแกนใบหน้า (Face ID) และระบบแนะนำคลิปวิดีโอ", "พัดลมตั้งโต๊ะแบบกดปุ่มปรับระดับความแรง", "กล้องถ่ายรูปที่ใช้ฟิล์ม"], answer: 1 },
-                            { question: "หากต้องการให้คอมพิวเตอร์เรียนรู้ที่จะแยกแยะภาพของ \"สุนัข\" และ \"แมว\" ต้องใช้วิธีการใด", choices: ["เปลี่ยนหน้าจอคอมพิวเตอร์ให้มีความละเอียดและสีสันคมชัดขึ้น", "พิมพ์ข้อความบอกคอมพิวเตอร์ว่าสุนัขร้องโฮ่ง แมวร้องเหมียว", "ติดตั้งโปรแกรมต้านไวรัส (Anti-virus) เวอร์ชันใหม่ล่าสุด", "ป้อนข้อมูลรูปภาพสุนัขและแมวจำนวนมหาศาลเพื่อให้ระบบเรียนรู้และจดจำลักษณะเด่นด้วยตัวเอง"], answer: 3 },
-                            { question: "เหตุใดในยุคปัจจุบันเราจึงจำเป็นต้องเรียนรู้เรื่อง AI", choices: ["เพื่อนำมาประยุกต์ใช้เป็นผู้ช่วยในการทำงานและเตรียมพร้อมรับมือกับความเปลี่ยนแปลงในอนาคต", "เพื่อให้เราสามารถประกอบหุ่นยนต์ไว้ใช้งานเองที่บ้านได้", "เพื่อเตรียมตัวหยุดทำงาน เนื่องจาก AI จะเข้ามาทำแทนมนุษย์ทุกอย่าง 100%", "เพื่อหาวิธีทำลายเทคโนโลยีนี้ก่อนที่มันจะฉลาดเกินไป"], answer: 0 }
-                        ],
-                        postTest: [
-                            { question: "ชื่อเต็มของ AI คืออะไร และแปลเป็นภาษาไทยว่าอย่างไร", choices: ["Automatic Intelligence (ปัญญาอัตโนมัติ)", "Artificial Intelligence (ปัญญาประดิษฐ์)", "Advanced Information (ข้อมูลขั้นสูง)", "Artificial Information (ข้อมูลสังเคราะห์)"], answer: 1 },
-                            { question: "เป้าหมายหลักของการสร้าง AI คืออะไร", choices: ["เพื่อสร้างหุ่นยนต์ที่มีรูปร่างหน้าตาและการเคลื่อนไหวเหมือนมนุษย์", "เพื่อให้คอมพิวเตอร์หรือโปรแกรมสามารถคิด ตัดสินใจ และเรียนรู้ได้คล้ายสมองมนุษย์", "เพื่อเพิ่มความเร็วในการคำนวณตัวเลขและพิมพ์งานบนคอมพิวเตอร์", "เพื่อนำมาแทนที่การทำงานของมนุษย์ในทุกๆ อาชีพอย่างถาวร"], answer: 1 },
-                            { question: "จากตัวอย่างในคลิป ข้อใด \"ไม่ใช่\" เทคโนโลยีที่ใช้ AI ในชีวิตประจำวัน", choices: ["ระบบสแกนใบหน้า (Face ID) เพื่อปลดล็อกหน้าจอ", "ระบบแนะนำวิดีโอใน YouTube หรือภาพยนตร์ใน Netflix", "การทำความสะอาดพื้นด้วยไม้กวาดและที่ตักขยะธรรมดา", "ระบบกรองอีเมลขยะ (Spam filter) ที่ช่วยคัดแยกอีเมลที่เราไม่ต้องการ"], answer: 2 },
-                            { question: "AI ต้องอาศัยการเรียนรู้จากข้อมูลจำนวนมหาศาล เพื่อจุดประสงค์ใดเป็นหลัก", choices: ["เพื่อให้มันสามารถแยกแยะ ตัดสินใจ หรือทำงานบางอย่างได้ด้วยตัวเอง (เช่น แยกรูปสุนัขกับแมว)", "เพื่อเก็บข้อมูลส่วนตัวของผู้ใช้งานทุกคนเอาไว้ในระบบ", "เพื่อให้คอมพิวเตอร์มีขนาดเล็กลงและประหยัดพลังงานไฟฟ้ามากขึ้น", "เพื่อแปลงภาษาคอมพิวเตอร์ทั้งหมดให้กลายเป็นภาษามนุษย์"], answer: 0 },
-                            { question: "ตามเนื้อหาในคลิป ข้อใดคือเหตุผลสำคัญที่สุดที่เราทุกคนควรเรียนรู้พื้นฐานเรื่อง AI", choices: ["เพื่อให้ทุกคนสามารถเขียนโปรแกรมและสร้าง AI ขึ้นมาใช้งานเองได้", "เพื่อเตรียมความพร้อมที่จะหยุดทำงานทุกอย่าง เนื่องจาก AI จะทำแทนทั้งหมด", "เพื่อนำมาใช้ประโยชน์ ช่วยให้ทำงานได้เร็วขึ้น ชีวิตง่ายขึ้น และรู้เท่าทันเทคโนโลยี", "เพื่อหาวิธีทำลายและป้องกันไม่ให้ AI มีความฉลาดมากเกินไป"], answer: 2 }
-                        ]
-                    }
-                }
-            };
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain;charset=utf-8" },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                if (result.status === "success") {
-                    showToast("เติมบทเรียนอัตโนมัติสำเร็จ");
-                    fetchResources();
-                } else {
-                    alert(result.message || "บันทึกบทเรียนไม่สำเร็จ");
-                }
-            } catch (error) {
-                console.error(error);
-                alert("เกิดข้อผิดพลาดในการเชื่อมต่อ API");
-            }
-        }
-
-        async function seedProgramLessons() {
-            const aiLessons = [
-                { title: "AI-01 พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน", url: "https://youtu.be/Z55vxrVi-9c?si=-G2ZkyALT1J0re1o" },
-                { title: "AI-02 OCR และงานเอกสารอัตโนมัติด้วย AI", url: "https://youtu.be/tfBQfFFlJ3Q" },
-                { title: "AI-03 ใช้ AI ช่วยอ่านสคริปต์ภาษาไทย", url: "https://youtu.be/QfpTt_pqqJw" },
-                { title: "AI-04 สร้างวิดีโอด้วย AI สำหรับงานสื่อสารองค์กร", url: "https://youtu.be/dA7zOWz7_lA" },
-                { title: "AI-05 อัปเดตแนวโน้ม AI เพื่อการทำงาน", url: "https://youtu.be/Wu9R5rHybFM" },
-                { title: "AI-06 Prompt สำหรับงานธุรการและรายงาน", url: "https://www.youtube.com/watch?v=jeQphrYz8TE" }
-            ];
-            const fiveSLessons = [
-                { title: "5ส-01 บทนำ 5ส สำหรับหน่วยงานสนับสนุน", url: "https://youtu.be/FXblssHX4O8" },
-                { title: "5ส-02 การจัดพื้นที่และมาตรฐานงานด้วย 5ส", url: "https://youtu.be/_XGtofXl6zQ" },
-                { title: "5ส-03 5ส เพื่อคุณภาพบริการและความปลอดภัย", url: "https://www.youtube.com/watch?v=DOiJWVkkNQ8" }
-            ];
-
-            const allLessons = [...aiLessons, ...fiveSLessons];
-            let successCount = 0;
-
-            for (const item of allLessons) {
-                const payload = {
-                    action: "saveLesson",
-                    lesson: {
-                        type: "Video",
-                        title: item.title,
-                        url: item.url,
-                        description: "หลักสูตรสำหรับการพัฒนาบุคลากรสายสนับสนุน พร้อมแบบทดสอบก่อนเรียนและหลังเรียน",
-                        author: currentUser ? currentUser.name : "Admin",
-                        quizzes: buildDefaultQuizSet(item.title)
-                    }
-                };
-
-                try {
-                    const response = await fetch(API_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "text/plain;charset=utf-8" },
-                        body: JSON.stringify(payload)
-                    });
-                    const result = await response.json();
-                    if (result.status === "success") successCount += 1;
-                } catch (err) {
-                    console.error("seed error", item.title, err);
-                }
-            }
-
-            showToast(`อัปโหลดสำเร็จ ${successCount}/${allLessons.length} บท`);
-            fetchResources();
-        }
-
-        function buildDefaultQuizSet(lessonTitle) {
-            return {
-                preTest: [
-                    { question: `${lessonTitle}: ก่อนเรียน คุณคาดหวังผลลัพธ์ใดมากที่สุด`, choices: ["ลดเวลางานเอกสาร", "เพิ่มความแม่นยำ", "ทำงานร่วมทีมดีขึ้น", "ทั้งหมดที่กล่าวมา"], answer: 3 },
-                    { question: "AI ควรใช้งานแบบใดในงานราชการ/ธุรการ", choices: ["แทนคนทั้งหมดทันที", "ช่วยร่างและให้คนตรวจทาน", "ใช้โดยไม่ต้องตรวจ", "ใช้เฉพาะงานไอที"], answer: 1 },
-                    { question: "ข้อมูลแบบใดไม่ควรใส่ใน AI สาธารณะ", choices: ["ข้อมูลสาธารณะ", "ข้อมูลส่วนบุคคลอ่อนไหว", "ข้อมูลประกาศทั่วไป", "ข้อมูลประชาสัมพันธ์"], answer: 1 },
-                    { question: "แนวทางที่ถูกต้องเมื่อใช้ AI เขียนเอกสาร", choices: ["คัดลอกใช้ทันที", "ตรวจข้อเท็จจริงและปรับภาษา", "ไม่ต้องอ้างอิง", "ส่งต่อทันที"], answer: 1 },
-                    { question: "เป้าหมายหลักของบทเรียนนี้คืออะไร", choices: ["ใช้ AI อย่างรับผิดชอบ", "เพิ่มประสิทธิภาพงาน", "ลดข้อผิดพลาด", "ถูกทุกข้อ"], answer: 3 }
-                ],
-                postTest: [
-                    { question: `หลังเรียน ${lessonTitle} สิ่งสำคัญที่สุดคือข้อใด`, choices: ["ความเร็วอย่างเดียว", "ความถูกต้องและจริยธรรม", "ความสวยงามเอกสาร", "ไม่ต้องตรวจทาน"], answer: 1 },
-                    { question: "เมื่อได้ผลลัพธ์จาก AI ขั้นตอนต่อไปคืออะไร", choices: ["ใช้งานทันที", "ตรวจทาน/ยืนยันกับแหล่งข้อมูล", "ส่งต่อทันที", "เก็บไว้ไม่ใช้"], answer: 1 },
-                    { question: "การใช้ 5ส กับงานดิจิทัลช่วยเรื่องใด", choices: ["ค้นหาไฟล์เร็วขึ้น", "ลดความซ้ำซ้อน", "ลดความผิดพลาด", "ถูกทุกข้อ"], answer: 3 },
-                    { question: "ตัวชี้วัดความสำเร็จหลังใช้ AI คืออะไร", choices: ["งานเร็วขึ้นและคุณภาพดีขึ้น", "ปริมาณข้อความเยอะขึ้น", "ใช้เครื่องมือมากขึ้น", "เอกสารยาวขึ้น"], answer: 0 },
-                    { question: "ผู้เรียนควรทำอะไรต่อหลังจบบทเรียน", choices: ["ทดลองใช้กับงานจริงแบบเล็ก", "หยุดใช้ AI", "ลบเอกสารทั้งหมด", "ไม่ต้องปรับปรุง"], answer: 0 }
-                ]
-            };
         }
 
         function showToast(message) {
