@@ -78,6 +78,7 @@
     </div>
   </main>
 
+<script src="learner-state.js"></script>
 <script>
 const API_URL = '/api/submit';
 let user = {};
@@ -85,6 +86,7 @@ window.onload = async function(){
   const s = localStorage.getItem('user');
   if(!s) return location.href='index.html';
   user = JSON.parse(s);
+  await LearnerState.init(user);
   userNameText.innerText = user.name || '-';
   userDeptText.innerText = user.department || '-';
   avatarContainer.innerText = (user.name||'U').substring(0,2);
@@ -92,8 +94,7 @@ window.onload = async function(){
 };
 function handleLogout(){ localStorage.removeItem('user'); location.href='index.html'; }
 function ord(t){ let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=String(t||'').match(/^5ส-(\d+)/i); if(m)return 100+ +m[1]; return 999; }
-function progressKey(){ return `lessonProgress_${(user.username||'guest').toLowerCase()}`; }
-function getProgress(){ try { return JSON.parse(localStorage.getItem(progressKey())||'{}'); } catch { return {}; } }
+function getProgress(){ return LearnerState.getProgress(); }
 
 async function renderHistory(){
   const rows = document.getElementById('historyRows');
@@ -153,3 +154,5 @@ async function renderHistory(){
 </script>
 </body>
 </html>
+
+

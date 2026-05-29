@@ -63,19 +63,21 @@
     </div>
   </main>
 
+<script src="learner-state.js"></script>
 <script>
 let user = {};
-window.onload = function(){
+window.onload = async function(){
   const s = localStorage.getItem('user');
   if(!s) return location.href='index.html';
   user = JSON.parse(s);
+  await LearnerState.init(user);
   userNameText.innerText = user.name || '-';
   userDeptText.innerText = user.department || '-';
   avatarContainer.innerText = (user.name||'U').substring(0,2);
   renderFavorites();
 }
 
-function favoriteList(){ return JSON.parse(localStorage.getItem('favoriteLessons')||'[]'); }
+function favoriteList(){ return LearnerState.getFavorites(); }
 function renderFavorites(){
   const list = favoriteList();
   favCountText.innerText = `${list.length} บทเรียน`;
@@ -103,7 +105,7 @@ function renderFavorites(){
 function removeFavorite(i){
   const list = favoriteList();
   list.splice(i,1);
-  localStorage.setItem('favoriteLessons', JSON.stringify(list));
+  LearnerState.setFavorites(list);
   renderFavorites();
 }
 
@@ -111,3 +113,5 @@ function handleLogout(){ localStorage.removeItem('user'); location.href='index.h
 </script>
 </body>
 </html>
+
+

@@ -6,6 +6,7 @@
   <title>หน้าหลัก - Learning Ecosystem</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="learner-state.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -147,7 +148,7 @@
   </main>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
+const API_URL = "/api/submit";
 let user = null;
 let lessons = [];
 let progress = {};
@@ -161,23 +162,8 @@ function ord(title){
   return 999;
 }
 
-function progressKey(){
-  return `lessonProgress_${(user?.username || "guest").toLowerCase()}`;
-}
-
-function getProgress(){
-  try { return JSON.parse(localStorage.getItem(progressKey()) || "{}"); }
-  catch { return {}; }
-}
-
-function getActivityLog(){
-  try {
-    const key = `activityLog_${(user?.username || "guest").toLowerCase()}`;
-    return JSON.parse(localStorage.getItem(key) || "[]");
-  } catch {
-    return [];
-  }
-}
+function getProgress(){ return LearnerState.getProgress(); }
+function getActivityLog(){ return LearnerState.getActivities(); }
 
 function calcStreak(logs){
   const dates = new Set(logs.map(x => new Date(x.time).toDateString()));
@@ -337,6 +323,7 @@ window.onload = async function(){
   const s = localStorage.getItem("user");
   if (!s) return location.href = "index.html";
   user = JSON.parse(s);
+  await LearnerState.init(user);
   document.getElementById("userNameText").innerText = user.name || "-";
   document.getElementById("userDeptText").innerText = user.department || "-";
   document.getElementById("welcomeName").innerText = user.name || "-";

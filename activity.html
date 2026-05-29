@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
@@ -37,9 +37,7 @@
     <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2 space-y-6">
         <div class="flex items-center gap-4"><div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-activity"></i></div><div><h2 class="text-xl font-bold text-slate-800">กิจกรรมของฉัน</h2><p class="text-xs text-slate-400">ไทม์ไลน์การเรียนรู้จริงของผู้ใช้งาน</p></div></div>
-        <div class="bg-white border rounded-2xl p-6">
-          <div id="timeline" class="space-y-4"></div>
-        </div>
+        <div class="bg-white border rounded-2xl p-6"><div id="timeline" class="space-y-4"></div></div>
       </div>
       <div class="space-y-6">
         <div class="bg-white border rounded-2xl p-5">
@@ -53,32 +51,36 @@
     </div>
   </main>
 
+  <script src="learner-state.js"></script>
   <script>
     function handleLogout(){localStorage.removeItem('user');window.location.href='index.html';}
     const user = JSON.parse(localStorage.getItem('user')||'{}');
+    if(!user?.username) location.href='index.html';
     document.getElementById('userNameText').innerText = user.name || 'ผู้เรียน';
     document.getElementById('userDeptText').innerText = user.department || 'บุคลากรสายสนับสนุน';
     document.getElementById('avatarContainer').innerText = (user.name||'US').slice(0,2);
 
-    const key = `activityLog_${(user.username||'guest').toLowerCase()}`;
-    let logs = JSON.parse(localStorage.getItem(key)||'[]');
-    if(!Array.isArray(logs)) logs = [];
-    if(!logs.length){
-      logs = [{action:'เข้าสู่ระบบ', lessonTitle:'Learning Ecosystem', time:new Date().toISOString()}];
-      localStorage.setItem(key, JSON.stringify(logs));
-    }
-    const map = {pretest_done:'ทำ Pre-test',video_done:'ดูวิดีโอจบ',posttest_done:'ทำ Post-test'};
-    const items = logs.slice().reverse();
-    document.getElementById('logCount').innerText = items.length;
-    document.getElementById('lastSeen').innerText = new Date(items[0].time).toLocaleString('th-TH');
-    document.getElementById('timeline').innerHTML = items.map(x=>`
-      <div class="border rounded-xl p-4 ${x.action==='posttest_done'?'bg-emerald-50 border-emerald-200':'bg-white'}">
-        <p class="font-semibold text-slate-800">${map[x.action]||x.action}</p>
-        <p class="text-xs text-slate-500 mt-1">${x.lessonTitle||'-'}</p>
-        ${x.score!=null?`<p class="text-xs mt-1 text-indigo-600">คะแนน: ${x.score}/${x.total}</p>`:''}
-        <p class="text-xs text-slate-400 mt-2">${new Date(x.time).toLocaleString('th-TH')}</p>
-      </div>
-    `).join('');
+    (async()=>{
+      await LearnerState.init(user);
+      let logs = LearnerState.getActivities();
+      if(!Array.isArray(logs)) logs = [];
+      if(!logs.length){
+        LearnerState.addActivity({ action:'เข้าสู่ระบบ', lessonTitle:'Learning Ecosystem' });
+        logs = LearnerState.getActivities();
+      }
+      const map = {pretest_done:'ทำ Pre-test',video_done:'ดูวิดีโอจบ',posttest_done:'ทำ Post-test'};
+      const items = logs.slice().reverse();
+      document.getElementById('logCount').innerText = items.length;
+      document.getElementById('lastSeen').innerText = new Date(items[0].time).toLocaleString('th-TH');
+      document.getElementById('timeline').innerHTML = items.map(x=>`
+        <div class="border rounded-xl p-4 ${x.action==='posttest_done'?'bg-emerald-50 border-emerald-200':'bg-white'}">
+          <p class="font-semibold text-slate-800">${map[x.action]||x.action}</p>
+          <p class="text-xs text-slate-500 mt-1">${x.lessonTitle||'-'}</p>
+          ${x.score!=null?`<p class="text-xs mt-1 text-indigo-600">คะแนน: ${x.score}/${x.total}</p>`:''}
+          <p class="text-xs text-slate-400 mt-2">${new Date(x.time).toLocaleString('th-TH')}</p>
+        </div>
+      `).join('');
+    })();
   </script>
 </body>
 </html>

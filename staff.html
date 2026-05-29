@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="learner-state.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -150,7 +151,7 @@
   </div>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
+const API_URL = "/api/submit";
 let currentUser=null, lessons=[], currentLesson=null, ytPlayer=null, lastWatched=0, activeTab='all';
 let popupTimer = null;
 let notifications = [];
@@ -159,6 +160,7 @@ window.onload = async function(){
   const s=localStorage.getItem('user');
   if(!s) return location.href='index.html';
   currentUser=JSON.parse(s);
+  await LearnerState.init(currentUser);
   userNameText.innerText=currentUser.name||'-';
   userDeptText.innerText=currentUser.department||'-';
   avatarContainer.innerText=(currentUser.name||'U').substring(0,2);
@@ -244,14 +246,13 @@ function showPopup(message, type='info'){
   }, 2600);
 }
 
-function progressKey(){return `lessonProgress_${(currentUser?.username||'guest').toLowerCase()}`}
-function getProgress(){try{return JSON.parse(localStorage.getItem(progressKey())||'{}')}catch{return {}}}
-function setProgress(v){localStorage.setItem(progressKey(),JSON.stringify(v))}
-function logActivity(action,extra={}){const k=`activityLog_${(currentUser?.username||'guest').toLowerCase()}`;const a=JSON.parse(localStorage.getItem(k)||'[]');a.unshift({action,time:new Date().toISOString(),...extra});localStorage.setItem(k,JSON.stringify(a.slice(0,200)));}
+function getProgress(){ return LearnerState.getProgress(); }
+function setProgress(v){ LearnerState.setProgress(v); }
+function logActivity(action,extra={}){ LearnerState.addActivity({ action, ...extra }); }
 function ord(t){let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=String(t||'').match(/^5ส-(\d+)/i); if(m)return 100+ +m[1]; return 999;}
-function favoriteList(){ return JSON.parse(localStorage.getItem('favoriteLessons')||'[]'); }
+function favoriteList(){ return LearnerState.getFavorites(); }
 function isFavorite(lesson){ return favoriteList().some(x=>x.id===lesson.id); }
-function toggleFavorite(lesson){ const list=favoriteList(); const i=list.findIndex(x=>x.id===lesson.id); if(i>=0) list.splice(i,1); else list.unshift({id:lesson.id,title:lesson.title}); localStorage.setItem('favoriteLessons', JSON.stringify(list)); }
+function toggleFavorite(lesson){ const list=favoriteList(); const i=list.findIndex(x=>x.id===lesson.id); if(i>=0) list.splice(i,1); else list.unshift({id:lesson.id,title:lesson.title}); LearnerState.setFavorites(list); }
 function videoId(u){u=String(u||'');let m=u.match(/youtu\.be\/([^?&]+)/);if(m)return m[1];m=u.match(/[?&]v=([^&]+)/);if(m)return m[1];m=u.match(/youtube\.com\/embed\/([^?&]+)/);if(m)return m[1];return ''}
 function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 
@@ -358,7 +359,7 @@ function renderNotStartedGrid(items,p){
 }
 
 function renderSchedule(){
-  const logs = JSON.parse(localStorage.getItem(`activityLog_${(currentUser?.username||'guest').toLowerCase()}`)||'[]').slice(0,3);
+  const logs = LearnerState.getActivities().slice(0,3);
   nextSchedule.innerHTML = (logs.length?logs:[{action:'เข้าสู่ระบบ',lessonTitle:'Learning Ecosystem',time:new Date().toISOString()}]).map(x=>`<div class="border rounded-xl p-3"><p class="font-medium text-slate-800">${esc(x.action||'-')}</p><p class="text-xs text-slate-500">${esc(x.lessonTitle||'-')}</p><p class="text-xs text-slate-400">${new Date(x.time).toLocaleString('th-TH')}</p></div>`).join('');
 }
 
