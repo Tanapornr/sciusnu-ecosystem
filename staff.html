@@ -1,213 +1,178 @@
 ﻿<!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>à¸„à¸­à¸£à¹Œà¸ªà¹€à¸£à¸µà¸¢à¸™à¸‚à¸­à¸‡à¸‰à¸±à¸™ - Learning Ecosystem</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { primary: '#121829', accent: '#6366f1' }
-                }
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คอร์สเรียนของฉัน - Learning Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Prompt', 'sans-serif'] },
+          colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
         }
-    </script>
-    <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; }
-        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.01); border-radius: 1.25rem; }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body{font-family:'Prompt',sans-serif;background:#f8fafc}
+    .glass-card{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 4px 12px rgba(0,0,0,.03)}
+  </style>
 </head>
-<body class="flex h-screen overflow-hidden text-slate-700">
+<body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
+  <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+    <div>
+      <div class="p-6 flex items-center gap-3">
+        <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div>
+        <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+      </div>
+      <nav class="px-4 space-y-1 text-sm">
+        <a href="staff-home.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+        <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+        <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+        <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+        <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+        <a href="messages.html" class="flex items-center justify-between px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl">
+          <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+          <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+      </nav>
+    </div>
+    <div class="p-4 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl">ออกจากระบบ</button></div>
+  </aside>
 
-    <aside class="w-64 bg-[#0f172a] text-white flex flex-col justify-between hidden md:flex z-20">
-        <div>
-            <div class="p-6 flex items-center gap-3">
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div>
-                <h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1>
-            </div>
-            
-            <nav class="px-4 space-y-1">
-                <a href="staff-home.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> à¸«à¸™à¹‰à¸²à¸«à¸¥à¸±à¸</a>
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-graduation-cap text-xl"></i> à¸„à¸­à¸£à¹Œà¸ªà¹€à¸£à¸µà¸¢à¸™à¸‚à¸­à¸‡à¸‰à¸±à¸™</a>
-                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> à¹à¸œà¸™à¸à¸²à¸£à¹€à¸£à¸µà¸¢à¸™à¸£à¸¹à¹‰</a>
-                <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> à¹ƒà¸šà¸›à¸£à¸°à¸à¸²à¸¨à¸™à¸µà¸¢à¸šà¸±à¸•à¸£</a>
-                <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-clock-counter-clockwise text-xl"></i> à¸›à¸£à¸°à¸§à¸±à¸•à¸´à¸à¸²à¸£à¹€à¸£à¸µà¸¢à¸™</a>
-                <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> à¸£à¸²à¸¢à¸à¸²à¸£à¹‚à¸›à¸£à¸”</a>
-                <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> à¸à¸´à¸ˆà¸à¸£à¸£à¸¡à¸‚à¸­à¸‡à¸‰à¸±à¸™</a>
-                <a href="messages.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition justify-between">
-                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡</span>
-                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
-                </a>
-                <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> à¸•à¸±à¹‰à¸‡à¸„à¹ˆà¸²</a>
-            </nav>
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+      <div class="relative w-96">
+        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none">
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
+        <div class="flex items-center gap-3 border-l pl-4">
+          <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div>
+          <div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div>
         </div>
-        
-        <div class="p-4">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
-                <i class="ph ph-sign-out"></i> à¸­à¸­à¸à¸ˆà¸²à¸à¸£à¸°à¸šà¸š
-            </button>
+      </div>
+    </header>
+
+    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+      <section class="lg:col-span-2 space-y-6">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
+            <p class="text-xs text-slate-400">ลำดับบทเรียนถูกล็อก: Pre-test (ครั้งเดียว) -> วิดีโอจบ -> Post-test</p>
+          </div>
         </div>
-    </aside>
+        <div class="border-b flex gap-6 text-sm font-medium text-slate-400"><span class="text-indigo-600 border-b-2 border-indigo-600 pb-2">ทั้งหมด</span></div>
+        <div id="lessonGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        <div id="emptyState" class="hidden glass-card p-8 text-center text-slate-500">ยังไม่มีบทเรียนในระบบ</div>
+      </section>
 
-    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
-            <div class="relative w-96">
-                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                <input type="text" placeholder="à¸„à¹‰à¸™à¸«à¸²à¸„à¸­à¸£à¹Œà¸ª, à¸—à¸±à¸à¸©à¸°, à¹€à¸™à¸·à¹‰à¸­à¸«à¸²..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none">
-            </div>
-            <div class="flex items-center gap-4">
-                <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
-                <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
-                <div class="flex items-center gap-3 border-l pl-4">
-                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" class="w-9 h-9 rounded-full object-cover">
-                    <div class="text-sm">
-                        <p class="font-semibold text-slate-800 leading-tight id-user-name">à¸à¸³à¸¥à¸±à¸‡à¹‚à¸«à¸¥à¸”...</p>
-                        <p class="text-xs text-slate-400 id-user-dept">à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸ªà¸²à¸¢à¸ªà¸™à¸±à¸šà¸ªà¸™à¸¸à¸™</p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">à¸„à¸­à¸£à¹Œà¸ªà¹€à¸£à¸µà¸¢à¸™à¸‚à¸­à¸‡à¸‰à¸±à¸™</h2>
-                        <p class="text-xs text-slate-400">à¸•à¸´à¸”à¸•à¸²à¸¡à¸„à¸§à¸²à¸¡à¸à¹‰à¸²à¸§à¸«à¸™à¹‰à¸²à¹à¸¥à¸°à¹€à¸£à¸µà¸¢à¸™à¸£à¸¹à¹‰à¸­à¸¢à¹ˆà¸²à¸‡à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡à¹€à¸žà¸·à¹ˆà¸­à¸žà¸±à¸’à¸™à¸²à¸—à¸±à¸à¸©à¸°à¸à¸²à¸£à¸—à¸³à¸‡à¸²à¸™à¸”à¹‰à¸§à¸¢ AI</p>
-                    </div>
-                </div>
-
-                <div class="border-b flex gap-6 text-sm font-medium text-slate-400">
-                    <span class="text-indigo-600 border-b-2 border-indigo-600 pb-2 cursor-pointer">à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">à¸à¸³à¸¥à¸±à¸‡à¹€à¸£à¸µà¸¢à¸™</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸£à¸´à¹ˆà¸¡à¹€à¸£à¸µà¸¢à¸™</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">à¹€à¸£à¸µà¸¢à¸™à¸ˆà¸šà¹à¸¥à¹‰à¸§</span>
-                </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-slate-800">à¸„à¸­à¸£à¹Œà¸ªà¸—à¸µà¹ˆà¸à¸³à¸¥à¸±à¸‡à¹€à¸£à¸µà¸¢à¸™</h3>
-                    
-                    <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-28 h-20 bg-indigo-900 text-white rounded-xl flex flex-col items-center justify-center font-bold text-xl relative overflow-hidden shrink-0">
-                            AI <span class="text-[10px] font-normal text-indigo-300">TECHNOLOGY</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">à¸à¸³à¸¥à¸±à¸‡à¹€à¸£à¸µà¸¢à¸™</span>
-                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">AI Tools for Education</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">à¹‚à¸”à¸¢ Admin User</p>
-                            <div class="flex items-center gap-3 mt-3">
-                                <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 72%"></div></div>
-                                <span class="text-xs font-semibold text-slate-600">72%</span>
-                            </div>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="text-xs text-slate-400 mb-2">2 à¸Šà¸¡. 35 à¸™. à¸ˆà¸²à¸ 4 à¸Šà¸¡.</p>
-                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">à¹€à¸£à¸µà¸¢à¸™à¸•à¹ˆà¸­</button>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-28 h-20 bg-amber-500 text-white rounded-xl flex flex-col items-center justify-center font-bold text-sm text-center px-1 shrink-0">
-                            Active Learning
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">à¸à¸³à¸¥à¸±à¸‡à¹€à¸£à¸µà¸¢à¸™</span>
-                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">à¸à¸²à¸£à¸­à¸­à¸à¹à¸šà¸šà¸à¸²à¸£à¹€à¸£à¸µà¸¢à¸™à¸£à¸¹à¹‰à¹à¸šà¸š Active Learning</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">à¹‚à¸”à¸¢ Kritsada S.</p>
-                            <div class="flex items-center gap-3 mt-3">
-                                <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 45%"></div></div>
-                                <span class="text-xs font-semibold text-slate-600">45%</span>
-                            </div>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="text-xs text-slate-400 mb-2">1 à¸Šà¸¡. 20 à¸™. à¸ˆà¸²à¸ 3 à¸Šà¸¡.</p>
-                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">à¹€à¸£à¸µà¸¢à¸™à¸•à¹ˆà¸­</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><h3 class="text-sm font-semibold text-slate-800">à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸£à¸´à¹ˆà¸¡à¹€à¸£à¸µà¸¢à¸™</h3><span class="text-xs text-indigo-600 hover:underline cursor-pointer">à¸”à¸¹à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</span></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="glass-card p-4 bg-white">
-                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-presentation-chart text-3xl"></i></div>
-                            <h4 class="text-xs font-semibold text-slate-800 truncate">Presentation Skills</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">à¹‚à¸”à¸¢ Admin User</p>
-                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">à¹€à¸£à¸´à¹ˆà¸¡à¹€à¸£à¸µà¸¢à¸™</button>
-                        </div>
-                        <div class="glass-card p-4 bg-white">
-                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-chart-bar text-3xl"></i></div>
-                            <h4 class="text-xs font-semibold text-slate-800 truncate">Data Visualization</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">à¹‚à¸”à¸¢ Nuttida P.</p>
-                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">à¹€à¸£à¸´à¹ˆà¸¡à¹€à¸£à¸µà¸¢à¸™</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="glass-card p-5 bg-white">
-                    <div class="flex justify-between text-sm font-semibold mb-2"><span>à¸„à¸§à¸²à¸¡à¸„à¸·à¸šà¸«à¸™à¹‰à¸²à¸£à¸§à¸¡</span><span class="text-indigo-600">65%</span></div>
-                    <div class="bg-slate-100 h-2 rounded-full w-full"><div class="bg-indigo-600 h-2 rounded-full" style="width: 65%"></div></div>
-                    <p class="text-xs text-slate-400 mt-2">à¹€à¸£à¸µà¸¢à¸™à¸ˆà¸š 8 à¸ˆà¸²à¸ 12 à¸„à¸­à¸£à¹Œà¸ª</p>
-                </div>
-
-                <div class="glass-card p-5 bg-white text-xs">
-                    <div class="flex justify-between items-center mb-4"><span class="font-bold text-slate-800">à¸›à¸à¸´à¸—à¸´à¸™à¸à¸²à¸£à¹€à¸£à¸µà¸¢à¸™</span><span class="text-indigo-600 cursor-pointer">à¸”à¸¹à¸›à¸à¸´à¸—à¸´à¸™à¸—à¸±à¹‰à¸‡à¸«à¸¡à¸”</span></div>
-                    <div class="text-center font-medium text-slate-700 mb-2">à¸žà¸¤à¸©à¸ à¸²à¸„à¸¡ 2569</div>
-                    <div class="grid grid-cols-7 gap-y-2 text-center text-slate-400">
-                        <span>à¸ˆ</span><span>à¸­</span><span>à¸ž</span><span>à¸žà¸¤</span><span>à¸¨</span><span>à¸ª</span><span>à¸­à¸²</span>
-                        <span class="text-slate-300">27</span><span class="text-slate-300">28</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                        <span>13</span><span>14</span><span>15</span><span class="bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center mx-auto">16</span><span>17</span><span>18</span><span>19</span>
-                    </div>
-                </div>
-
-                <div class="glass-card p-5 bg-white">
-                    <h3 class="text-sm font-semibold mb-4 text-slate-800">à¸„à¸§à¸²à¸¡à¸ªà¸³à¹€à¸£à¹‡à¸ˆà¸‚à¸­à¸‡à¸‰à¸±à¸™</h3>
-                    <div class="flex gap-4 justify-around text-center">
-                        <div>
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-rocket"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">à¸œà¸¹à¹‰à¹€à¸£à¸µà¸¢à¸™à¸—à¸µà¹ˆà¸”à¸µ</p>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-fire"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">à¹€à¸£à¸µà¸¢à¸™à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡</p>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-trophy"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">à¸™à¸±à¸à¹€à¸£à¸µà¸¢à¸™à¸„à¸¸à¸“à¸ à¸²à¸ž</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      <aside class="space-y-6">
+        <div class="glass-card p-5">
+          <div class="flex justify-between text-sm font-semibold mb-2"><span>ความคืบหน้ารวม</span><span id="statProgress" class="text-indigo-600">0%</span></div>
+          <div class="bg-slate-100 h-2 rounded-full w-full"><div id="progressBar" class="bg-indigo-600 h-2 rounded-full" style="width:0%"></div></div>
+          <p id="statLine" class="text-xs text-slate-400 mt-2">เรียนจบ 0 จาก 0 บท</p>
         </div>
-    </main>
+        <div class="glass-card p-5">
+          <h3 class="text-sm font-semibold mb-3">สถิติของฉัน</h3>
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div class="bg-slate-50 rounded-xl py-3"><div id="statTotal" class="text-xl font-bold">0</div><div class="text-xs text-slate-400">บทเรียนทั้งหมด</div></div>
+            <div class="bg-slate-50 rounded-xl py-3"><div id="statDone" class="text-xl font-bold text-emerald-600">0</div><div class="text-xs text-slate-400">จบแล้ว</div></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
 
-    <script>
-        window.onload = function() {
-            const userDataString = localStorage.getItem('user');
-            if (userDataString) {
-                const user = JSON.parse(userDataString);
-                // à¹à¸ªà¸”à¸‡à¸Šà¸·à¹ˆà¸­à¸ˆà¸£à¸´à¸‡ à¹à¸¥à¸° à¸«à¸™à¹ˆà¸§à¸¢à¸‡à¸²à¸™à¸ªà¸±à¸‡à¸à¸±à¸”à¸ˆà¸£à¸´à¸‡à¸‚à¸­à¸‡à¸šà¸¸à¸„à¸¥à¸²à¸à¸£à¸„à¸™à¸™à¸±à¹‰à¸™à¹†
-                document.querySelector('.id-user-name').innerText = user.name;
-                document.querySelector('.id-user-dept').innerText = user.department;
-            }
-        };
+  <div id="learnModal" class="fixed inset-0 hidden bg-black/50 z-50 items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl border">
+      <div class="px-5 py-4 border-b flex items-center justify-between"><h3 id="modalTitle" class="font-bold text-lg"></h3><button onclick="closeLearnModal()"><i class="ph ph-x text-xl"></i></button></div>
+      <div id="modalStateText" class="px-5 py-3 text-xs text-slate-500 border-b">สถานะ</div>
+      <div class="p-5">
+        <div id="tabPre" class="space-y-4"></div>
+        <div id="tabVideo" class="hidden space-y-4"><div id="videoContainer" class="aspect-video bg-slate-100 rounded-xl overflow-hidden"></div><div class="text-xs text-slate-500">ต้องดูจนจบ ระบบจึงปลดล็อก Post-test และป้องกันการเลื่อนข้าม</div></div>
+        <div id="tabPost" class="hidden space-y-4"></div>
+      </div>
+    </div>
+  </div>
 
-        function handleLogout() {
-            localStorage.clear();
-            window.location.href = 'index.html';
-        }
-    </script>
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
+let currentUser=null, lessons=[], currentLesson=null, ytPlayer=null, lastWatched=0;
+window.onload = async function(){const s=localStorage.getItem('user'); if(!s) return location.href='index.html'; currentUser=JSON.parse(s); userNameText.innerText=currentUser.name||'-'; userDeptText.innerText=currentUser.department||'-'; avatarContainer.innerText=(currentUser.name||'U').substring(0,2); await loadLessons();};
+function progressKey(){return `lessonProgress_${(currentUser?.username||'guest').toLowerCase()}`}
+function getProgress(){try{return JSON.parse(localStorage.getItem(progressKey())||'{}')}catch{return {}}}
+function setProgress(v){localStorage.setItem(progressKey(),JSON.stringify(v))}
+function logActivity(action,extra={}){const k=`activityLog_${(currentUser?.username||'guest').toLowerCase()}`;const a=JSON.parse(localStorage.getItem(k)||'[]');a.unshift({action,time:new Date().toISOString(),...extra});localStorage.setItem(k,JSON.stringify(a.slice(0,200)));}
+function ord(t){let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=String(t||'').match(/^5ส-(\d+)/i); if(m)return 100+ +m[1]; return 999;}
+function favoriteList(){ return JSON.parse(localStorage.getItem('favoriteLessons')||'[]'); }
+function isFavorite(lesson){ return favoriteList().some(x=>x.id===lesson.id); }
+function toggleFavorite(lesson){ const list=favoriteList(); const i=list.findIndex(x=>x.id===lesson.id); if(i>=0) list.splice(i,1); else list.unshift({id:lesson.id,title:lesson.title}); localStorage.setItem('favoriteLessons', JSON.stringify(list)); }
+
+async function loadLessons(){
+  lessonGrid.innerHTML='';
+  const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'getLessons'})});
+  const j=await r.json();
+  lessons=(j.lessons||[]).map(norm).sort((a,b)=>ord(a.title)-ord(b.title));
+  if(!lessons.length){emptyState.classList.remove('hidden');return;} else emptyState.classList.add('hidden');
+  const p=getProgress(); let unlocked=0; while(unlocked<lessons.length && p[lessons[unlocked].id]?.postDone) unlocked++;
+  lessons.forEach((l,idx)=>{const st=p[l.id]||{};const locked=idx>unlocked;const done=!!st.postDone;const preDone=!!st.preDone;const liked=isFavorite(l);
+    const favHtml = done
+      ? `<button class="fav text-base ${liked?'text-rose-500':'text-slate-300'}" title="เพิ่มรายการโปรด">❤</button>`
+      : `<span class="text-[10px] text-slate-300" title="ต้องเรียนจบก่อนจึงเพิ่มรายการโปรดได้">❤</span>`;
+    const card=document.createElement('div'); card.className='glass-card p-4'; card.innerHTML=`<div class="flex justify-between items-center mb-2"><span class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded">Video</span><div class="flex items-center gap-2">${favHtml}${locked?'<span class="text-xs text-amber-600">🔒 ล็อก</span>':done?'<span class="text-xs text-emerald-600">✓ จบแล้ว</span>':'<span class="text-xs text-slate-500">กำลังเรียน</span>'}</div></div><h4 class="font-semibold text-slate-800 mb-1">${esc(l.title)}</h4><p class="text-xs text-slate-500 mb-3 line-clamp-2">${esc(l.description||'-')}</p><div class="text-[11px] text-slate-500 mb-3">Pre-test: ${preDone?'ทำแล้ว':'ยังไม่ทำ'} | Post-test: ${done?'ทำแล้ว':'ยังไม่ทำ'}</div><button class="start w-full ${locked?'bg-slate-300 cursor-not-allowed':'bg-indigo-600 hover:bg-indigo-700'} text-white py-2 rounded-lg text-sm" ${locked?'disabled':''}>${locked?'ยังล็อก':(done?'ดูวิดีโออีกครั้ง':'เริ่มเรียน')}</button>`;
+    const favBtn = card.querySelector('.fav');
+    if (favBtn) favBtn.onclick=(e)=>{e.stopPropagation();toggleFavorite(l);loadLessons();};
+    const b=card.querySelector('.start'); if(!locked) b.onclick=()=>openLesson(l);
+    lessonGrid.appendChild(card);
+  });
+  const total=lessons.length, done=lessons.filter(x=>p[x.id]?.postDone).length, pc=total?Math.round(done*100/total):0;
+  statTotal.innerText=String(total); statDone.innerText=String(done); statProgress.innerText=`${pc}%`; progressBar.style.width=`${pc}%`; statLine.innerText=`เรียนจบ ${done} จาก ${total} บท`;
+}
+
+function openLesson(l){currentLesson=l; modalTitle.innerText=l.title; learnModal.classList.remove('hidden'); learnModal.classList.add('flex'); renderStep();}
+function closeLearnModal(){learnModal.classList.add('hidden');learnModal.classList.remove('flex'); if(ytPlayer&&ytPlayer.destroy)try{ytPlayer.destroy()}catch{}; ytPlayer=null; currentLesson=null;}
+function showTab(k){tabPre.classList.add('hidden');tabVideo.classList.add('hidden');tabPost.classList.add('hidden'); if(k==='pre')tabPre.classList.remove('hidden'); if(k==='video')tabVideo.classList.remove('hidden'); if(k==='post')tabPost.classList.remove('hidden');}
+
+function renderStep(){const p=getProgress();const s=p[currentLesson.id]||{preDone:false,videoDone:false,postDone:false};
+  if(s.postDone){
+    modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)';
+    showTab('video');
+    renderVideo(false);
+    return;
+  }
+  if(!s.preDone){modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)';showTab('pre');renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();});return;}
+  if(!s.videoDone){modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)';showTab('video');renderVideo(true);return;}
+  if(!s.postDone){modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test';showTab('post');renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});alert(`คะแนน Post-test: ${sc}/${tt}`);closeLearnModal();loadLessons();});return;}
+  closeLearnModal();
+}
+
+function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='glass-card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});alert(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`);done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
+
+function renderVideo(enforceNoSeek){
+  const id=videoId(currentLesson.url);
+  if(!id){videoContainer.innerHTML='<div class="h-full flex items-center justify-center text-slate-500">ลิงก์วิดีโอไม่ถูกต้อง</div>';return;}
+  videoContainer.innerHTML='<div id="ytPlayer" class="w-full h-full"></div>';
+  lastWatched=0;
+  if(ytPlayer&&ytPlayer.destroy)try{ytPlayer.destroy()}catch{};
+  ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});alert('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test');renderStep();}},1000);}}});
+}
+
+function norm(l){let q=l.quizData||l.quizzes||{}; if(typeof q==='string')try{q=JSON.parse(q)}catch{q={}}; return {id:l.id||l.title,title:l.title||'บทเรียน',description:l.description||'',url:l.url||'',preTest:normQ(q.preTest||q.pre||[]),postTest:normQ(q.postTest||q.post||[])};}
+function normQ(a){if(!Array.isArray(a))return[];return a.map(q=>q.choices?{question:q.question||'',choices:q.choices||[],answer:Number(q.answer||0)}:{question:q.q||'',choices:q.opts||[],answer:Math.max(0,Number(q.ans||1)-1)}).filter(x=>x.question&&x.choices.length>=2)}
+function videoId(u){u=String(u||'');let m=u.match(/youtu\.be\/([^?&]+)/);if(m)return m[1];m=u.match(/[?&]v=([^&]+)/);if(m)return m[1];m=u.match(/youtube\.com\/embed\/([^?&]+)/);if(m)return m[1];return ''}
+function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function handleLogout(){localStorage.clear();location.href='index.html'}
+</script>
 </body>
 </html>
-
