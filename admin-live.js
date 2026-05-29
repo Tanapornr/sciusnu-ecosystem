@@ -80,6 +80,9 @@
   }
 
   function applySmallTable(users) {
+    // Keep dedicated learner/staff pages in control of their own full table rendering.
+    if (document.getElementById('learnerRows')) return;
+
     const table = document.querySelector('tbody');
     if (!table) return;
     const firstRow = table.querySelector('tr');
