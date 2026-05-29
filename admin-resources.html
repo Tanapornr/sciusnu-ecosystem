@@ -92,6 +92,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="seedPresetLesson()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-magic-wand"></i> เติมบทเรียนอัตโนมัติ</button>
+                    <button onclick="seedProgramLessons()" class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-stack"></i> อัปโหลด 9 บท</button>
                     <button onclick="openUploadModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm"><i class="ph-bold ph-upload-simple"></i> อัปโหลดสื่อใหม่</button>
                 </div>
             </div>
@@ -541,6 +542,73 @@
                 console.error(error);
                 alert("เกิดข้อผิดพลาดในการเชื่อมต่อ API");
             }
+        }
+
+        async function seedProgramLessons() {
+            const aiLessons = [
+                { title: "AI-01 พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน", url: "https://youtu.be/Z55vxrVi-9c?si=-G2ZkyALT1J0re1o" },
+                { title: "AI-02 OCR และงานเอกสารอัตโนมัติด้วย AI", url: "https://youtu.be/tfBQfFFlJ3Q" },
+                { title: "AI-03 ใช้ AI ช่วยอ่านสคริปต์ภาษาไทย", url: "https://youtu.be/QfpTt_pqqJw" },
+                { title: "AI-04 สร้างวิดีโอด้วย AI สำหรับงานสื่อสารองค์กร", url: "https://youtu.be/dA7zOWz7_lA" },
+                { title: "AI-05 อัปเดตแนวโน้ม AI เพื่อการทำงาน", url: "https://youtu.be/Wu9R5rHybFM" },
+                { title: "AI-06 Prompt สำหรับงานธุรการและรายงาน", url: "https://www.youtube.com/watch?v=jeQphrYz8TE" }
+            ];
+            const fiveSLessons = [
+                { title: "5ส-01 บทนำ 5ส สำหรับหน่วยงานสนับสนุน", url: "https://youtu.be/FXblssHX4O8" },
+                { title: "5ส-02 การจัดพื้นที่และมาตรฐานงานด้วย 5ส", url: "https://youtu.be/_XGtofXl6zQ" },
+                { title: "5ส-03 5ส เพื่อคุณภาพบริการและความปลอดภัย", url: "https://www.youtube.com/watch?v=DOiJWVkkNQ8" }
+            ];
+
+            const allLessons = [...aiLessons, ...fiveSLessons];
+            let successCount = 0;
+
+            for (const item of allLessons) {
+                const payload = {
+                    action: "saveLesson",
+                    lesson: {
+                        type: "Video",
+                        title: item.title,
+                        url: item.url,
+                        description: "หลักสูตรสำหรับการพัฒนาบุคลากรสายสนับสนุน พร้อมแบบทดสอบก่อนเรียนและหลังเรียน",
+                        author: currentUser ? currentUser.name : "Admin",
+                        quizzes: buildDefaultQuizSet(item.title)
+                    }
+                };
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (result.status === "success") successCount += 1;
+                } catch (err) {
+                    console.error("seed error", item.title, err);
+                }
+            }
+
+            showToast(`อัปโหลดสำเร็จ ${successCount}/${allLessons.length} บท`);
+            fetchResources();
+        }
+
+        function buildDefaultQuizSet(lessonTitle) {
+            return {
+                preTest: [
+                    { question: `${lessonTitle}: ก่อนเรียน คุณคาดหวังผลลัพธ์ใดมากที่สุด`, choices: ["ลดเวลางานเอกสาร", "เพิ่มความแม่นยำ", "ทำงานร่วมทีมดีขึ้น", "ทั้งหมดที่กล่าวมา"], answer: 3 },
+                    { question: "AI ควรใช้งานแบบใดในงานราชการ/ธุรการ", choices: ["แทนคนทั้งหมดทันที", "ช่วยร่างและให้คนตรวจทาน", "ใช้โดยไม่ต้องตรวจ", "ใช้เฉพาะงานไอที"], answer: 1 },
+                    { question: "ข้อมูลแบบใดไม่ควรใส่ใน AI สาธารณะ", choices: ["ข้อมูลสาธารณะ", "ข้อมูลส่วนบุคคลอ่อนไหว", "ข้อมูลประกาศทั่วไป", "ข้อมูลประชาสัมพันธ์"], answer: 1 },
+                    { question: "แนวทางที่ถูกต้องเมื่อใช้ AI เขียนเอกสาร", choices: ["คัดลอกใช้ทันที", "ตรวจข้อเท็จจริงและปรับภาษา", "ไม่ต้องอ้างอิง", "ส่งต่อทันที"], answer: 1 },
+                    { question: "เป้าหมายหลักของบทเรียนนี้คืออะไร", choices: ["ใช้ AI อย่างรับผิดชอบ", "เพิ่มประสิทธิภาพงาน", "ลดข้อผิดพลาด", "ถูกทุกข้อ"], answer: 3 }
+                ],
+                postTest: [
+                    { question: `หลังเรียน ${lessonTitle} สิ่งสำคัญที่สุดคือข้อใด`, choices: ["ความเร็วอย่างเดียว", "ความถูกต้องและจริยธรรม", "ความสวยงามเอกสาร", "ไม่ต้องตรวจทาน"], answer: 1 },
+                    { question: "เมื่อได้ผลลัพธ์จาก AI ขั้นตอนต่อไปคืออะไร", choices: ["ใช้งานทันที", "ตรวจทาน/ยืนยันกับแหล่งข้อมูล", "ส่งต่อทันที", "เก็บไว้ไม่ใช้"], answer: 1 },
+                    { question: "การใช้ 5ส กับงานดิจิทัลช่วยเรื่องใด", choices: ["ค้นหาไฟล์เร็วขึ้น", "ลดความซ้ำซ้อน", "ลดความผิดพลาด", "ถูกทุกข้อ"], answer: 3 },
+                    { question: "ตัวชี้วัดความสำเร็จหลังใช้ AI คืออะไร", choices: ["งานเร็วขึ้นและคุณภาพดีขึ้น", "ปริมาณข้อความเยอะขึ้น", "ใช้เครื่องมือมากขึ้น", "เอกสารยาวขึ้น"], answer: 0 },
+                    { question: "ผู้เรียนควรทำอะไรต่อหลังจบบทเรียน", choices: ["ทดลองใช้กับงานจริงแบบเล็ก", "หยุดใช้ AI", "ลบเอกสารทั้งหมด", "ไม่ต้องปรับปรุง"], answer: 0 }
+                ]
+            };
         }
 
         function showToast(message) {

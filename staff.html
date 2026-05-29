@@ -1,212 +1,253 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คอร์สเรียนของฉัน - Learning Ecosystem</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
-                    colors: { primary: '#121829', accent: '#6366f1' }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; }
-        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.01); border-radius: 1.25rem; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คอร์สเรียนของฉัน - Learning Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Prompt', sans-serif; background: #f8fafc; }
+    .glass-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+  </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700">
+  <aside class="w-64 bg-[#0f172a] text-white hidden md:flex flex-col justify-between">
+    <div>
+      <div class="p-6 flex items-center gap-3">
+        <div class="bg-indigo-600 p-2 rounded-xl"><i class="ph-fill ph-book-open text-xl"></i></div>
+        <h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1>
+      </div>
+      <nav class="px-4 space-y-1 text-sm">
+        <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl"><i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+      </nav>
+    </div>
+    <div class="p-4">
+      <button onclick="handleLogout()" class="w-full bg-slate-800 text-slate-300 py-2.5 rounded-xl">ออกจากระบบ</button>
+    </div>
+  </aside>
 
-    <aside class="w-64 bg-[#0f172a] text-white flex flex-col justify-between hidden md:flex z-20">
-        <div>
-            <div class="p-6 flex items-center gap-3">
-                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div>
-                <h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1>
-            </div>
-            
-            <nav class="px-4 space-y-1">
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
-                <a href="staff.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
-                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
-                <a href="certificates.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
-                <a href="history.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
-                <a href="favorites.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
-                <a href="activity.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-                <a href="messages.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition justify-between">
-                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
-                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
-                </a>
-                <a href="settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
-            </nav>
+  <main class="flex-1 overflow-y-auto">
+    <header class="bg-white border-b px-8 py-4 sticky top-0 z-10 flex justify-between items-center">
+      <h2 class="text-xl font-bold">คอร์สเรียนของฉัน</h2>
+      <div class="text-sm">
+        <span id="userNameText" class="font-semibold"></span>
+        <span class="text-slate-400"> | </span>
+        <span id="userDeptText" class="text-slate-500"></span>
+      </div>
+    </header>
+
+    <div class="p-8 max-w-6xl mx-auto">
+      <div class="mb-4 text-sm text-slate-500">กดเริ่มเรียนเพื่อทำ Pre-test ทันที จากนั้นระบบจะเล่นวิดีโอและต่อ Post-test อัตโนมัติ</div>
+      <div id="lessonGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <div id="emptyState" class="hidden glass-card p-8 text-center text-slate-500">ยังไม่มีบทเรียนในระบบ</div>
+    </div>
+  </main>
+
+  <div id="learnModal" class="fixed inset-0 hidden bg-black/50 z-50 items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl border">
+      <div class="px-5 py-4 border-b flex items-center justify-between">
+        <h3 id="modalTitle" class="font-bold text-lg"></h3>
+        <button onclick="closeLearnModal()"><i class="ph ph-x text-xl"></i></button>
+      </div>
+
+      <div class="px-5 py-4 border-b text-sm font-medium text-slate-500 flex gap-6">
+        <button id="tabPreBtn" onclick="switchLearnTab('pre')" class="text-indigo-600 border-b-2 border-indigo-600 pb-1">1) Pre-test</button>
+        <button id="tabVideoBtn" onclick="switchLearnTab('video')" class="pb-1">2) วิดีโอ</button>
+        <button id="tabPostBtn" onclick="switchLearnTab('post')" class="pb-1">3) Post-test</button>
+      </div>
+
+      <div class="p-5">
+        <div id="tabPre" class="space-y-4"></div>
+        <div id="tabVideo" class="hidden space-y-4">
+          <div id="videoContainer" class="aspect-video bg-slate-100 rounded-xl overflow-hidden"></div>
+          <div class="text-right">
+            <button onclick="switchLearnTab('post')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg">ทำ Post-test ต่อ</button>
+          </div>
         </div>
-        
-        <div class="p-4">
-            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
-                <i class="ph ph-sign-out"></i> ออกจากระบบ
-            </button>
-        </div>
-    </aside>
+        <div id="tabPost" class="hidden space-y-4"></div>
+      </div>
+    </div>
+  </div>
 
-    <main class="flex-1 flex flex-col h-screen overflow-y-auto">
-        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
-            <div class="relative w-96">
-                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2 focus:outline-none">
-            </div>
-            <div class="flex items-center gap-4">
-                <button class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span></button>
-                <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
-                <div class="flex items-center gap-3 border-l pl-4">
-                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" class="w-9 h-9 rounded-full object-cover">
-                    <div class="text-sm">
-                        <p class="font-semibold text-slate-800 leading-tight id-user-name">กำลังโหลด...</p>
-                        <p class="text-xs text-slate-400 id-user-dept">บุคลากรสายสนับสนุน</p>
-                    </div>
-                </div>
-            </div>
-        </header>
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycby_LQtHrmRmUDHrGVVgp_0vVfTpHPZTFzbty5GrU2ObqojoeavuSyYmmkVzeF7iqD0ffg/exec";
+    let currentLesson = null;
 
-        <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl"><i class="ph-fill ph-graduation-cap"></i></div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">คอร์สเรียนของฉัน</h2>
-                        <p class="text-xs text-slate-400">ติดตามความก้าวหน้าและเรียนรู้อย่างต่อเนื่องเพื่อพัฒนาทักษะการทำงานด้วย AI</p>
-                    </div>
-                </div>
+    window.onload = async function() {
+      const storedUser = localStorage.getItem('user');
+      if (!storedUser) return window.location.href = 'index.html';
+      const user = JSON.parse(storedUser);
+      document.getElementById('userNameText').innerText = user.name || '-';
+      document.getElementById('userDeptText').innerText = user.department || '-';
+      await loadLessons();
+    };
 
-                <div class="border-b flex gap-6 text-sm font-medium text-slate-400">
-                    <span class="text-indigo-600 border-b-2 border-indigo-600 pb-2 cursor-pointer">ทั้งหมด</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">กำลังเรียน</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">ยังไม่เริ่มเรียน</span>
-                    <span class="hover:text-slate-600 pb-2 cursor-pointer">เรียนจบแล้ว</span>
-                </div>
+    async function loadLessons() {
+      const grid = document.getElementById('lessonGrid');
+      const empty = document.getElementById('emptyState');
+      grid.innerHTML = '';
 
-                <div class="space-y-4">
-                    <h3 class="text-sm font-semibold text-slate-800">คอร์สที่กำลังเรียน</h3>
-                    
-                    <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-28 h-20 bg-indigo-900 text-white rounded-xl flex flex-col items-center justify-center font-bold text-xl relative overflow-hidden shrink-0">
-                            AI <span class="text-[10px] font-normal text-indigo-300">TECHNOLOGY</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">กำลังเรียน</span>
-                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">AI Tools for Education</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">โดย Admin User</p>
-                            <div class="flex items-center gap-3 mt-3">
-                                <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 72%"></div></div>
-                                <span class="text-xs font-semibold text-slate-600">72%</span>
-                            </div>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="text-xs text-slate-400 mb-2">2 ชม. 35 น. จาก 4 ชม.</p>
-                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">เรียนต่อ</button>
-                        </div>
-                    </div>
+      try {
+        const resp = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'getLessons' })
+        });
+        const data = await resp.json();
+        const lessons = (data && data.lessons) ? data.lessons : [];
 
-                    <div class="glass-card p-4 flex gap-4 items-center bg-white">
-                        <div class="w-28 h-20 bg-amber-500 text-white rounded-xl flex flex-col items-center justify-center font-bold text-sm text-center px-1 shrink-0">
-                            Active Learning
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-medium px-2 py-0.5 rounded">กำลังเรียน</span>
-                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">การออกแบบการเรียนรู้แบบ Active Learning</h4>
-                            <p class="text-xs text-slate-400 mt-0.5">โดย Kritsada S.</p>
-                            <div class="flex items-center gap-3 mt-3">
-                                <div class="flex-1 bg-slate-100 rounded-full h-1.5"><div class="bg-indigo-600 h-1.5 rounded-full" style="width: 45%"></div></div>
-                                <span class="text-xs font-semibold text-slate-600">45%</span>
-                            </div>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="text-xs text-slate-400 mb-2">1 ชม. 20 น. จาก 3 ชม.</p>
-                            <button class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">เรียนต่อ</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center"><h3 class="text-sm font-semibold text-slate-800">ยังไม่เริ่มเรียน</h3><span class="text-xs text-indigo-600 hover:underline cursor-pointer">ดูทั้งหมด</span></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="glass-card p-4 bg-white">
-                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-presentation-chart text-3xl"></i></div>
-                            <h4 class="text-xs font-semibold text-slate-800 truncate">Presentation Skills</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">โดย Admin User</p>
-                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">เริ่มเรียน</button>
-                        </div>
-                        <div class="glass-card p-4 bg-white">
-                            <div class="h-24 bg-slate-100 rounded-xl mb-3 flex items-center justify-center text-slate-400"><i class="ph ph-chart-bar text-3xl"></i></div>
-                            <h4 class="text-xs font-semibold text-slate-800 truncate">Data Visualization</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">โดย Nuttida P.</p>
-                            <button class="w-full mt-3 border py-1.5 rounded-lg text-xs font-medium hover:bg-slate-50">เริ่มเรียน</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <div class="glass-card p-5 bg-white">
-                    <div class="flex justify-between text-sm font-semibold mb-2"><span>ความคืบหน้ารวม</span><span class="text-indigo-600">65%</span></div>
-                    <div class="bg-slate-100 h-2 rounded-full w-full"><div class="bg-indigo-600 h-2 rounded-full" style="width: 65%"></div></div>
-                    <p class="text-xs text-slate-400 mt-2">เรียนจบ 8 จาก 12 คอร์ส</p>
-                </div>
-
-                <div class="glass-card p-5 bg-white text-xs">
-                    <div class="flex justify-between items-center mb-4"><span class="font-bold text-slate-800">ปฏิทินการเรียน</span><span class="text-indigo-600 cursor-pointer">ดูปฏิทินทั้งหมด</span></div>
-                    <div class="text-center font-medium text-slate-700 mb-2">พฤษภาคม 2569</div>
-                    <div class="grid grid-cols-7 gap-y-2 text-center text-slate-400">
-                        <span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span><span>อา</span>
-                        <span class="text-slate-300">27</span><span class="text-slate-300">28</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-                        <span>13</span><span>14</span><span>15</span><span class="bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center mx-auto">16</span><span>17</span><span>18</span><span>19</span>
-                    </div>
-                </div>
-
-                <div class="glass-card p-5 bg-white">
-                    <h3 class="text-sm font-semibold mb-4 text-slate-800">ความสำเร็จของฉัน</h3>
-                    <div class="flex gap-4 justify-around text-center">
-                        <div>
-                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-rocket"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">ผู้เรียนที่ดี</p>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-fire"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">เรียนต่อเนื่อง</p>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-yellow-50 text-yellow-600 rounded-full flex items-center justify-center text-2xl mx-auto shadow-sm"><i class="ph-fill ph-trophy"></i></div>
-                            <p class="text-[10px] font-medium mt-1 text-slate-700">นักเรียนคุณภาพ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <script>
-        window.onload = function() {
-            const userDataString = localStorage.getItem('user');
-            if (userDataString) {
-                const user = JSON.parse(userDataString);
-                // แสดงชื่อจริง และ หน่วยงานสังกัดจริงของบุคลากรคนนั้นๆ
-                document.querySelector('.id-user-name').innerText = user.name;
-                document.querySelector('.id-user-dept').innerText = user.department;
-            }
-        };
-
-        function handleLogout() {
-            localStorage.clear();
-            window.location.href = 'index.html';
+        if (!lessons.length) {
+          empty.classList.remove('hidden');
+          return;
         }
-    </script>
+        empty.classList.add('hidden');
+
+        for (const lesson of lessons) {
+          const card = document.createElement('div');
+          card.className = 'glass-card p-4';
+          card.innerHTML = `
+            <div class="text-xs mb-2 inline-block bg-indigo-50 text-indigo-600 px-2 py-1 rounded">${escapeHtml(lesson.type || 'Video')}</div>
+            <h4 class="font-semibold text-slate-800 mb-1">${escapeHtml(lesson.title || 'ไม่ระบุชื่อ')}</h4>
+            <p class="text-xs text-slate-500 mb-4 line-clamp-2">${escapeHtml(lesson.description || '-')}</p>
+            <button class="w-full bg-indigo-600 text-white py-2 rounded-lg text-sm">เริ่มเรียน</button>
+          `;
+          card.querySelector('button').onclick = () => openLesson(lesson);
+          grid.appendChild(card);
+        }
+      } catch (e) {
+        empty.classList.remove('hidden');
+        empty.innerText = 'โหลดบทเรียนไม่สำเร็จ';
+      }
+    }
+
+    function openLesson(rawLesson) {
+      currentLesson = normalizeLesson(rawLesson);
+      document.getElementById('modalTitle').innerText = currentLesson.title;
+      renderQuiz('pre');
+      renderVideo();
+      renderQuiz('post');
+      document.getElementById('learnModal').classList.remove('hidden');
+      document.getElementById('learnModal').classList.add('flex');
+      switchLearnTab('pre');
+    }
+
+    function closeLearnModal() {
+      document.getElementById('learnModal').classList.add('hidden');
+      document.getElementById('learnModal').classList.remove('flex');
+      currentLesson = null;
+    }
+
+    function switchLearnTab(tab) {
+      const tabs = ['pre', 'video', 'post'];
+      for (const t of tabs) {
+        document.getElementById('tab' + capitalize(t)).classList.add('hidden');
+        const btn = document.getElementById('tab' + capitalize(t) + 'Btn');
+        btn.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
+      }
+      document.getElementById('tab' + capitalize(tab)).classList.remove('hidden');
+      const activeBtn = document.getElementById('tab' + capitalize(tab) + 'Btn');
+      activeBtn.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
+    }
+
+    function renderVideo() {
+      const box = document.getElementById('videoContainer');
+      const embedUrl = toEmbedUrl(currentLesson.url || '');
+      if (!embedUrl) {
+        box.innerHTML = `<div class="h-full flex items-center justify-center text-slate-500">ไม่พบลิงก์วิดีโอที่เล่นแบบฝังได้</div>`;
+        return;
+      }
+      box.innerHTML = `<iframe class="w-full h-full" src="${embedUrl}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    }
+
+    function renderQuiz(kind) {
+      const target = document.getElementById(kind === 'pre' ? 'tabPre' : 'tabPost');
+      const questions = kind === 'pre' ? currentLesson.preTest : currentLesson.postTest;
+      target.innerHTML = '';
+
+      if (!questions.length) {
+        target.innerHTML = `<div class="text-slate-500">ยังไม่มีข้อสอบ ${kind === 'pre' ? 'ก่อนเรียน' : 'หลังเรียน'}</div>`;
+        return;
+      }
+
+      questions.forEach((q, idx) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'glass-card p-4';
+
+        const optionsHtml = q.choices.map((c, i) => `
+          <label class="block text-sm mb-2">
+            <input type="radio" name="${kind}_${idx}" value="${i}" class="mr-2">${escapeHtml(c)}
+          </label>
+        `).join('');
+
+        wrap.innerHTML = `
+          <div class="font-semibold mb-3">${idx + 1}) ${escapeHtml(q.question || '-')}</div>
+          ${optionsHtml}
+        `;
+        target.appendChild(wrap);
+      });
+
+      const footer = document.createElement('div');
+      footer.className = 'text-right';
+      footer.innerHTML = `<button class="px-4 py-2 bg-indigo-600 text-white rounded-lg">ส่งคำตอบ ${kind === 'pre' ? 'ก่อนเรียน' : 'หลังเรียน'}</button>`;
+      footer.querySelector('button').onclick = () => submitQuiz(kind);
+      target.appendChild(footer);
+    }
+
+    function submitQuiz(kind) {
+      const qs = kind === 'pre' ? currentLesson.preTest : currentLesson.postTest;
+      let score = 0;
+      qs.forEach((q, idx) => {
+        const checked = document.querySelector(`input[name="${kind}_${idx}"]:checked`);
+        if (checked && Number(checked.value) === Number(q.answer)) score += 1;
+      });
+      alert(`คะแนน ${kind === 'pre' ? 'Pre-test' : 'Post-test'}: ${score}/${qs.length}`);
+      if (kind === 'pre') switchLearnTab('video');
+      if (kind === 'post') closeLearnModal();
+    }
+
+    function normalizeLesson(lesson) {
+      let quizData = lesson.quizData || lesson.quizzes || {};
+      if (typeof quizData === 'string') {
+        try { quizData = JSON.parse(quizData); } catch { quizData = {}; }
+      }
+      const preRaw = quizData.preTest || quizData.pre || [];
+      const postRaw = quizData.postTest || quizData.post || [];
+      return {
+        title: lesson.title || 'บทเรียน',
+        url: lesson.url || '',
+        preTest: normalizeQuestions(preRaw),
+        postTest: normalizeQuestions(postRaw)
+      };
+    }
+
+    function normalizeQuestions(arr) {
+      if (!Array.isArray(arr)) return [];
+      return arr.map((q) => {
+        if (q.choices) return { question: q.question || '', choices: q.choices || [], answer: Number(q.answer ?? 0) };
+        return { question: q.q || '', choices: q.opts || [], answer: Math.max(0, Number(q.ans || 1) - 1) };
+      }).filter(q => q.question && Array.isArray(q.choices) && q.choices.length >= 2);
+    }
+
+    function toEmbedUrl(url) {
+      const text = String(url || '').trim();
+      if (!text) return '';
+      let videoId = '';
+      const youtu = text.match(/youtu\.be\/([^?&]+)/);
+      const watch = text.match(/[?&]v=([^&]+)/);
+      const embed = text.match(/youtube\.com\/embed\/([^?&]+)/);
+      if (youtu) videoId = youtu[1];
+      else if (watch) videoId = watch[1];
+      else if (embed) videoId = embed[1];
+      if (!videoId) return '';
+      return `https://www.youtube.com/embed/${videoId}?rel=0`;
+    }
+
+    function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+    function escapeHtml(s){ return String(s||'').replace(/[&<>"]/g, (m)=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[m])); }
+    function handleLogout(){ localStorage.clear(); window.location.href = 'index.html'; }
+  </script>
 </body>
 </html>
