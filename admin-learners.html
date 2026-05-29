@@ -12,8 +12,8 @@
     body { font-family: 'Prompt', sans-serif; background:#f4f7fb; }
     .glass { background: rgba(255,255,255,.96); border:1px solid #e6ebf2; border-radius: 16px; }
     .menu-active { background: linear-gradient(90deg,#3b5bfd,#5a4cf0); color:#fff; }
-    .tab-btn { color:#64748b; padding-bottom:12px; border-bottom:2px solid transparent; font-weight:500; }
-    .tab-btn.active { color:#4f46e5; border-bottom-color:#4f46e5; }
+    .tab-btn { color:#64748b; padding-bottom:12px; border-bottom:2px solid transparent; font-weight:400; font-size: 1.125rem; }
+    .tab-btn.active { color:#4f46e5; border-bottom-color:#4f46e5; font-weight:600; }
   </style>
   <script src="mojibake-fix.js"></script>
 </head>
@@ -73,7 +73,7 @@
         <button class="px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold">+ สร้างกลุ่มผู้เรียน</button>
       </div>
 
-      <div class="border-b border-slate-200 flex gap-8 text-lg">
+      <div class="border-b border-slate-200 flex gap-8">
         <button class="tab-btn active" data-tab="overview">ภาพรวม</button>
         <button class="tab-btn" data-tab="groups">กลุ่มผู้เรียน</button>
         <button class="tab-btn" data-tab="needs">ความต้องการเรียนรู้</button>
@@ -84,22 +84,22 @@
 
       <div id="tab-overview" class="tab-panel space-y-4">
         <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
-          <div class="glass p-5"><p class="text-slate-500">ผู้เรียนทั้งหมด</p><p id="kpiUsers" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-          <div class="glass p-5"><p class="text-slate-500">กลุ่มผู้เรียน</p><p id="kpiGroups" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-          <div class="glass p-5"><p class="text-slate-500">หลักสูตรที่มีในระบบ</p><p id="kpiLessons" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
-          <div class="glass p-5"><p class="text-slate-500">ความก้าวหน้าเฉลี่ย</p><p id="kpiAvg" class="text-4xl font-bold text-slate-900 mt-1">0%</p></div>
+          <div class="glass p-5"><p class="text-slate-500">ผู้เรียนทั้งหมด</p><p id="kpiUsers" class="text-2xl font-semibold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">กลุ่มผู้เรียน</p><p id="kpiGroups" class="text-2xl font-semibold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">หลักสูตรที่มีในระบบ</p><p id="kpiLessons" class="text-2xl font-semibold text-slate-900 mt-1">0</p></div>
+          <div class="glass p-5"><p class="text-slate-500">ความก้าวหน้าเฉลี่ย</p><p id="kpiAvg" class="text-2xl font-semibold text-slate-900 mt-1">0%</p></div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <div class="glass p-5">
             <div class="flex justify-between items-center mb-4">
-              <h3 class="text-2xl text-slate-900">กลุ่มผู้เรียนล่าสุด</h3>
+              <h3 class="text-xl font-medium text-slate-900">กลุ่มผู้เรียนล่าสุด</h3>
               <span class="text-indigo-600">ดูทั้งหมด</span>
             </div>
             <div id="groupList" class="space-y-3"></div>
           </div>
           <div class="glass p-5">
             <div class="flex justify-between items-center mb-4">
-              <h3 class="text-2xl text-slate-900">แนวโน้มการเรียนรู้</h3>
+              <h3 class="text-xl font-medium text-slate-900">แนวโน้มการเรียนรู้</h3>
               <span class="text-slate-500">6 เดือนล่าสุด</span>
             </div>
             <canvas id="trendChart" height="190"></canvas>
@@ -109,7 +109,7 @@
 
       <div id="tab-groups" class="tab-panel hidden">
         <div class="glass p-5">
-          <h3 class="text-2xl text-slate-900 mb-4">ข้อมูลกลุ่มผู้เรียนตามหน่วยงาน</h3>
+          <h3 class="text-xl font-medium text-slate-900 mb-4">ข้อมูลกลุ่มผู้เรียนตามหน่วยงาน</h3>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead><tr class="text-slate-500 border-b"><th class="text-left py-2">หน่วยงาน</th><th class="text-right py-2">จำนวนผู้เรียน</th><th class="text-right py-2">ความก้าวหน้าเฉลี่ย</th></tr></thead>
@@ -121,14 +121,14 @@
 
       <div id="tab-needs" class="tab-panel hidden">
         <div class="glass p-5">
-          <h3 class="text-2xl text-slate-900 mb-4">ความต้องการเรียนรู้ (จากช่องว่างทักษะ)</h3>
+          <h3 class="text-xl font-medium text-slate-900 mb-4">ความต้องการเรียนรู้ (จากช่องว่างทักษะ)</h3>
           <div id="needsList" class="space-y-3"></div>
         </div>
       </div>
 
       <div id="tab-progress" class="tab-panel hidden">
         <div class="glass p-5">
-          <h3 class="text-2xl text-slate-900 mb-4">ความก้าวหน้ารายบุคคล</h3>
+          <h3 class="text-xl font-medium text-slate-900 mb-4">ความก้าวหน้ารายบุคคล</h3>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead><tr class="text-slate-500 border-b"><th class="text-left py-2">ชื่อ</th><th class="text-left py-2">หน่วยงาน</th><th class="text-right py-2">Pre</th><th class="text-right py-2">Post</th><th class="text-right py-2">Progress</th></tr></thead>
@@ -140,11 +140,11 @@
 
       <div id="tab-behavior" class="tab-panel hidden">
         <div class="glass p-5">
-          <h3 class="text-2xl text-slate-900 mb-4">พฤติกรรมการเรียนรู้</h3>
+          <h3 class="text-xl font-medium text-slate-900 mb-4">พฤติกรรมการเรียนรู้</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานวันนี้</p><p id="behaviorToday" class="text-3xl font-bold">0</p></div>
-            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">ไม่เคยเข้าใช้งาน</p><p id="behaviorNever" class="text-3xl font-bold">0</p></div>
-            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานรวม</p><p id="behaviorTotalAccess" class="text-3xl font-bold">0</p></div>
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานวันนี้</p><p id="behaviorToday" class="text-2xl font-semibold">0</p></div>
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">ไม่เคยเข้าใช้งาน</p><p id="behaviorNever" class="text-2xl font-semibold">0</p></div>
+            <div class="p-4 rounded-xl bg-slate-50 border"><p class="text-slate-500">เข้าใช้งานรวม</p><p id="behaviorTotalAccess" class="text-2xl font-semibold">0</p></div>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -157,7 +157,7 @@
 
       <div id="tab-reports" class="tab-panel hidden">
         <div class="glass p-5">
-          <h3 class="text-2xl text-slate-900 mb-4">รายงานสรุป</h3>
+          <h3 class="text-xl font-medium text-slate-900 mb-4">รายงานสรุป</h3>
           <div id="reportSummary" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </div>
       </div>
@@ -204,7 +204,7 @@ function renderGroups(users){
   wrap.innerHTML = rows.map((r, idx)=>`
     <div class="flex items-center justify-between border border-slate-100 rounded-xl p-3">
       <div>
-        <p class="font-semibold text-slate-900">${r.dept}</p>
+        <p class="font-medium text-slate-900">${r.dept}</p>
         <p class="text-sm text-slate-500">ผู้เรียน ${r.count} คน</p>
       </div>
       <div class="w-44">
@@ -325,7 +325,7 @@ function renderTabReports(users, lessons){
     { k: 'ผู้เรียนยังไม่เริ่ม', v: `${users.filter(u=>progressNum(u.progress)===0).length.toLocaleString('th-TH')} คน` }
   ];
   document.getElementById('reportSummary').innerHTML = summary.map(s =>
-    `<div class="border rounded-xl p-4 bg-slate-50"><p class="text-slate-500">${s.k}</p><p class="text-2xl font-bold text-slate-900 mt-1">${s.v}</p></div>`
+    `<div class="border rounded-xl p-4 bg-slate-50"><p class="text-slate-500">${s.k}</p><p class="text-2xl font-semibold text-slate-900 mt-1">${s.v}</p></div>`
   ).join('');
 }
 
