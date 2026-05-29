@@ -6,150 +6,227 @@
   <title>Learners - Learning Ecosystem</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Prompt', sans-serif; background:#f8fafc; }
-    .card { background:#fff; border:1px solid #e2e8f0; border-radius:16px; }
+    body { font-family: 'Prompt', sans-serif; background:#f4f7fb; }
+    .glass { background: rgba(255,255,255,.96); border:1px solid #e6ebf2; border-radius: 16px; }
+    .menu-active { background: linear-gradient(90deg,#3b5bfd,#5a4cf0); color:#fff; }
   </style>
-    <script src="mojibake-fix.js"></script></head>
-<body class="flex h-screen overflow-hidden text-slate-700">
-  <aside class="w-64 bg-slate-950 text-white hidden md:flex flex-col justify-between">
-    <div class="overflow-y-auto h-full pb-4">
-      <div class="p-6 flex items-center gap-3"><div class="bg-emerald-500 p-2 rounded-xl"><i class="ph-fill ph-book-open text-xl"></i></div><h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1></div>
-      <nav class="px-4 space-y-1 text-sm">
-        <a href="admin.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-house"></i> หน้าหลัก</a>
-        <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">องค์ประกอบ</div>
-        <a href="admin-learners.html" class="flex items-center gap-3 px-4 py-2.5 bg-indigo-600 text-white rounded-xl"><i class="ph-fill ph-users"></i> Learners</a>
-        <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-user-gear"></i> Staff</a>
-        <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-desktop"></i> Technology</a>
-        <a href="admin-community.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-users-three"></i> Community</a>
-        <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-briefcase"></i> Workplace</a>
-        <a href="admin-resources.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-books"></i> Learning Resources</a>
-        <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-clipboard-text"></i> Assessment</a>
-        <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-brain"></i> AI Integration</a>
-        <div class="pt-4 pb-2 px-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">การจัดการ</div>
-        <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-chart-line-up"></i> รายงานและวิเคราะห์</a>
-        <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-2.5 text-slate-400 hover:bg-slate-800 rounded-xl"><i class="ph ph-gear"></i> การตั้งค่า</a>
+  <script src="mojibake-fix.js"></script>
+</head>
+<body class="flex min-h-screen text-slate-700">
+  <aside class="w-72 bg-slate-950 text-slate-300 hidden md:flex flex-col justify-between">
+    <div>
+      <div class="p-6 flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-blue-600 grid place-items-center"><i class="ph-fill ph-book-open text-2xl text-white"></i></div>
+        <h1 class="text-4 leading-tight font-semibold text-white">Learning<br/>Ecosystem</h1>
+      </div>
+      <nav class="px-3 text-[31px]">
+        <a href="admin.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-house"></i><span class="text-lg">หน้าหลัก</span></a>
+        <div class="px-4 py-3 text-[11px] uppercase tracking-wider text-slate-500">องค์ประกอบ</div>
+        <a href="admin-learners.html" class="menu-active flex items-center gap-3 px-4 py-3 rounded-xl mb-1"><i class="ph-fill ph-users"></i><span class="text-lg">Learners</span></a>
+        <a href="admin-teachers.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-user-gear"></i><span class="text-lg">Staff</span></a>
+        <a href="admin-technology.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-desktop"></i><span class="text-lg">Technology</span></a>
+        <a href="admin-community.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-users-three"></i><span class="text-lg">Community</span></a>
+        <a href="admin-workplace.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-briefcase"></i><span class="text-lg">Workplace</span></a>
+        <a href="admin-resources.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-books"></i><span class="text-lg">Learning Resources</span></a>
+        <a href="admin-assessment.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-clipboard-text"></i><span class="text-lg">Assessment</span></a>
+        <a href="admin-ai.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-brain"></i><span class="text-lg">AI Integration</span></a>
+        <div class="px-4 py-3 mt-2 text-[11px] uppercase tracking-wider text-slate-500">การจัดการ</div>
+        <a href="admin-reports.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 mb-1"><i class="ph ph-chart-line-up"></i><span class="text-lg">รายงานและวิเคราะห์</span></a>
+        <a href="admin-settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800"><i class="ph ph-gear"></i><span class="text-lg">การตั้งค่า</span></a>
       </nav>
     </div>
-    <div class="p-4 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-slate-800 text-slate-300 py-2 rounded-xl">ออกจากระบบ</button></div>
+    <div class="p-4"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-slate-700 rounded-xl py-3 text-white">ออกจากระบบ</button></div>
   </aside>
 
-  <main class="flex-1 flex flex-col h-screen overflow-hidden">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center">
-      <h2 class="text-xl font-bold">Learners Management</h2>
-      <div class="text-sm"><span id="userNameText" class="font-semibold"></span> • <span id="userDeptText" class="text-slate-500"></span></div>
+  <main class="flex-1">
+    <header class="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between">
+      <div class="w-[420px] max-w-full relative">
+        <i class="ph ph-magnifying-glass absolute left-4 top-3.5 text-xl text-slate-400"></i>
+        <input id="searchInput" placeholder="ค้นหาในระบบ..." class="w-full pl-12 pr-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 focus:outline-none" />
+      </div>
+      <div class="flex items-center gap-4">
+        <i class="ph ph-bell text-2xl text-slate-500"></i>
+        <img src="https://ui-avatars.com/api/?name=Admin+User&background=1f3a8a&color=fff" class="w-12 h-12 rounded-full"/>
+        <div><p id="userNameText" class="font-bold"></p><p id="userDeptText" class="text-sm text-slate-500"></p></div>
+      </div>
     </header>
 
-    <div class="p-8 space-y-6 overflow-y-auto">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="card p-4"><p class="text-xs text-slate-500">บุคลากรทั้งหมด</p><p class="text-2xl font-bold" id="totalUsers">-</p></div>
-        <div class="card p-4"><p class="text-xs text-slate-500">ความคืบหน้าเฉลี่ย</p><p class="text-2xl font-bold" id="avgProgress">-</p></div>
-        <div class="card p-4"><p class="text-xs text-slate-500">ทำ Post-test แล้ว</p><p class="text-2xl font-bold" id="postDoneCount">-</p></div>
-        <div class="card p-4"><p class="text-xs text-slate-500">เข้าใช้งานวันนี้</p><p class="text-2xl font-bold" id="todayLoginCount">-</p></div>
+    <section class="p-8 space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 grid place-items-center text-white"><i class="ph-fill ph-users text-3xl"></i></div>
+          <div>
+            <h2 class="text-5 font-semibold text-slate-900">Learners</h2>
+            <p class="text-slate-500">กำหนดกลุ่มผู้เรียนและความต้องการในการเรียนรู้</p>
+          </div>
+        </div>
+        <button class="px-6 py-3 rounded-xl bg-indigo-600 text-white font-semibold">+ สร้างกลุ่มผู้เรียน</button>
       </div>
 
-      <div class="card p-4">
-        <div class="flex justify-between items-center mb-3">
-          <h3 class="font-semibold">รายชื่อบุคลากร (ข้อมูลจริงจาก Users)</h3>
-          <input id="searchInput" placeholder="ค้นหาชื่อ/username/หน่วยงาน" class="border rounded-lg px-3 py-2 text-sm w-72" />
+      <div class="border-b border-slate-200 flex gap-8 text-lg">
+        <button class="text-indigo-600 border-b-2 border-indigo-600 pb-3 font-semibold">ภาพรวม</button>
+        <button class="text-slate-500 pb-3">กลุ่มผู้เรียน</button>
+        <button class="text-slate-500 pb-3">ความต้องการเรียนรู้</button>
+        <button class="text-slate-500 pb-3">ความก้าวหน้า</button>
+        <button class="text-slate-500 pb-3">พฤติกรรมการเรียนรู้</button>
+        <button class="text-slate-500 pb-3">รายงาน</button>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-4 gap-4">
+        <div class="glass p-5"><p class="text-slate-500">ผู้เรียนทั้งหมด</p><p id="kpiUsers" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+        <div class="glass p-5"><p class="text-slate-500">กลุ่มผู้เรียน</p><p id="kpiGroups" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+        <div class="glass p-5"><p class="text-slate-500">หลักสูตรที่มีในระบบ</p><p id="kpiLessons" class="text-4xl font-bold text-slate-900 mt-1">0</p></div>
+        <div class="glass p-5"><p class="text-slate-500">ความก้าวหน้าเฉลี่ย</p><p id="kpiAvg" class="text-4xl font-bold text-slate-900 mt-1">0%</p></div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        <div class="glass p-5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-2xl text-slate-900">กลุ่มผู้เรียนล่าสุด</h3>
+            <span class="text-indigo-600">ดูทั้งหมด</span>
+          </div>
+          <div id="groupList" class="space-y-3"></div>
         </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead class="bg-slate-50 text-slate-500">
-              <tr>
-                <th class="p-3 text-left">ชื่อ</th>
-                <th class="p-3 text-left">Username</th>
-                <th class="p-3 text-left">หน่วยงาน</th>
-                <th class="p-3 text-center">Progress</th>
-                <th class="p-3 text-center">Pre/Post</th>
-                <th class="p-3 text-right">Last Login</th>
-              </tr>
-            </thead>
-            <tbody id="learnerRows" class="divide-y"></tbody>
-          </table>
+        <div class="glass p-5">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-semibold text-2xl text-slate-900">แนวโน้มการเรียนรู้</h3>
+            <span class="text-slate-500">6 เดือนล่าสุด</span>
+          </div>
+          <canvas id="trendChart" height="190"></canvas>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <script>
-    const API_URL = '/api/submit';
-    let allUsers = [];
+<script>
+const API_URL = '/api/submit';
+let trendChart;
 
-    function handleLogout(){ localStorage.removeItem('user'); location.href='index.html'; }
-    function p(v){
-      const raw = String(v ?? '').trim();
-      if (!raw) return 0;
-      const hasPercent = raw.includes('%');
-      const n = Number(raw.replace('%','').replace(/,/g,''));
-      if (!Number.isFinite(n)) return 0;
-      if (hasPercent) return n;
-      return n > 0 && n <= 1 ? n * 100 : n;
+function handleLogout(){ localStorage.clear(); location.href='index.html'; }
+
+function progressNum(v){
+  const raw = String(v ?? '').trim();
+  if (!raw) return 0;
+  const hasPercent = raw.includes('%');
+  const n = Number(raw.replace('%','').replace(/,/g,''));
+  if (!Number.isFinite(n)) return 0;
+  if (hasPercent) return n;
+  return n > 0 && n <= 1 ? n * 100 : n;
+}
+
+async function post(payload){
+  const r = await fetch(API_URL,{ method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
+  return await r.json();
+}
+
+function renderGroups(users){
+  const byDept = new Map();
+  users.forEach(u=>{
+    const dept = (u.department || 'ไม่ระบุหน่วยงาน').trim();
+    const item = byDept.get(dept) || { dept, count:0, avg:0, sum:0 };
+    item.count += 1;
+    item.sum += progressNum(u.progress);
+    byDept.set(dept, item);
+  });
+
+  const rows = [...byDept.values()].map(x=>({ ...x, avg: x.count ? Math.round(x.sum/x.count) : 0 }))
+    .sort((a,b)=>b.count-a.count).slice(0,6);
+
+  const wrap = document.getElementById('groupList');
+  wrap.innerHTML = rows.map((r, idx)=>`
+    <div class="flex items-center justify-between border border-slate-100 rounded-xl p-3">
+      <div>
+        <p class="font-semibold text-slate-900">${r.dept}</p>
+        <p class="text-sm text-slate-500">ผู้เรียน ${r.count} คน</p>
+      </div>
+      <div class="w-44">
+        <div class="flex justify-between text-sm mb-1"><span>ความก้าวหน้า</span><span>${r.avg}%</span></div>
+        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full rounded-full ${idx%2===0?'bg-blue-500':'bg-emerald-500'}" style="width:${r.avg}%"></div></div>
+      </div>
+    </div>`).join('') || '<p class="text-slate-400">ไม่พบข้อมูล</p>';
+
+  document.getElementById('kpiGroups').innerText = byDept.size;
+}
+
+function buildTrend(users){
+  const now = new Date();
+  const labels = [];
+  const active = [];
+  const avg = [];
+
+  for(let i=5;i>=0;i--){
+    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+    const month = d.getMonth();
+    const year = d.getFullYear();
+    labels.push(d.toLocaleDateString('th-TH',{month:'short', year:'2-digit'}));
+
+    const inMonth = users.filter(u=>{
+      const v = new Date(u.lastLogin || '');
+      return !isNaN(v.getTime()) && v.getMonth()===month && v.getFullYear()===year;
+    });
+
+    active.push(inMonth.length);
+    const p = inMonth.length ? Math.round(inMonth.reduce((s,u)=>s+progressNum(u.progress),0)/inMonth.length) : 0;
+    avg.push(p);
+  }
+
+  const ctx = document.getElementById('trendChart');
+  if (trendChart) trendChart.destroy();
+  trendChart = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        { label:'ผู้เรียนที่ active', data: active, borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,0.12)', fill:true, tension:.35, yAxisID:'y' },
+        { label:'ความก้าวหน้าเฉลี่ย (%)', data: avg, borderColor:'#16a34a', tension:.35, yAxisID:'y1' }
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{ legend:{ position:'top' } },
+      scales:{
+        y:{ beginAtZero:true, ticks:{ precision:0 } },
+        y1:{ beginAtZero:true, position:'right', max:100, grid:{ drawOnChartArea:false } }
+      }
     }
-    function d(v){ const x=new Date(v||''); return isNaN(x.getTime())?null:x; }
-    function sameDay(a,b){ return a&&b&&a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate(); }
+  });
+}
 
-    async function post(payload){
-      const r = await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-      return await r.json();
-    }
+async function boot(){
+  const auth = JSON.parse(localStorage.getItem('user') || 'null');
+  if(!auth) return location.href='index.html';
+  if(auth.role !== 'admin') return location.href='staff-home.html';
+  userNameText.innerText = auth.name || 'Admin User';
+  userDeptText.innerText = auth.department || 'ผู้ดูแลระบบ';
 
-    function renderRows(rows){
-      const box=document.getElementById('learnerRows');
-      box.innerHTML = rows.map(u=>`<tr>
-        <td class="p-3">${u.name||'-'}</td>
-        <td class="p-3">${u.username||'-'}</td>
-        <td class="p-3">${u.department||'-'}</td>
-        <td class="p-3 text-center">${p(u.progress)}%</td>
-        <td class="p-3 text-center">${Number(u.preScore||0)}/${Number(u.postScore||0)}</td>
-        <td class="p-3 text-right">${u.lastLogin||'-'}</td>
-      </tr>`).join('') || '<tr><td colspan="6" class="p-4 text-slate-400 text-center">ไม่พบข้อมูล</td></tr>';
-    }
+  const [uRes, lRes] = await Promise.all([post({action:'getUsers'}), post({action:'getLessons'})]);
+  const users = Array.isArray(uRes.users) ? uRes.users : [];
+  const lessons = Array.isArray(lRes.lessons) ? lRes.lessons : [];
 
-    function recalcKpi(users){
-      const now = new Date();
-      const total = users.length;
-      const avg = total ? Math.round(users.reduce((s,u)=>s+p(u.progress),0)/total) : 0;
-      const postDone = users.filter(u=>Number(u.postScore||0)>0).length;
-      const today = users.filter(u=>sameDay(d(u.lastLogin), now)).length;
-      totalUsers.innerText = total;
-      avgProgress.innerText = avg + '%';
-      postDoneCount.innerText = postDone;
-      todayLoginCount.innerText = today;
-    }
+  document.getElementById('kpiUsers').innerText = users.length.toLocaleString('th-TH');
+  document.getElementById('kpiLessons').innerText = lessons.length.toLocaleString('th-TH');
+  const avg = users.length ? Math.round(users.reduce((s,u)=>s+progressNum(u.progress),0)/users.length) : 0;
+  document.getElementById('kpiAvg').innerText = `${avg}%`;
 
-    async function boot(){
-      const auth = JSON.parse(localStorage.getItem('user')||'null');
-      if(!auth) return location.href='index.html';
-      if(auth.role!=='admin') return location.href='staff-home.html';
-      userNameText.innerText = auth.name || 'Admin';
-      userDeptText.innerText = auth.department || 'ผู้ดูแลระบบ';
+  renderGroups(users);
+  buildTrend(users);
 
-      const res = await post({action:'getUsers'});
-      allUsers = Array.isArray(res.users)?res.users:[];
-      recalcKpi(allUsers);
-      renderRows(allUsers);
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', ()=>{
+    const q = searchInput.value.trim().toLowerCase();
+    const filtered = !q ? users : users.filter(u => String(u.name||'').toLowerCase().includes(q) || String(u.department||'').toLowerCase().includes(q) || String(u.username||'').toLowerCase().includes(q));
+    renderGroups(filtered);
+    buildTrend(filtered);
+    document.getElementById('kpiUsers').innerText = filtered.length.toLocaleString('th-TH');
+    const favg = filtered.length ? Math.round(filtered.reduce((s,u)=>s+progressNum(u.progress),0)/filtered.length) : 0;
+    document.getElementById('kpiAvg').innerText = `${favg}%`;
+  });
+}
 
-      searchInput.addEventListener('input',()=>{
-        const q = searchInput.value.trim().toLowerCase();
-        const f = !q ? allUsers : allUsers.filter(u=>
-          String(u.name||'').toLowerCase().includes(q) ||
-          String(u.username||'').toLowerCase().includes(q) ||
-          String(u.department||'').toLowerCase().includes(q)
-        );
-        renderRows(f);
-      });
-    }
-
-    window.onload = boot;
-  </script>
-
-<script src='admin-live.js'></script>
+window.onload = boot;
+</script>
 </body>
 </html>
-
-
-
-
-
