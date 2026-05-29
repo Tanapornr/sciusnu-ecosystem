@@ -122,8 +122,12 @@ async function loadLessons(){
   if(!lessons.length){emptyState.classList.remove('hidden');return;} else emptyState.classList.add('hidden');
   const p=getProgress(); let unlocked=0; while(unlocked<lessons.length && p[lessons[unlocked].id]?.postDone) unlocked++;
   lessons.forEach((l,idx)=>{const st=p[l.id]||{};const locked=idx>unlocked;const done=!!st.postDone;const preDone=!!st.preDone;const liked=isFavorite(l);
-    const card=document.createElement('div'); card.className='glass-card p-4'; card.innerHTML=`<div class="flex justify-between items-center mb-2"><span class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded">Video</span><div class="flex items-center gap-2"><button class="fav text-base ${liked?'text-rose-500':'text-slate-300'}">❤</button>${locked?'<span class="text-xs text-amber-600">🔒 ล็อก</span>':done?'<span class="text-xs text-emerald-600">✓ จบแล้ว</span>':'<span class="text-xs text-slate-500">กำลังเรียน</span>'}</div></div><h4 class="font-semibold text-slate-800 mb-1">${esc(l.title)}</h4><p class="text-xs text-slate-500 mb-3 line-clamp-2">${esc(l.description||'-')}</p><div class="text-[11px] text-slate-500 mb-3">Pre-test: ${preDone?'ทำแล้ว':'ยังไม่ทำ'} | Post-test: ${done?'ทำแล้ว':'ยังไม่ทำ'}</div><button class="start w-full ${locked?'bg-slate-300 cursor-not-allowed':'bg-indigo-600 hover:bg-indigo-700'} text-white py-2 rounded-lg text-sm" ${locked?'disabled':''}>${locked?'ยังล็อก':'เริ่มเรียน'}</button>`;
-    card.querySelector('.fav').onclick=(e)=>{e.stopPropagation();toggleFavorite(l);loadLessons();};
+    const favHtml = done
+      ? `<button class="fav text-base ${liked?'text-rose-500':'text-slate-300'}" title="เพิ่มรายการโปรด">❤</button>`
+      : `<span class="text-[10px] text-slate-300" title="ต้องเรียนจบก่อนจึงเพิ่มรายการโปรดได้">❤</span>`;
+    const card=document.createElement('div'); card.className='glass-card p-4'; card.innerHTML=`<div class="flex justify-between items-center mb-2"><span class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded">Video</span><div class="flex items-center gap-2">${favHtml}${locked?'<span class="text-xs text-amber-600">🔒 ล็อก</span>':done?'<span class="text-xs text-emerald-600">✓ จบแล้ว</span>':'<span class="text-xs text-slate-500">กำลังเรียน</span>'}</div></div><h4 class="font-semibold text-slate-800 mb-1">${esc(l.title)}</h4><p class="text-xs text-slate-500 mb-3 line-clamp-2">${esc(l.description||'-')}</p><div class="text-[11px] text-slate-500 mb-3">Pre-test: ${preDone?'ทำแล้ว':'ยังไม่ทำ'} | Post-test: ${done?'ทำแล้ว':'ยังไม่ทำ'}</div><button class="start w-full ${locked?'bg-slate-300 cursor-not-allowed':'bg-indigo-600 hover:bg-indigo-700'} text-white py-2 rounded-lg text-sm" ${locked?'disabled':''}>${locked?'ยังล็อก':(done?'ดูวิดีโออีกครั้ง':'เริ่มเรียน')}</button>`;
+    const favBtn = card.querySelector('.fav');
+    if (favBtn) favBtn.onclick=(e)=>{e.stopPropagation();toggleFavorite(l);loadLessons();};
     const b=card.querySelector('.start'); if(!locked) b.onclick=()=>openLesson(l);
     lessonGrid.appendChild(card);
   });
@@ -136,15 +140,28 @@ function closeLearnModal(){learnModal.classList.add('hidden');learnModal.classLi
 function showTab(k){tabPre.classList.add('hidden');tabVideo.classList.add('hidden');tabPost.classList.add('hidden'); if(k==='pre')tabPre.classList.remove('hidden'); if(k==='video')tabVideo.classList.remove('hidden'); if(k==='post')tabPost.classList.remove('hidden');}
 
 function renderStep(){const p=getProgress();const s=p[currentLesson.id]||{preDone:false,videoDone:false,postDone:false};
+  if(s.postDone){
+    modalStateText.innerText='บทเรียนนี้เรียนจบแล้ว: ดูวิดีโอซ้ำได้ทันที (ไม่ต้องทำแบบทดสอบอีก)';
+    showTab('video');
+    renderVideo(false);
+    return;
+  }
   if(!s.preDone){modalStateText.innerText='ขั้นตอน 1/3: ทำ Pre-test (ทำได้ครั้งเดียว)';showTab('pre');renderQuiz('pre',currentLesson.preTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),preDone:true,preScore:sc,preTotal:tt,prePercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('pretest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});renderStep();});return;}
-  if(!s.videoDone){modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)';showTab('video');renderVideo();return;}
+  if(!s.videoDone){modalStateText.innerText='ขั้นตอน 2/3: ดูวิดีโอให้จบ (ห้ามเลื่อนข้าม)';showTab('video');renderVideo(true);return;}
   if(!s.postDone){modalStateText.innerText='ขั้นตอน 3/3: ทำ Post-test';showTab('post');renderQuiz('post',currentLesson.postTest,(sc,tt)=>{const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),postDone:true,postScore:sc,postTotal:tt,postPercent:Math.round(sc*100/Math.max(tt,1))};setProgress(d);logActivity('posttest_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title,score:sc,total:tt});alert(`คะแนน Post-test: ${sc}/${tt}`);closeLearnModal();loadLessons();});return;}
   closeLearnModal();
 }
 
 function renderQuiz(kind,arr,done){const target=kind==='pre'?tabPre:tabPost;target.innerHTML=''; if(!arr.length){target.innerHTML='<div class="text-slate-500">ยังไม่มีข้อสอบ</div>';return;} arr.forEach((q,i)=>{const c=document.createElement('div'); c.className='glass-card p-4'; c.innerHTML=`<div class="font-semibold mb-3">${i+1}) ${esc(q.question)}</div>`+q.choices.map((x,j)=>`<label class="block text-sm mb-2"><input type="radio" name="${kind}_${i}" value="${j}" class="mr-2">${esc(x)}</label>`).join(''); target.appendChild(c);}); const f=document.createElement('div');f.className='text-right';const b=document.createElement('button');b.className='px-4 py-2 bg-indigo-600 text-white rounded-lg';b.textContent=`ส่งคำตอบ ${kind==='pre'?'ก่อนเรียน':'หลังเรียน'}`;b.onclick=()=>{let s=0;arr.forEach((q,i)=>{const ch=document.querySelector(`input[name="${kind}_${i}"]:checked`); if(ch&&Number(ch.value)===Number(q.answer))s++;});alert(`คะแนน ${kind==='pre'?'Pre-test':'Post-test'}: ${s}/${arr.length}`);done(s,arr.length)};f.appendChild(b);target.appendChild(f);} 
 
-function renderVideo(){const id=videoId(currentLesson.url); if(!id){videoContainer.innerHTML='<div class="h-full flex items-center justify-center text-slate-500">ลิงก์วิดีโอไม่ถูกต้อง</div>';return;} videoContainer.innerHTML='<div id="ytPlayer" class="w-full h-full"></div>';lastWatched=0; if(ytPlayer&&ytPlayer.destroy)try{ytPlayer.destroy()}catch{}; ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);if(dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});alert('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test');renderStep();}},1000);}}});}
+function renderVideo(enforceNoSeek){
+  const id=videoId(currentLesson.url);
+  if(!id){videoContainer.innerHTML='<div class="h-full flex items-center justify-center text-slate-500">ลิงก์วิดีโอไม่ถูกต้อง</div>';return;}
+  videoContainer.innerHTML='<div id="ytPlayer" class="w-full h-full"></div>';
+  lastWatched=0;
+  if(ytPlayer&&ytPlayer.destroy)try{ytPlayer.destroy()}catch{};
+  ytPlayer=new YT.Player('ytPlayer',{videoId:id,playerVars:{rel:0,modestbranding:1,controls:1,disablekb:1},events:{onReady:()=>{const t=setInterval(()=>{if(!ytPlayer||typeof ytPlayer.getCurrentTime!=='function'){clearInterval(t);return;}const cur=ytPlayer.getCurrentTime();const dur=ytPlayer.getDuration()||0;if(enforceNoSeek){if(cur>lastWatched+2.5)ytPlayer.seekTo(lastWatched,true);else lastWatched=Math.max(lastWatched,cur);}if(enforceNoSeek&&dur>0&&lastWatched>=dur-1.5){clearInterval(t);const d=getProgress();d[currentLesson.id]={...(d[currentLesson.id]||{}),videoDone:true};setProgress(d);logActivity('video_done',{lessonId:currentLesson.id,lessonTitle:currentLesson.title});alert('ดูวิดีโอจบแล้ว ระบบปลดล็อก Post-test');renderStep();}},1000);}}});
+}
 
 function norm(l){let q=l.quizData||l.quizzes||{}; if(typeof q==='string')try{q=JSON.parse(q)}catch{q={}}; return {id:l.id||l.title,title:l.title||'บทเรียน',description:l.description||'',url:l.url||'',preTest:normQ(q.preTest||q.pre||[]),postTest:normQ(q.postTest||q.post||[])};}
 function normQ(a){if(!Array.isArray(a))return[];return a.map(q=>q.choices?{question:q.question||'',choices:q.choices||[],answer:Number(q.answer||0)}:{question:q.q||'',choices:q.opts||[],answer:Math.max(0,Number(q.ans||1)-1)}).filter(x=>x.question&&x.choices.length>=2)}
