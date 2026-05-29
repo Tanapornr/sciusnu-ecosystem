@@ -50,12 +50,13 @@
   </aside>
 
   <main class="flex-1 flex flex-col h-screen overflow-hidden">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
-      <div class="relative w-96">
+    <header class="bg-white border-b border-slate-200 px-4 md:px-8 py-3 md:py-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-3 sticky top-0 z-10 shrink-0">
+      <div class="relative w-full md:w-96 order-2 md:order-1">
         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
         <input type="text" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..." class="w-full bg-slate-100 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none">
       </div>
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 md:gap-4 order-1 md:order-2 ml-auto">
+        <button class="md:hidden p-2 text-slate-600" onclick="toggleMobileMenu()"><i class="ph ph-list text-2xl"></i></button>
         <div id="bellWrap" class="relative">
           <button id="bellBtn" type="button" class="p-2 text-slate-400 hover:text-slate-600 relative"><i class="ph ph-bell text-xl"></i><span id="bellDot" class="absolute top-1 right-1 min-w-[16px] h-4 px-1 text-[10px] bg-red-500 text-white rounded-full hidden items-center justify-center"></span></button>
           <div id="bellPanel" class="hidden absolute right-0 mt-2 w-80 bg-white border border-slate-200 rounded-2xl shadow-2xl z-30">
@@ -63,7 +64,7 @@
             <div id="bellList" class="max-h-80 overflow-auto p-2"></div>
           </div>
         </div>
-        <button class="p-2 text-slate-400 hover:text-slate-600"><i class="ph ph-envelope text-xl"></i></button>
+        <button class="p-2 text-slate-400 hover:text-slate-600 hidden sm:block"><i class="ph ph-envelope text-xl"></i></button>
         <div class="flex items-center gap-3 border-l pl-4">
           <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div>
           <div class="text-sm">
@@ -74,12 +75,12 @@
       </div>
     </header>
 
-    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 xl:grid-cols-4 gap-6 flex-1 overflow-y-auto">
+    <div class="p-3 md:p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 xl:grid-cols-4 gap-4 md:gap-6 flex-1 overflow-y-auto">
       <section class="xl:col-span-3 space-y-5">
-        <div class="card p-6 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 flex items-center justify-between gap-4">
+        <div class="card p-4 md:p-6 bg-gradient-to-r from-indigo-50 via-white to-indigo-50 flex items-center justify-between gap-4">
           <div>
-            <p class="text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></p>
-            <p id="welcomeName" class="text-4xl font-bold text-slate-900 mt-1">-</p>
+            <p class="text-2xl md:text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></p>
+            <p id="welcomeName" class="text-2xl md:text-4xl font-bold text-slate-900 mt-1">-</p>
             <p class="text-slate-500 mt-2">พร้อมเรียนรู้สิ่งใหม่ ๆ แล้วหรือยัง? มุ่งสู่เป้าหมายของคุณไปด้วยกัน!</p>
           </div>
           <div class="hidden lg:block text-indigo-300 text-8xl"><i class="ph-fill ph-notebook"></i></div>
@@ -330,6 +331,7 @@ function handleLogout(){
   localStorage.clear();
   location.href = "index.html";
 }
+function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
 
 window.onload = async function(){
   const s = localStorage.getItem("user");
@@ -353,5 +355,25 @@ window.onload = async function(){
   renderNotifications();
 };
 </script>
+  <div id="mobileMenu" class="hidden fixed inset-0 z-[80] md:hidden">
+    <div class="absolute inset-0 bg-black/40" onclick="toggleMobileMenu()"></div>
+    <div class="absolute left-0 top-0 h-full w-72 bg-sidebarBg text-white p-4 overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-semibold">เมนูผู้เรียน</h2>
+        <button onclick="toggleMobileMenu()"><i class="ph ph-x text-xl"></i></button>
+      </div>
+      <nav class="space-y-1 text-sm">
+        <a href="staff-home.html" class="block px-3 py-2 rounded-lg bg-indigo-600">หน้าหลัก</a>
+        <a href="staff.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">แผนการเรียนรู้</a>
+        <a href="certificates.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ใบประกาศนียบัตร</a>
+        <a href="history.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ประวัติการเรียน</a>
+        <a href="favorites.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">รายการโปรด</a>
+        <a href="activity.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">กิจกรรมของฉัน</a>
+        <a href="messages.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ข้อความ</a>
+        <a href="settings.html" class="block px-3 py-2 rounded-lg hover:bg-slate-800/50">ตั้งค่า</a>
+      </nav>
+    </div>
+  </div>
 </body>
 </html>
