@@ -86,10 +86,15 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="glass-card p-6 lg:col-span-2">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="font-bold text-slate-800">สัดส่วนตามหน่วยงาน (ข้อมูลจริง)</h3>
-            <span class="text-xs text-slate-400">Users Sheet</span>
+            <h3 class="font-bold text-slate-800">สัดส่วนตามหน่วยงาน</h3>
+            <span class="text-xs text-slate-400">อัปเดตล่าสุด</span>
           </div>
-          <div id="deptWrap" class="space-y-3 text-sm"></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            <div class="flex justify-center">
+              <canvas id="deptPieChart" width="240" height="240" class="max-w-[240px]"></canvas>
+            </div>
+            <div id="deptWrap" class="space-y-3 text-sm"></div>
+          </div>
         </div>
 
         <div class="glass-card p-6">
@@ -164,13 +169,54 @@
         map[dept] = (map[dept] || 0) + 1;
       });
       const total = users.length || 1;
-      const html = Object.entries(map)
-        .sort((a,b)=>b[1]-a[1])
-        .map(([dept,count]) => {
+      const sorted = Object.entries(map).sort((a,b)=>b[1]-a[1]);
+      const colors = ['#4f46e5', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#14b8a6', '#f43f5e'];
+      const html = sorted
+        .map(([dept,count], idx) => {
           const pct = Math.round((count * 100) / total);
-          return `<div><div class="flex justify-between mb-1"><span class="text-slate-600">${dept}</span><span class="font-semibold text-slate-800">${count} คน</span></div><div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full bg-indigo-500" style="width:${pct}%"></div></div></div>`;
+          const c = colors[idx % colors.length];
+          return `<div><div class="flex justify-between mb-1"><span class="text-slate-600 flex items-center gap-2"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:${c}"></span>${dept}</span><span class="font-semibold text-slate-800">${count} คน (${pct}%)</span></div><div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full" style="width:${pct}%;background:${c}"></div></div></div>`;
         }).join('');
       document.getElementById('deptWrap').innerHTML = html || '<p class="text-slate-400">ยังไม่มีข้อมูลหน่วยงาน</p>';
+
+      const canvas = document.getElementById('deptPieChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      const cx = w / 2, cy = h / 2, r = 92;
+      ctx.clearRect(0, 0, w, h);
+
+      if (!sorted.length) {
+        ctx.fillStyle = '#cbd5e1';
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        let start = -Math.PI / 2;
+        sorted.forEach(([_, count], idx) => {
+          const slice = (count / total) * Math.PI * 2;
+          const end = start + slice;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, r, start, end);
+          ctx.closePath();
+          ctx.fillStyle = colors[idx % colors.length];
+          ctx.fill();
+          start = end;
+        });
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, 44, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.fillStyle = '#0f172a';
+      ctx.textAlign = 'center';
+      ctx.font = '700 24px Prompt';
+      ctx.fillText(String(total), cx, cy + 2);
+      ctx.fillStyle = '#64748b';
+      ctx.font = '500 12px Prompt';
+      ctx.fillText('บุคลากร', cx, cy + 20);
     }
 
     function renderLogs(users) {
