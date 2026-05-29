@@ -1,9 +1,94 @@
-﻿<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>กิจกรรมของฉัน</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>body{font-family:'Prompt',sans-serif}</style></head><body class="bg-slate-50 text-slate-700"><div class="max-w-5xl mx-auto p-6"><h1 class="text-2xl font-bold mb-4">กิจกรรมของฉัน</h1><div id="logBox" class="space-y-3"></div><a class="inline-block mt-6 text-indigo-600" href="staff.html">กลับหน้าบทเรียน</a></div><script>
-const user=JSON.parse(localStorage.getItem('user')||'{}');
-const key=`activityLog_${(user.username||'guest').toLowerCase()}`;
-const logs=JSON.parse(localStorage.getItem(key)||'[]');
-const map={pretest_done:'ทำ Pre-test',video_done:'ดูวิดีโอจบ',posttest_done:'ทำ Post-test'};
-const box=document.getElementById('logBox');
-if(!logs.length){box.innerHTML='<div class="bg-white border rounded-xl p-4 text-slate-500">ยังไม่มีกิจกรรม</div>';}
-else box.innerHTML=logs.map(x=>`<div class="bg-white border rounded-xl p-4"><div class="font-semibold">${map[x.action]||x.action}</div><div class="text-xs text-slate-500">${x.lessonTitle||'-'} | ${new Date(x.time).toLocaleString('th-TH')}</div>${x.score!=null?`<div class="text-xs mt-1">คะแนน: ${x.score}/${x.total}</div>`:''}</div>`).join('');
-</script></body></html>
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>กิจกรรมของฉัน - Learning Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Prompt','sans-serif']}}}}</script>
+  <style>body{font-family:'Prompt',sans-serif;background:#f8fafc}</style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700">
+  <aside class="w-64 bg-slate-950 text-white flex flex-col justify-between hidden md:flex z-20">
+    <div>
+      <div class="p-6 flex items-center gap-3"><div class="bg-indigo-600 p-2 rounded-xl"><i class="ph-fill ph-book-open text-xl"></i></div><h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1></div>
+      <nav class="px-4 space-y-1 text-sm">
+        <a href="staff-home.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+        <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+        <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+        <a href="activity.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+        <a href="messages.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+      </nav>
+    </div>
+    <div class="p-4"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-200 py-2.5 rounded-xl text-sm">ออกจากระบบ</button></div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto">
+    <header class="bg-white border-b px-8 py-4 flex justify-between items-center sticky top-0">
+      <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i><input class="w-full bg-slate-100 rounded-xl pl-10 pr-4 py-2" placeholder="ค้นหากิจกรรม..."></div>
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center" id="avatar">US</div><div><p class="font-semibold text-slate-800 text-sm" id="userName">ผู้เรียน</p><p class="text-xs text-slate-400" id="userDept">บุคลากรสายสนับสนุน</p></div></div>
+    </header>
+
+    <div class="p-8 max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <section class="lg:col-span-2">
+        <div class="bg-white border rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center"><i class="ph-fill ph-activity"></i></div><div><h2 class="text-xl font-bold">กิจกรรมของฉัน</h2><p class="text-xs text-slate-400">ประวัติการใช้งานที่เชื่อมกับข้อมูลผู้ใช้จริง</p></div></div>
+          <div id="activityTimeline" class="space-y-4"></div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="bg-white border rounded-2xl p-5">
+          <h3 class="font-semibold mb-3">สรุปกิจกรรม</h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-slate-500">จำนวนรายการ</span><span class="font-semibold" id="activityCount">0</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">ล่าสุด</span><span class="font-semibold" id="lastActivity">-</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+<script>
+function handleLogout(){ localStorage.clear(); window.location.href='index.html'; }
+function safeJsonParse(v,f){ try{return JSON.parse(v)}catch{return f} }
+function formatDate(d){ try { return new Date(d).toLocaleString('th-TH'); } catch { return '-'; } }
+(function init(){
+  const user = safeJsonParse(localStorage.getItem('user'), null) || {name:'ผู้เรียน', department:'บุคลากรสายสนับสนุน', username:'staff'};
+  document.getElementById('userName').innerText = user.name || 'ผู้เรียน';
+  document.getElementById('userDept').innerText = user.department || 'บุคลากรสายสนับสนุน';
+  document.getElementById('avatar').innerText = (user.name || 'US').slice(0,2);
+
+  const key = `activityLog_${user.username || 'staff'}`;
+  let logs = safeJsonParse(localStorage.getItem(key), []);
+
+  if (!Array.isArray(logs) || logs.length === 0) {
+    logs = [
+      { action: 'เข้าสู่ระบบ Learning Ecosystem', detail: `ผู้ใช้ ${user.username || '-'} เข้าสู่ระบบ`, time: new Date().toISOString() },
+      { action: 'เปิดหน้ากิจกรรมของฉัน', detail: 'ตรวจสอบประวัติการเรียนและการใช้งาน', time: new Date().toISOString() }
+    ];
+    localStorage.setItem(key, JSON.stringify(logs));
+  }
+
+  logs = logs.slice().reverse();
+  document.getElementById('activityCount').innerText = logs.length;
+  document.getElementById('lastActivity').innerText = formatDate(logs[0]?.time);
+
+  const timeline = document.getElementById('activityTimeline');
+  timeline.innerHTML = logs.map((item, idx) => `
+    <div class="border rounded-xl p-4 ${idx===0 ? 'bg-indigo-50/40 border-indigo-100' : 'bg-white'}">
+      <p class="text-sm font-semibold text-slate-800">${item.action || 'กิจกรรม'}</p>
+      <p class="text-xs text-slate-500 mt-1">${item.detail || '-'}</p>
+      <p class="text-xs text-slate-400 mt-2">${formatDate(item.time)}</p>
+    </div>
+  `).join('');
+})();
+</script>
+</body>
+</html>

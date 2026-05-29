@@ -1,153 +1,111 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ประวัติการเรียน - Learning Ecosystem</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Prompt', 'sans-serif'] },
-          colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประวัติการเรียน - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+                }
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; }
-    .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,.02); border-radius: 1.25rem; }
-  </style>
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01); border-radius: 1.25rem; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
-  <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
-    <div>
-      <div class="p-6 flex items-center gap-3"><div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div><h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1></div>
-      <nav class="px-4 space-y-1 text-sm">
-        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
-        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
-        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
-        <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
-        <a href="history.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
-        <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
-        <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-      </nav>
-    </div>
-    <div class="p-4 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl">ออกจากระบบ</button></div>
-  </aside>
 
-  <main class="flex-1 flex flex-col h-screen overflow-hidden">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
-      <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i><input type="text" placeholder="ค้นหาประวัติหลักสูตร..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none"></div>
-      <div class="flex items-center gap-3 border-l pl-4"><div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div><div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div></div>
-    </header>
-
-    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
-      <section class="lg:col-span-2 space-y-6">
-        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30"><i class="ph-fill ph-clock-counter-clockwise"></i></div><div><h2 class="text-xl font-bold text-slate-800">ประวัติการเรียนและคะแนนทดสอบ</h2><p class="text-xs text-slate-400 mt-0.5">ดึงคะแนน Pre/Post รายบทจากคอร์สเรียนจริงของผู้เรียน</p></div></div>
-
-        <div class="glass-card overflow-hidden bg-white border border-slate-200">
-          <div class="p-4 bg-slate-50 border-b flex justify-between items-center"><h3 class="font-bold text-xs text-slate-400 uppercase tracking-wider">บันทึกคะแนนรวมตามหลักสูตร</h3></div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-50 border-b font-bold text-slate-500">
-                <tr>
-                  <th class="p-4">รายชื่อคอร์สหลักสูตร</th>
-                  <th class="p-4 text-center">Pre-test</th>
-                  <th class="p-4 text-center">Post-test</th>
-                  <th class="p-4 text-center">สถานะ</th>
-                </tr>
-              </thead>
-              <tbody id="historyRows" class="divide-y text-slate-600 font-medium"></tbody>
-            </table>
-          </div>
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div>
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center"><i class="ph-fill ph-book-open text-xl"></i></div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="staff-home.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
+                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+                <a href="history.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md"><i class="ph-fill ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span><span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span></a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+            </nav>
         </div>
-      </section>
-
-      <aside class="space-y-6">
-        <div class="glass-card p-6 bg-white border border-slate-200">
-          <h3 class="font-bold text-slate-800 text-sm border-b pb-3 mb-3"><i class="ph-bold ph-chart-bar text-indigo-600"></i> สถิติสะสม</h3>
-          <p id="summaryText" class="text-xs text-slate-500 font-semibold leading-relaxed">กำลังโหลดข้อมูล...</p>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2"><i class="ph ph-sign-out"></i> ออกจากระบบ</button>
         </div>
-      </aside>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i><input type="text" placeholder="ค้นหาประวัติหลักสูตร..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none"></div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3 border-l pl-4">
+                    <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
+                    <div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p><p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl border border-indigo-100/30"><i class="ph-fill ph-clock-counter-clockwise"></i></div>
+                    <div><h2 class="text-xl font-bold text-slate-800">ประวัติการเรียนและคะแนนทดสอบ</h2><p class="text-xs text-slate-400 mt-0.5">ตรวจสอบบันทึกผลการเข้าเรียน คะแนน Pre-test และ Post-test ทั้งหมดของคุณ</p></div>
+                </div>
+
+                <div class="glass-card overflow-hidden bg-white border border-slate-200">
+                    <div class="p-4 bg-slate-50 border-b flex justify-between items-center">
+                        <h3 class="font-bold text-xs text-slate-400 uppercase tracking-wider">บันทึกคะแนนรวมตามหลักสูตร</h3>
+                    </div>
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50 border-b font-bold text-slate-500">
+                            <tr><th class="p-4">รายชื่อคอร์สหลักสูตร</th><th class="p-4 text-center">Pre-test</th><th class="p-4 text-center">Post-test</th><th class="p-4 text-center">สถานะ</th></tr>
+                        </thead>
+                        <tbody class="divide-y text-slate-600 font-medium">
+                            <tr class="hover:bg-slate-50/60 transition">
+                                <td class="p-4"><p class="font-semibold text-slate-800">AI Tools for Education</p><p class="text-[10px] text-slate-400">รหัสวิชา: L-866 | โดย Admin User</p></td>
+                                <td class="p-4 text-center text-red-500">0 / 5</td><td class="p-4 text-center text-emerald-500">3 / 5</td>
+                                <td class="p-4 text-center"><span class="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded border text-[10px]">กำลังศึกษา</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="space-y-6"><div class="glass-card p-6 bg-white border border-slate-200"><h3 class="font-bold text-slate-800 text-sm border-b pb-3 mb-3"><i class="ph-bold ph-chart-bar text-indigo-600"></i> สถิติสะสม</h3><p class="text-xs text-slate-500 font-semibold leading-relaxed">เวลาเรียนรวมทั้งหมดในระบบ: 7 ชม. 55 นาที <br>การล็อกอินสะสม: 12 ครั้ง</p></div></div>
+        </div>
+    </main>
+
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i><span id="toastMessage">ข้อความแจ้งเตือน</span>
     </div>
-  </main>
 
-<script>
-const API_URL = '/api/submit';
-let user = {};
-window.onload = async function(){
-  const s = localStorage.getItem('user');
-  if(!s) return location.href='index.html';
-  user = JSON.parse(s);
-  userNameText.innerText = user.name || '-';
-  userDeptText.innerText = user.department || '-';
-  avatarContainer.innerText = (user.name||'U').substring(0,2);
-  await renderHistory();
-};
-function handleLogout(){ localStorage.clear(); location.href='index.html'; }
-function ord(t){ let m=String(t||'').match(/^AI-(\d+)/i); if(m)return +m[1]; m=String(t||'').match(/^5ส-(\d+)/i); if(m)return 100+ +m[1]; return 999; }
-function progressKey(){ return `lessonProgress_${(user.username||'guest').toLowerCase()}`; }
-function getProgress(){ try { return JSON.parse(localStorage.getItem(progressKey())||'{}'); } catch { return {}; } }
-
-async function renderHistory(){
-  const rows = document.getElementById('historyRows');
-  const summary = document.getElementById('summaryText');
-  rows.innerHTML = '<tr><td class="p-4 text-slate-400" colspan="4">กำลังโหลดข้อมูล...</td></tr>';
-  try {
-    const r = await fetch(API_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'getLessons'}) });
-    const j = await r.json();
-    const lessons = (j.lessons||[]).sort((a,b)=>ord(a.title)-ord(b.title));
-    const p = getProgress();
-
-    if(!lessons.length){
-      rows.innerHTML = '<tr><td class="p-4 text-slate-400" colspan="4">ยังไม่พบบทเรียนในระบบ</td></tr>';
-      summary.innerText = 'ยังไม่มีข้อมูลสถิติ';
-      return;
-    }
-
-    let totalPre = 0, totalPost = 0, doneCount = 0;
-
-    rows.innerHTML = lessons.map((l)=>{
-      const s = p[l.id] || {};
-      const preText = s.preDone ? `${Number(s.preScore||0)} / ${Number(s.preTotal||0)}` : '-';
-      const postText = s.postDone ? `${Number(s.postScore||0)} / ${Number(s.postTotal||0)}` : '-';
-      if(s.preDone) totalPre += Number(s.prePercent || 0);
-      if(s.postDone){ totalPost += Number(s.postPercent || 0); doneCount += 1; }
-
-      const status = s.postDone
-        ? '<span class="bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded border text-[10px]">เรียนจบแล้ว</span>'
-        : s.videoDone
-          ? '<span class="bg-amber-50 text-amber-600 px-2 py-0.5 rounded border text-[10px]">รอ Post-test</span>'
-          : s.preDone
-            ? '<span class="bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded border text-[10px]">กำลังดูวิดีโอ</span>'
-            : '<span class="bg-slate-100 text-slate-500 px-2 py-0.5 rounded border text-[10px]">ยังไม่เริ่ม</span>';
-
-      return `<tr class="hover:bg-slate-50/60 transition">
-        <td class="p-4"><p class="font-semibold text-slate-800">${l.title}</p><p class="text-[10px] text-slate-400">รหัสวิชา: ${l.id || '-'} | โดย ${l.author || 'Admin'}</p></td>
-        <td class="p-4 text-center ${s.preDone ? 'text-indigo-600' : 'text-slate-400'}">${preText}</td>
-        <td class="p-4 text-center ${s.postDone ? 'text-emerald-600' : 'text-slate-400'}">${postText}</td>
-        <td class="p-4 text-center">${status}</td>
-      </tr>`;
-    }).join('');
-
-    const preAvg = lessons.length ? Math.round(totalPre / lessons.length) : 0;
-    const postAvg = doneCount ? Math.round(totalPost / doneCount) : 0;
-    summary.innerHTML = `
-      จำนวนบทเรียนทั้งหมด: ${lessons.length} บท<br>
-      บทเรียนที่จบแล้ว: ${doneCount} บท<br>
-      ค่าเฉลี่ย Pre-test (รวมทุกบท): ${preAvg}%<br>
-      ค่าเฉลี่ย Post-test (เฉพาะบทที่จบ): ${postAvg}%
-    `;
-
-  } catch(e){
-    rows.innerHTML = '<tr><td class="p-4 text-rose-500" colspan="4">โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชใหม่</td></tr>';
-    summary.innerText = 'เกิดข้อผิดพลาดในการโหลดข้อมูล';
-  }
-}
-</script>
+    <script>
+        window.onload = function() {
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                document.getElementById('userNameText').innerText = user.name;
+                document.getElementById('userDeptText').innerText = user.department;
+                document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+            }
+        };
+        function showToast(message) { const toast = document.getElementById('toastBox'); document.getElementById('toastMessage').innerText = message; toast.classList.remove('translate-y-20', 'opacity-0'); setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500); }
+        function handleLogout() { localStorage.clear(); window.location.href = 'index.html'; }
+    </script>
 </body>
 </html>

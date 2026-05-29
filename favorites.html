@@ -1,111 +1,219 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>รายการโปรดของฉัน - Learning Ecosystem</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Prompt', 'sans-serif'] },
-          colors: { sidebarBg: '#0f172a', primaryPurple: '#4f46e5', bgLight: '#f8fafc' }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายการโปรดของฉัน - Learning Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { 
+                        sidebarBg: '#0f172a',
+                        primaryPurple: '#4f46e5',
+                        bgLight: '#f8fafc'
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; }
-    .glass-card { background: white; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,.02); border-radius: 1.25rem; }
-  </style>
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; user-select: none; }
+        .glass-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+            border-radius: 1.25rem;
+        }
+        /* ซ่อน Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-700 bg-bgLight">
-  <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
-    <div>
-      <div class="p-6 flex items-center gap-3"><div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md"><i class="ph-fill ph-book-open text-xl"></i></div><h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1></div>
-      <nav class="px-4 space-y-1 text-sm">
-        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-house text-xl"></i> หน้าหลัก</a>
-        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
-        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
-        <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
-        <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
-        <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-heart text-xl"></i> รายการโปรด</a>
-        <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
-      </nav>
-    </div>
-    <div class="p-4 border-t border-slate-800"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl">ออกจากระบบ</button></div>
-  </aside>
 
-  <main class="flex-1 flex flex-col h-screen overflow-hidden">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
-      <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i><input type="text" placeholder="ค้นหาในรายการโปรด..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none"></div>
-      <div class="flex items-center gap-3 border-l pl-4"><div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm">US</div><div class="text-sm"><p id="userNameText" class="font-semibold text-slate-800 leading-tight">-</p><p id="userDeptText" class="text-xs text-slate-400">-</p></div></div>
-    </header>
-
-    <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
-      <section class="lg:col-span-2 space-y-6">
-        <div class="flex items-center gap-4"><div class="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center text-2xl border border-rose-100/40"><i class="ph-fill ph-heart"></i></div><div><h2 class="text-xl font-bold text-slate-800">รายการโปรดของฉัน</h2><p class="text-xs text-slate-400 mt-0.5">เฉพาะบทเรียนที่เรียนจบแล้วและคุณกดหัวใจไว้</p></div></div>
-        <div id="favoritesListContainer" class="space-y-4"></div>
-      </section>
-
-      <aside class="space-y-6">
-        <div class="glass-card p-6 bg-white border border-slate-200 space-y-4">
-          <h3 class="font-bold text-slate-800 text-sm border-b pb-3 flex items-center gap-2"><i class="ph-bold ph-chart-pie text-rose-500"></i> สรุปรายการ</h3>
-          <div class="p-3 bg-slate-50 rounded-xl border text-xs font-medium text-center"><p class="text-slate-400">จำนวนบทเรียนที่บันทึกไว้</p><p class="text-xl font-bold text-rose-500 mt-1" id="favCountText">0 บทเรียน</p></div>
-          <p class="text-xs text-slate-400 text-center">กดหัวใจอีกครั้งเพื่อเอาออกจากรายการโปรดได้ทันที</p>
+    <aside class="w-64 bg-sidebarBg text-white flex flex-col justify-between hidden md:flex z-20 shrink-0">
+        <div>
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md flex items-center justify-center">
+                    <i class="ph-fill ph-book-open text-xl"></i>
+                </div>
+                <h1 class="text-base font-semibold leading-tight tracking-wide">Learning<br>Ecosystem</h1>
+            </div>
+            
+            <nav class="px-4 space-y-1 text-sm">
+                <a href="staff-home.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-house text-xl"></i> หน้าหลัก
+                </a>
+                <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน
+                </a>
+                <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้
+                </a>
+                <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร
+                </a>
+                <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน
+                </a>
+                <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-md">
+                    <i class="ph-fill ph-heart text-xl"></i> รายการโปรด
+                </a>
+                <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน
+                </a>
+                <a href="messages.html" class="flex items-center justify-between px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <span class="flex items-center gap-3"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</span>
+                    <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800/50 rounded-xl transition">
+                    <i class="ph ph-gear text-xl"></i> ตั้งค่า
+                </a>
+            </nav>
         </div>
-      </aside>
+        <div class="p-4 border-t border-slate-800">
+            <button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-300 hover:text-red-200 text-sm py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                <i class="ph ph-sign-out"></i> ออกจากระบบ
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shrink-0">
+            <div class="relative w-96">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg"></i>
+                <input type="text" placeholder="ค้นหาในรายการโปรด..." class="w-full bg-slate-100 text-sm rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 border border-transparent focus:border-slate-300 transition">
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button onclick="showToast('ศูนย์แจ้งเตือน')" class="p-2 text-slate-400 hover:text-slate-600 relative transition"><i class="ph ph-bell text-xl"></i></button>
+                <div class="flex items-center gap-3 border-l pl-4">
+                    <div id="avatarContainer" class="w-9 h-9 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-sm shadow-inner">นร</div>
+                    <div class="text-sm">
+                        <p id="userNameText" class="font-semibold text-slate-800 leading-tight">กำลังโหลด...</p>
+                        <p id="userDeptText" class="text-xs text-slate-400">งานสนับสนุน คณะวิทยาศาสตร์</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-y-auto h-[calc(100vh-70px)]">
+            
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center text-2xl border border-rose-100/40">
+                        <i class="ph-fill ph-heart"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">รายการโปรดของฉัน</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">คอร์สเรียนที่คุณบันทึกเก็บไว้เพื่อการเข้าถึงอย่างรวดเร็ว</p>
+                    </div>
+                </div>
+
+                <div id="favoritesListContainer" class="space-y-4">
+                    <div id="fav-card-1" class="glass-card p-4 flex flex-col sm:flex-row gap-4 items-center bg-white border border-slate-200 hover:shadow-md transition">
+                        <div class="w-full sm:w-28 h-16 bg-[#1e1b4b] text-white rounded-xl flex flex-col items-center justify-center font-bold text-center text-sm shrink-0">
+                            AI<span class="text-[8px] font-normal opacity-70 mt-0.5">L-866</span>
+                        </div>
+                        <div class="flex-1 min-w-0 w-full">
+                            <span class="bg-indigo-50 text-indigo-600 text-[10px] font-semibold px-2 py-0.5 rounded border border-indigo-100/50">กำลังเรียน</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">AI Tools for Education</h4>
+                            <p class="text-xs text-slate-400">โดย Admin User</p>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                            <a href="staff.html" class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium bg-white transition shadow-sm">เข้าเรียน</a>
+                            <button onclick="removeFavorite(1)" class="text-rose-500 text-xl transition hover:scale-110 hover:text-slate-400"><i class="ph-fill ph-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass-card p-6 bg-white border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm border-b pb-3 flex items-center gap-2">
+                        <i class="ph-bold ph-chart-pie text-rose-500"></i> สรุปรายการ
+                    </h3>
+                    <div class="p-3 bg-slate-50 rounded-xl border text-xs font-medium text-center">
+                        <p class="text-slate-400">จำนวนหลักสูตรที่บันทึกไว้</p>
+                        <p class="text-xl font-bold text-slate-800 mt-1 text-rose-500" id="favCountText">1 หลักสูตร</p>
+                    </div>
+                    <p class="text-xs text-slate-400 font-normal leading-relaxed text-center">
+                        สามารถกดไอคอนหัวใจเพื่อนำวิชาออกจากรายการได้ทุกเมื่อ
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="toastBox" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-medium shadow-2xl flex items-center gap-2.5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="ph-fill ph-sparkle text-yellow-400 text-lg"></i>
+        <span id="toastMessage">ข้อความแจ้งเตือน</span>
     </div>
-  </main>
 
-<script>
-let user = {};
-window.onload = function(){
-  const s = localStorage.getItem('user');
-  if(!s) return location.href='index.html';
-  user = JSON.parse(s);
-  userNameText.innerText = user.name || '-';
-  userDeptText.innerText = user.department || '-';
-  avatarContainer.innerText = (user.name||'U').substring(0,2);
-  renderFavorites();
-}
+    <script>
+        let totalFavCount = 1;
 
-function favoriteList(){ return JSON.parse(localStorage.getItem('favoriteLessons')||'[]'); }
-function renderFavorites(){
-  const list = favoriteList();
-  favCountText.innerText = `${list.length} บทเรียน`;
-  const box = document.getElementById('favoritesListContainer');
-  if(!list.length){
-    box.innerHTML = `<div class="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50"><i class="ph ph-folder-open text-4xl text-slate-300 mb-2"></i><p class="text-slate-400 text-xs font-medium">ยังไม่มีรายการโปรดที่บันทึกไว้ในขณะนี้</p></div>`;
-    return;
-  }
+        window.onload = function() {
+            // ระบบตรวจสอบข้อมูลผู้ใช้จริงหลังล็อกอิน
+            const storedUser = localStorage.getItem('user');
+            if (storedUser) {
+                const user = JSON.parse(storedUser);
+                document.getElementById('userNameText').innerText = user.name;
+                document.getElementById('userDeptText').innerText = user.department;
+                document.getElementById('avatarContainer').innerText = user.name.substring(0, 2);
+            } else {
+                document.getElementById('userNameText').innerText = "นางสาวสมหญิง รักงาน";
+            }
+        };
 
-  box.innerHTML = list.map((x,idx)=>`
-    <div class="glass-card p-4 flex flex-col sm:flex-row gap-4 items-center bg-white border border-slate-200 hover:shadow-md transition">
-      <div class="w-full sm:w-28 h-16 bg-[#1e1b4b] text-white rounded-xl flex items-center justify-center font-bold text-center text-sm shrink-0">★</div>
-      <div class="flex-1 min-w-0 w-full">
-        <span class="bg-emerald-50 text-emerald-600 text-[10px] font-semibold px-2 py-0.5 rounded border border-emerald-100/50">เรียนจบแล้ว</span>
-        <h4 class="text-sm font-semibold text-slate-800 mt-1 truncate">${x.title || x.id}</h4>
-      </div>
-      <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
-        <a href="staff.html" class="border border-slate-200 text-slate-700 hover:bg-slate-50 px-4 py-1.5 rounded-lg text-xs font-medium">เข้าเรียน</a>
-        <button onclick="removeFavorite(${idx})" class="text-rose-500 text-xl transition hover:scale-110 hover:text-slate-400">❤</button>
-      </div>
-    </div>
-  `).join('');
-}
+        // ฟังก์ชันลบคอร์สโปรดแบบไดนามิกจริงคาตา
+        function removeFavorite(cardId) {
+            const card = document.getElementById('fav-card-' + cardId);
+            if (card) {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                card.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    card.remove();
+                    totalFavCount--;
+                    document.getElementById('favCountText').innerText = `${totalFavCount} หลักสูตร`;
+                    
+                    // เคสลบจนหมดเกลี้ยง
+                    if (totalFavCount === 0) {
+                        document.getElementById('favoritesListContainer').innerHTML = `
+                            <div class="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                                <i class="ph ph-folder-open text-4xl text-slate-300 mb-2"></i>
+                                <p class="text-slate-400 text-xs font-medium">ยังไม่มีรายการโปรดที่บันทึกไว้ในขณะนี้</p>
+                            </div>
+                        `;
+                    }
+                }, 300);
 
-function removeFavorite(i){
-  const list = favoriteList();
-  list.splice(i,1);
-  localStorage.setItem('favoriteLessons', JSON.stringify(list));
-  renderFavorites();
-}
+                showToast(`💔 นำออกจากรายการโปรดแล้ว`);
+            }
+        }
 
-function handleLogout(){ localStorage.clear(); location.href='index.html'; }
-</script>
+        function showToast(message) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => { toast.classList.add('translate-y-20', 'opacity-0'); }, 2500);
+        }
+
+        function handleLogout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
 </body>
 </html>

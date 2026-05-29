@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>หน้าหลัก - Learning Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Prompt', 'sans-serif'] } } } }
+  </script>
+  <style>body{font-family:'Prompt',sans-serif;background:#f3f5fb}</style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-700">
+  <aside class="w-64 bg-slate-950 text-white flex flex-col justify-between hidden md:flex z-20">
+    <div>
+      <div class="p-6 flex items-center gap-3"><div class="bg-indigo-600 p-2 rounded-xl"><i class="ph-fill ph-book-open text-xl"></i></div><h1 class="text-base font-semibold leading-tight">Learning<br>Ecosystem</h1></div>
+      <nav class="px-4 space-y-1 text-sm">
+        <a href="staff-home.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-600 text-white rounded-xl font-medium"><i class="ph-fill ph-house text-xl"></i> หน้าหลัก</a>
+        <a href="staff.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-graduation-cap text-xl"></i> คอร์สเรียนของฉัน</a>
+        <a href="learning-plan.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-git-branch text-xl"></i> แผนการเรียนรู้</a>
+        <a href="certificates.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-certificate text-xl"></i> ใบประกาศนียบัตร</a>
+        <a href="history.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-clock-counter-clockwise text-xl"></i> ประวัติการเรียน</a>
+        <a href="favorites.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-heart text-xl"></i> รายการโปรด</a>
+        <a href="activity.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-activity text-xl"></i> กิจกรรมของฉัน</a>
+        <a href="messages.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-chat-circle-dots text-xl"></i> ข้อความ</a>
+        <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-xl"><i class="ph ph-gear text-xl"></i> ตั้งค่า</a>
+      </nav>
+    </div>
+    <div class="p-4"><button onclick="handleLogout()" class="w-full bg-slate-800 hover:bg-red-900/40 text-slate-200 py-2.5 rounded-xl text-sm">ออกจากระบบ</button></div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto">
+    <header class="bg-white border-b px-8 py-4 flex justify-between items-center sticky top-0">
+      <div class="relative w-96"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i><input class="w-full bg-slate-100 rounded-xl pl-10 pr-4 py-2" placeholder="ค้นหาคอร์ส, ทักษะ, เนื้อหา..."></div>
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center" id="avatar">US</div><div><p class="font-semibold text-slate-800 text-sm" id="userName">ผู้เรียน</p><p class="text-xs text-slate-400" id="userDept">บุคลากรสายสนับสนุน</p></div></div>
+    </header>
+
+    <div class="p-8 grid grid-cols-1 xl:grid-cols-3 gap-6 max-w-[1400px] mx-auto">
+      <section class="xl:col-span-2 space-y-6">
+        <div class="bg-white border rounded-2xl p-6 flex justify-between items-center">
+          <div><h2 class="text-3xl font-bold text-slate-900">สวัสดีตอนเช้า <span>☀️</span></h2><p class="text-slate-500 mt-1">พร้อมพัฒนาทักษะงานสนับสนุนด้วย AI และ 5ส</p></div>
+          <a href="staff.html" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm">ไปที่คอร์สเรียน</a>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">คอร์สทั้งหมด</p><p class="text-2xl font-bold" id="totalCourses">0</p></div>
+          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">เรียนแล้ว</p><p class="text-2xl font-bold" id="doneCourses">0</p></div>
+          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">กำลังเรียน</p><p class="text-2xl font-bold" id="inProgressCourses">0</p></div>
+          <div class="bg-white border rounded-2xl p-4"><p class="text-xs text-slate-400">คะแนนเฉลี่ย Post-test</p><p class="text-2xl font-bold" id="avgScore">0%</p></div>
+        </div>
+
+        <div class="bg-white border rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-4"><h3 class="font-semibold text-slate-800">คอร์สล่าสุด</h3><a href="staff.html" class="text-indigo-600 text-sm">ดูทั้งหมด</a></div>
+          <div id="recentCourses" class="grid md:grid-cols-2 gap-4"></div>
+        </div>
+      </section>
+
+      <aside class="space-y-6">
+        <div class="bg-white border rounded-2xl p-5">
+          <h3 class="font-semibold mb-3">กิจกรรมล่าสุด</h3>
+          <div id="latestActivities" class="space-y-3 text-sm"></div>
+        </div>
+        <div class="bg-white border rounded-2xl p-5">
+          <h3 class="font-semibold mb-3">ทางลัด</h3>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <a href="learning-plan.html" class="border rounded-xl p-3 hover:bg-slate-50">แผนการเรียนรู้</a>
+            <a href="certificates.html" class="border rounded-xl p-3 hover:bg-slate-50">ใบประกาศฯ</a>
+            <a href="history.html" class="border rounded-xl p-3 hover:bg-slate-50">ประวัติคะแนน</a>
+            <a href="favorites.html" class="border rounded-xl p-3 hover:bg-slate-50">รายการโปรด</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+<script>
+function handleLogout(){ localStorage.clear(); window.location.href='index.html'; }
+function safeJsonParse(v,f){ try{return JSON.parse(v)}catch{return f} }
+(function init(){
+  const user = safeJsonParse(localStorage.getItem('user'), null) || {name:'ผู้เรียน', department:'บุคลากรสายสนับสนุน', username:'staff'};
+  document.getElementById('userName').innerText = user.name || 'ผู้เรียน';
+  document.getElementById('userDept').innerText = user.department || 'บุคลากรสายสนับสนุน';
+  document.getElementById('avatar').innerText = (user.name || 'US').slice(0,2);
+
+  const lessons = safeJsonParse(localStorage.getItem('lessonsCache'), []);
+  const total = lessons.length || 9;
+  const done = Number(user.postScore || 0) > 0 ? 1 : 0;
+  const inProgress = Math.max(1, Math.min(3, total - done));
+  const avg = Number(user.postScore || 0) > 0 ? Math.round((Number(user.postScore||0) / 5) * 100) : 0;
+
+  document.getElementById('totalCourses').innerText = total;
+  document.getElementById('doneCourses').innerText = done;
+  document.getElementById('inProgressCourses').innerText = inProgress;
+  document.getElementById('avgScore').innerText = `${avg}%`;
+
+  const recent = lessons.slice(0,4).map(l => ({title:l.title || 'บทเรียนใหม่', desc:l.description || 'คอร์สสำหรับบุคลากรสายสนับสนุน'}));
+  const recentEl = document.getElementById('recentCourses');
+  const recentData = recent.length ? recent : [
+    {title:'AI-01 พื้นฐาน AI สำหรับบุคลากรสายสนับสนุน', desc:'เริ่มต้นทำความเข้าใจ AI ในงานประจำ'},
+    {title:'5ส-01 บทนำ 5ส สำหรับหน่วยงานสนับสนุน', desc:'วางระบบงานด้วย 5ส ในบริบทสำนักงาน'}
+  ];
+  recentEl.innerHTML = recentData.map(c => `<a href="staff.html" class="border rounded-xl p-4 hover:bg-slate-50 block"><p class="font-semibold text-slate-800">${c.title}</p><p class="text-xs text-slate-500 mt-1">${c.desc}</p></a>`).join('');
+
+  const logKey = `activityLog_${user.username || 'staff'}`;
+  const logs = safeJsonParse(localStorage.getItem(logKey), []);
+  const logEl = document.getElementById('latestActivities');
+  const activityData = logs.length ? logs.slice(0,5) : [
+    {text:'เข้าสู่ระบบ Learning Ecosystem', time:new Date().toLocaleString('th-TH')},
+    {text:'เข้าหน้าคอร์สเรียนของฉัน', time:new Date().toLocaleString('th-TH')}
+  ];
+  logEl.innerHTML = activityData.map(a => `<div class="border rounded-lg p-3"><p class="text-slate-700">${a.text || a.action || 'กิจกรรม'}</p><p class="text-xs text-slate-400 mt-1">${a.time || '-'}</p></div>`).join('');
+})();
+</script>
+</body>
+</html>
