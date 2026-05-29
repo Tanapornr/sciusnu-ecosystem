@@ -97,19 +97,85 @@
             </div>
 
             <div class="flex gap-8 text-sm font-medium text-slate-500 border-b border-slate-200 mb-6">
-                <span id="tabBtn-overview" onclick="switchPersonnelTab('overview')" class="pb-3 cursor-pointer hover:text-slate-800">ภาพรวม</span>
-                <span id="tabBtn-list" onclick="switchPersonnelTab('list')" class="pb-3 cursor-pointer active-tab text-emerald-600">รายชื่อบุคลากร</span>
+                <span id="tabBtn-overview" onclick="switchPersonnelTab('overview')" class="pb-3 cursor-pointer active-tab text-emerald-600">ภาพรวม</span>
+                <span id="tabBtn-list" onclick="switchPersonnelTab('list')" class="pb-3 cursor-pointer hover:text-slate-800">รายชื่อบุคลากร</span>
                 <span id="tabBtn-roles" onclick="switchPersonnelTab('roles')" class="pb-3 cursor-pointer hover:text-slate-800">บทบาทและสิทธิ์</span>
                 <span id="tabBtn-dev" onclick="switchPersonnelTab('dev')" class="pb-3 cursor-pointer hover:text-slate-800">การพัฒนา</span>
                 <span id="tabBtn-usage" onclick="switchPersonnelTab('usage')" class="pb-3 cursor-pointer hover:text-slate-800">System Usage</span>
                 <span id="tabBtn-reports" onclick="switchPersonnelTab('reports')" class="pb-3 cursor-pointer hover:text-slate-800">รายงาน</span>
             </div>
 
-            <div id="content-overview" class="tab-content hidden">
-                <div class="glass-card p-10 text-center text-slate-500 bg-white">
-                    <i class="ph-fill ph-chart-pie-slice text-5xl text-emerald-300 mb-3"></i>
-                    <h3 class="text-lg font-bold text-slate-700">หน้าต่างภาพรวมระบบบุคลากร</h3>
-                    <p class="text-sm mt-2">ส่วนนี้เตรียมไว้สำหรับแสดงกราฟสรุปภาพรวมทั้งหมดของหน่วยงาน</p>
+            <div id="content-overview" class="tab-content block">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="glass-card p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-users"></i></div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">บุคลากรทั้งหมด</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight"><span id="overviewTotalUsers">0</span> <span class="text-xs font-medium text-slate-500">คน</span></p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-user-check"></i></div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">เข้าใช้งานวันนี้</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight"><span id="overviewTodayLogin">0</span> <span class="text-xs font-medium text-slate-500">คน</span></p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-books"></i></div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">บทเรียนในระบบ</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight"><span id="overviewLessonCount">0</span> <span class="text-xs font-medium text-slate-500">บท</span></p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-chart-line-up"></i></div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">อัตราเรียนจบเฉลี่ย</p>
+                            <p class="text-2xl font-bold text-slate-800 leading-tight"><span id="overviewAvgProgress">0</span><span class="text-xs font-medium text-slate-500">%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 glass-card p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-800">สัดส่วนตามหน่วยงาน</h3>
+                            <span class="text-xs text-slate-400">อัปเดตล่าสุด</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                            <div class="flex justify-center">
+                                <canvas id="overviewDeptPieChart" width="240" height="240" class="max-w-[240px]"></canvas>
+                            </div>
+                            <div id="overviewDeptWrap" class="space-y-3 text-sm"></div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-slate-800">กิจกรรมล่าสุดในระบบ</h3>
+                            <span class="text-xs text-slate-400">Real-time</span>
+                        </div>
+                        <div id="overviewRecentLogs" class="space-y-3 text-sm"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 mt-6">
+                    <h3 class="font-bold text-slate-800 mb-4">รายชื่อบุคลากรล่าสุด</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 border-b text-slate-500">
+                                <tr>
+                                    <th class="p-3 font-semibold">ชื่อบุคลากร</th>
+                                    <th class="p-3 font-semibold">หน่วยงาน</th>
+                                    <th class="p-3 font-semibold text-center">ความคืบหน้า</th>
+                                    <th class="p-3 font-semibold text-center">Pre/Post</th>
+                                    <th class="p-3 font-semibold text-right">เข้าใช้ล่าสุด</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overviewStaffRows" class="divide-y divide-slate-100 text-slate-600"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -145,7 +211,7 @@
                 </div>
             </div>
 
-            <div id="content-list" class="tab-content block">
+            <div id="content-list" class="tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div class="glass-card p-5 flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0"><i class="ph-fill ph-users"></i></div>
@@ -434,8 +500,19 @@
             });
             const result = await response.json();
             const users = normalizeUsers(result);
+            let lessonCount = 0;
+            try {
+                const lessonRes = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'getLessons' })
+                });
+                const lessonJson = await lessonRes.json();
+                lessonCount = Array.isArray(lessonJson.lessons) ? lessonJson.lessons.length : 0;
+            } catch (_) {}
 
             if (users.length > 0) {
+                renderOverview(users, lessonCount);
                 renderPersonnelTable(users);
                 renderDepartmentChart(users);
                 renderUsageTrend(users);
@@ -456,9 +533,119 @@
                 email: u.email || (u.username ? `${u.username}@nu.ac.th` : ''),
                 department: u.department || 'Unknown',
                 role: u.role || 'staff',
-                accessCount: Number(u.accessCount || 0)
+                accessCount: Number(u.accessCount || 0),
+                preScore: Number(u.preScore || 0),
+                postScore: Number(u.postScore || 0),
+                progress: u.progress || '0%',
+                lastLogin: u.lastLogin || ''
             }))
             .filter((u) => u.role !== 'admin' && u.name);
+    }
+
+    function parseProgressPercent(v) {
+        const raw = String(v || '').trim();
+        if (!raw) return 0;
+        const hasPercent = raw.includes('%');
+        const n = Number(raw.replace('%', '').replace(/,/g, ''));
+        if (!Number.isFinite(n)) return 0;
+        if (hasPercent) return n;
+        return n > 0 && n <= 1 ? n * 100 : n;
+    }
+
+    function toDate(val) {
+        const d = new Date(val || '');
+        return isNaN(d.getTime()) ? null : d;
+    }
+
+    function sameDay(d1, d2) {
+        return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+    }
+
+    function renderOverview(users, lessonCount) {
+        const totalUsers = users.length;
+        const now = new Date();
+        const todayLogin = users.filter((u) => {
+            const d = toDate(u.lastLogin);
+            return d ? sameDay(d, now) : false;
+        }).length;
+        const avgProgress = totalUsers ? Math.round(users.reduce((s, u) => s + parseProgressPercent(u.progress), 0) / totalUsers) : 0;
+
+        const totalEl = document.getElementById('overviewTotalUsers');
+        const todayEl = document.getElementById('overviewTodayLogin');
+        const lessonEl = document.getElementById('overviewLessonCount');
+        const avgEl = document.getElementById('overviewAvgProgress');
+        if (totalEl) totalEl.innerText = String(totalUsers);
+        if (todayEl) todayEl.innerText = String(todayLogin);
+        if (lessonEl) lessonEl.innerText = String(lessonCount);
+        if (avgEl) avgEl.innerText = String(avgProgress);
+
+        const grouped = users.reduce((acc, u) => {
+            acc[u.department] = (acc[u.department] || 0) + 1;
+            return acc;
+        }, {});
+        const entries = Object.entries(grouped).sort((a, b) => b[1] - a[1]);
+        const colors = ['#4f46e5', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#14b8a6', '#94a3b8'];
+
+        const deptWrap = document.getElementById('overviewDeptWrap');
+        if (deptWrap) {
+            deptWrap.innerHTML = entries.map(([dept, count], idx) => {
+                const pct = totalUsers ? Math.round((count * 100) / totalUsers) : 0;
+                return `<div><div class="flex justify-between mb-1"><span class="text-slate-600 flex items-center gap-2"><span class="inline-block w-2.5 h-2.5 rounded-full" style="background:${colors[idx % colors.length]}"></span>${dept}</span><span class="font-semibold text-slate-800">${count} คน (${pct}%)</span></div><div class="h-2 rounded-full bg-slate-100"><div class="h-2 rounded-full" style="width:${pct}%;background:${colors[idx % colors.length]}"></div></div></div>`;
+            }).join('');
+        }
+
+        const canvas = document.getElementById('overviewDeptPieChart');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            const cx = w / 2, cy = h / 2, r = 92;
+            ctx.clearRect(0, 0, w, h);
+            let start = -Math.PI / 2;
+            entries.forEach(([_, count], idx) => {
+                const slice = totalUsers ? (count / totalUsers) * Math.PI * 2 : 0;
+                const end = start + slice;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, r, start, end);
+                ctx.closePath();
+                ctx.fillStyle = colors[idx % colors.length];
+                ctx.fill();
+                start = end;
+            });
+            ctx.beginPath();
+            ctx.arc(cx, cy, 44, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.textAlign = 'center';
+            ctx.font = '700 24px Prompt';
+            ctx.fillText(String(totalUsers), cx, cy + 2);
+            ctx.fillStyle = '#64748b';
+            ctx.font = '500 12px Prompt';
+            ctx.fillText('บุคลากร', cx, cy + 20);
+        }
+
+        const recentLogs = [...users]
+            .filter((u) => toDate(u.lastLogin))
+            .sort((a, b) => toDate(b.lastLogin) - toDate(a.lastLogin))
+            .slice(0, 5);
+        const logsEl = document.getElementById('overviewRecentLogs');
+        if (logsEl) {
+            logsEl.innerHTML = recentLogs.length
+                ? recentLogs.map((u) => `<div class="border border-slate-100 rounded-xl p-3"><p class="font-semibold text-slate-700">${u.name}</p><p class="text-xs text-slate-500">login • เข้าสู่ระบบ</p><p class="text-[10px] text-slate-400 mt-1">${toDate(u.lastLogin).toLocaleString('th-TH')}</p></div>`).join('')
+                : '<p class="text-slate-400">ยังไม่พบกิจกรรม</p>';
+        }
+
+        const rows = [...users]
+            .sort((a, b) => (toDate(b.lastLogin)?.getTime() || 0) - (toDate(a.lastLogin)?.getTime() || 0))
+            .slice(0, 10);
+        const rowsEl = document.getElementById('overviewStaffRows');
+        if (rowsEl) {
+            rowsEl.innerHTML = rows.map((u) => {
+                const p = Math.round(parseProgressPercent(u.progress));
+                return `<tr><td class="p-3"><p class="font-semibold text-slate-800">${u.name || '-'}</p><p class="text-[10px] text-slate-400">${u.id || '-'} • ${u.username || '-'}</p></td><td class="p-3">${u.department || '-'}</td><td class="p-3 text-center">${p}%</td><td class="p-3 text-center">${Number(u.preScore || 0)}/${Number(u.postScore || 0)}</td><td class="p-3 text-right">${u.lastLogin || '-'}</td></tr>`;
+            }).join('');
+        }
     }
 
     function renderPersonnelTable(users) {
